@@ -17,7 +17,7 @@
 #define SPRITE_SIZE               16
 #define SPRITE_FRAMES             2
 
-typedef uint8_t cBool;
+typedef uint8_t cBool_t;
 #define cTrue 1
 #define cFalse 0
 #define TOGGLE_BOOL( b ) b = b ? cFalse : cTrue

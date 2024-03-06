@@ -18,7 +18,7 @@ void loop()
 {
   cClock_StartFrame( &( g_game.clock ) );
 
-  // TODO: update and render
+  cGame_Tic( &g_game );
 
   cClock_EndFrame( &( g_game.clock ) );
 }

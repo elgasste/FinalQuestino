@@ -12,4 +12,11 @@ typedef enum cDirection_t
 }
 cDirection_t;
 
+typedef enum cGameState_t
+{
+  cGameState_Init = 0,
+  cGameState_Playing
+}
+cGameState_t;
+
 #endif // ENUMS_H
