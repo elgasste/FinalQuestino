@@ -4,14 +4,12 @@
 #include "common.h"
 #include "screen.h"
 #include "tile_map.h"
-#include "sprite.h"
 
 typedef struct cWindow_t
 {
   cScreen_t screen;
   cTileMap_t tileMap;
   uint8_t textBitFields[TEXT_TILES][8];
-  cSprite_t sprite;
 }
 cWindow_t;
 

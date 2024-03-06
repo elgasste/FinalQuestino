@@ -17,6 +17,8 @@
 #define SPRITE_SIZE               16
 #define SPRITE_FRAMES             2
 
+#define PLAYER_MAX_VELOCITY       48
+
 typedef uint8_t cBool_t;
 #define cTrue 1
 #define cFalse 0

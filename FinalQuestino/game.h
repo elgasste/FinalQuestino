@@ -4,13 +4,14 @@
 #include "common.h"
 #include "window.h"
 #include "clock.h"
-#include "enums.h"
+#include "player.h"
 
 typedef struct cGame_t
 {
   cWindow_t window;
   cClock_t clock;
   cGameState_t state;
+  cPlayer_t player;
 }
 cGame_t;
 

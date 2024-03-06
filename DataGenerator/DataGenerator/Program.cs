@@ -6,7 +6,7 @@ using System.Windows.Media.Imaging;
 var _palette = new List<ushort>();
 var _textTextureMap = new List<byte>();
 var _tileTextureMapBytes = new List<byte>();
-var _spriteTextureMapBytes = new List<byte>();
+var _playerSpriteTextureMapBytes = new List<byte>();
 
 Console.WriteLine();
 Console.WriteLine( "=====================================================" );
@@ -121,11 +121,11 @@ void LoadWorldTextureMap( BitmapSource bitmap )
    }
 }
 
-void LoadSpriteTextureMap( BitmapSource bitmap )
+void LoadPlayerSpriteTextureMap( BitmapSource bitmap )
 {
-   if ( _spriteTextureMapBytes is null )
+   if ( _playerSpriteTextureMapBytes is null )
    {
-      throw new Exception( "Somehow the sprite texture map is null, no idea how it happened." );
+      throw new Exception( "Somehow the player sprite texture map is null, no idea how it happened." );
    }
 
    for ( int row = 0; row < bitmap.PixelHeight; row++ )
@@ -133,7 +133,7 @@ void LoadSpriteTextureMap( BitmapSource bitmap )
       for ( int col = 0; col < bitmap.PixelWidth; col++ )
       {
          var pixelColor = GetPixelColor16( bitmap, col, row );
-         _spriteTextureMapBytes.Add( (byte)PaletteIndexFromColor( pixelColor ) );
+         _playerSpriteTextureMapBytes.Add( (byte)PaletteIndexFromColor( pixelColor ) );
       }
    }
 }
@@ -233,17 +233,17 @@ string BuildTextBitFieldsOutputString()
    return outputString;
 }
 
-string BuildSpriteTexturesOutputString()
+string BuildPlayerSpriteTexturesOutputString()
 {
-   if ( _spriteTextureMapBytes is null )
+   if ( _playerSpriteTextureMapBytes is null )
    {
-      throw new Exception( "Somehow the sprite texture map is null, I have no idea what went wrong." );
+      throw new Exception( "Somehow the player sprite texture map is null, I have no idea what went wrong." );
    }
 
-   string outputString = "void cSprite_LoadTextures( cSprite_t* sprite )\n";
+   string outputString = "void cPlayer_LoadSprite( cPlayer_t* player )\n";
    outputString += "{\n";
 
-   int frameCount = _spriteTextureMapBytes.Count / ( 4 * 16 ) / 16;
+   int frameCount = _playerSpriteTextureMapBytes.Count / ( 4 * 16 ) / 16;
 
    for ( int row = 0, spriteIdx = 0; row < 4; row++ )
    {
@@ -257,11 +257,11 @@ string BuildSpriteTexturesOutputString()
                int frameOffset = frame * 16;
                int pixelIndex1 = rowStart + frameOffset + pixelCol++ + ( pixelRow * frameCount * 16 );
                int pixelIndex2 = rowStart + frameOffset + pixelCol + ( pixelRow * frameCount * 16 );
-               var unpackedPixel1 = (ushort)_spriteTextureMapBytes[pixelIndex1];
-               var unpackedPixel2 = (ushort)_spriteTextureMapBytes[pixelIndex2];
+               var unpackedPixel1 = (ushort)_playerSpriteTextureMapBytes[pixelIndex1];
+               var unpackedPixel2 = (ushort)_playerSpriteTextureMapBytes[pixelIndex2];
                var packedPixels = (ushort)( ( unpackedPixel1 << 4 ) | unpackedPixel2 );
 
-               outputString += string.Format( "  sprite->frameTextures[{0}] = 0x{1};\n", spriteIdx, packedPixels.ToString( "X2" ) );
+               outputString += string.Format( "  player->sprite.frameTextures[{0}] = 0x{1};\n", spriteIdx, packedPixels.ToString( "X2" ) );
             }
          }
       }
@@ -286,18 +286,18 @@ void GenerateOutputData()
    BitmapSanityCheck( worldBitmap );
    LoadWorldTextureMap( worldBitmap );
 
-   var spriteFileStream = new FileStream( "sprite_tileset.png", FileMode.Open, FileAccess.Read, FileShare.Read );
-   var spriteDecoder = new PngBitmapDecoder( spriteFileStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default );
-   BitmapSource spriteBitmap = spriteDecoder.Frames[0];
-   BitmapSanityCheck( spriteBitmap );
-   LoadSpriteTextureMap( spriteBitmap );
+   var playerSpriteFileStream = new FileStream( "player_sprite_tileset.png", FileMode.Open, FileAccess.Read, FileShare.Read );
+   var playerSpriteDecoder = new PngBitmapDecoder( playerSpriteFileStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default );
+   BitmapSource playerSpriteBitmap = playerSpriteDecoder.Frames[0];
+   BitmapSanityCheck( playerSpriteBitmap );
+   LoadPlayerSpriteTextureMap( playerSpriteBitmap );
 }
 
 try
 {
    string outputString = "/* This file was generated from DataGenerator, please do not edit */\n\n";
    outputString += "#include \"window.h\"\n";
-   outputString += "#include \"sprite.h\"\n\n";
+   outputString += "#include \"player.h\"\n\n";
 
    Console.Write( "Generating data..." );
    GenerateOutputData();
@@ -315,8 +315,8 @@ try
    outputString += BuildTextBitFieldsOutputString();
    Console.Write( "Done!\n" );
 
-   Console.Write( "Generating sprite texture loader..." );
-   outputString += BuildSpriteTexturesOutputString();
+   Console.Write( "Generating player sprite texture loader..." );
+   outputString += BuildPlayerSpriteTexturesOutputString();
    Console.Write( "Done!\n" );
 
    Console.Write( "Writing source file..." );

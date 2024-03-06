@@ -3,6 +3,7 @@
 void cGame_Init( cGame_t* game )
 {
   cWindow_Init( &( game->window ) );
+  cPlayer_Init( &( game->player ) );
   game->state = cGameState_Init;
 }
 

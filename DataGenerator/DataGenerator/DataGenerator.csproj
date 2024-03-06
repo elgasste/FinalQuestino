@@ -12,6 +12,9 @@
     <None Update="map_tileset.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="player_sprite_tileset.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="player_texture_map.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
