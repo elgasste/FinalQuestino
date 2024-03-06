@@ -214,7 +214,7 @@ string BuildTextBitFieldsOutputString()
       throw new Exception( "Somehow the text texture map is null, I have no idea what went wrong." );
    }
 
-   string outputString = "void cWindow_LoadTextBitFields( cWindow_t* window )\n";
+   string outputString = "void cGame_LoadTextBitFields( cGame_t* game )\n";
    outputString += "{\n";
 
    int charCount = _textTextureMap.Count / 8;
@@ -224,7 +224,7 @@ string BuildTextBitFieldsOutputString()
       for ( int row = 0; row < 8; row++ )
       {
          byte b = _textTextureMap[ch + ( row * charCount )];
-         outputString += string.Format( "  window->textBitFields[{0}][{1}] = 0x{2};\n", ch, row, b.ToString( "X2" ) );
+         outputString += string.Format( "  game->textBitFields[{0}][{1}] = 0x{2};\n", ch, row, b.ToString( "X2" ) );
       }
    }
 
@@ -296,8 +296,7 @@ void GenerateOutputData()
 try
 {
    string outputString = "/* This file was generated from DataGenerator, please do not edit */\n\n";
-   outputString += "#include \"window.h\"\n";
-   outputString += "#include \"player.h\"\n\n";
+   outputString += "#include \"game.h\"\n\n";
 
    Console.Write( "Generating data..." );
    GenerateOutputData();

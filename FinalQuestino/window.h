@@ -3,13 +3,10 @@
 
 #include "common.h"
 #include "screen.h"
-#include "tile_map.h"
 
 typedef struct cWindow_t
 {
   cScreen_t screen;
-  cTileMap_t tileMap;
-  uint8_t textBitFields[TEXT_TILES][8];
 }
 cWindow_t;
 
@@ -18,10 +15,6 @@ extern "C" {
 #endif
 
 void cWindow_Init( cWindow_t* window );
-void cWindow_Refresh( cWindow_t* window );
-
-// data_loader.c
-void cWindow_LoadTextBitFields( cWindow_t* window );
 
 #if defined( __cplusplus )
 }
