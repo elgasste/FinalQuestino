@@ -8,6 +8,7 @@
 #include "common.h"
 #include "tile_map.h"
 #include "sprite.h"
+#include "vector.h"
 
 // possibly useful color macros
 #define	BLACK   0x0000
@@ -123,7 +124,7 @@ void cScreen_DrawTile( cScreen_t* screen, uint8_t* tileTexture, uint16_t x, uint
 void cScreen_DrawTileMap( cScreen_t* screen, cTileMap_t* map );
 void cScreen_DrawText( cScreen_t* screen, const char* text, uint16_t x, uint16_t y,
                        uint16_t backgroundColor, uint16_t foregroundColor, uint8_t* bitFields );
-void cScreen_DrawSprite( cScreen_t* screen, cSprite_t* sprite, cTileMap_t* map, uint16_t x, uint16_t y );
+void cScreen_DrawSprite( cScreen_t* screen, cSprite_t* sprite, cTileMap_t* map, cVector2f_t* pos );
 
 // data_loader.c
 void cScreen_LoadPalette( cScreen_t* screen, uint8_t index );

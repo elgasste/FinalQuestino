@@ -18,7 +18,7 @@ void cGame_Tic( cGame_t* game )
   if ( game->state == cGameState_Init )
   {
     cScreen_DrawTileMap( &( game->screen ), &( game->tileMap ) );
-    cScreen_DrawSprite( &( game->screen ), &( game->player.sprite ), &( game->tileMap ), (uint16_t)game->player.position.x, (uint16_t)game->player.position.y );
+    cScreen_DrawSprite( &( game->screen ), &( game->player.sprite ), &( game->tileMap ), &( game->player.position ) );
     game->state = cGameState_Playing;
   }
 }

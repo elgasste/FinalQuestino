@@ -342,13 +342,15 @@ static uint16_t cScreen_GetTilePixelColor( cScreen_t* screen, cTileMap_t* map, u
   }
 }
 
-void cScreen_DrawSprite( cScreen_t* screen, cSprite_t* sprite, cTileMap_t* map, uint16_t x, uint16_t y )
+void cScreen_DrawSprite( cScreen_t* screen, cSprite_t* sprite, cTileMap_t* map, cVector2f_t* pos )
 {
   uint8_t pixelPair, paletteIndex;
   uint16_t color;
   uint16_t frameBytes = ( SPRITE_SIZE / 2 ) * SPRITE_SIZE;
   uint16_t startByte = ( (uint8_t)( sprite->direction ) * SPRITE_FRAMES * frameBytes ) + ( sprite->currentFrame * frameBytes );
   uint16_t i, pixel;
+  uint16_t x = (uint16_t)pos->x;
+  uint16_t y = (uint16_t)pos->y;
 
   CS_ACTIVE;
   cScreen_SetAddrWindow( screen, x, y, x + SPRITE_SIZE - 1, y + SPRITE_SIZE - 1 );
