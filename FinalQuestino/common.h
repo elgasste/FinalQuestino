@@ -3,6 +3,8 @@
 
 #include <Arduino.h>
 
+#define GAME_FPS                  30
+
 #define TILE_SIZE                 16
 #define PACKED_TILE_SIZE          8
 #define TILES_X                   20
@@ -15,7 +17,7 @@
 #define SPRITE_SIZE               16
 #define SPRITE_FRAMES             2
 
-typedef uint8_t cBool;
+typedef uint8_t cBool_t;
 #define cTrue 1
 #define cFalse 0
 #define TOGGLE_BOOL( b ) b = b ? cFalse : cTrue

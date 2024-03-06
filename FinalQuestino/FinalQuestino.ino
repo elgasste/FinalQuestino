@@ -1,7 +1,7 @@
 #include "common.h"
-#include "window.h"
+#include "game.h"
 
-cWindow_t g_window;
+cGame_t g_game;
 
 void cSerial_PrintLn( const char* msg )
 {
@@ -11,11 +11,14 @@ void cSerial_PrintLn( const char* msg )
 void setup()
 {
   Serial.begin( 9600 );
-  cWindow_Init( &g_window );
-  cWindow_Refresh( &g_window );
+  cGame_Init( &g_game );
 }
 
 void loop()
 {
-  delay( 1000 );
+  cClock_StartFrame( &( g_game.clock ) );
+
+  cGame_Tic( &g_game );
+
+  cClock_EndFrame( &( g_game.clock ) );
 }
