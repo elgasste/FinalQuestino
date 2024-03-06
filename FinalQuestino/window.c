@@ -13,5 +13,5 @@ void cWindow_Init( cWindow_t* window )
 
 void cWindow_Refresh( cWindow_t* window )
 {
-  cScreen_DrawTileMap( &( window->screen ), &( window->tileMap ), 0, 0 );
+  cScreen_DrawTileMap( &( window->screen ), &( window->tileMap ) );
 }
