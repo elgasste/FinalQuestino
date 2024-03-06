@@ -344,48 +344,48 @@ static uint16_t cScreen_GetTilePixelColor( cScreen_t* screen, cTileMap_t* map, u
   }
 }
 
-void cScreen_DrawSprite( cScreen_t* screen, cSprite_t* sprite, cTileMap_t* map, cVector2f_t* pos )
+void cScreen_DrawSprite( cScreen_t* screen, cSprite_t* sprite, cTileMap_t* map, float x, float y )
 {
   uint8_t pixelPair, paletteIndex, skipLeft, skipTop, skipRight, skipBottom, curX, curY;
   uint16_t color;
   uint16_t frameBytes = ( SPRITE_SIZE / 2 ) * SPRITE_SIZE;
   uint16_t startByte = ( (uint8_t)( sprite->direction ) * SPRITE_FRAMES * frameBytes ) + ( sprite->currentFrame * frameBytes );
-  uint16_t i, pixel, x, y;
+  uint16_t i, pixel, ux, uy;
 
-  if ( pos->x >= ( TILE_SIZE * TILES_X ) || pos->y >= ( TILE_SIZE * TILES_Y ) ||
-       pos->x + SPRITE_SIZE < 0 || pos->y + SPRITE_SIZE < 0 )
+  if ( x >= ( TILE_SIZE * TILES_X ) || y >= ( TILE_SIZE * TILES_Y ) ||
+       x + SPRITE_SIZE < 0 || y + SPRITE_SIZE < 0 )
   {
     return;
   }
 
-  if ( pos->x < 0 )
+  if ( x < 0 )
   {
-    x = 0;
-    skipLeft = (uint8_t)( -( pos->x - NEGATIVE_CLAMP_THETA ) );
+    ux = 0;
+    skipLeft = (uint8_t)( -( x - NEGATIVE_CLAMP_THETA ) );
     skipRight = 0;
   }
   else
   {
-    x = (uint16_t)pos->x;
+    ux = (uint16_t)x;
     skipLeft = 0;
-    skipRight = ( x + SPRITE_SIZE ) >= ( TILE_SIZE * TILES_X ) ? TILE_SIZE - ( ( TILE_SIZE * TILES_X ) - x ) : 0;
+    skipRight = ( ux + SPRITE_SIZE ) >= ( TILE_SIZE * TILES_X ) ? TILE_SIZE - ( ( TILE_SIZE * TILES_X ) - ux ) : 0;
   }
 
-  if ( pos->y < 0 )
+  if ( y < 0 )
   {
-    y = 0;
-    skipTop = (uint8_t)( -( pos->y - NEGATIVE_CLAMP_THETA ) );
+    uy = 0;
+    skipTop = (uint8_t)( -( y - NEGATIVE_CLAMP_THETA ) );
     skipBottom = 0;
   }
   else
   {
-    y = (uint16_t)pos->y;
+    uy = (uint16_t)y;
     skipTop = 0;
-    skipBottom = ( y + SPRITE_SIZE ) >= ( TILE_SIZE * TILES_Y ) ? TILE_SIZE - ( ( TILE_SIZE * TILES_Y ) - y ) : 0;
+    skipBottom = ( uy + SPRITE_SIZE ) >= ( TILE_SIZE * TILES_Y ) ? TILE_SIZE - ( ( TILE_SIZE * TILES_Y ) - uy ) : 0;
   }
 
   CS_ACTIVE;
-  cScreen_SetAddrWindow( screen, x, y, x + SPRITE_SIZE - skipLeft - skipRight - 1, y + SPRITE_SIZE - skipTop - skipBottom - 1 );
+  cScreen_SetAddrWindow( screen, ux, uy, ux + SPRITE_SIZE - skipLeft - skipRight - 1, uy + SPRITE_SIZE - skipTop - skipBottom - 1 );
   CD_COMMAND;
   write8( 0x2C );
   CD_DATA;
@@ -401,7 +401,7 @@ void cScreen_DrawSprite( cScreen_t* screen, cSprite_t* sprite, cTileMap_t* map, 
 
       if ( color == TRANSPARENT_COLOR )
       {
-        color = cScreen_GetTilePixelColor( screen, map, x + ( pixel % SPRITE_SIZE ), y + ( pixel / SPRITE_SIZE ) );
+        color = cScreen_GetTilePixelColor( screen, map, ux + ( pixel % SPRITE_SIZE ), uy + ( pixel / SPRITE_SIZE ) );
       }
 
       write16( color >> 8, color );
@@ -417,7 +417,7 @@ void cScreen_DrawSprite( cScreen_t* screen, cSprite_t* sprite, cTileMap_t* map, 
 
       if ( color == TRANSPARENT_COLOR )
       {
-        color = cScreen_GetTilePixelColor( screen, map, x + ( pixel % SPRITE_SIZE ), y + ( pixel / SPRITE_SIZE ) );
+        color = cScreen_GetTilePixelColor( screen, map, ux + ( pixel % SPRITE_SIZE ), uy + ( pixel / SPRITE_SIZE ) );
       }
 
       write16( color >> 8, color );

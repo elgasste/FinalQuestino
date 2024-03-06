@@ -10,7 +10,10 @@ typedef struct cPlayer_t
   cVector2f_t position;
   cVector2f_t velocity;
   cVector2f_t maxVelocity;
+  cVector2f_t hitBoxSize;
+
   cSprite_t sprite;
+  cVector2f_t spriteOffset;
 }
 cPlayer_t;
 
