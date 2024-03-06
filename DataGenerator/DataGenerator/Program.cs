@@ -145,7 +145,7 @@ string BuildPaletteOutputString()
       throw new Exception( "Somehow the palette is null, I have no idea what could have happened." );
    }
 
-   string outputString = "void cTileMap_LoadPalette( cTileMap_t* map, uint8_t index )\n";
+   string outputString = "void cScreen_LoadPalette( cScreen_t* screen, uint8_t index )\n";
    outputString += "{\n";
    outputString += "  if ( index == 0 )\n";
    outputString += "  {\n";
@@ -154,11 +154,11 @@ string BuildPaletteOutputString()
    {
       if ( i < _palette.Count )
       {
-         outputString += string.Format( "    map->palette[{0}] = 0x{1};\n", i, _palette[i].ToString( "X4" ) );
+         outputString += string.Format( "    screen->palette[{0}] = 0x{1};\n", i, _palette[i].ToString( "X4" ) );
       }
       else
       {
-         outputString += string.Format( "    map->palette[{0}] = 0x0000;\n", i );
+         outputString += string.Format( "    screen->palette[{0}] = 0x0000;\n", i );
       }
    }
 
@@ -243,13 +243,28 @@ string BuildSpriteTexturesOutputString()
    string outputString = "void cSprite_LoadTextures( cSprite_t* sprite )\n";
    outputString += "{\n";
 
-   for ( int i = 0, idx = 0; i < _spriteTextureMapBytes.Count; i++, idx++ )
-   {
-      var unpackedPixel1 = (ushort)_spriteTextureMapBytes[i++];
-      var unpackedPixel2 = (ushort)_spriteTextureMapBytes[i];
-      var packedPixels = (ushort)( ( unpackedPixel1 << 4 ) | unpackedPixel2 );
+   int frameCount = _spriteTextureMapBytes.Count / ( 4 * 16 ) / 16;
 
-      outputString += string.Format( "  sprite->frameTextures[{0}] = 0x{1};\n", idx, packedPixels.ToString( "X2" ) );
+   for ( int row = 0, spriteIdx = 0; row < 4; row++ )
+   {
+      for ( int frame = 0; frame < frameCount; frame++ )
+      {
+         for ( int pixelRow = 0; pixelRow < 16; pixelRow++ )
+         {
+            for ( int pixelCol = 0; pixelCol < 16; pixelCol++, spriteIdx++ )
+            {
+               int rowStart = row * frameCount * 16 * 16;
+               int frameOffset = frame * 16;
+               int pixelIndex1 = rowStart + frameOffset + pixelCol++ + ( pixelRow * frameCount * 16 );
+               int pixelIndex2 = rowStart + frameOffset + pixelCol + ( pixelRow * frameCount * 16 );
+               var unpackedPixel1 = (ushort)_spriteTextureMapBytes[pixelIndex1];
+               var unpackedPixel2 = (ushort)_spriteTextureMapBytes[pixelIndex2];
+               var packedPixels = (ushort)( ( unpackedPixel1 << 4 ) | unpackedPixel2 );
+
+               outputString += string.Format( "  sprite->frameTextures[{0}] = 0x{1};\n", spriteIdx, packedPixels.ToString( "X2" ) );
+            }
+         }
+      }
    }
 
    outputString += "}\n";

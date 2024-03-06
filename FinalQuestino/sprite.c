@@ -10,5 +10,5 @@ cSprite_Init( cSprite_t* sprite )
 
 cSprite_Tic( cSprite_t* sprite )
 {
-  // TODO: we don't have a clock yet, but when we do, it should be a function parameter here
+  // TODO: bring in the clock, and use it to tic the sprite
 }

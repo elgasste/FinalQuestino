@@ -5,7 +5,6 @@
 
 typedef struct cTileMap_t
 {
-  uint16_t palette[16];
   uint8_t tileTextures[16][TILE_TEXTURE_SIZE_BYTES];
 
   // hi 4 bits are flags, lo 4 bits are tile texture index
@@ -24,7 +23,6 @@ extern "C" {
 void cTileMap_Init( cTileMap_t* map );
 
 // data_loader.c
-void cTileMap_LoadPalette( cTileMap_t* map, uint8_t index );
 void cTileMap_LoadMap( cTileMap_t* map, uint8_t index );
 
 #if defined( __cplusplus )

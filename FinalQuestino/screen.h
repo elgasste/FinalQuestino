@@ -7,6 +7,7 @@
 
 #include "common.h"
 #include "tile_map.h"
+#include "sprite.h"
 
 // possibly useful color macros
 #define	BLACK   0x0000
@@ -17,6 +18,8 @@
 #define MAGENTA 0xF81F
 #define YELLOW  0xFFE0
 #define WHITE   0xFFFF
+
+#define TRANSPARENT_COLOR MAGENTA
 
 // registers
 #define HX8347G_COLADDREND_HI   0x04
@@ -104,6 +107,8 @@ typedef struct cScreen_t
   uint8_t cdPinUnset;
   uint8_t wrPinUnset;
   uint8_t rdPinUnset;
+
+  uint16_t palette[16];
 }
 cScreen_t;
 
@@ -111,13 +116,17 @@ cScreen_t;
 extern "C" {
 #endif
 
-void cLcdScreen_Init( cScreen_t* screen );
-void cLcdScreen_Begin( cScreen_t* screen );
-void cLcdScreen_DrawRect( cScreen_t* screen, uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color );
-void cLcdScreen_DrawTile( cScreen_t* screen, uint8_t* tileTexture, uint16_t* palette, uint16_t x, uint16_t y );
-void cLcdScreen_DrawTileMap( cScreen_t* screen, cTileMap_t* map, uint16_t x, uint16_t y );
-void cLcdScreen_DrawText( cScreen_t* screen, const char* text, uint16_t x, uint16_t y,
-                          uint16_t backgroundColor, uint16_t foregroundColor, uint8_t* bitFields );
+void cScreen_Init( cScreen_t* screen );
+void cScreen_Begin( cScreen_t* screen );
+void cScreen_DrawRect( cScreen_t* screen, uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color );
+void cScreen_DrawTile( cScreen_t* screen, uint8_t* tileTexture, uint16_t x, uint16_t y );
+void cScreen_DrawTileMap( cScreen_t* screen, cTileMap_t* map );
+void cScreen_DrawText( cScreen_t* screen, const char* text, uint16_t x, uint16_t y,
+                       uint16_t backgroundColor, uint16_t foregroundColor, uint8_t* bitFields );
+void cScreen_DrawSprite( cScreen_t* screen, cSprite_t* sprite, cTileMap_t* map, uint16_t x, uint16_t y );
+
+// data_loader.c
+void cScreen_LoadPalette( cScreen_t* screen, uint8_t index );
 
 #if defined( __cplusplus )
 }

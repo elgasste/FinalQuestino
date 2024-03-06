@@ -5,6 +5,7 @@
 static void cScreen_Reset( cScreen_t* screen );
 static void cScreen_SetAddrWindow( cScreen_t* screen, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2 );
 static int8_t cScreen_GetCharIndexFromChar( const char ch );
+static uint16_t cScreen_GetTilePixelColor( cScreen_t* screen, cTileMap_t* map, uint16_t x, uint16_t y );
 
 void cScreen_Init( cScreen_t* screen )
 {
@@ -40,6 +41,11 @@ void cScreen_Init( cScreen_t* screen )
   }
 
   setWriteDir(); // Set up LCD data port(s) for WRITE operations
+
+  for ( i = 0; i < 16; i++ )
+  {
+    screen->palette[i] = 0;
+  }
 }
 
 static void cScreen_Reset( cScreen_t* screen )
@@ -164,7 +170,7 @@ void cScreen_DrawRect( cScreen_t* screen, uint16_t x, uint16_t y, uint16_t w, ui
   CS_IDLE;
 }
 
-void cScreen_DrawTile( cScreen_t* screen, uint8_t* tileTexture, uint16_t* palette, uint16_t x, uint16_t y )
+void cScreen_DrawTile( cScreen_t* screen, uint8_t* tileTexture, uint16_t x, uint16_t y )
 {
   uint8_t pixelPair, paletteIndex;
   uint16_t i, color;
@@ -180,25 +186,25 @@ void cScreen_DrawTile( cScreen_t* screen, uint8_t* tileTexture, uint16_t* palett
     pixelPair = tileTexture[i];
 
     paletteIndex = pixelPair >> 4;
-    color = palette[paletteIndex];
+    color = screen->palette[paletteIndex];
     write16( color >> 8, color );
 
     paletteIndex = pixelPair & 0x0F;
-    color = palette[paletteIndex];
+    color = screen->palette[paletteIndex];
     write16( color >> 8, color );
   }
 
   CS_IDLE;
 }
 
-void cScreen_DrawTileMap( cScreen_t* screen, cTileMap_t* map, uint16_t x, uint16_t y )
+void cScreen_DrawTileMap( cScreen_t* screen, cTileMap_t* map )
 {
   uint16_t tileRow, tileCol, color, colorCache;
   uint8_t pixelRow, pixelCol, pixelPair, paletteIndex;
   uint8_t tile;
 
   CS_ACTIVE;
-  cScreen_SetAddrWindow( screen, x, y, x + ( TILE_SIZE * TILES_X ) - 1, y + ( TILE_SIZE * TILES_Y ) - 1 );
+  cScreen_SetAddrWindow( screen, 0, 0, ( TILE_SIZE * TILES_X ) - 1, ( TILE_SIZE * TILES_Y ) - 1 );
   CD_COMMAND;
   write8( 0x2C );
   CD_DATA;
@@ -216,11 +222,11 @@ void cScreen_DrawTileMap( cScreen_t* screen, cTileMap_t* map, uint16_t x, uint16
           pixelPair = map->tileTextures[tile & 0xF][pixelCol + ( pixelRow * PACKED_TILE_SIZE )];
 
           paletteIndex = pixelPair >> 4;
-          color = map->palette[paletteIndex];
+          color = screen->palette[paletteIndex];
           write16( color >> 8, color );
 
           paletteIndex = pixelPair & 0x0F;
-          color = map->palette[paletteIndex];
+          color = screen->palette[paletteIndex];
           write16( color >> 8, color );
         }
       }
@@ -314,6 +320,67 @@ void cScreen_DrawText( cScreen_t* screen, const char* text, uint16_t x, uint16_t
     }
 
     x += 8;
+  }
+
+  CS_IDLE;
+}
+
+static uint16_t cScreen_GetTilePixelColor( cScreen_t* screen, cTileMap_t* map, uint16_t x, uint16_t y )
+{
+  uint8_t tile = map->tiles[( ( y / TILE_SIZE ) * TILES_X ) + ( x / TILE_SIZE )];
+  uint8_t* tileTexture = map->tileTextures[tile & 0xF];
+  uint8_t pixelOffsetX = x % TILE_SIZE;
+  uint8_t pixelOffsetY = y % TILE_SIZE;
+
+  if ( pixelOffsetX % 2 == 0 )
+  {
+    return screen->palette[tileTexture[( pixelOffsetX / 2 ) + ( pixelOffsetY * PACKED_TILE_SIZE )] >> 4];
+  }
+  else
+  {
+    return screen->palette[tileTexture[( pixelOffsetX / 2 ) + ( pixelOffsetY * PACKED_TILE_SIZE )] & 0xF];
+  }
+}
+
+void cScreen_DrawSprite( cScreen_t* screen, cSprite_t* sprite, cTileMap_t* map, uint16_t x, uint16_t y )
+{
+  uint8_t pixelPair, paletteIndex;
+  uint16_t color;
+  uint16_t frameBytes = ( SPRITE_SIZE / 2 ) * SPRITE_SIZE;
+  uint16_t startByte = ( (uint8_t)( sprite->direction ) * SPRITE_FRAMES * frameBytes ) + ( sprite->currentFrame * frameBytes );
+  uint16_t i, pixel;
+
+  CS_ACTIVE;
+  cScreen_SetAddrWindow( screen, x, y, x + SPRITE_SIZE - 1, y + SPRITE_SIZE - 1 );
+  CD_COMMAND;
+  write8( 0x2C );
+  CD_DATA;
+
+  for ( i = startByte, pixel = 0; i < startByte + frameBytes; i++ )
+  {
+    pixelPair = sprite->frameTextures[i];
+
+    paletteIndex = pixelPair >> 4;
+    color = screen->palette[paletteIndex];
+
+    if ( color == TRANSPARENT_COLOR )
+    {
+      color = cScreen_GetTilePixelColor( screen, map, x + ( pixel % SPRITE_SIZE ), y + ( pixel / SPRITE_SIZE ) );
+    }
+
+    write16( color >> 8, color );
+    pixel++;
+
+    paletteIndex = pixelPair & 0x0F;
+    color = screen->palette[paletteIndex];
+
+    if ( color == TRANSPARENT_COLOR )
+    {
+      color = cScreen_GetTilePixelColor( screen, map, x + ( pixel % SPRITE_SIZE ), y + ( pixel / SPRITE_SIZE ) );
+    }
+
+    write16( color >> 8, color );
+    pixel++;
   }
 
   CS_IDLE;
