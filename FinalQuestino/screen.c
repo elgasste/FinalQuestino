@@ -318,3 +318,33 @@ void cScreen_DrawText( cScreen_t* screen, const char* text, uint16_t x, uint16_t
 
   CS_IDLE;
 }
+
+void cScreen_DrawSprite( cScreen_t* screen, cSprite_t* sprite, uint16_t* palette, uint16_t x, uint16_t y )
+{
+  uint8_t pixelPair, paletteIndex;
+  uint16_t color;
+  uint16_t frameBytes = ( SPRITE_SIZE / 2 ) * SPRITE_SIZE;
+  uint16_t startByte = ( (uint8_t)( sprite->direction ) * SPRITE_FRAMES * frameBytes ) + ( sprite->currentFrame * frameBytes );
+  uint16_t i;
+
+  CS_ACTIVE;
+  cScreen_SetAddrWindow( screen, x, y, x + SPRITE_SIZE - 1, y + SPRITE_SIZE - 1 );
+  CD_COMMAND;
+  write8( 0x2C );
+  CD_DATA;
+
+  for ( i = startByte; i < startByte + frameBytes; i++ )
+  {
+    pixelPair = sprite->frameTextures[i];
+
+    paletteIndex = pixelPair >> 4;
+    color = palette[paletteIndex];
+    write16( color >> 8, color );
+
+    paletteIndex = pixelPair & 0x0F;
+    color = palette[paletteIndex];
+    write16( color >> 8, color );
+  }
+
+  CS_IDLE;
+}
