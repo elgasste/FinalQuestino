@@ -16,5 +16,9 @@ void setup()
 
 void loop()
 {
-  delay( 1000 );
+  cClock_StartFrame( &( g_game.clock ) );
+
+  // TODO: update and render
+
+  cClock_EndFrame( &( g_game.clock ) );
 }
