@@ -19,4 +19,13 @@ typedef enum cGameState_t
 }
 cGameState_t;
 
+typedef enum cButton_t
+{
+  cButton_Left = 0,
+  cButton_Up,
+  cButton_Right,
+  cButton_Down
+}
+cButton_t;
+
 #endif // ENUMS_H
