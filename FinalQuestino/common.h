@@ -3,6 +3,8 @@
 
 #include <Arduino.h>
 
+#define GAME_FPS                  30
+
 #define TILE_SIZE                 16
 #define PACKED_TILE_SIZE          8
 #define TILES_X                   20
