@@ -40,6 +40,11 @@ void cScreen_Init( cScreen_t* screen )
   }
 
   setWriteDir(); // Set up LCD data port(s) for WRITE operations
+
+  for ( i = 0; i < 16; i++ )
+  {
+    screen->palette[i] = 0;
+  }
 }
 
 static void cScreen_Reset( cScreen_t* screen )
@@ -164,7 +169,7 @@ void cScreen_DrawRect( cScreen_t* screen, uint16_t x, uint16_t y, uint16_t w, ui
   CS_IDLE;
 }
 
-void cScreen_DrawTile( cScreen_t* screen, uint8_t* tileTexture, uint16_t* palette, uint16_t x, uint16_t y )
+void cScreen_DrawTile( cScreen_t* screen, uint8_t* tileTexture, uint16_t x, uint16_t y )
 {
   uint8_t pixelPair, paletteIndex;
   uint16_t i, color;
@@ -180,11 +185,11 @@ void cScreen_DrawTile( cScreen_t* screen, uint8_t* tileTexture, uint16_t* palett
     pixelPair = tileTexture[i];
 
     paletteIndex = pixelPair >> 4;
-    color = palette[paletteIndex];
+    color = screen->palette[paletteIndex];
     write16( color >> 8, color );
 
     paletteIndex = pixelPair & 0x0F;
-    color = palette[paletteIndex];
+    color = screen->palette[paletteIndex];
     write16( color >> 8, color );
   }
 
@@ -216,11 +221,11 @@ void cScreen_DrawTileMap( cScreen_t* screen, cTileMap_t* map, uint16_t x, uint16
           pixelPair = map->tileTextures[tile & 0xF][pixelCol + ( pixelRow * PACKED_TILE_SIZE )];
 
           paletteIndex = pixelPair >> 4;
-          color = map->palette[paletteIndex];
+          color = screen->palette[paletteIndex];
           write16( color >> 8, color );
 
           paletteIndex = pixelPair & 0x0F;
-          color = map->palette[paletteIndex];
+          color = screen->palette[paletteIndex];
           write16( color >> 8, color );
         }
       }
@@ -319,7 +324,7 @@ void cScreen_DrawText( cScreen_t* screen, const char* text, uint16_t x, uint16_t
   CS_IDLE;
 }
 
-void cScreen_DrawSprite( cScreen_t* screen, cSprite_t* sprite, uint16_t* palette, uint16_t x, uint16_t y )
+void cScreen_DrawSprite( cScreen_t* screen, cSprite_t* sprite, uint16_t x, uint16_t y )
 {
   uint8_t pixelPair, paletteIndex;
   uint16_t color;
@@ -338,11 +343,11 @@ void cScreen_DrawSprite( cScreen_t* screen, cSprite_t* sprite, uint16_t* palette
     pixelPair = sprite->frameTextures[i];
 
     paletteIndex = pixelPair >> 4;
-    color = palette[paletteIndex];
+    color = screen->palette[paletteIndex];
     write16( color >> 8, color );
 
     paletteIndex = pixelPair & 0x0F;
-    color = palette[paletteIndex];
+    color = screen->palette[paletteIndex];
     write16( color >> 8, color );
   }
 

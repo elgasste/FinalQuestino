@@ -3,26 +3,26 @@
 #include "window.h"
 #include "sprite.h"
 
-void cTileMap_LoadPalette( cTileMap_t* map, uint8_t index )
+void cScreen_LoadPalette( cScreen_t* screen, uint8_t index )
 {
   if ( index == 0 )
   {
-    map->palette[0] = 0x9720;
-    map->palette[1] = 0x4521;
-    map->palette[2] = 0x0000;
-    map->palette[3] = 0xFEB3;
-    map->palette[4] = 0x7BEF;
-    map->palette[5] = 0x3AFE;
-    map->palette[6] = 0xFFFF;
-    map->palette[7] = 0xB5D6;
-    map->palette[8] = 0xFCE0;
-    map->palette[9] = 0xF81F;
-    map->palette[10] = 0x39FF;
-    map->palette[11] = 0xFDBC;
-    map->palette[12] = 0x0000;
-    map->palette[13] = 0x0000;
-    map->palette[14] = 0x0000;
-    map->palette[15] = 0x0000;
+    screen->palette[0] = 0x9720;
+    screen->palette[1] = 0x4521;
+    screen->palette[2] = 0x0000;
+    screen->palette[3] = 0xFEB3;
+    screen->palette[4] = 0x7BEF;
+    screen->palette[5] = 0x3AFE;
+    screen->palette[6] = 0xFFFF;
+    screen->palette[7] = 0xB5D6;
+    screen->palette[8] = 0xFCE0;
+    screen->palette[9] = 0xF81F;
+    screen->palette[10] = 0x39FF;
+    screen->palette[11] = 0xFDBC;
+    screen->palette[12] = 0x0000;
+    screen->palette[13] = 0x0000;
+    screen->palette[14] = 0x0000;
+    screen->palette[15] = 0x0000;
   }
 }
 

@@ -145,7 +145,7 @@ string BuildPaletteOutputString()
       throw new Exception( "Somehow the palette is null, I have no idea what could have happened." );
    }
 
-   string outputString = "void cTileMap_LoadPalette( cTileMap_t* map, uint8_t index )\n";
+   string outputString = "void cScreen_LoadPalette( cScreen_t* screen, uint8_t index )\n";
    outputString += "{\n";
    outputString += "  if ( index == 0 )\n";
    outputString += "  {\n";
@@ -154,11 +154,11 @@ string BuildPaletteOutputString()
    {
       if ( i < _palette.Count )
       {
-         outputString += string.Format( "    map->palette[{0}] = 0x{1};\n", i, _palette[i].ToString( "X4" ) );
+         outputString += string.Format( "    screen->palette[{0}] = 0x{1};\n", i, _palette[i].ToString( "X4" ) );
       }
       else
       {
-         outputString += string.Format( "    map->palette[{0}] = 0x0000;\n", i );
+         outputString += string.Format( "    screen->palette[{0}] = 0x0000;\n", i );
       }
    }
 

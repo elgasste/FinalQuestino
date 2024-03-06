@@ -8,8 +8,6 @@ void cTileMap_Init( cTileMap_t* map )
 
   for ( i = 0; i < 16; i++ )
   {
-    map->palette[i] = 0;
-
     tileTexture = map->tileTextures[i];
 
     for ( j = 0; j < TILE_TEXTURE_SIZE_BYTES; j++ )
