@@ -2,6 +2,8 @@
 
 #include "screen.h"
 
+#define NEGATIVE_CLAMP_THETA 0.9999f
+
 static void cScreen_Reset( cScreen_t* screen );
 static void cScreen_SetAddrWindow( cScreen_t* screen, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2 );
 static int8_t cScreen_GetCharIndexFromChar( const char ch );
@@ -344,45 +346,96 @@ static uint16_t cScreen_GetTilePixelColor( cScreen_t* screen, cTileMap_t* map, u
 
 void cScreen_DrawSprite( cScreen_t* screen, cSprite_t* sprite, cTileMap_t* map, cVector2f_t* pos )
 {
-  uint8_t pixelPair, paletteIndex;
+  uint8_t pixelPair, paletteIndex, skipLeft, skipTop, skipRight, skipBottom, curX, curY;
   uint16_t color;
   uint16_t frameBytes = ( SPRITE_SIZE / 2 ) * SPRITE_SIZE;
   uint16_t startByte = ( (uint8_t)( sprite->direction ) * SPRITE_FRAMES * frameBytes ) + ( sprite->currentFrame * frameBytes );
-  uint16_t i, pixel;
-  uint16_t x = (uint16_t)pos->x;
-  uint16_t y = (uint16_t)pos->y;
+  uint16_t i, pixel, x, y;
+
+  if ( pos->x >= ( TILE_SIZE * TILES_X ) || pos->y >= ( TILE_SIZE * TILES_Y ) ||
+       pos->x + SPRITE_SIZE < 0 || pos->y + SPRITE_SIZE < 0 )
+  {
+    return;
+  }
+
+  if ( pos->x < 0 )
+  {
+    x = 0;
+    skipLeft = (uint8_t)( -( pos->x - NEGATIVE_CLAMP_THETA ) );
+    skipRight = 0;
+  }
+  else
+  {
+    x = (uint16_t)pos->x;
+    skipLeft = 0;
+    skipRight = ( x + SPRITE_SIZE ) >= ( TILE_SIZE * TILES_X ) ? TILE_SIZE - ( ( TILE_SIZE * TILES_X ) - x ) : 0;
+  }
+
+  if ( pos->y < 0 )
+  {
+    y = 0;
+    skipTop = (uint8_t)( -( pos->y - NEGATIVE_CLAMP_THETA ) );
+    skipBottom = 0;
+  }
+  else
+  {
+    y = (uint16_t)pos->y;
+    skipTop = 0;
+    skipBottom = ( y + SPRITE_SIZE ) >= ( TILE_SIZE * TILES_Y ) ? TILE_SIZE - ( ( TILE_SIZE * TILES_Y ) - y ) : 0;
+  }
 
   CS_ACTIVE;
-  cScreen_SetAddrWindow( screen, x, y, x + SPRITE_SIZE - 1, y + SPRITE_SIZE - 1 );
+  cScreen_SetAddrWindow( screen, x, y, x + SPRITE_SIZE - skipLeft - skipRight - 1, y + SPRITE_SIZE - skipTop - skipBottom - 1 );
   CD_COMMAND;
   write8( 0x2C );
   CD_DATA;
 
-  for ( i = startByte, pixel = 0; i < startByte + frameBytes; i++ )
+  for ( i = startByte, pixel = 0, curX = 0, curY = 0; i < startByte + frameBytes; i++ )
   {
     pixelPair = sprite->frameTextures[i];
 
-    paletteIndex = pixelPair >> 4;
-    color = screen->palette[paletteIndex];
-
-    if ( color == TRANSPARENT_COLOR )
+    if ( curX >= skipLeft && curX < ( TILE_SIZE - skipRight ) && curY >= skipTop && curY < ( TILE_SIZE - skipBottom ) )
     {
-      color = cScreen_GetTilePixelColor( screen, map, x + ( pixel % SPRITE_SIZE ), y + ( pixel / SPRITE_SIZE ) );
+      paletteIndex = pixelPair >> 4;
+      color = screen->palette[paletteIndex];
+
+      if ( color == TRANSPARENT_COLOR )
+      {
+        color = cScreen_GetTilePixelColor( screen, map, x + ( pixel % SPRITE_SIZE ), y + ( pixel / SPRITE_SIZE ) );
+      }
+
+      write16( color >> 8, color );
     }
-
-    write16( color >> 8, color );
+    
     pixel++;
+    curX++;
 
-    paletteIndex = pixelPair & 0x0F;
-    color = screen->palette[paletteIndex];
-
-    if ( color == TRANSPARENT_COLOR )
+    if ( curX >= skipLeft && curX < ( TILE_SIZE - skipRight ) && curY >= skipTop && curY < ( TILE_SIZE - skipBottom ) )
     {
-      color = cScreen_GetTilePixelColor( screen, map, x + ( pixel % SPRITE_SIZE ), y + ( pixel / SPRITE_SIZE ) );
-    }
+      paletteIndex = pixelPair & 0x0F;
+      color = screen->palette[paletteIndex];
 
-    write16( color >> 8, color );
+      if ( color == TRANSPARENT_COLOR )
+      {
+        color = cScreen_GetTilePixelColor( screen, map, x + ( pixel % SPRITE_SIZE ), y + ( pixel / SPRITE_SIZE ) );
+      }
+
+      write16( color >> 8, color );
+    }
+    
     pixel++;
+    curX++;
+
+    if ( curX >= SPRITE_SIZE )
+    {
+      curX = 0;
+      curY++;
+
+      if ( curY >= SPRITE_SIZE)
+      {
+        curY = 0;
+      }
+    }
   }
 
   CS_IDLE;
