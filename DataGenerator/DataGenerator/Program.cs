@@ -267,6 +267,36 @@ string BuildPlayerSpriteTexturesOutputString()
       }
    }
 
+   outputString += "}\n\n";
+
+   return outputString;
+}
+
+string BuildMapTilesOutputString()
+{
+   string outputString = "void cTileMap_LoadTiles( cTileMap_t* map, uint8_t index )\n";
+   outputString += "{\n";
+
+   for ( int i = 0; i < DataGenerator.MapData.MapTiles.Count; i++ )
+   {
+      if ( i == 0 )
+      {
+         outputString += "  if ( index == " + i + " )\n";
+      }
+      else
+      {
+         outputString += "  else if ( index == " + i + " )\n";
+      }
+      outputString += "  {\n";
+
+      for ( int j = 0; j < DataGenerator.MapData.MapTiles[i].Count; j++ )
+      {
+         outputString += string.Format( "    map->tiles[{0}] = 0x{1};\n", j, DataGenerator.MapData.MapTiles[i][j].ToString( "X2" ) );
+      }
+
+      outputString += "  }\n";
+   }
+
    outputString += "}\n";
 
    return outputString;
@@ -316,6 +346,10 @@ try
 
    Console.Write( "Generating player sprite texture loader..." );
    outputString += BuildPlayerSpriteTexturesOutputString();
+   Console.Write( "Done!\n" );
+
+   Console.Write( "Generating map tiles..." );
+   outputString += BuildMapTilesOutputString();
    Console.Write( "Done!\n" );
 
    Console.Write( "Writing source file..." );

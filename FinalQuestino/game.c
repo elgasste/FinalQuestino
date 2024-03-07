@@ -11,13 +11,14 @@ void cGame_Init( cGame_t* game )
 
   cTileMap_Init( &( game->tileMap ) );
   cTileMap_LoadMap( &( game->tileMap ), 0 );
+  cTileMap_LoadTiles( &( game->tileMap ), 0 );
   cGame_LoadTextBitFields( game );
 
   cPlayer_Init( &( game->player ) );
   game->player.sprite.direction = cDirection_Down;
   game->player.sprite.frameSeconds = 0.2f;
-  game->player.position.x = ( TILES_X * TILE_SIZE ) / 2;
-  game->player.position.y = ( TILES_Y * TILE_SIZE ) / 2;
+  game->player.position.x = TILE_SIZE * 10;
+  game->player.position.y = TILE_SIZE * 10;
   game->player.hitBoxSize.x = 12;
   game->player.hitBoxSize.y = 12;
   game->player.spriteOffset.x = -2;
