@@ -11,7 +11,7 @@ void cGame_Init( cGame_t* game )
   cScreen_Begin( &( game->screen ) );
 
   cClock_Init( &( game->clock ) );
-  cInputReader_Init( &( game->inputReader ) );
+  cInput_Init( &( game->input ) );
 
   cTileMap_Init( &( game->tileMap ) );
   cTileMap_LoadMap( &( game->tileMap ), 0 );
@@ -34,7 +34,7 @@ void cGame_Tic( cGame_t* game )
 {
   cVector2f_t prevPlayerPos;
 
-  cInputReader_ReadInput( &( game->inputReader ) );
+  cInput_Read( &( game->input ) );
   cGame_HandleInput( game );
 
   switch( game->state )
@@ -90,10 +90,10 @@ static void cGame_HandleInput( cGame_t* game )
   // TODO: this should go into an input handler file, probably
   if ( game->state == cGameState_Playing )
   {
-    leftIsDown = game->inputReader.buttonStates[cButton_Left].down;
-    upIsDown = game->inputReader.buttonStates[cButton_Up].down;
-    rightIsDown = game->inputReader.buttonStates[cButton_Right].down;
-    downIsDown = game->inputReader.buttonStates[cButton_Down].down;
+    leftIsDown = game->input.buttonStates[cButton_Left].down;
+    upIsDown = game->input.buttonStates[cButton_Up].down;
+    rightIsDown = game->input.buttonStates[cButton_Right].down;
+    downIsDown = game->input.buttonStates[cButton_Down].down;
 
     if ( game->state == cGameState_Playing )
     {

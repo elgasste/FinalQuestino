@@ -8,18 +8,20 @@
 #define PIN_ANALOG_X A15
 #define PIN_ANALOG_Y A14
 
-typedef struct cInputReader_t
+// MUFFINS: rename this, it's not an input reader. Also rename this whole file to just input.h,
+// and put the handler functions in.
+typedef struct cInput_t
 {
   cButtonState_t buttonStates[cButton_Count];
 }
-cInputReader_t;
+cInput_t;
 
 #if defined( __cplusplus )
 extern "C" {
 #endif
 
-void cInputReader_Init( cInputReader_t* inputReader );
-void cInputReader_ReadInput( cInputReader_t* inputReader );
+void cInput_Init( cInput_t* input );
+void cInput_Read( cInput_t* input );
 
 #if defined( __cplusplus )
 }
