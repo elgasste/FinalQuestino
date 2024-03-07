@@ -5,6 +5,7 @@
 #include "screen.h"
 #include "tile_map.h"
 #include "clock.h"
+#include "input_reader.h"
 #include "player.h"
 
 typedef struct cGame_t
@@ -14,6 +15,8 @@ typedef struct cGame_t
   uint8_t textBitFields[TEXT_TILES][8];
 
   cClock_t clock;
+  cInputReader_t inputReader;
+
   cGameState_t state;
   cPlayer_t player;
 }

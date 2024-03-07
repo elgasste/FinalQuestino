@@ -348,7 +348,7 @@ void cScreen_DrawSprite( cScreen_t* screen, cSprite_t* sprite, cTileMap_t* map, 
 {
   uint8_t pixelPair, paletteIndex, skipLeft, skipTop, skipRight, skipBottom, curX, curY;
   uint16_t color;
-  uint16_t frameBytes = ( SPRITE_SIZE / 2 ) * SPRITE_SIZE;
+  uint16_t frameBytes = PACKED_SPRITE_SIZE * SPRITE_SIZE;
   uint16_t startByte = ( (uint8_t)( sprite->direction ) * SPRITE_FRAMES * frameBytes ) + ( sprite->currentFrame * frameBytes );
   uint16_t i, pixel, ux, uy;
 
@@ -420,6 +420,86 @@ void cScreen_DrawSprite( cScreen_t* screen, cSprite_t* sprite, cTileMap_t* map, 
         color = cScreen_GetTilePixelColor( screen, map, ux + ( pixel % SPRITE_SIZE ), uy + ( pixel / SPRITE_SIZE ) );
       }
 
+      write16( color >> 8, color );
+    }
+    
+    pixel++;
+    curX++;
+
+    if ( curX >= SPRITE_SIZE )
+    {
+      curX = 0;
+      curY++;
+
+      if ( curY >= SPRITE_SIZE)
+      {
+        curY = 0;
+      }
+    }
+  }
+
+  CS_IDLE;
+}
+
+void cScreen_WipeSprite( cScreen_t* screen, cTileMap_t* map, float x, float y )
+{
+  uint8_t skipLeft, skipTop, skipRight, skipBottom, curX, curY;
+  uint16_t color;
+  uint16_t frameBytes = PACKED_SPRITE_SIZE * SPRITE_SIZE;
+  uint16_t i, pixel, ux, uy;
+
+  if ( x >= ( TILE_SIZE * TILES_X ) || y >= ( TILE_SIZE * TILES_Y ) ||
+       x + SPRITE_SIZE < 0 || y + SPRITE_SIZE < 0 )
+  {
+    return;
+  }
+
+  if ( x < 0 )
+  {
+    ux = 0;
+    skipLeft = (uint8_t)( -( x - NEGATIVE_CLAMP_THETA ) );
+    skipRight = 0;
+  }
+  else
+  {
+    ux = (uint16_t)x;
+    skipLeft = 0;
+    skipRight = ( ux + SPRITE_SIZE ) >= ( TILE_SIZE * TILES_X ) ? TILE_SIZE - ( ( TILE_SIZE * TILES_X ) - ux ) : 0;
+  }
+
+  if ( y < 0 )
+  {
+    uy = 0;
+    skipTop = (uint8_t)( -( y - NEGATIVE_CLAMP_THETA ) );
+    skipBottom = 0;
+  }
+  else
+  {
+    uy = (uint16_t)y;
+    skipTop = 0;
+    skipBottom = ( uy + SPRITE_SIZE ) >= ( TILE_SIZE * TILES_Y ) ? TILE_SIZE - ( ( TILE_SIZE * TILES_Y ) - uy ) : 0;
+  }
+
+  CS_ACTIVE;
+  cScreen_SetAddrWindow( screen, ux, uy, ux + SPRITE_SIZE - skipLeft - skipRight - 1, uy + SPRITE_SIZE - skipTop - skipBottom - 1 );
+  CD_COMMAND;
+  write8( 0x2C );
+  CD_DATA;
+
+  for ( i = 0, pixel = 0, curX = 0, curY = 0; i < frameBytes; i++ )
+  {
+    if ( curX >= skipLeft && curX < ( TILE_SIZE - skipRight ) && curY >= skipTop && curY < ( TILE_SIZE - skipBottom ) )
+    {
+      color = cScreen_GetTilePixelColor( screen, map, ux + ( pixel % SPRITE_SIZE ), uy + ( pixel / SPRITE_SIZE ) );
+      write16( color >> 8, color );
+    }
+    
+    pixel++;
+    curX++;
+
+    if ( curX >= skipLeft && curX < ( TILE_SIZE - skipRight ) && curY >= skipTop && curY < ( TILE_SIZE - skipBottom ) )
+    {
+      color = cScreen_GetTilePixelColor( screen, map, ux + ( pixel % SPRITE_SIZE ), uy + ( pixel / SPRITE_SIZE ) );
       write16( color >> 8, color );
     }
     
