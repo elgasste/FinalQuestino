@@ -1,4 +1,4 @@
-#include "input.h"
+#include "game.h"
 
 // the analog stick ranges from 0 to 1024
 #define ANALOG_THRESHOLD_LOW 200
@@ -43,4 +43,89 @@ static void cInput_UpdateButtonState( cButtonState_t* buttonState, cBool_t down 
   }
 
   buttonState->down = down;
+}
+
+void cInput_Handle( cGame_t* game )
+{
+  cPlayer_t* player = &( game->player );
+  cSprite_t* sprite = &( player->sprite );
+  cBool_t leftIsDown, upIsDown, rightIsDown, downIsDown;
+
+  if ( game->state == cGameState_Playing )
+  {
+    leftIsDown = game->input.buttonStates[cButton_Left].down;
+    upIsDown = game->input.buttonStates[cButton_Up].down;
+    rightIsDown = game->input.buttonStates[cButton_Right].down;
+    downIsDown = game->input.buttonStates[cButton_Down].down;
+
+    if ( game->state == cGameState_Playing )
+    {
+      if ( leftIsDown && !rightIsDown )
+      {
+        player->velocity.x = -( player->maxVelocity.x );
+
+        if ( !( upIsDown && sprite->direction == cDirection_Up ) &&
+            !( downIsDown && sprite->direction == cDirection_Down ) )
+        {
+          sprite->direction = cDirection_Left;
+        }
+
+        if ( upIsDown || downIsDown )
+        {
+          player->velocity.x *= 0.707;
+        }
+      }
+      else if ( rightIsDown && !leftIsDown )
+      {
+        player->velocity.x = player->maxVelocity.x;
+
+        if ( !( upIsDown && sprite->direction == cDirection_Up ) &&
+            !( downIsDown && sprite->direction == cDirection_Down ) )
+        {
+          sprite->direction = cDirection_Right;
+        }
+
+        if ( upIsDown || downIsDown )
+        {
+          player->velocity.x *= 0.707;
+        }
+      }
+
+      if ( upIsDown && !downIsDown )
+      {
+        player->velocity.y = -( player->maxVelocity.y );
+
+        if ( !( leftIsDown && sprite->direction == cDirection_Left ) &&
+            !( rightIsDown && sprite->direction == cDirection_Right ) )
+        {
+          sprite->direction = cDirection_Up;
+        }
+
+        if ( leftIsDown || rightIsDown )
+        {
+          player->velocity.y *= 0.707;
+        }
+      }
+      else if ( downIsDown && !upIsDown )
+      {
+        player->velocity.y = player->maxVelocity.y;
+
+        if ( !( leftIsDown && sprite->direction == cDirection_Left ) &&
+            !( rightIsDown && sprite->direction == cDirection_Right ) )
+        {
+          sprite->direction = cDirection_Down;
+        }
+
+        if ( leftIsDown || rightIsDown )
+        {
+          player->velocity.y *= 0.707;
+        }
+      }
+    }
+
+    if ( leftIsDown || upIsDown || rightIsDown || downIsDown )
+    {
+      cSprite_Tic( &( player->sprite ), &( game->clock ) );
+    }
+  }
 }

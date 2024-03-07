@@ -8,6 +8,8 @@
 #define PIN_ANALOG_X A15
 #define PIN_ANALOG_Y A14
 
+typedef struct cGame_t cGame_t;
+
 typedef struct cInput_t
 {
   cButtonState_t buttonStates[cButton_Count];
@@ -20,6 +22,7 @@ extern "C" {
 
 void cInput_Init( cInput_t* input );
 void cInput_Read( cInput_t* input );
+void cInput_Handle( cGame_t* game );
 
 #if defined( __cplusplus )
 }
