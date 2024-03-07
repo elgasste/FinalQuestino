@@ -458,7 +458,7 @@ void cScreen_WipeSprite( cScreen_t* screen, cTileMap_t* map, float x, float y )
   if ( x < 0 )
   {
     ux = 0;
-    w = SPRITE_SIZE - (uint8_t)( -( x - NEGATIVE_CLAMP_THETA ) );
+    w = (uint16_t)( SPRITE_SIZE + x );
   }
   else
   {
@@ -469,7 +469,7 @@ void cScreen_WipeSprite( cScreen_t* screen, cTileMap_t* map, float x, float y )
   if ( y < 0 )
   {
     uy = 0;
-    h = SPRITE_SIZE - (uint8_t)( -( y - NEGATIVE_CLAMP_THETA ) );
+    h = (uint16_t)( SPRITE_SIZE + y );
   }
   else
   {
@@ -478,7 +478,7 @@ void cScreen_WipeSprite( cScreen_t* screen, cTileMap_t* map, float x, float y )
   }
 
   CS_ACTIVE;
-  cScreen_SetAddrWindow( screen, ux, uy, ux + w - 1, uy + y - 1 );
+  cScreen_SetAddrWindow( screen, ux, uy, ux + w - 1, uy + h - 1 );
   CD_COMMAND;
   write8( 0x2C );
   CD_DATA;
