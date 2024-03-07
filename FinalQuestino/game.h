@@ -6,6 +6,7 @@
 #include "tile_map.h"
 #include "clock.h"
 #include "input.h"
+#include "physics.h"
 #include "player.h"
 
 typedef struct cGame_t
@@ -16,6 +17,7 @@ typedef struct cGame_t
 
   cClock_t clock;
   cInput_t input;
+  cPhysics_t physics;
 
   cGameState_t state;
   cPlayer_t player;

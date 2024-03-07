@@ -1,7 +1,11 @@
-#include "physics.h"
 #include "game.h"
 
 #define COLLISION_PADDING 0.001f
+
+void cPhysics_Init( cPhysics_t* physics )
+{
+  physics->spriteFrameCache = 0;
+}
 
 void cPhysics_MovePlayer( cGame_t* game )
 {
@@ -32,12 +36,13 @@ void cPhysics_MovePlayer( cGame_t* game )
   game->player.velocity.x = 0;
   game->player.velocity.y = 0;
 
-  if ( prevPlayerPos.x != game->player.position.x || prevPlayerPos.y != game->player.position.y )
+  if ( prevPlayerPos.x != game->player.position.x || prevPlayerPos.y != game->player.position.y ||
+       game->player.sprite.currentFrame != game->physics.spriteFrameCache )
   {
-    // TODO: this should happen on a new sprite frame as well
     cScreen_WipeSprite( &( game->screen ), &( game->tileMap ),
                         prevPlayerPos.x + game->player.spriteOffset.x,
                         prevPlayerPos.y + game->player.spriteOffset.y );
+    game->physics.spriteFrameCache = game->player.sprite.currentFrame;
   }
 
   cScreen_DrawSprite( &( game->screen ), &( game->player.sprite ), &( game->tileMap ),

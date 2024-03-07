@@ -1,5 +1,4 @@
 #include "game.h"
-#include "physics.h"
 
 void cGame_Init( cGame_t* game )
 {
