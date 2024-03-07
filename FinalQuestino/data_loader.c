@@ -2864,8 +2864,8 @@ void cTileMap_LoadTiles( cTileMap_t* map, uint8_t index )
     map->tiles[289] = 0x10;
     map->tiles[290] = 0x10;
     map->tiles[291] = 0x10;
-    map->tiles[292] = 0x10;
-    map->tiles[293] = 0x10;
+    map->tiles[292] = 0x06;
+    map->tiles[293] = 0x06;
     map->tiles[294] = 0x06;
     map->tiles[295] = 0x06;
     map->tiles[296] = 0x06;
