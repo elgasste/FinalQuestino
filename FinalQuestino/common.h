@@ -12,6 +12,8 @@
 #define TILE_COUNT                300
 #define TILE_TEXTURE_SIZE_BYTES   128 // 16x16 bit-packed, so 16/2 x 16
 
+#define TILE_PASSABLE_FLAG        0x10
+
 #define TEXT_TILES                44
 
 #define SPRITE_SIZE               16
