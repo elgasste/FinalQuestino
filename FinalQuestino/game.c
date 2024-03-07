@@ -19,6 +19,7 @@ void cGame_Init( cGame_t* game )
 
   cPlayer_Init( &( game->player ) );
   game->player.sprite.direction = cDirection_Down;
+  game->player.sprite.frameSeconds = 0.2f;
   game->player.position.x = ( TILES_X * TILE_SIZE ) / 2;
   game->player.position.y = ( TILES_Y * TILE_SIZE ) / 2;
   game->player.hitBoxSize.x = 12;
@@ -43,6 +44,7 @@ void cGame_Tic( cGame_t* game )
     case cGameState_Playing:
       // TODO: this should go into a physics file, probably
       game->player.position.x += ( game->player.velocity.x * game->clock.frameSeconds );
+      game->player.position.y += ( game->player.velocity.y * game->clock.frameSeconds );
       if ( game->player.position.x < 0 )
       {
         game->player.position.x = 0;
@@ -51,7 +53,6 @@ void cGame_Tic( cGame_t* game )
       {
         game->player.position.x = ( TILES_X * TILE_SIZE ) - game->player.hitBoxSize.x - COLLISION_PADDING;
       }
-      game->player.position.y += ( game->player.velocity.y * game->clock.frameSeconds );
       if ( game->player.position.y < 0 )
       {
         game->player.position.y = 0;
@@ -146,6 +147,11 @@ static void cGame_HandleInput( cGame_t* game )
           player->velocity.y *= 0.707;
         }
       }
+    }
+
+    if ( leftIsDown || upIsDown || rightIsDown || downIsDown )
+    {
+      cSprite_Tic( &( player->sprite ), &( game->clock ) );
     }
   }
 }
