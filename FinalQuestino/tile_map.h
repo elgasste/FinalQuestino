@@ -24,6 +24,7 @@ void cTileMap_Init( cTileMap_t* map );
 
 // data_loader.c
 void cTileMap_LoadMap( cTileMap_t* map, uint8_t index );
+void cTileMap_LoadTiles( cTileMap_t* map, uint8_t index );
 
 #if defined( __cplusplus )
 }
