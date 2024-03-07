@@ -5,7 +5,7 @@
 #include "screen.h"
 #include "tile_map.h"
 #include "clock.h"
-#include "input_reader.h"
+#include "input.h"
 #include "player.h"
 
 typedef struct cGame_t

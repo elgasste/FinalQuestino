@@ -1,4 +1,4 @@
-#include "input_reader.h"
+#include "input.h"
 
 // the analog stick ranges from 0 to 1024
 #define ANALOG_THRESHOLD_LOW 200
