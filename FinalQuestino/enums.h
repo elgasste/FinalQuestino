@@ -24,7 +24,9 @@ typedef enum cButton_t
   cButton_Left = 0,
   cButton_Up,
   cButton_Right,
-  cButton_Down
+  cButton_Down,
+
+  cButton_Count
 }
 cButton_t;
 
