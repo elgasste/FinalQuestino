@@ -2,8 +2,6 @@
 
 #define COLLISION_PADDING 0.001f
 
-static void cGame_HandleInput( cGame_t* game );
-
 void cGame_Init( cGame_t* game )
 {
   cScreen_Init( &( game->screen ) );
@@ -11,7 +9,7 @@ void cGame_Init( cGame_t* game )
   cScreen_Begin( &( game->screen ) );
 
   cClock_Init( &( game->clock ) );
-  cInputReader_Init( &( game->inputReader ) );
+  cInput_Init( &( game->input ) );
 
   cTileMap_Init( &( game->tileMap ) );
   cTileMap_LoadMap( &( game->tileMap ), 0 );
@@ -34,8 +32,8 @@ void cGame_Tic( cGame_t* game )
 {
   cVector2f_t prevPlayerPos;
 
-  cInputReader_ReadInput( &( game->inputReader ) );
-  cGame_HandleInput( game );
+  cInput_Read( &( game->input ) );
+  cInput_Handle( game );
 
   switch( game->state )
   {
@@ -78,91 +76,5 @@ void cGame_Tic( cGame_t* game )
                           game->player.position.x + game->player.spriteOffset.x,
                           game->player.position.y + game->player.spriteOffset.y );
       break;
-  }
-}
-
-static void cGame_HandleInput( cGame_t* game )
-{
-  cPlayer_t* player = &( game->player );
-  cSprite_t* sprite = &( player->sprite );
-  cBool_t leftIsDown, upIsDown, rightIsDown, downIsDown;
-
-  // TODO: this should go into an input handler file, probably
-  if ( game->state == cGameState_Playing )
-  {
-    leftIsDown = game->inputReader.buttonStates[cButton_Left].down;
-    upIsDown = game->inputReader.buttonStates[cButton_Up].down;
-    rightIsDown = game->inputReader.buttonStates[cButton_Right].down;
-    downIsDown = game->inputReader.buttonStates[cButton_Down].down;
-
-    if ( game->state == cGameState_Playing )
-    {
-      if ( leftIsDown && !rightIsDown )
-      {
-        player->velocity.x = -( player->maxVelocity.x );
-
-        if ( !( upIsDown && sprite->direction == cDirection_Up ) &&
-            !( downIsDown && sprite->direction == cDirection_Down ) )
-        {
-          sprite->direction = cDirection_Left;
-        }
-
-        if ( upIsDown || downIsDown )
-        {
-          player->velocity.x *= 0.707;
-        }
-      }
-      else if ( rightIsDown && !leftIsDown )
-      {
-        player->velocity.x = player->maxVelocity.x;
-
-        if ( !( upIsDown && sprite->direction == cDirection_Up ) &&
-            !( downIsDown && sprite->direction == cDirection_Down ) )
-        {
-          sprite->direction = cDirection_Right;
-        }
-
-        if ( upIsDown || downIsDown )
-        {
-          player->velocity.x *= 0.707;
-        }
-      }
-
-      if ( upIsDown && !downIsDown )
-      {
-        player->velocity.y = -( player->maxVelocity.y );
-
-        if ( !( leftIsDown && sprite->direction == cDirection_Left ) &&
-            !( rightIsDown && sprite->direction == cDirection_Right ) )
-        {
-          sprite->direction = cDirection_Up;
-        }
-
-        if ( leftIsDown || rightIsDown )
-        {
-          player->velocity.y *= 0.707;
-        }
-      }
-      else if ( downIsDown && !upIsDown )
-      {
-        player->velocity.y = player->maxVelocity.y;
-
-        if ( !( leftIsDown && sprite->direction == cDirection_Left ) &&
-            !( rightIsDown && sprite->direction == cDirection_Right ) )
-        {
-          sprite->direction = cDirection_Down;
-        }
-
-        if ( leftIsDown || rightIsDown )
-        {
-          player->velocity.y *= 0.707;
-        }
-      }
-    }
-
-    if ( leftIsDown || upIsDown || rightIsDown || downIsDown )
-    {
-      cSprite_Tic( &( player->sprite ), &( game->clock ) );
-    }
   }
 }

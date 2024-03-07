@@ -1,6 +1,8 @@
 #include <string.h>
 
 #include "screen.h"
+#include "sprite.h"
+#include "tile_map.h"
 
 #define NEGATIVE_CLAMP_THETA 0.9999f
 

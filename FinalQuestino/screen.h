@@ -6,8 +6,6 @@
 // for "Elegoo 2.8 Inch Touch Screen User Manual".
 
 #include "common.h"
-#include "tile_map.h"
-#include "sprite.h"
 
 // possibly useful color macros
 #define	BLACK   0x0000
@@ -87,6 +85,9 @@
 
 #define SCREEN_WIDTH  320
 #define SCREEN_HEIGHT 240
+
+typedef struct cSprite_t cSprite_t;
+typedef struct cTileMap_t cTileMap_t;
 
 typedef struct cScreen_t
 {
