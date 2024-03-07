@@ -32,6 +32,8 @@ void cGame_Init( cGame_t* game )
 
 void cGame_Tic( cGame_t* game )
 {
+  cVector2f_t prevPlayerPos;
+
   cInputReader_ReadInput( &( game->inputReader ) );
   cGame_HandleInput( game );
 
@@ -43,6 +45,8 @@ void cGame_Tic( cGame_t* game )
       break;
     case cGameState_Playing:
       // TODO: this should go into a physics file, probably
+      prevPlayerPos.x = game->player.position.x;
+      prevPlayerPos.y = game->player.position.y;
       game->player.position.x += ( game->player.velocity.x * game->clock.frameSeconds );
       game->player.position.y += ( game->player.velocity.y * game->clock.frameSeconds );
       if ( game->player.position.x < 0 )
@@ -63,6 +67,13 @@ void cGame_Tic( cGame_t* game )
       }
       game->player.velocity.x = 0;
       game->player.velocity.y = 0;
+      if ( prevPlayerPos.x != game->player.position.x || prevPlayerPos.y != game->player.position.y )
+      {
+        // TODO: this should happen on a new sprite frame as well
+        cScreen_WipeSprite( &( game->screen ), &( game->tileMap ),
+                            prevPlayerPos.x + game->player.spriteOffset.x,
+                            prevPlayerPos.y + game->player.spriteOffset.y );
+      }
       cScreen_DrawSprite( &( game->screen ), &( game->player.sprite ), &( game->tileMap ),
                           game->player.position.x + game->player.spriteOffset.x,
                           game->player.position.y + game->player.spriteOffset.y );
