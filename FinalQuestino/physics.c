@@ -35,14 +35,14 @@ void cPhysics_MovePlayer( cGame_t* game )
   }
   if ( newPos.y < 0 )
   {
-    game->tilesIndex -= TILES_X;
+    game->tilesIndex -= SCREENS_X;
     player->position.y = ( TILES_Y * TILE_SIZE ) - player->hitBoxSize.y - COLLISION_PADDING;
     cPhysics_RefreshFromScreenSwap( game );
     return;
   }
   else if ( ( newPos.y + player->hitBoxSize.y ) >= ( TILES_Y * TILE_SIZE ) )
   {
-    game->tilesIndex += TILES_X;
+    game->tilesIndex += SCREENS_X;
     player->position.y = COLLISION_PADDING;
     cPhysics_RefreshFromScreenSwap( game );
     return;
