@@ -4,7 +4,7 @@ void cGame_Init( cGame_t* game )
 {
   game->paletteIndex = 0;
   game->tileTexturesIndex = 0;
-  game->tilesIndex = 0;
+  game->tilesIndex = 23;
 
   cScreen_Init( &( game->screen ) );
   cScreen_LoadPalette( &( game->screen ), game->paletteIndex );
@@ -21,8 +21,8 @@ void cGame_Init( cGame_t* game )
   cPlayer_Init( &( game->player ) );
   game->player.sprite.direction = cDirection_Down;
   game->player.sprite.frameSeconds = 0.2f;
-  game->player.position.x = TILE_SIZE * 15;
-  game->player.position.y = TILE_SIZE * 8;
+  game->player.position.x = TILE_SIZE * 10;
+  game->player.position.y = TILE_SIZE * 6;
   game->player.hitBoxSize.x = 12;
   game->player.hitBoxSize.y = 12;
   game->player.spriteOffset.x = -2;

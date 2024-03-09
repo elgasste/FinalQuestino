@@ -9,7 +9,7 @@ typedef struct cTileMap_t
 
   // hi 4 bits are flags, lo 4 bits are tile texture index
   // flag 0001: is passable
-  // flag 0010: is exit
+  // flag 0010: causes damage
   // flag 0100: is encounterable
   // flag 1000: has high encounter rate
   uint8_t tiles[TILE_COUNT];
