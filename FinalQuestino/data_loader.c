@@ -2824,7 +2824,7 @@ void cPlayer_LoadSprite( cPlayer_t* player )
   player->sprite.frameTextures[1023] = 0x99;
 }
 
-void cTileMap_LoadTiles( cTileMap_t* map, uint8_t index )
+void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
 {
   if ( index == 0 )
   {

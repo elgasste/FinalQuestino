@@ -24,28 +24,28 @@ void cPhysics_MovePlayer( cGame_t* game )
   // check screen boundaries
   if ( newPos.x < 0 )
   {
-    game->tilesIndex--;
+    game->tileMapIndex--;
     player->position.x = ( TILES_X * TILE_SIZE ) - player->hitBoxSize.x - COLLISION_PADDING;
     cPhysics_RefreshFromScreenSwap( game );
     return;
   }
   else if ( ( newPos.x + player->hitBoxSize.x ) >= ( TILES_X * TILE_SIZE ) )
   {
-    game->tilesIndex++;
+    game->tileMapIndex++;
     player->position.x = COLLISION_PADDING;
     cPhysics_RefreshFromScreenSwap( game );
     return;
   }
   if ( newPos.y < 0 )
   {
-    game->tilesIndex -= SCREENS_X;
+    game->tileMapIndex -= SCREENS_X;
     player->position.y = ( TILES_Y * TILE_SIZE ) - player->hitBoxSize.y - COLLISION_PADDING;
     cPhysics_RefreshFromScreenSwap( game );
     return;
   }
   else if ( ( newPos.y + player->hitBoxSize.y ) >= ( TILES_Y * TILE_SIZE ) )
   {
-    game->tilesIndex += SCREENS_X;
+    game->tileMapIndex += SCREENS_X;
     player->position.y = COLLISION_PADDING;
     cPhysics_RefreshFromScreenSwap( game );
     return;
@@ -158,7 +158,7 @@ void cPhysics_MovePlayer( cGame_t* game )
 
 static void cPhysics_RefreshFromScreenSwap( cGame_t* game )
 {
-  cTileMap_LoadTiles( &( game->tileMap ), game->tilesIndex );
+  cTileMap_LoadTileMap( &( game->tileMap ), game->tileMapIndex );
   cScreen_DrawTileMap( &( game->screen ), &( game->tileMap ) );
   cScreen_DrawSprite( &( game->screen ), &( game->player.sprite ), &( game->tileMap ),
                       game->player.position.x + game->player.spriteOffset.x,

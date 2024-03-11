@@ -4,7 +4,7 @@ void cGame_Init( cGame_t* game )
 {
   game->paletteIndex = 0;
   game->tileTexturesIndex = 0;
-  game->tilesIndex = 23;
+  game->tileMapIndex = 23;
 
   cScreen_Init( &( game->screen ) );
   cScreen_LoadPalette( &( game->screen ), game->paletteIndex );
@@ -15,7 +15,7 @@ void cGame_Init( cGame_t* game )
 
   cTileMap_Init( &( game->tileMap ) );
   cTileMap_LoadTileTextures( &( game->tileMap ), game->tileTexturesIndex );
-  cTileMap_LoadTiles( &( game->tileMap ), game->tilesIndex );
+  cTileMap_LoadTileMap( &( game->tileMap ), game->tileMapIndex );
 
   cPlayer_Init( &( game->player ) );
   game->player.sprite.direction = cDirection_Down;
