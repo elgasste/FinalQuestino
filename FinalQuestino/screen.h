@@ -110,6 +110,7 @@ typedef struct cScreen_t
   uint8_t rdPinUnset;
 
   uint16_t palette[16];
+  uint8_t textBitFields[TEXT_TILES][8];
 }
 cScreen_t;
 
@@ -123,12 +124,13 @@ void cScreen_DrawRect( cScreen_t* screen, uint16_t x, uint16_t y, uint16_t w, ui
 void cScreen_DrawTile( cScreen_t* screen, uint8_t* tileTexture, uint16_t x, uint16_t y );
 void cScreen_DrawTileMap( cScreen_t* screen, cTileMap_t* map );
 void cScreen_DrawText( cScreen_t* screen, const char* text, uint16_t x, uint16_t y,
-                       uint16_t backgroundColor, uint16_t foregroundColor, uint8_t* bitFields );
+                       uint16_t backgroundColor, uint16_t foregroundColor );
 void cScreen_DrawSprite( cScreen_t* screen, cSprite_t* sprite, cTileMap_t* map, float x, float y );
 void cScreen_WipeSprite( cScreen_t* screen, cTileMap_t* map, float x, float y );
 
 // data_loader.c
 void cScreen_LoadPalette( cScreen_t* screen, uint8_t index );
+void cScreen_LoadTextBitFields( cScreen_t* screen );
 
 #if defined( __cplusplus )
 }

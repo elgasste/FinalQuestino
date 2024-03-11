@@ -214,7 +214,7 @@ string BuildTextBitFieldsOutputString()
       throw new Exception( "Somehow the text texture map is null, I have no idea what went wrong." );
    }
 
-   string outputString = "void cGame_LoadTextBitFields( cGame_t* game )\n";
+   string outputString = "void cScreen_LoadTextBitFields( cScreen_t* screen )\n";
    outputString += "{\n";
 
    int charCount = _textTextureMap.Count / 8;
@@ -224,7 +224,7 @@ string BuildTextBitFieldsOutputString()
       for ( int row = 0; row < 8; row++ )
       {
          byte b = _textTextureMap[ch + ( row * charCount )];
-         outputString += string.Format( "  game->textBitFields[{0}][{1}] = 0x{2};\n", ch, row, b.ToString( "X2" ) );
+         outputString += string.Format( "  screen->textBitFields[{0}][{1}] = 0x{2};\n", ch, row, b.ToString( "X2" ) );
       }
    }
 

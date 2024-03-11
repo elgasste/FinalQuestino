@@ -13,7 +13,6 @@ typedef struct cGame_t
 {
   cScreen_t screen;
   cTileMap_t tileMap;
-  uint8_t textBitFields[TEXT_TILES][8];
   uint8_t paletteIndex;
   uint8_t tileTexturesIndex;
   uint8_t tilesIndex;
@@ -33,9 +32,6 @@ extern "C" {
 
 void cGame_Init( cGame_t* game );
 void cGame_Tic( cGame_t* game );
-
-// data_loader.c
-void cGame_LoadTextBitFields( cGame_t* game );
 
 #if defined( __cplusplus )
 }
