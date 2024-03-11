@@ -15,7 +15,7 @@ typedef struct cGame_t
   cTileMap_t tileMap;
   uint8_t paletteIndex;
   uint8_t tileTexturesIndex;
-  uint8_t tilesIndex;
+  uint8_t tileMapIndex;
 
   cClock_t clock;
   cInput_t input;

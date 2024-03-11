@@ -274,7 +274,7 @@ string BuildPlayerSpriteTexturesOutputString()
 
 string BuildMapTilesOutputString()
 {
-   string outputString = "void cTileMap_LoadTiles( cTileMap_t* map, uint8_t index )\n";
+   string outputString = "void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )\n";
    outputString += "{\n";
 
    for ( int i = 0; i < DataGenerator.MapData.MapTiles.Count; i++ )
