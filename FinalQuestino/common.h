@@ -2,6 +2,7 @@
 #define COMMON_H
 
 #include <Arduino.h>
+#include <string.h>
 
 // uncomment to use cSerial_PrintLn
 //#define SERIAL_DEBUG
@@ -19,6 +20,9 @@
 #define SCREENS_Y                 9
 
 #define TILE_PASSABLE_FLAG        0x10
+#define TILE_DAMAGE_FLAG          0x20
+#define TILE_ENCOUNTERABLE_FLAG   0x40
+#define TILE_HIGHRATE_FLAG        0x80
 
 #define TEXT_TILES                44
 

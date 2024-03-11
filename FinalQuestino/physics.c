@@ -3,10 +3,12 @@
 #define COLLISION_PADDING 0.001f
 
 static void cPhysics_RefreshFromScreenSwap( cGame_t* game );
+static void cPhysics_UpdateTileIndexCache( cGame_t* game );
 
 void cPhysics_Init( cPhysics_t* physics )
 {
   physics->spriteFrameCache = 0;
+  physics->tileIndexCache = TILES_X * TILES_Y; // off the map
 }
 
 void cPhysics_MovePlayer( cGame_t* game )
@@ -14,11 +16,12 @@ void cPhysics_MovePlayer( cGame_t* game )
   cVector2f_t newPos;
   cPlayer_t* player = &( game->player );
   uint8_t tileRowStartIndex, tileRowEndIndex, tileColStartIndex, tileColEndIndex, row, col, tile;
+  cBool_t posChanged;
 
   newPos.x = player->position.x + ( player->velocity.x * game->clock.frameSeconds );
   newPos.y = player->position.y + ( player->velocity.y * game->clock.frameSeconds );
 
-  // clip to screen boundaries
+  // check screen boundaries
   if ( newPos.x < 0 )
   {
     game->tilesIndex--;
@@ -128,8 +131,9 @@ void cPhysics_MovePlayer( cGame_t* game )
     }
   }
 
-  if ( newPos.x != player->position.x || newPos.y != player->position.y ||
-       player->sprite.currentFrame != game->physics.spriteFrameCache )
+  posChanged = newPos.x != player->position.x || newPos.y != player->position.y;
+
+  if ( posChanged || player->sprite.currentFrame != game->physics.spriteFrameCache )
   {
     cScreen_WipeSprite( &( game->screen ), &( game->tileMap ),
                         player->position.x + player->spriteOffset.x,
@@ -143,6 +147,11 @@ void cPhysics_MovePlayer( cGame_t* game )
                       player->position.x + player->spriteOffset.x,
                       player->position.y + player->spriteOffset.y );
 
+  if ( posChanged )
+  {
+    cPhysics_UpdateTileIndexCache( game );
+  }
+
   player->velocity.x = 0;
   player->velocity.y = 0;
 }
@@ -154,4 +163,18 @@ static void cPhysics_RefreshFromScreenSwap( cGame_t* game )
   cScreen_DrawSprite( &( game->screen ), &( game->player.sprite ), &( game->tileMap ),
                       game->player.position.x + game->player.spriteOffset.x,
                       game->player.position.y + game->player.spriteOffset.y );
+  cPhysics_UpdateTileIndexCache( game );
+}
+
+static void cPhysics_UpdateTileIndexCache( cGame_t* game )
+{
+  uint16_t centerX = game->player.position.x + ( game->player.hitBoxSize.x / 2 );
+  uint16_t centerY = game->player.position.y + ( game->player.hitBoxSize.y / 2 );
+  uint16_t newTileIndex = ( centerX / TILE_SIZE ) + ( ( centerY / TILE_SIZE ) * TILES_X );
+
+  if ( newTileIndex != game->physics.tileIndexCache )
+  {
+    game->physics.tileIndexCache = newTileIndex;
+    cGame_SteppedOnTile( game, newTileIndex );
+  }
 }

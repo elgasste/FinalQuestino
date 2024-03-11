@@ -46,3 +46,20 @@ void cGame_Tic( cGame_t* game )
       break;
   }
 }
+
+void cGame_SteppedOnTile( cGame_t* game, uint16_t tileIndex )
+{
+  uint8_t tile = game->tileMap.tiles[tileIndex];
+
+  // TODO: if the tile is a portal, swap in the new map and return
+
+  if ( tile & TILE_DAMAGE_FLAG )
+  {
+    // TODO: inflict damage
+  }
+
+  if ( tile & TILE_ENCOUNTERABLE_FLAG )
+  {
+    // TODO: roll for encounter
+  }
+}
