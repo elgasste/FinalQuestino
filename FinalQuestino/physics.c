@@ -1,7 +1,5 @@
 #include "game.h"
 
-#define COLLISION_PADDING 0.001f
-
 static void cPhysics_RefreshFromScreenSwap( cGame_t* game );
 
 void cPhysics_Init( cPhysics_t* physics )

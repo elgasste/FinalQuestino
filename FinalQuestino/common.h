@@ -33,6 +33,8 @@
 
 #define PLAYER_MAX_VELOCITY       64
 
+#define COLLISION_PADDING 0.001f
+
 typedef uint8_t cBool_t;
 #define cTrue 1
 #define cFalse 0
