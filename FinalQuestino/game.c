@@ -47,6 +47,19 @@ void cGame_Tic( cGame_t* game )
   }
 }
 
+void cGame_Refresh( cGame_t* game )
+{
+  if ( game->state == cGameState_Playing )
+  {
+    cTileMap_LoadTileMap( &( game->tileMap ), game->tileMapIndex );
+    cScreen_DrawTileMap( &( game->screen ), &( game->tileMap ) );
+    cScreen_DrawSprite( &( game->screen ), &( game->player.sprite ), &( game->tileMap ),
+                        game->player.position.x + game->player.spriteOffset.x,
+                        game->player.position.y + game->player.spriteOffset.y );
+    cPhysics_UpdateTileIndexCache( game );
+  }
+}
+
 void cGame_SteppedOnTile( cGame_t* game, uint16_t tileIndex )
 {
   uint8_t tile = game->tileMap.tiles[tileIndex];
