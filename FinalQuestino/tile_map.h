@@ -7,12 +7,17 @@ typedef struct cTileMap_t
 {
   uint8_t tileTextures[16][TILE_TEXTURE_SIZE_BYTES];
 
-  // hi 4 bits are flags, lo 4 bits are tile texture index
+  // high 4 bits are flags, low 4 bits are tile texture index
   // flag 0001: is passable
   // flag 0010: causes damage
   // flag 0100: is encounterable
   // flag 1000: has high encounter rate
   uint8_t tiles[TILE_COUNT];
+
+  // high 11 bits are the origin tile index
+  // middle 10 bits are the destination tile map index
+  // low 11 bits are the destination tile index
+  uint32_t portals[PORTAL_COUNT];
 }
 cTileMap_t;
 

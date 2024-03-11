@@ -20,4 +20,9 @@ void cTileMap_Init( cTileMap_t* map )
   {
     map->tiles[i] = 0;
   }
+
+  for ( i = 0; i < PORTAL_COUNT; i++ )
+  {
+    map->portals[i] = ( TILES_X * TILES_Y ) << 21; // off the map
+  }
 }
