@@ -1,9 +1,6 @@
 #include "game.h"
 
-#define COLLISION_PADDING 0.001f
-
 static void cPhysics_RefreshFromScreenSwap( cGame_t* game );
-static void cPhysics_UpdateTileIndexCache( cGame_t* game );
 
 void cPhysics_Init( cPhysics_t* physics )
 {
@@ -26,28 +23,28 @@ void cPhysics_MovePlayer( cGame_t* game )
   {
     game->tileMapIndex--;
     player->position.x = ( TILES_X * TILE_SIZE ) - player->hitBoxSize.x - COLLISION_PADDING;
-    cPhysics_RefreshFromScreenSwap( game );
+    cGame_Refresh( game );
     return;
   }
   else if ( ( newPos.x + player->hitBoxSize.x ) >= ( TILES_X * TILE_SIZE ) )
   {
     game->tileMapIndex++;
     player->position.x = COLLISION_PADDING;
-    cPhysics_RefreshFromScreenSwap( game );
+    cGame_Refresh( game );
     return;
   }
   if ( newPos.y < 0 )
   {
     game->tileMapIndex -= SCREENS_X;
     player->position.y = ( TILES_Y * TILE_SIZE ) - player->hitBoxSize.y - COLLISION_PADDING;
-    cPhysics_RefreshFromScreenSwap( game );
+    cGame_Refresh( game );
     return;
   }
   else if ( ( newPos.y + player->hitBoxSize.y ) >= ( TILES_Y * TILE_SIZE ) )
   {
     game->tileMapIndex += SCREENS_X;
     player->position.y = COLLISION_PADDING;
-    cPhysics_RefreshFromScreenSwap( game );
+    cGame_Refresh( game );
     return;
   }
 
@@ -156,17 +153,7 @@ void cPhysics_MovePlayer( cGame_t* game )
   player->velocity.y = 0;
 }
 
-static void cPhysics_RefreshFromScreenSwap( cGame_t* game )
-{
-  cTileMap_LoadTileMap( &( game->tileMap ), game->tileMapIndex );
-  cScreen_DrawTileMap( &( game->screen ), &( game->tileMap ) );
-  cScreen_DrawSprite( &( game->screen ), &( game->player.sprite ), &( game->tileMap ),
-                      game->player.position.x + game->player.spriteOffset.x,
-                      game->player.position.y + game->player.spriteOffset.y );
-  cPhysics_UpdateTileIndexCache( game );
-}
-
-static void cPhysics_UpdateTileIndexCache( cGame_t* game )
+void cPhysics_UpdateTileIndexCache( cGame_t* game )
 {
   uint16_t centerX = game->player.position.x + ( game->player.hitBoxSize.x / 2 );
   uint16_t centerY = game->player.position.y + ( game->player.hitBoxSize.y / 2 );

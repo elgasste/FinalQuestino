@@ -18,6 +18,7 @@ extern "C" {
 
 void cPhysics_Init( cPhysics_t* physics );
 void cPhysics_MovePlayer( cGame_t* game );
+void cPhysics_UpdateTileIndexCache( cGame_t* game );
 
 #if defined( __cplusplus )
 }

@@ -47,11 +47,39 @@ void cGame_Tic( cGame_t* game )
   }
 }
 
+void cGame_Refresh( cGame_t* game )
+{
+  if ( game->state == cGameState_Playing )
+  {
+    cTileMap_LoadTileMap( &( game->tileMap ), game->tileMapIndex );
+    cScreen_DrawTileMap( &( game->screen ), &( game->tileMap ) );
+    cScreen_DrawSprite( &( game->screen ), &( game->player.sprite ), &( game->tileMap ),
+                        game->player.position.x + game->player.spriteOffset.x,
+                        game->player.position.y + game->player.spriteOffset.y );
+    cPhysics_UpdateTileIndexCache( game );
+  }
+}
+
 void cGame_SteppedOnTile( cGame_t* game, uint16_t tileIndex )
 {
+  uint8_t i;
   uint8_t tile = game->tileMap.tiles[tileIndex];
+  uint16_t newTileIndex, newTileX, newTileY;
 
-  // TODO: if the tile is a portal, swap in the new map and return
+  for ( i = 0; i < PORTAL_COUNT; i++ )
+  {
+    if ( ( game->tileMap.portals[i] >> 21 ) == tileIndex )
+    {
+      game->tileMapIndex = ( game->tileMap.portals[i] >> 11 ) & 0x3FF;
+      newTileIndex = game->tileMap.portals[i] & 0x7FF;
+      newTileY = newTileIndex / TILES_X;
+      newTileX = newTileIndex - ( newTileY * TILES_X );
+      game->player.position.x = ( newTileX * TILE_SIZE ) + ( ( TILE_SIZE - game->player.hitBoxSize.x ) / 2 );
+      game->player.position.y = ( newTileY * TILE_SIZE ) + ( TILE_SIZE - game->player.hitBoxSize.y ) - COLLISION_PADDING;
+      cGame_Refresh( game );
+      return;
+    }
+  }
 
   if ( tile & TILE_DAMAGE_FLAG )
   {

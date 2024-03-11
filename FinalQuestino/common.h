@@ -15,6 +15,7 @@
 #define TILES_Y                   15
 #define TILE_COUNT                300
 #define TILE_TEXTURE_SIZE_BYTES   128 // 16x16 bit-packed, so 16/2 x 16
+#define PORTAL_COUNT              3
 
 #define SCREENS_X                 7
 #define SCREENS_Y                 9
@@ -31,6 +32,8 @@
 #define SPRITE_FRAMES             2
 
 #define PLAYER_MAX_VELOCITY       64
+
+#define COLLISION_PADDING 0.001f
 
 typedef uint8_t cBool_t;
 #define cTrue 1
