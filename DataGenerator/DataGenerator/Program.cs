@@ -179,7 +179,7 @@ string BuildTileTexturesOutputString()
       throw new Exception( "Somehow the tile texture map is null, I have no idea what went wrong." );
    }
 
-   string outputString = "void cTileMap_LoadMap( cTileMap_t* map, uint8_t index )\n";
+   string outputString = "void cTileMap_LoadTileTextures( cTileMap_t* map, uint8_t index )\n";
    outputString += "{\n";
    outputString += "  if ( index == 0 )\n";
    outputString += "  {\n";

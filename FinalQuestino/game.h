@@ -14,6 +14,9 @@ typedef struct cGame_t
   cScreen_t screen;
   cTileMap_t tileMap;
   uint8_t textBitFields[TEXT_TILES][8];
+  uint8_t paletteIndex;
+  uint8_t tileTexturesIndex;
+  uint8_t tilesIndex;
 
   cClock_t clock;
   cInput_t input;

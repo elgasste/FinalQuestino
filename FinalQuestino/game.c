@@ -2,23 +2,27 @@
 
 void cGame_Init( cGame_t* game )
 {
+  game->paletteIndex = 0;
+  game->tileTexturesIndex = 0;
+  game->tilesIndex = 23;
+
   cScreen_Init( &( game->screen ) );
-  cScreen_LoadPalette( &( game->screen ), 0 );
+  cScreen_LoadPalette( &( game->screen ), game->paletteIndex );
   cScreen_Begin( &( game->screen ) );
 
   cClock_Init( &( game->clock ) );
   cInput_Init( &( game->input ) );
 
   cTileMap_Init( &( game->tileMap ) );
-  cTileMap_LoadMap( &( game->tileMap ), 0 );
-  cTileMap_LoadTiles( &( game->tileMap ), 0 );
+  cTileMap_LoadTileTextures( &( game->tileMap ), game->tileTexturesIndex );
+  cTileMap_LoadTiles( &( game->tileMap ), game->tilesIndex );
   cGame_LoadTextBitFields( game );
 
   cPlayer_Init( &( game->player ) );
   game->player.sprite.direction = cDirection_Down;
   game->player.sprite.frameSeconds = 0.2f;
   game->player.position.x = TILE_SIZE * 10;
-  game->player.position.y = TILE_SIZE * 10;
+  game->player.position.y = TILE_SIZE * 6;
   game->player.hitBoxSize.x = 12;
   game->player.hitBoxSize.y = 12;
   game->player.spriteOffset.x = -2;
