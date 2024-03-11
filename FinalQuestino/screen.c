@@ -279,8 +279,7 @@ static int8_t cScreen_GetCharIndexFromChar( const char ch )
   }
 }
 
-void cScreen_DrawText( cScreen_t* screen, const char* text, uint16_t x, uint16_t y, uint16_t backgroundColor,
-                       uint16_t foregroundColor, uint8_t* bitFields )
+void cScreen_DrawText( cScreen_t* screen, const char* text, uint16_t x, uint16_t y, uint16_t backgroundColor, uint16_t foregroundColor )
 {
   uint16_t ch;
   int8_t charIndex, i;
@@ -307,7 +306,7 @@ void cScreen_DrawText( cScreen_t* screen, const char* text, uint16_t x, uint16_t
     }
     else
     {
-      bitField = &( bitFields[charIndex * 8] );
+      bitField = &( screen->textBitFields[charIndex] );
 
       for ( row = 0; row < 8; row++ )
       {
