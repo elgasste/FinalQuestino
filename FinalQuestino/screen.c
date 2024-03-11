@@ -50,6 +50,8 @@ void cScreen_Init( cScreen_t* screen )
   {
     screen->palette[i] = 0;
   }
+
+  cScreen_LoadTextBitFields( screen );
 }
 
 static void cScreen_Reset( cScreen_t* screen )

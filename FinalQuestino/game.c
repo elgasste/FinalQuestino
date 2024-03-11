@@ -16,7 +16,6 @@ void cGame_Init( cGame_t* game )
   cTileMap_Init( &( game->tileMap ) );
   cTileMap_LoadTileTextures( &( game->tileMap ), game->tileTexturesIndex );
   cTileMap_LoadTiles( &( game->tileMap ), game->tilesIndex );
-  cGame_LoadTextBitFields( game );
 
   cPlayer_Init( &( game->player ) );
   game->player.sprite.direction = cDirection_Down;
