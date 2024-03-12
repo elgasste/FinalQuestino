@@ -5,9 +5,9 @@
 
 typedef struct cButtonState_t
 {
-  cBool_t pressed;
-  cBool_t released;
-  cBool_t down;
+   cBool_t pressed;
+   cBool_t released;
+   cBool_t down;
 }
 cButtonState_t;
 

@@ -11,18 +11,18 @@
 
 typedef struct cGame_t
 {
-  cScreen_t screen;
-  cTileMap_t tileMap;
-  uint8_t paletteIndex;
-  uint8_t tileTexturesIndex;
-  uint8_t tileMapIndex;
+   cScreen_t screen;
+   cTileMap_t tileMap;
+   uint8_t paletteIndex;
+   uint8_t tileTexturesIndex;
+   uint8_t tileMapIndex;
 
-  cClock_t clock;
-  cInput_t input;
-  cPhysics_t physics;
+   cClock_t clock;
+   cInput_t input;
+   cPhysics_t physics;
 
-  cGameState_t state;
-  cPlayer_t player;
+   cGameState_t state;
+   cPlayer_t player;
 }
 cGame_t;
 

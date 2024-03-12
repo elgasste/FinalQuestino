@@ -3,9 +3,10 @@
 
 #include <Arduino.h>
 #include <stdint.h>
+#include <limits.h>
 #include <string.h>
 
-// uncomment to use cSerial_PrintLn
+// un-comment to use cSerial_PrintLn
 //#define SERIAL_DEBUG
 
 #define GAME_FPS                  30
