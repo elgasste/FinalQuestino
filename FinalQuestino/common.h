@@ -2,9 +2,11 @@
 #define COMMON_H
 
 #include <Arduino.h>
+#include <stdint.h>
+#include <limits.h>
 #include <string.h>
 
-// uncomment to use cSerial_PrintLn
+// un-comment to use cSerial_PrintLn
 //#define SERIAL_DEBUG
 
 #define GAME_FPS                  30
@@ -31,7 +33,7 @@
 #define PACKED_SPRITE_SIZE        8
 #define SPRITE_FRAMES             2
 
-#define PLAYER_MAX_VELOCITY       64
+#define PLAYER_MAX_VELOCITY       48
 
 #define COLLISION_PADDING 0.001f
 

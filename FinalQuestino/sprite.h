@@ -8,11 +8,11 @@ typedef struct cClock_t cClock_t;
 
 typedef struct cSprite_t
 {
-  uint8_t frameTextures[( SPRITE_SIZE / 2 ) * SPRITE_SIZE * SPRITE_FRAMES * 4];
-  cDirection_t direction;
-  uint8_t currentFrame;
-  float elapsedSeconds;
-  float frameSeconds;
+   uint8_t frameTextures[( SPRITE_SIZE / 2 ) * SPRITE_SIZE * SPRITE_FRAMES * 4];
+   cDirection_t direction;
+   uint8_t currentFrame;
+   float elapsedSeconds;
+   float frameSeconds;
 }
 cSprite_t;
 

@@ -12,7 +12,7 @@ typedef struct cGame_t cGame_t;
 
 typedef struct cInput_t
 {
-  cButtonState_t buttonStates[cButton_Count];
+   cButtonState_t buttonStates[cButton_Count];
 }
 cInput_t;
 

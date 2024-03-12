@@ -91,26 +91,26 @@ typedef struct cTileMap_t cTileMap_t;
 
 typedef struct cScreen_t
 {
-  uint16_t rotatedWidth;
-  uint16_t rotatedHeight;
+   uint16_t rotatedWidth;
+   uint16_t rotatedHeight;
 
-  volatile uint8_t* csPort;
-  volatile uint8_t* cdPort;
-  volatile uint8_t* wrPort;
-  volatile uint8_t* rdPort;
+   volatile uint8_t* csPort;
+   volatile uint8_t* cdPort;
+   volatile uint8_t* wrPort;
+   volatile uint8_t* rdPort;
 
-	uint8_t csPinSet;
-  uint8_t cdPinSet;
-  uint8_t wrPinSet;
-  uint8_t rdPinSet;
+   uint8_t csPinSet;
+   uint8_t cdPinSet;
+   uint8_t wrPinSet;
+   uint8_t rdPinSet;
 
-	uint8_t csPinUnset;
-  uint8_t cdPinUnset;
-  uint8_t wrPinUnset;
-  uint8_t rdPinUnset;
+   uint8_t csPinUnset;
+   uint8_t cdPinUnset;
+   uint8_t wrPinUnset;
+   uint8_t rdPinUnset;
 
-  uint16_t palette[16];
-  uint8_t textBitFields[TEXT_TILES][8];
+   uint16_t palette[16];
+   uint8_t textBitFields[TEXT_TILES][8];
 }
 cScreen_t;
 

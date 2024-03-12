@@ -5,9 +5,9 @@
 
 typedef struct cClock_t
 {
-  uint32_t frameStartMicro;
-  uint32_t frameMicro;
-  float frameSeconds;
+   uint32_t frameStartMicro;
+   uint32_t frameMicro;
+   float frameSeconds;
 }
 cClock_t;
 

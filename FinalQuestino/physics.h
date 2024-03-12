@@ -7,8 +7,8 @@ typedef struct cGame_t cGame_t;
 
 typedef struct cPhysics_t
 {
-  uint8_t spriteFrameCache;
-  uint16_t tileIndexCache;
+   uint8_t spriteFrameCache;
+   uint16_t tileIndexCache;
 }
 cPhysics_t;
 

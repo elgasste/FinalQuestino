@@ -5,8 +5,8 @@
 
 typedef struct cVector2f_t
 {
-  float x;
-  float y;
+   float x;
+   float y;
 }
 cVector2f_t;
 
