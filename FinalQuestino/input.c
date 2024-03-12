@@ -10,7 +10,7 @@ void cInput_Init( cInput_t* input )
 {
    uint8_t i;
 
-   for( i = 0; i < (uint8_t)cButton_Count; i++ )
+   for ( i = 0; i < (uint8_t)cButton_Count; i++ )
    {
       input->buttonStates[i].pressed = cFalse;
       input->buttonStates[i].released = cFalse;
@@ -20,9 +20,8 @@ void cInput_Init( cInput_t* input )
 
 void cInput_Read( cInput_t* input )
 {
-   // MUFFINS: these shouldn't be ints, we need to define their size
-   int xValue = analogRead( PIN_ANALOG_X );
-   int yValue = analogRead( PIN_ANALOG_Y );
+   int16_t xValue = analogRead( PIN_ANALOG_X );
+   int16_t yValue = analogRead( PIN_ANALOG_Y );
 
    cInput_UpdateButtonState( &( input->buttonStates[cButton_Left ] ), xValue > ANALOG_THRESHOLD_HIGH );
    cInput_UpdateButtonState( &( input->buttonStates[cButton_Up ] ), yValue < ANALOG_THRESHOLD_LOW );

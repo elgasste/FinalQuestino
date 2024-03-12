@@ -60,7 +60,7 @@ void cPhysics_MovePlayer( cGame_t* game )
          // moving left, check leftward tiles
          col = newPos.x / TILE_SIZE;
 
-         for( row = tileRowStartIndex; row <= tileRowEndIndex; row++ )
+         for ( row = tileRowStartIndex; row <= tileRowEndIndex; row++ )
          {
             tile = game->tileMap.tiles[col + ( row * TILES_X )];
 
@@ -76,7 +76,7 @@ void cPhysics_MovePlayer( cGame_t* game )
          // moving right, check rightward tiles
          col = ( newPos.x + player->hitBoxSize.x ) / TILE_SIZE;
 
-         for( row = tileRowStartIndex; row <= tileRowEndIndex; row++ )
+         for ( row = tileRowStartIndex; row <= tileRowEndIndex; row++ )
          {
             tile = game->tileMap.tiles[col + ( row * TILES_X )];
 
@@ -100,7 +100,7 @@ void cPhysics_MovePlayer( cGame_t* game )
          // moving up, check upward tiles
          row = newPos.y / TILE_SIZE;
 
-         for( col = tileColStartIndex; col <= tileColEndIndex; col++ )
+         for ( col = tileColStartIndex; col <= tileColEndIndex; col++ )
          {
             tile = game->tileMap.tiles[col + ( row * TILES_X )];
 
@@ -116,7 +116,7 @@ void cPhysics_MovePlayer( cGame_t* game )
          // moving down, check downward tiles
          row = ( newPos.y + player->hitBoxSize.y ) / TILE_SIZE;
 
-         for( col = tileColStartIndex; col <= tileColEndIndex; col++ )
+         for ( col = tileColStartIndex; col <= tileColEndIndex; col++ )
          {
             tile = game->tileMap.tiles[col + ( row * TILES_X )];
 
