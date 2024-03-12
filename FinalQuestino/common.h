@@ -32,7 +32,7 @@
 #define PACKED_SPRITE_SIZE        8
 #define SPRITE_FRAMES             2
 
-#define PLAYER_MAX_VELOCITY       64
+#define PLAYER_MAX_VELOCITY       48
 
 #define COLLISION_PADDING 0.001f
 
