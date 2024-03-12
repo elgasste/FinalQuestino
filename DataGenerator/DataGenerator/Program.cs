@@ -147,22 +147,22 @@ string BuildPaletteOutputString()
 
    string outputString = "void cScreen_LoadPalette( cScreen_t* screen, uint8_t index )\n";
    outputString += "{\n";
-   outputString += "  if ( index == 0 )\n";
-   outputString += "  {\n";
+   outputString += "   if ( index == 0 )\n";
+   outputString += "   {\n";
 
    for ( int i = 0; i < 16; i++ )
    {
       if ( i < _palette.Count )
       {
-         outputString += string.Format( "    screen->palette[{0}] = 0x{1};\n", i, _palette[i].ToString( "X4" ) );
+         outputString += string.Format( "      screen->palette[{0}] = 0x{1};\n", i, _palette[i].ToString( "X4" ) );
       }
       else
       {
-         outputString += string.Format( "    screen->palette[{0}] = 0x0000;\n", i );
+         outputString += string.Format( "      screen->palette[{0}] = 0x0000;\n", i );
       }
    }
 
-   outputString += "  }\n";
+   outputString += "   }\n";
    outputString += "}\n\n";
 
    return outputString;
@@ -181,8 +181,8 @@ string BuildTileTexturesOutputString()
 
    string outputString = "void cTileMap_LoadTileTextures( cTileMap_t* map, uint8_t index )\n";
    outputString += "{\n";
-   outputString += "  if ( index == 0 )\n";
-   outputString += "  {\n";
+   outputString += "   if ( index == 0 )\n";
+   outputString += "   {\n";
 
    int tileTextureCount = _tileTextureMapBytes.Count / 16 / 16;
 
@@ -196,12 +196,12 @@ string BuildTileTexturesOutputString()
             var unpackedPixel1 = (ushort)_tileTextureMapBytes[idx++];
             var unpackedPixel2 = (ushort)_tileTextureMapBytes[idx];
             var packedPixels = (ushort)( ( unpackedPixel1 << 4 ) | unpackedPixel2 );
-            outputString += string.Format( "    map->tileTextures[{0}][{1}] = 0x{2};\n", i, counter, packedPixels.ToString( "X2" ) );
+            outputString += string.Format( "      map->tileTextures[{0}][{1}] = 0x{2};\n", i, counter, packedPixels.ToString( "X2" ) );
          }
       }
    }
 
-   outputString += "  }\n";
+   outputString += "   }\n";
    outputString += "}\n\n";
 
    return outputString;
@@ -224,7 +224,7 @@ string BuildTextBitFieldsOutputString()
       for ( int row = 0; row < 8; row++ )
       {
          byte b = _textTextureMap[ch + ( row * charCount )];
-         outputString += string.Format( "  screen->textBitFields[{0}][{1}] = 0x{2};\n", ch, row, b.ToString( "X2" ) );
+         outputString += string.Format( "   screen->textBitFields[{0}][{1}] = 0x{2};\n", ch, row, b.ToString( "X2" ) );
       }
    }
 
@@ -261,7 +261,7 @@ string BuildPlayerSpriteTexturesOutputString()
                var unpackedPixel2 = (ushort)_playerSpriteTextureMapBytes[pixelIndex2];
                var packedPixels = (ushort)( ( unpackedPixel1 << 4 ) | unpackedPixel2 );
 
-               outputString += string.Format( "  player->sprite.frameTextures[{0}] = 0x{1};\n", spriteIdx, packedPixels.ToString( "X2" ) );
+               outputString += string.Format( "   player->sprite.frameTextures[{0}] = 0x{1};\n", spriteIdx, packedPixels.ToString( "X2" ) );
             }
          }
       }
@@ -281,20 +281,20 @@ string BuildMapTilesOutputString()
    {
       if ( i == 0 )
       {
-         outputString += "  if ( index == " + i + " )\n";
+         outputString += "   if ( index == " + i + " )\n";
       }
       else
       {
-         outputString += "  else if ( index == " + i + " )\n";
+         outputString += "   else if ( index == " + i + " )\n";
       }
-      outputString += "  {\n";
+      outputString += "   {\n";
 
       for ( int j = 0; j < DataGenerator.MapData.MapTiles[i].Count; j++ )
       {
-         outputString += string.Format( "    map->tiles[{0}] = 0x{1};\n", j, DataGenerator.MapData.MapTiles[i][j].ToString( "X2" ) );
+         outputString += string.Format( "      map->tiles[{0}] = 0x{1};\n", j, DataGenerator.MapData.MapTiles[i][j].ToString( "X2" ) );
       }
 
-      outputString += "  }\n";
+      outputString += "   }\n";
    }
 
    outputString += "}\n";
