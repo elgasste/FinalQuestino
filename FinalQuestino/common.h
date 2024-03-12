@@ -2,6 +2,7 @@
 #define COMMON_H
 
 #include <Arduino.h>
+#include <stdint.h>
 #include <string.h>
 
 // uncomment to use cSerial_PrintLn
