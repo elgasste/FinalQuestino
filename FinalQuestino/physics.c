@@ -133,9 +133,10 @@ void cPhysics_MovePlayer( cGame_t* game )
 
    if ( posChanged || player->sprite.currentFrame != game->physics.spriteFrameCache )
    {
-      cScreen_WipeSprite( &( game->screen ), &( game->tileMap ),
-                          player->position.x + player->spriteOffset.x,
-                          player->position.y + player->spriteOffset.y );
+      cScreen_WipeTileMapSection( &( game->screen ), &( game->tileMap ),
+                                  player->position.x + player->spriteOffset.x,
+                                  player->position.y + player->spriteOffset.y,
+                                  SPRITE_SIZE, SPRITE_SIZE );
       game->physics.spriteFrameCache = player->sprite.currentFrame;
    }
 

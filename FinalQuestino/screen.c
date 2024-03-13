@@ -444,14 +444,14 @@ void cScreen_DrawSprite( cScreen_t* screen, cSprite_t* sprite, cTileMap_t* map, 
    CS_IDLE;
 }
 
-void cScreen_WipeSprite( cScreen_t* screen, cTileMap_t* map, float x, float y )
+void cScreen_WipeTileMapSection( cScreen_t* screen, cTileMap_t* map, float x, float y, uint16_t w, uint16_t h )
 {
    uint8_t pixelPair, paletteIndex, curX, curY;
    uint16_t color;
-   uint16_t ux, uy, w, h, row, col;
+   uint16_t ux, uy, row, col;
 
    if ( x >= ( TILE_SIZE * TILES_X ) || y >= ( TILE_SIZE * TILES_Y ) ||
-        x + SPRITE_SIZE < 0 || y + SPRITE_SIZE < 0 )
+        x + w < 0 || y + h < 0 )
    {
       return;
    }
@@ -459,23 +459,23 @@ void cScreen_WipeSprite( cScreen_t* screen, cTileMap_t* map, float x, float y )
    if ( x < 0 )
    {
       ux = 0;
-      w = (uint16_t)( SPRITE_SIZE + x );
+      w = (uint16_t)( w + x );
    }
    else
    {
       ux = (uint16_t)x;
-      w = ( ux + SPRITE_SIZE ) >= ( TILE_SIZE * TILES_X ) ? ( TILE_SIZE * TILES_X ) - ux : SPRITE_SIZE;
+      w = ( ux + w ) >= ( TILE_SIZE * TILES_X ) ? ( TILE_SIZE * TILES_X ) - ux : w;
    }
 
    if ( y < 0 )
    {
       uy = 0;
-      h = (uint16_t)( SPRITE_SIZE + y );
+      h = (uint16_t)( h + y );
    }
    else
    {
       uy = (uint16_t)y;
-      h = ( uy + SPRITE_SIZE ) >= ( TILE_SIZE * TILES_Y ) ? ( TILE_SIZE * TILES_Y ) - uy : SPRITE_SIZE;
+      h = ( uy + h ) >= ( TILE_SIZE * TILES_Y ) ? ( TILE_SIZE * TILES_Y ) - uy : h;
    }
 
    CS_ACTIVE;
