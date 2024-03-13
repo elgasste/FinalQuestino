@@ -74,6 +74,10 @@ void cGame_ChangeState( cGame_t *game, cGameState_t newState )
          {
             game->state = newState;
             cScreen_DrawRect( &( game->screen ), TILE_SIZE, TILE_SIZE, TILE_SIZE * 5, TILE_SIZE * 6, BLACK );
+            cScreen_DrawText( &( game->screen ), "press B", TILE_SIZE + 8, TILE_SIZE + 16, BLACK, WHITE );
+            cScreen_DrawText( &( game->screen ), "to get", TILE_SIZE + 8, TILE_SIZE + 32, BLACK, WHITE );
+            cScreen_DrawText( &( game->screen ), "out of", TILE_SIZE + 8, TILE_SIZE + 48, BLACK, WHITE );
+            cScreen_DrawText( &( game->screen ), "here", TILE_SIZE + 8, TILE_SIZE + 64, BLACK, WHITE );
          }
          break;
       case cGameState_MapMenu:
