@@ -5,8 +5,10 @@
 #include "button_state.h"
 #include "enums.h"
 
-#define PIN_ANALOG_X A15
-#define PIN_ANALOG_Y A14
+#define PIN_ANALOG_X    A15
+#define PIN_ANALOG_Y    A14
+#define PIN_A_BUTTON    50
+#define PIN_B_BUTTON    52
 
 typedef struct cGame_t cGame_t;
 

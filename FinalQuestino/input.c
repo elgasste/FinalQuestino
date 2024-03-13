@@ -16,6 +16,9 @@ void cInput_Init( cInput_t* input )
       input->buttonStates[i].released = cFalse;
       input->buttonStates[i].down = cFalse;
    }
+
+   pinMode( PIN_A_BUTTON, INPUT_PULLUP );
+   pinMode( PIN_B_BUTTON, INPUT_PULLUP );
 }
 
 void cInput_Read( cInput_t* input )
@@ -27,6 +30,9 @@ void cInput_Read( cInput_t* input )
    cInput_UpdateButtonState( &( input->buttonStates[cButton_Up ] ), yValue < ANALOG_THRESHOLD_LOW );
    cInput_UpdateButtonState( &( input->buttonStates[cButton_Right ] ), xValue < ANALOG_THRESHOLD_LOW );
    cInput_UpdateButtonState( &( input->buttonStates[cButton_Down ] ), yValue > ANALOG_THRESHOLD_HIGH );
+
+   cInput_UpdateButtonState( &( input->buttonStates[cButton_A] ), digitalRead( PIN_A_BUTTON ) == LOW );
+   cInput_UpdateButtonState( &( input->buttonStates[cButton_B] ), digitalRead( PIN_B_BUTTON ) == LOW );
 }
 
 static void cInput_UpdateButtonState( cButtonState_t* buttonState, cBool_t down )
