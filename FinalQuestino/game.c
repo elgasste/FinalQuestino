@@ -15,7 +15,6 @@ void cGame_Init( cGame_t* game )
 
    cTileMap_Init( &( game->tileMap ) );
    cTileMap_LoadTileTextures( &( game->tileMap ), game->tileTexturesIndex );
-   cTileMap_LoadTileMap( &( game->tileMap ), game->tileMapIndex );
 
    cPlayer_Init( &( game->player ) );
    game->player.sprite.direction = cDirection_Down;
@@ -38,12 +37,11 @@ void cGame_Tic( cGame_t* game )
    switch( game->state )
    {
       case cGameState_Init:
-         cScreen_DrawTileMap( &( game->screen ), &( game->tileMap ) );
-         game->state = cGameState_Map;
+         cGame_ChangeState( game, cGameState_Map );
          break;
       case cGameState_Map:
          cPhysics_MovePlayer( game );
-      break;
+         break;
    }
 }
 
@@ -57,6 +55,20 @@ void cGame_Refresh( cGame_t* game )
                           game->player.position.x + game->player.spriteOffset.x,
                           game->player.position.y + game->player.spriteOffset.y );
       cPhysics_UpdateTileIndexCache( game );
+   }
+}
+
+void cGame_ChangeState( cGame_t *game, cGameState_t newState )
+{
+   switch( game->state )
+   {
+      case cGameState_Init:
+         if ( newState == cGameState_Map )
+         {
+            game->state = newState;
+            cGame_Refresh( game );
+         }
+         break;
    }
 }
 
