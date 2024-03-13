@@ -69,6 +69,26 @@ void cGame_ChangeState( cGame_t *game, cGameState_t newState )
             cGame_Refresh( game );
          }
          break;
+      case cGameState_Map:
+         if ( newState == cGameState_MapMenu )
+         {
+            game->state = newState;
+            // TODO: draw the menu
+         }
+         break;
+      case cGameState_MapMenu:
+         if ( newState == cGameState_Map )
+         {
+            game->state = newState;
+            // TODO: wipe the menu
+            cScreen_WipeSprite( &( game->screen ), &( game->tileMap ),
+                                game->player.position.x + game->player.spriteOffset.x,
+                                game->player.position.y + game->player.spriteOffset.y );
+            cScreen_DrawSprite( &( game->screen ), &( game->player.sprite ), &( game->tileMap ),
+                                game->player.position.x + game->player.spriteOffset.x,
+                                game->player.position.y + game->player.spriteOffset.y );
+         }
+         break;
    }
 }
 

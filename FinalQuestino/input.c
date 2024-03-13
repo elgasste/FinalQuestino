@@ -5,6 +5,8 @@
 #define ANALOG_THRESHOLD_HIGH 824
 
 static void cInput_UpdateButtonState( cButtonState_t* buttonState, cBool_t down );
+static void cInput_HandleMapStateInput( cGame_t* game );
+static void cInput_HandleMapMenuStateInput( cGame_t* game );
 
 void cInput_Init( cInput_t* input )
 {
@@ -53,82 +55,107 @@ static void cInput_UpdateButtonState( cButtonState_t* buttonState, cBool_t down 
 
 void cInput_Handle( cGame_t* game )
 {
+   switch( game->state )
+   {
+      case cGameState_Map:
+         cInput_HandleMapStateInput( game );
+         break;
+      case cGameState_MapMenu:
+         cInput_HandleMapMenuStateInput( game );
+         break;
+   }
+}
+
+static void cInput_HandleMapStateInput( cGame_t* game )
+{
    cPlayer_t* player = &( game->player );
    cSprite_t* sprite = &( player->sprite );
    cBool_t leftIsDown, upIsDown, rightIsDown, downIsDown;
 
-   if ( game->state == cGameState_Map )
+   if ( game->input.buttonStates[cButton_A].pressed )
+   {
+      cGame_ChangeState( game, cGameState_MapMenu );
+   }
+   else
    {
       leftIsDown = game->input.buttonStates[cButton_Left].down;
       upIsDown = game->input.buttonStates[cButton_Up].down;
       rightIsDown = game->input.buttonStates[cButton_Right].down;
       downIsDown = game->input.buttonStates[cButton_Down].down;
 
-      if ( leftIsDown && !rightIsDown )
-      {
-         player->velocity.x = -( player->maxVelocity.x );
-
-         if ( !( upIsDown && sprite->direction == cDirection_Up ) &&
-               !( downIsDown && sprite->direction == cDirection_Down ) )
-         {
-            sprite->direction = cDirection_Left;
-         }
-
-         if ( upIsDown || downIsDown )
-         {
-            player->velocity.x *= 0.707;
-         }
-      }
-      else if ( rightIsDown && !leftIsDown )
-      {
-         player->velocity.x = player->maxVelocity.x;
-
-         if ( !( upIsDown && sprite->direction == cDirection_Up ) &&
-               !( downIsDown && sprite->direction == cDirection_Down ) )
-         {
-            sprite->direction = cDirection_Right;
-         }
-
-         if ( upIsDown || downIsDown )
-         {
-            player->velocity.x *= 0.707;
-         }
-      }
-
-      if ( upIsDown && !downIsDown )
-      {
-         player->velocity.y = -( player->maxVelocity.y );
-
-         if ( !( leftIsDown && sprite->direction == cDirection_Left ) &&
-               !( rightIsDown && sprite->direction == cDirection_Right ) )
-         {
-            sprite->direction = cDirection_Up;
-         }
-
-         if ( leftIsDown || rightIsDown )
-         {
-            player->velocity.y *= 0.707;
-         }
-      }
-      else if ( downIsDown && !upIsDown )
-      {
-         player->velocity.y = player->maxVelocity.y;
-
-         if ( !( leftIsDown && sprite->direction == cDirection_Left ) &&
-               !( rightIsDown && sprite->direction == cDirection_Right ) )
-         {
-            sprite->direction = cDirection_Down;
-         }
-
-         if ( leftIsDown || rightIsDown )
-         {
-            player->velocity.y *= 0.707;
-         }
-      }
-
       if ( leftIsDown || upIsDown || rightIsDown || downIsDown )
       {
+         if ( leftIsDown && !rightIsDown )
+         {
+            player->velocity.x = -( player->maxVelocity.x );
+
+            if ( !( upIsDown && sprite->direction == cDirection_Up ) &&
+                  !( downIsDown && sprite->direction == cDirection_Down ) )
+            {
+               sprite->direction = cDirection_Left;
+            }
+
+            if ( upIsDown || downIsDown )
+            {
+               player->velocity.x *= 0.707;
+            }
+         }
+         else if ( rightIsDown && !leftIsDown )
+         {
+            player->velocity.x = player->maxVelocity.x;
+
+            if ( !( upIsDown && sprite->direction == cDirection_Up ) &&
+                  !( downIsDown && sprite->direction == cDirection_Down ) )
+            {
+               sprite->direction = cDirection_Right;
+            }
+
+            if ( upIsDown || downIsDown )
+            {
+               player->velocity.x *= 0.707;
+            }
+         }
+
+         if ( upIsDown && !downIsDown )
+         {
+            player->velocity.y = -( player->maxVelocity.y );
+
+            if ( !( leftIsDown && sprite->direction == cDirection_Left ) &&
+                  !( rightIsDown && sprite->direction == cDirection_Right ) )
+            {
+               sprite->direction = cDirection_Up;
+            }
+
+            if ( leftIsDown || rightIsDown )
+            {
+               player->velocity.y *= 0.707;
+            }
+         }
+         else if ( downIsDown && !upIsDown )
+         {
+            player->velocity.y = player->maxVelocity.y;
+
+            if ( !( leftIsDown && sprite->direction == cDirection_Left ) &&
+                  !( rightIsDown && sprite->direction == cDirection_Right ) )
+            {
+               sprite->direction = cDirection_Down;
+            }
+
+            if ( leftIsDown || rightIsDown )
+            {
+               player->velocity.y *= 0.707;
+            }
+         }
+
          cSprite_Tic( &( player->sprite ), &( game->clock ) );
       }
+   }
+}
+
+static void cInput_HandleMapMenuStateInput( cGame_t* game )
+{
+   if ( game->input.buttonStates[cButton_B].pressed )
+   {
+      cGame_ChangeState( game, cGameState_Map );
    }
 }
