@@ -15,7 +15,6 @@ void cGame_Init( cGame_t* game )
 
    cTileMap_Init( &( game->tileMap ) );
    cTileMap_LoadTileTextures( &( game->tileMap ), game->tileTexturesIndex );
-   cTileMap_LoadTileMap( &( game->tileMap ), game->tileMapIndex );
 
    cPlayer_Init( &( game->player ) );
    game->player.sprite.direction = cDirection_Down;
@@ -38,18 +37,17 @@ void cGame_Tic( cGame_t* game )
    switch( game->state )
    {
       case cGameState_Init:
-         cScreen_DrawTileMap( &( game->screen ), &( game->tileMap ) );
-         game->state = cGameState_Playing;
+         cGame_ChangeState( game, cGameState_Map );
          break;
-      case cGameState_Playing:
+      case cGameState_Map:
          cPhysics_MovePlayer( game );
-      break;
+         break;
    }
 }
 
 void cGame_Refresh( cGame_t* game )
 {
-   if ( game->state == cGameState_Playing )
+   if ( game->state == cGameState_Map )
    {
       cTileMap_LoadTileMap( &( game->tileMap ), game->tileMapIndex );
       cScreen_DrawTileMap( &( game->screen ), &( game->tileMap ) );
@@ -57,6 +55,46 @@ void cGame_Refresh( cGame_t* game )
                           game->player.position.x + game->player.spriteOffset.x,
                           game->player.position.y + game->player.spriteOffset.y );
       cPhysics_UpdateTileIndexCache( game );
+   }
+}
+
+void cGame_ChangeState( cGame_t *game, cGameState_t newState )
+{
+   switch( game->state )
+   {
+      case cGameState_Init:
+         if ( newState == cGameState_Map )
+         {
+            game->state = newState;
+            cGame_Refresh( game );
+         }
+         break;
+      case cGameState_Map:
+         if ( newState == cGameState_MapMenu )
+         {
+            game->state = newState;
+            cScreen_DrawRect( &( game->screen ), TILE_SIZE, TILE_SIZE, TILE_SIZE * 5, TILE_SIZE * 6, BLACK );
+            cScreen_DrawText( &( game->screen ), "press B", TILE_SIZE + 8, TILE_SIZE + 16, BLACK, WHITE );
+            cScreen_DrawText( &( game->screen ), "to get", TILE_SIZE + 8, TILE_SIZE + 32, BLACK, WHITE );
+            cScreen_DrawText( &( game->screen ), "out of", TILE_SIZE + 8, TILE_SIZE + 48, BLACK, WHITE );
+            cScreen_DrawText( &( game->screen ), "here", TILE_SIZE + 8, TILE_SIZE + 64, BLACK, WHITE );
+         }
+         break;
+      case cGameState_MapMenu:
+         if ( newState == cGameState_Map )
+         {
+            game->state = newState;
+            cScreen_WipeTileMapSection( &( game->screen ), &( game->tileMap ),
+                                        TILE_SIZE, TILE_SIZE, TILE_SIZE * 5, TILE_SIZE * 6 );
+            cScreen_WipeTileMapSection( &( game->screen ), &( game->tileMap ),
+                                        game->player.position.x + game->player.spriteOffset.x,
+                                        game->player.position.y + game->player.spriteOffset.y,
+                                        SPRITE_SIZE, SPRITE_SIZE );
+            cScreen_DrawSprite( &( game->screen ), &( game->player.sprite ), &( game->tileMap ),
+                                game->player.position.x + game->player.spriteOffset.x,
+                                game->player.position.y + game->player.spriteOffset.y );
+         }
+         break;
    }
 }
 

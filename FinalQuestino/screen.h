@@ -126,7 +126,7 @@ void cScreen_DrawTileMap( cScreen_t* screen, cTileMap_t* map );
 void cScreen_DrawText( cScreen_t* screen, const char* text, uint16_t x, uint16_t y,
                        uint16_t backgroundColor, uint16_t foregroundColor );
 void cScreen_DrawSprite( cScreen_t* screen, cSprite_t* sprite, cTileMap_t* map, float x, float y );
-void cScreen_WipeSprite( cScreen_t* screen, cTileMap_t* map, float x, float y );
+void cScreen_WipeTileMapSection( cScreen_t* screen, cTileMap_t* map, float x, float y, uint16_t w, uint16_t h );
 
 // data_loader.c
 void cScreen_LoadPalette( cScreen_t* screen, uint8_t index );
