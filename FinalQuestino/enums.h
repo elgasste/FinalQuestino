@@ -15,7 +15,8 @@ cDirection_t;
 typedef enum cGameState_t
 {
    cGameState_Init = 0,
-   cGameState_Playing
+   cGameState_Map,
+   cGameState_MapMenu
 }
 cGameState_t;
 

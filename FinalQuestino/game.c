@@ -39,9 +39,9 @@ void cGame_Tic( cGame_t* game )
    {
       case cGameState_Init:
          cScreen_DrawTileMap( &( game->screen ), &( game->tileMap ) );
-         game->state = cGameState_Playing;
+         game->state = cGameState_Map;
          break;
-      case cGameState_Playing:
+      case cGameState_Map:
          cPhysics_MovePlayer( game );
       break;
    }
@@ -49,7 +49,7 @@ void cGame_Tic( cGame_t* game )
 
 void cGame_Refresh( cGame_t* game )
 {
-   if ( game->state == cGameState_Playing )
+   if ( game->state == cGameState_Map )
    {
       cTileMap_LoadTileMap( &( game->tileMap ), game->tileMapIndex );
       cScreen_DrawTileMap( &( game->screen ), &( game->tileMap ) );
