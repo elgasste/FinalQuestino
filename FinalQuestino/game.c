@@ -73,26 +73,15 @@ void cGame_ChangeState( cGame_t *game, cGameState_t newState )
          if ( newState == cGameState_MapMenu )
          {
             game->state = newState;
-            cScreen_DrawRect( &( game->screen ), TILE_SIZE, TILE_SIZE, TILE_SIZE * 5, TILE_SIZE * 6, BLACK );
-            cScreen_DrawText( &( game->screen ), "press B", TILE_SIZE + 8, TILE_SIZE + 16, BLACK, WHITE );
-            cScreen_DrawText( &( game->screen ), "to get", TILE_SIZE + 8, TILE_SIZE + 32, BLACK, WHITE );
-            cScreen_DrawText( &( game->screen ), "out of", TILE_SIZE + 8, TILE_SIZE + 48, BLACK, WHITE );
-            cScreen_DrawText( &( game->screen ), "here", TILE_SIZE + 8, TILE_SIZE + 64, BLACK, WHITE );
+            cMenu_Load( &( game->menu ), cMenuIndex_Map );
+            cMenu_Draw( game );
          }
          break;
       case cGameState_MapMenu:
          if ( newState == cGameState_Map )
          {
             game->state = newState;
-            cScreen_WipeTileMapSection( &( game->screen ), &( game->tileMap ),
-                                        TILE_SIZE, TILE_SIZE, TILE_SIZE * 5, TILE_SIZE * 6 );
-            cScreen_WipeTileMapSection( &( game->screen ), &( game->tileMap ),
-                                        game->player.position.x + game->player.spriteOffset.x,
-                                        game->player.position.y + game->player.spriteOffset.y,
-                                        SPRITE_SIZE, SPRITE_SIZE );
-            cScreen_DrawSprite( &( game->screen ), &( game->player.sprite ), &( game->tileMap ),
-                                game->player.position.x + game->player.spriteOffset.x,
-                                game->player.position.y + game->player.spriteOffset.y );
+            cMenu_Wipe( game );
          }
          break;
    }

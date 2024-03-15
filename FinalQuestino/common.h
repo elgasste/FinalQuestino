@@ -35,6 +35,8 @@
 
 #define PLAYER_MAX_VELOCITY       48
 
+#define MENU_CARATBLINKRATE       0.2f
+
 #define COLLISION_PADDING 0.001f
 
 typedef uint8_t cBool_t;

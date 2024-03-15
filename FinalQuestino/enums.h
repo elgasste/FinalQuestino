@@ -34,4 +34,10 @@ typedef enum cButton_t
 }
 cButton_t;
 
+typedef enum cMenuIndex_t
+{
+   cMenuIndex_Map = 0
+}
+cMenuIndex_t;
+
 #endif // ENUMS_H
