@@ -23,10 +23,10 @@ void cMenu_Draw( cGame_t* game )
    switch( game->menu.index )
    {
       case cMenuIndex_Map:
-         cScreen_DrawRect( &( game->screen ), TILE_SIZE, TILE_SIZE, TILE_SIZE * 5, TILE_SIZE * 6, BLACK );
-         cScreen_DrawText( &( game->screen ), "hi", TILE_SIZE + 24, TILE_SIZE + 8, BLACK, WHITE );
-         cScreen_DrawText( &( game->screen ), "hello", TILE_SIZE + 24, TILE_SIZE + 24, BLACK, WHITE );
-         cScreen_DrawText( &( game->screen ), "howdy", TILE_SIZE + 24, TILE_SIZE + 40, BLACK, WHITE );
+         cScreen_DrawRect( &( game->screen ), 16, 16, 72, 56, BLACK );
+         cScreen_DrawText( &( game->screen ), "hi", 32, 24, BLACK, WHITE );
+         cScreen_DrawText( &( game->screen ), "hello", 32, 40, BLACK, WHITE );
+         cScreen_DrawText( &( game->screen ), "howdy", 32, 56, BLACK, WHITE );
          break;
    }
 
@@ -38,8 +38,7 @@ void cMenu_Wipe( cGame_t* game )
    switch( game->menu.index )
    {
       case cMenuIndex_Map:
-         cScreen_WipeTileMapSection( &( game->screen ), &( game->tileMap ),
-                                     TILE_SIZE, TILE_SIZE, TILE_SIZE * 5, TILE_SIZE * 6 );
+         cScreen_WipeTileMapSection( &( game->screen ), &( game->tileMap ), 16, 16, 72, 56 );
          cScreen_WipeTileMapSection( &( game->screen ), &( game->tileMap ),
                                      game->player.position.x + game->player.spriteOffset.x,
                                      game->player.position.y + game->player.spriteOffset.y,
@@ -83,9 +82,7 @@ static void cMenu_DrawCarat( cGame_t* game )
    switch( game->menu.index )
    {
       case cMenuIndex_Map:
-         cScreen_DrawText( &( game->screen ), "-",
-                           TILE_SIZE + 8, ( TILE_SIZE + 8 ) + ( TILE_SIZE * game->menu.optionIndex ),
-                           BLACK, WHITE );
+         cScreen_DrawText( &( game->screen ), ">", 20, 24 + ( 16 * game->menu.optionIndex ), BLACK, WHITE );
          break;
    }
 }
@@ -95,9 +92,7 @@ static void cMenu_WipeCarat( cGame_t* game )
    switch( game->menu.index )
    {
       case cMenuIndex_Map:
-         cScreen_DrawText( &( game->screen ), " ",
-                           TILE_SIZE + 8, ( TILE_SIZE + 8 ) + ( TILE_SIZE * game->menu.optionIndex ),
-                           BLACK, WHITE );
+         cScreen_DrawText( &( game->screen ), " ", 20, 24 + ( 16 * game->menu.optionIndex ), BLACK, WHITE );
          break;
    }
 }

@@ -20,13 +20,13 @@ void BitmapSanityCheck( BitmapSource bitmap )
    {
       throw new Exception( "Expecting image pixel format to be Indexed8" );
    }
-   else if ( bitmap.PixelWidth <= 0 || bitmap.PixelWidth % 16 != 0 )
+   else if ( bitmap.PixelWidth <= 0 || bitmap.PixelWidth % 8 != 0 )
    {
-      throw new Exception( "Image width should be a multiple of 16" );
+      throw new Exception( "Image width should be a multiple of 8" );
    }
-   else if ( bitmap.PixelHeight <= 0 || bitmap.PixelWidth % 16 != 0 )
+   else if ( bitmap.PixelHeight <= 0 || bitmap.PixelWidth % 8 != 0 )
    {
-      throw new Exception( "Image height should be a multiple of 16" );
+      throw new Exception( "Image height should be a multiple of 8" );
    }
 }
 

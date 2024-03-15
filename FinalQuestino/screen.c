@@ -264,14 +264,15 @@ static int8_t cScreen_GetCharIndexFromChar( const char ch )
       // special characters start at 36 in our table
       switch ( ch )
       {
-         case 44: return 36;   // comma
-         case 33: return 37;   // exclamation point
-         case 39: return 38;   // single quote
-         case 38: return 39;   // ampersand
-         case 46: return 40;   // period
-         case 34: return 41;   // double quotes
-         case 63: return 42;   // question mark
-         case 45: return 43;   // dash
+         case 44: return 36;     // comma
+         case 33: return 37;     // exclamation point
+         case 39: return 38;     // single quote
+         case 38: return 39;     // ampersand
+         case 46: return 40;     // period
+         case 34: return 41;     // double quotes
+         case 63: return 42;     // question mark
+         case 45: return 43;     // dash
+         case 62: return 44;     // greater-than
 
          default: return -1;
       }
