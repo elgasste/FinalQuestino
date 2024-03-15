@@ -4,6 +4,7 @@
 #include "common.h"
 #include "screen.h"
 #include "tile_map.h"
+#include "menu.h"
 #include "clock.h"
 #include "input.h"
 #include "physics.h"
@@ -16,6 +17,8 @@ typedef struct cGame_t
    uint8_t paletteIndex;
    uint8_t tileTexturesIndex;
    uint8_t tileMapIndex;
+
+   cMenu_t menu;
 
    cClock_t clock;
    cInput_t input;
