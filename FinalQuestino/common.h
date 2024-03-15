@@ -35,7 +35,7 @@
 
 #define PLAYER_MAX_VELOCITY       48
 
-#define MENU_CARATBLINKRATE       0.2f
+#define MENU_CARATBLINKRATE       0.3f
 
 #define COLLISION_PADDING 0.001f
 

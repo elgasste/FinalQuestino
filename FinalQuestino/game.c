@@ -42,6 +42,9 @@ void cGame_Tic( cGame_t* game )
       case cGameState_Map:
          cPhysics_MovePlayer( game );
          break;
+      case cGameState_MapMenu:
+         cMenu_Tic( game );
+         break;
    }
 }
 
