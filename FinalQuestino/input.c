@@ -90,7 +90,7 @@ static void cInput_HandleMapStateInput( cGame_t* game )
             player->velocity.x = -( player->maxVelocity.x );
 
             if ( !( upIsDown && sprite->direction == cDirection_Up ) &&
-                  !( downIsDown && sprite->direction == cDirection_Down ) )
+                 !( downIsDown && sprite->direction == cDirection_Down ) )
             {
                sprite->direction = cDirection_Left;
             }
@@ -105,7 +105,7 @@ static void cInput_HandleMapStateInput( cGame_t* game )
             player->velocity.x = player->maxVelocity.x;
 
             if ( !( upIsDown && sprite->direction == cDirection_Up ) &&
-                  !( downIsDown && sprite->direction == cDirection_Down ) )
+                 !( downIsDown && sprite->direction == cDirection_Down ) )
             {
                sprite->direction = cDirection_Right;
             }
@@ -121,7 +121,7 @@ static void cInput_HandleMapStateInput( cGame_t* game )
             player->velocity.y = -( player->maxVelocity.y );
 
             if ( !( leftIsDown && sprite->direction == cDirection_Left ) &&
-                  !( rightIsDown && sprite->direction == cDirection_Right ) )
+                 !( rightIsDown && sprite->direction == cDirection_Right ) )
             {
                sprite->direction = cDirection_Up;
             }
@@ -136,7 +136,7 @@ static void cInput_HandleMapStateInput( cGame_t* game )
             player->velocity.y = player->maxVelocity.y;
 
             if ( !( leftIsDown && sprite->direction == cDirection_Left ) &&
-                  !( rightIsDown && sprite->direction == cDirection_Right ) )
+                 !( rightIsDown && sprite->direction == cDirection_Right ) )
             {
                sprite->direction = cDirection_Down;
             }
