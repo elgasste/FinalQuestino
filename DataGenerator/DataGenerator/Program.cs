@@ -294,6 +294,13 @@ string BuildMapTilesOutputString()
          outputString += string.Format( "      map->tiles[{0}] = 0x{1};\n", j, DataGenerator.MapData.MapTiles[i][j].ToString( "X2" ) );
       }
 
+      outputString += string.Format( "      map->stride = {0};\n", DataGenerator.MapData.MapStrides[i] );
+
+      for ( int j = 0; j < 4; j++ )
+      {
+         outputString += string.Format( "      map->portals[{0}] = 0x{1};\n", j, DataGenerator.MapData.MapPortals[i][j].CompiledData.ToString( "X2" ) );
+      }
+
       outputString += "   }\n";
    }
 

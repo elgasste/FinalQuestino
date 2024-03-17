@@ -25,4 +25,6 @@ void cTileMap_Init( cTileMap_t* map )
    {
       map->portals[i] = (uint32_t)( TILES_X * TILES_Y ) << 21; // off the map
    }
+
+   map->stride = 1;
 }

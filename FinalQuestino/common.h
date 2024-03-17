@@ -17,10 +17,7 @@
 #define TILES_Y                   15
 #define TILE_COUNT                300
 #define TILE_TEXTURE_SIZE_BYTES   128 // 16x16 bit-packed, so 16/2 x 16
-#define PORTAL_COUNT              3
-
-#define SCREENS_X                 7
-#define SCREENS_Y                 9
+#define PORTAL_COUNT              4
 
 #define TILE_PASSABLE_FLAG        0x10
 #define TILE_DAMAGE_FLAG          0x20
@@ -33,7 +30,9 @@
 #define PACKED_SPRITE_SIZE        8
 #define SPRITE_FRAMES             2
 
-#define PLAYER_MAX_VELOCITY       48
+// MUFFINS
+//#define PLAYER_MAX_VELOCITY       48
+#define PLAYER_MAX_VELOCITY       96
 
 #define MENU_CARATBLINKRATE       0.3f
 
