@@ -11377,7 +11377,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->tiles[18] = 0xD1;
       map->tiles[19] = 0xD1;
       map->tiles[20] = 0xD1;
-      map->tiles[21] = 0x06;
+      map->tiles[21] = 0xD1;
       map->tiles[22] = 0xD1;
       map->tiles[23] = 0xD1;
       map->tiles[24] = 0xD1;
@@ -11657,8 +11657,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->tiles[298] = 0x52;
       map->tiles[299] = 0x05;
       map->stride = 7;
-      map->portals[0] = 0x10C1F841;
-      map->portals[1] = 0x1D4208E1;
+      map->portals[0] = 0x10C1F842;
+      map->portals[1] = 0x1D4208E2;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
    }
@@ -23053,7 +23053,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->tiles[298] = 0x0E;
       map->tiles[299] = 0x0E;
       map->stride = 1;
-      map->portals[0] = 0x7FFFFFFF;
+      map->portals[0] = 0x820D072;
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
@@ -23669,7 +23669,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->tiles[298] = 0x0E;
       map->tiles[299] = 0x0E;
       map->stride = 1;
-      map->portals[0] = 0x7FFFFFFF;
+      map->portals[0] = 0x1C20D0FE;
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
