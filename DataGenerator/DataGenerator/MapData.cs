@@ -2,6 +2,76 @@
 {
    internal static class MapData
    {
+      public static List<List<PortalData>> MapPortals = new()
+      {
+         new() { new(), new(), new(), new() },  // 0
+         new() { new(), new(), new(), new() },  // 1
+         new() { new(), new(), new(), new() },  // 2
+         new() { new(), new(), new(), new() },  // 3
+         new() { new(), new(), new(), new() },  // 4
+         new() { new(), new(), new(), new() },  // 5
+         new() { new(), new(), new(), new() },  // 6
+         new() { new(), new(), new(), new() },  // 7
+         new() { new(), new(), new(), new() },  // 8
+         new() { new(), new(), new(), new() },  // 9
+         new() { new(), new(), new(), new() },  // 10
+         new() { new(), new(), new(), new() },  // 11
+         new() { new(), new(), new(), new() },  // 12
+         new() { new(), new(), new(), new() },  // 13
+         new() { new(), new(), new(), new() },  // 14
+         new() { new(), new(), new(), new() },  // 15
+         new() { new(), new(), new(), new() },  // 16
+         new() { new(), new(), new(), new() },  // 17
+         new() { new(), new(), new(), new() },  // 18
+         new() { new(), new(), new(), new() },  // 19
+         new() { new(), new(), new(), new() },  // 20
+         new() { new(), new(), new(), new() },  // 21
+         new() { new(), new(), new(), new() },  // 22
+         new() { new(), new(), new(), new() },  // 23
+         new() { new(), new(), new(), new() },  // 24
+         new() { new(), new(), new(), new() },  // 25
+         new() { new(), new(), new(), new() },  // 26
+         new() { new(), new(), new(), new() },  // 27
+         new() { new(), new(), new(), new() },  // 28
+         new() { new(), new(), new(), new() },  // 29
+         new() { new(), new(), new(), new() },  // 30
+         new() { new(), new(), new(), new() },  // 31
+         new() { new(), new(), new(), new() },  // 32
+         new() { new(), new(), new(), new() },  // 33
+         new() { new(), new(), new(), new() },  // 34
+         new() { new(), new(), new(), new() },  // 35
+         new() { new(), new(), new(), new() },  // 36
+         new() { new(), new(), new(), new() },  // 37
+         new() { new(), new(), new(), new() },  // 38
+         new() { new(), new(), new(), new() },  // 39
+         new() { new(), new(), new(), new() },  // 40
+         new() { new(), new(), new(), new() },  // 41
+         new() { new(), new(), new(), new() },  // 42
+         new() { new(), new(), new(), new() },  // 43
+         new() { new(), new(), new(), new() },  // 44
+         new() { new(), new(), new(), new() },  // 45
+         new() { new(), new(), new(), new() },  // 46
+         new() { new(), new(), new(), new() },  // 47
+         new() { new(), new(), new(), new() },  // 48
+         new() { new(), new(), new(), new() },  // 49
+         new() { new(), new(), new(), new() },  // 50
+         new() { new(), new(), new(), new() },  // 51
+         new() { new(), new(), new(), new() },  // 52
+         new() { new(), new(), new(), new() },  // 53
+         new() { new(), new(), new(), new() },  // 54
+         new() { new(), new(), new(), new() },  // 55
+         new() { new(), new(), new(), new() },  // 56
+         new() { new(), new(), new(), new() },  // 57
+         new() { new(), new(), new(), new() },  // 58
+         new() { new(), new(), new(), new() },  // 59
+         new() { new(), new(), new(), new() },  // 60
+         new() { new(), new(), new(), new() },  // 61
+         new() { new(), new(), new(), new() },  // 62
+         new() { new(), new(), new(), new() },  // 63
+         new() { new(), new(), new(), new() },  // 64
+         new() { new(), new(), new(), new() }   // 65
+      };
+
       public static List<List<int>> MapTiles = new()
       {
          // LEGEND:

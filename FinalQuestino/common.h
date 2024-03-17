@@ -17,7 +17,7 @@
 #define TILES_Y                   15
 #define TILE_COUNT                300
 #define TILE_TEXTURE_SIZE_BYTES   128 // 16x16 bit-packed, so 16/2 x 16
-#define PORTAL_COUNT              3
+#define PORTAL_COUNT              4
 
 #define SCREENS_X                 7
 #define SCREENS_Y                 9
