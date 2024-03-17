@@ -6,6 +6,7 @@
 typedef struct cTileMap_t
 {
    uint8_t tileTextures[16][TILE_TEXTURE_SIZE_BYTES];
+   uint8_t stride;
 
    // high 4 bits are flags, low 4 bits are tile texture index
    // flag 0001: is passable
