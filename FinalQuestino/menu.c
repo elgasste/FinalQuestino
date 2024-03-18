@@ -61,7 +61,7 @@ void cMenu_Tic( cGame_t* game )
    while( menu->caratSeconds >= MENU_CARATBLINKRATE )
    {
       menu->caratSeconds -= MENU_CARATBLINKRATE;
-      menu->showCarat = ( menu->showCarat ) ? cFalse : cTrue;
+      TOGGLE_BOOL( menu->showCarat );
    }
 
    if ( showCaratCache != menu->showCarat )
