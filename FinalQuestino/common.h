@@ -30,9 +30,7 @@
 #define PACKED_SPRITE_SIZE        8
 #define SPRITE_FRAMES             2
 
-// MUFFINS
-//#define PLAYER_MAX_VELOCITY       48
-#define PLAYER_MAX_VELOCITY       96
+#define PLAYER_MAX_VELOCITY       48
 
 #define MENU_CARATBLINKRATE       0.3f
 
