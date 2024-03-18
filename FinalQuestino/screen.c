@@ -244,40 +244,38 @@ void cScreen_DrawTileMap( cScreen_t* screen, cTileMap_t* map )
 
 static int8_t cScreen_GetCharIndexFromChar( const char ch )
 {
-   if ( ch >= 65 && ch <= 90 )
-   {
-      // A - Z (upper case)
-      return ch - 65;
-   }
    if ( ch >= 97 && ch <= 122 )
    {
-      // a - z (lower case)
+      // a - z (lower case letters start at 0 in our table)
       return ch - 97;
+   }
+   else if ( ch >= 65 && ch <= 90 )
+   {
+      // A - Z (upper case letters start at 26 in our table)
+      return ch - 39;
    }
    else if ( ch >= 48 && ch <= 57 )
    {
-      // 0 - 9 (numbers start at 26 in our table)
-      return ch - 22;
+      // 0 - 9 (numbers start at 52 in our table)
+      return ch + 4;
    }
    else
    {
-      // special characters start at 36 in our table
+      // special characters start at 62 in our table
       switch ( ch )
       {
-         case 44: return 36;     // comma
-         case 33: return 37;     // exclamation point
-         case 39: return 38;     // single quote
-         case 38: return 39;     // ampersand
-         case 46: return 40;     // period
-         case 34: return 41;     // double quotes
-         case 63: return 42;     // question mark
-         case 45: return 43;     // dash
-         case 62: return 44;     // greater-than
+         case 44: return 62;     // comma
+         case 33: return 63;     // exclamation point
+         case 39: return 64;     // single quote
+         case 38: return 65;     // ampersand
+         case 46: return 66;     // period
+         case 34: return 67;     // double quotes
+         case 63: return 68;     // question mark
+         case 45: return 69;     // dash
+         case 62: return 70;     // greater-than
 
          default: return -1;
       }
-
-      return -1;
    }
 }
 
