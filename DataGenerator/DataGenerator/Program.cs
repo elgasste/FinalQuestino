@@ -361,10 +361,13 @@ try
 
    Console.Write( "Writing source file..." );
    File.WriteAllText( "data_loader.c", outputString );
+   Console.Write( "Done!\n" );
+
+   Console.Write( "Copying source file..." );
+   File.Copy( "data_loader.c", "..\\..\\..\\..\\..\\FinalQuestino\\data_loader.c", overwrite: true );
    Console.Write( "Done!\n\n" );
 
-   Console.WriteLine( "The file 'data_loader.c' has been generated, replace" );
-   Console.WriteLine( "the existing file in the Final Questino folder. Bye!" );
+   Console.WriteLine( "Everything worked out perfectly with no possibility of errors. Bye!" );
 }
 catch( Exception e )
 {
