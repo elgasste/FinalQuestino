@@ -38,6 +38,7 @@ void cGame_Tic( cGame_t* game );
 void cGame_Refresh( cGame_t* game );
 void cGame_ChangeState( cGame_t *game, cGameState_t newState );
 void cGame_SteppedOnTile( cGame_t* game, uint16_t tileIndex );
+void cGame_ShowMessage( cGame_t* game, const char* message );
 
 #if defined( __cplusplus )
 }
