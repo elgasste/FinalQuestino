@@ -2,6 +2,7 @@
 
 static void cMenu_DrawCarat( cGame_t* game );
 static void cMenu_WipeCarat( cGame_t* game );
+static void cMenu_MapMenuSelect( cGame_t* game );
 
 void cMenu_Load( cMenu_t* menu, cMenuIndex_t index )
 {
@@ -130,4 +131,31 @@ void cMenu_ScrollUp( cGame_t* game )
    }
 
    cMenu_DrawCarat( game );
+}
+
+void cMenu_Select( cGame_t* game )
+{
+   switch( game->menu.index )
+   {
+      case cMenuIndex_Map:
+         cMenu_MapMenuSelect( game );
+         break;
+   }
+}
+
+static void cMenu_MapMenuSelect( cGame_t* game )
+{
+   switch( game->menu.optionIndex )
+   {
+      case 0: // talk
+         break;
+      case 1: // status
+         break;
+      case 2: // search
+         break;
+      case 3: // spell
+         break;
+      case 4: // item
+         break;
+   }
 }

@@ -26,6 +26,7 @@ void cMenu_Wipe( cGame_t* game );
 void cMenu_Tic( cGame_t* game );
 void cMenu_ScrollDown( cGame_t* game );
 void cMenu_ScrollUp( cGame_t* game );
+void cMenu_Select( cGame_t* game );
 
 #if defined( __cplusplus )
 }

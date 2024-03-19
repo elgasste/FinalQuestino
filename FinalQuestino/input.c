@@ -156,7 +156,11 @@ static void cInput_HandleMapMenuStateInput( cGame_t* game )
 {
    cBool_t upIsDown, downIsDown;
 
-   if ( game->input.buttonStates[cButton_B].pressed )
+   if ( game->input.buttonStates[cButton_A].pressed )
+   {
+      cMenu_Select( game );
+   }
+   else if ( game->input.buttonStates[cButton_B].pressed )
    {
       cGame_ChangeState( game, cGameState_Map );
    }
