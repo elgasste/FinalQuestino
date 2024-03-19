@@ -13,7 +13,7 @@ void cMenu_Load( cMenu_t* menu, cMenuIndex_t index )
    switch( index )
    {
       case cMenuIndex_Map:
-         menu->optionCount = 3;
+         menu->optionCount = 5;
          break;
    }
 }
@@ -23,10 +23,12 @@ void cMenu_Draw( cGame_t* game )
    switch( game->menu.index )
    {
       case cMenuIndex_Map:
-         cScreen_DrawRect( &( game->screen ), 16, 16, 72, 56, BLACK );
-         cScreen_DrawText( &( game->screen ), "hi", 32, 24, BLACK, WHITE );
-         cScreen_DrawText( &( game->screen ), "hello", 32, 40, BLACK, WHITE );
-         cScreen_DrawText( &( game->screen ), "howdy", 32, 56, BLACK, WHITE );
+         cScreen_DrawRect( &( game->screen ), 16, 16, 76, 88, BLACK );
+         cScreen_DrawText( &( game->screen ), "TALK", 32, 24, BLACK, WHITE );
+         cScreen_DrawText( &( game->screen ), "STATUS", 32, 40, BLACK, WHITE );
+         cScreen_DrawText( &( game->screen ), "SEARCH", 32, 56, BLACK, WHITE );
+         cScreen_DrawText( &( game->screen ), "SPELL", 32, 72, BLACK, WHITE );
+         cScreen_DrawText( &( game->screen ), "ITEM", 32, 88, BLACK, WHITE );
          break;
    }
 
@@ -38,7 +40,7 @@ void cMenu_Wipe( cGame_t* game )
    switch( game->menu.index )
    {
       case cMenuIndex_Map:
-         cScreen_WipeTileMapSection( &( game->screen ), &( game->tileMap ), 16, 16, 72, 56 );
+         cScreen_WipeTileMapSection( &( game->screen ), &( game->tileMap ), 16, 16, 76, 88 );
          cScreen_WipeTileMapSection( &( game->screen ), &( game->tileMap ),
                                      game->player.position.x + game->player.spriteOffset.x,
                                      game->player.position.y + game->player.spriteOffset.y,
