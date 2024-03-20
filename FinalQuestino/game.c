@@ -1,4 +1,5 @@
 #include "game.h"
+#include "random.h"
 
 static void cGame_DrawMapStatus( cGame_t* game );
 
@@ -29,6 +30,8 @@ void cGame_Init( cGame_t* game )
    game->player.spriteOffset.y = -4;
 
    game->state = cGameState_Init;
+
+   cRandom_Seed();
 }
 
 void cGame_Tic( cGame_t* game )
