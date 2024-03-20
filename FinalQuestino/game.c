@@ -1,5 +1,7 @@
 #include "game.h"
 
+static void cGame_DrawMapStatus( cGame_t* game );
+
 void cGame_Init( cGame_t* game )
 {
    game->paletteIndex = 0;
@@ -88,6 +90,11 @@ void cGame_ChangeState( cGame_t *game, cGameState_t newState )
                game->state = newState;
                cMenu_Wipe( game );
                break;
+            case cGameState_MapStatus:
+               game->state = newState;
+               cMenu_Wipe( game );
+               cGame_DrawMapStatus( game );
+               break;
          }
          break;
       case cGameState_MapMessage:
@@ -95,6 +102,13 @@ void cGame_ChangeState( cGame_t *game, cGameState_t newState )
          {
             game->state = newState;
             cScreen_WipeTileMapSection( &( game->screen ), &( game->tileMap ), 48, 128, 224, 96 );
+         }
+         break;
+      case cGameState_MapStatus:
+         if ( newState == cGameState_Map )
+         {
+            game->state = newState;
+            cScreen_WipeTileMapSection( &( game->screen ), &( game->tileMap ), 16, 16, 112, 96 );
          }
          break;
    }
@@ -137,4 +151,27 @@ void cGame_ShowMessage( cGame_t* game, const char* message )
    cGame_ChangeState( game, cGameState_MapMessage );
    cScreen_DrawRect( &( game->screen ), 48, 128, 224, 96, BLACK );
    cScreen_DrawWrappedText( &( game->screen ), message, 56, 136, 26, 8, BLACK, WHITE );
+}
+
+static void cGame_DrawMapStatus( cGame_t* game )
+{
+   cPlayer_t* player = &( game->player );
+   char str[14];
+
+   cScreen_DrawRect( &( game->screen ), 16, 16, 112, 96, BLACK );
+
+   snprintf( str, 13, "Lvl: %u", cPlayer_GetLevel( player ) );
+   cScreen_DrawText( &( game->screen ), str, 24, 24, BLACK, WHITE );
+   snprintf( str, 13, " HP: %u/%u", player->stats.HitPoints, player->stats.MaxHitPoints );
+   cScreen_DrawText( &( game->screen ), str, 24, 36, BLACK, WHITE );
+   snprintf( str, 13, " MP: %u/%u", player->stats.MagicPoints, player->stats.MaxMagicPoints );
+   cScreen_DrawText( &( game->screen ), str, 24, 48, BLACK, WHITE );
+   snprintf( str, 13, "Atk: %u", player->stats.AttackPower );
+   cScreen_DrawText( &( game->screen ), str, 24, 60, BLACK, WHITE );
+   snprintf( str, 13, "Def: %u", player->stats.DefensePower );
+   cScreen_DrawText( &( game->screen ), str, 24, 72, BLACK, WHITE );
+   snprintf( str, 13, "Agl: %u", player->stats.Agility );
+   cScreen_DrawText( &( game->screen ), str, 24, 84, BLACK, WHITE );
+   snprintf( str, 13, "Exp: %u", player->experience );
+   cScreen_DrawText( &( game->screen ), str, 24, 96, BLACK, WHITE );
 }

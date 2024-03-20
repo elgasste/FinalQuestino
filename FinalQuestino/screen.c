@@ -273,6 +273,8 @@ static int8_t cScreen_GetCharIndexFromChar( const char ch )
          case 63: return 68;     // question mark
          case 45: return 69;     // dash
          case 62: return 70;     // greater-than
+         case 58: return 71;     // colon
+         case 47: return 72;     // forward slash
 
          default: return -1;
       }

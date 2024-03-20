@@ -4,6 +4,7 @@
 #include "common.h"
 #include "vector.h"
 #include "sprite.h"
+#include "battle_stats.h"
 
 typedef struct cPlayer_t
 {
@@ -14,6 +15,10 @@ typedef struct cPlayer_t
 
    cSprite_t sprite;
    cVector2f_t spriteOffset;
+
+   cBattleStats_t stats;
+   uint16_t experience;
+   uint16_t gold;
 }
 cPlayer_t;
 
@@ -22,6 +27,7 @@ extern "C" {
 #endif
 
 void cPlayer_Init( cPlayer_t* player );
+uint8_t cPlayer_GetLevel( cPlayer_t* player );
 
 // data_loader.c
 void cPlayer_LoadSprite( cPlayer_t* player );
