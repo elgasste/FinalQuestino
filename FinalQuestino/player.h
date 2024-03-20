@@ -16,6 +16,7 @@ typedef struct cPlayer_t
    cSprite_t sprite;
    cVector2f_t spriteOffset;
 
+   uint16_t experience;
    cBattleStats_t stats;
 }
 cPlayer_t;
@@ -25,6 +26,7 @@ extern "C" {
 #endif
 
 void cPlayer_Init( cPlayer_t* player );
+uint8_t cPlayer_GetLevel( cPlayer_t* player );
 
 // data_loader.c
 void cPlayer_LoadSprite( cPlayer_t* player );
