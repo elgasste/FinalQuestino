@@ -14,4 +14,12 @@ void cPlayer_Init( cPlayer_t* player )
    player->hitBoxSize.y = 0;
    player->spriteOffset.x = 0;
    player->spriteOffset.y = 0;
+
+   player->stats.HitPoints = 12;
+   player->stats.MaxHitPoints = 12;
+   player->stats.MagicPoints = 0;
+   player->stats.MaxMagicPoints = 0;
+   player->stats.AttackPower = 2;
+   player->stats.DefensePower = 2;
+   player->stats.Agility = 2;
 }

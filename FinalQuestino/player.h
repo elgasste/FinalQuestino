@@ -4,6 +4,7 @@
 #include "common.h"
 #include "vector.h"
 #include "sprite.h"
+#include "battle_stats.h"
 
 typedef struct cPlayer_t
 {
@@ -14,6 +15,8 @@ typedef struct cPlayer_t
 
    cSprite_t sprite;
    cVector2f_t spriteOffset;
+
+   cBattleStats_t stats;
 }
 cPlayer_t;
 
