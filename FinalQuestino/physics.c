@@ -64,7 +64,7 @@ void cPhysics_Tic( cGame_t* game )
          {
             tile = game->tileMap.tiles[col + ( row * TILES_X )];
 
-            if ( !( tile & TILE_PASSABLE_FLAG ) )
+            if ( !( tile & TILE_FLAG_PASSABLE ) )
             {
                newPos.x = ( ( col + 1 ) * TILE_SIZE );
                break;
@@ -80,7 +80,7 @@ void cPhysics_Tic( cGame_t* game )
          {
             tile = game->tileMap.tiles[col + ( row * TILES_X )];
 
-            if ( !( tile & TILE_PASSABLE_FLAG ) )
+            if ( !( tile & TILE_FLAG_PASSABLE ) )
             {
                newPos.x = ( col * TILE_SIZE ) - player->hitBoxSize.x - COLLISION_PADDING;
                break;
@@ -104,7 +104,7 @@ void cPhysics_Tic( cGame_t* game )
          {
             tile = game->tileMap.tiles[col + ( row * TILES_X )];
 
-            if ( !( tile & TILE_PASSABLE_FLAG ) )
+            if ( !( tile & TILE_FLAG_PASSABLE ) )
             {
                newPos.y = ( ( row + 1 ) * TILE_SIZE );
                break;
@@ -120,7 +120,7 @@ void cPhysics_Tic( cGame_t* game )
          {
             tile = game->tileMap.tiles[col + ( row * TILES_X )];
 
-            if ( !( tile & TILE_PASSABLE_FLAG ) )
+            if ( !( tile & TILE_FLAG_PASSABLE ) )
             {
                newPos.y = ( row * TILE_SIZE ) - player->hitBoxSize.y - COLLISION_PADDING;
                break;

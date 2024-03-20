@@ -138,14 +138,14 @@ void cGame_SteppedOnTile( cGame_t* game, uint16_t tileIndex )
       }
    }
 
-  if ( tile & TILE_DAMAGE_FLAG )
+  if ( tile & TILE_FLAG_DAMAGE )
   {
      // TODO: inflict damage
   }
 
-  if ( tile & TILE_ENCOUNTERABLE_FLAG )
+  if ( tile & TILE_FLAG_ENCOUNTERABLE )
   {
-     // TODO: roll for encounter
+     cGame_RollEncounter( game, ( tile & TILE_FLAG_HIGHENCOUNTERRATE ) ? cTrue : cFalse );
   }
 }
 
@@ -177,4 +177,14 @@ static void cGame_DrawMapStatus( cGame_t* game )
    cScreen_DrawText( &( game->screen ), str, 24, 84, BLACK, WHITE );
    snprintf( str, 13, "Exp: %u", player->experience );
    cScreen_DrawText( &( game->screen ), str, 24, 96, BLACK, WHITE );
+}
+
+void cGame_RollEncounter( cGame_t* game, cBool_t highRate )
+{
+   cBool_t spawnEncounter = highRate ? ( cRandom_Percent() <= ENCOUNTER_RATE_HIGH ) : ( cRandom_Percent() <= ENCOUNTER_RATE_NORMAL );
+
+   if ( spawnEncounter )
+   {
+      // TODO: change the game state to battle
+   }
 }

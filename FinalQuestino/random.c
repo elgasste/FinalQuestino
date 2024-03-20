@@ -7,7 +7,7 @@ void cRandom_Seed()
    srand( (uint32_t)time( 0 ) );
 }
 
-uint8_t qRandom_Percent()
+uint8_t cRandom_Percent()
 {
    return (uint8_t)rand() % 101;
 }

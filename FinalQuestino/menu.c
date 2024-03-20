@@ -71,9 +71,9 @@ void cMenu_Tic( cGame_t* game )
 
    menu->caratSeconds += game->clock.frameSeconds;
 
-   while( menu->caratSeconds >= MENU_CARATBLINKRATE )
+   while( menu->caratSeconds >= MENU_CARAT_BLINKRATE )
    {
-      menu->caratSeconds -= MENU_CARATBLINKRATE;
+      menu->caratSeconds -= MENU_CARAT_BLINKRATE;
       TOGGLE_BOOL( menu->showCarat );
    }
 

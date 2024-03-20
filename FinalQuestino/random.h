@@ -8,7 +8,7 @@ extern "C" {
 #endif
 
 void cRandom_Seed();
-uint8_t qRandom_Percent();
+uint8_t cRandom_Percent();
 
 #if defined( __cplusplus )
 }
