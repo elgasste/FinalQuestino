@@ -136,6 +136,5 @@ void cGame_ShowMessage( cGame_t* game, const char* message )
 {
    cGame_ChangeState( game, cGameState_MapMessage );
    cScreen_DrawRect( &( game->screen ), 48, 128, 224, 96, BLACK );
-   // TODO: text wrapping
-   cScreen_DrawText( &( game->screen ), message, 56, 136, BLACK, WHITE );
+   cScreen_DrawWrappedText( &( game->screen ), message, 56, 136, 26, 8, BLACK, WHITE );
 }

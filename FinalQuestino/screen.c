@@ -330,6 +330,68 @@ void cScreen_DrawText( cScreen_t* screen, const char* text, uint16_t x, uint16_t
    CS_IDLE;
 }
 
+void cScreen_DrawWrappedText( cScreen_t* screen, const char* text, uint16_t x, uint16_t y,
+                              uint8_t lineChars, uint8_t lineHeight,
+                              uint16_t backgroundColor, uint16_t foregroundColor )
+{
+   uint8_t textIndex, lineIndex, lastSpaceIndex, currentLine;
+   uint16_t strLen = strlen( text );
+   cBool_t endOfLine, endOfText;
+   char line[256];
+   char curChar;
+
+   for ( textIndex = 0, lineIndex = 0, lastSpaceIndex = 0, currentLine = 0; textIndex < strLen; textIndex++ )
+   {
+      curChar = text[textIndex];
+      endOfLine = ( lineIndex == ( lineChars - 1 ) );
+      endOfText = ( textIndex == ( strLen - 1 ) ) ? cTrue : cFalse;
+
+      if ( endOfLine || endOfText )
+      {
+         if ( ( lastSpaceIndex > 0 ) && !endOfText )
+         {
+            if ( curChar == ' ' )
+            {
+               line[lineIndex] = '\0';
+            }
+            else if ( text[textIndex + 1] == ' ' )
+            {
+               line[lineIndex] = curChar;
+               line[lineIndex + 1] = '\0';
+            }
+            else
+            {
+               line[lastSpaceIndex] = '\0';
+               textIndex -= ( ( lineIndex - lastSpaceIndex ) + 1 );
+            }
+         }
+         else if ( curChar == ' ' )
+         {
+            line[lineIndex] = '\0';
+         }
+         else
+         {
+            line[lineIndex] = curChar;
+            line[lineIndex + 1] = '\0';
+         }
+
+         cScreen_DrawText( screen, line, x, y + ( currentLine * lineHeight ), backgroundColor, foregroundColor );
+         lineIndex = 0;
+         lastSpaceIndex = 0;
+         currentLine++;
+      }
+      else if ( curChar != ' ' )
+      {
+         line[lineIndex++] = curChar;
+      }
+      else if ( lineIndex > 0 && lastSpaceIndex != lineIndex )
+      {
+         line[lineIndex++] = curChar;
+         lastSpaceIndex = lineIndex;
+      }
+   }
+}
+
 static uint16_t cScreen_GetTilePixelColor( cScreen_t* screen, cTileMap_t* map, uint16_t x, uint16_t y )
 {
    uint8_t tile = map->tiles[( ( y / TILE_SIZE ) * TILES_X ) + ( x / TILE_SIZE )];
