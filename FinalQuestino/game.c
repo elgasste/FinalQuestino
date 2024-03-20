@@ -78,11 +78,20 @@ void cGame_ChangeState( cGame_t *game, cGameState_t newState )
          }
          break;
       case cGameState_Map:
-         if ( newState == cGameState_MapMenu )
+         switch( newState )
          {
-            game->state = newState;
-            cMenu_Load( &( game->menu ), cMenuIndex_Map );
-            cMenu_Draw( game );
+            case cGameState_MapMenu:
+               game->state = newState;
+               cMenu_Load( &( game->menu ), cMenuIndex_Map );
+               cMenu_Draw( game );
+               break;
+            case cGameState_Battle:
+               game->state = newState;
+
+               // MUFFINS: draw the spiral rect
+               cScreen_DrawRect( &( game->screen ),  )
+
+               break;
          }
          break;
       case cGameState_MapMenu:
@@ -112,6 +121,13 @@ void cGame_ChangeState( cGame_t *game, cGameState_t newState )
          {
             game->state = newState;
             cScreen_WipeTileMapSection( &( game->screen ), &( game->tileMap ), 16, 16, 112, 96 );
+         }
+         break;
+      case cGameState_Battle:
+         if ( newState == cGameState_Map )
+         {
+            game->state = newState;
+            // MUFFINS: wipe the spiral rect
          }
          break;
    }
@@ -185,6 +201,6 @@ void cGame_RollEncounter( cGame_t* game, cBool_t highRate )
 
    if ( spawnEncounter )
    {
-      // TODO: change the game state to battle
+      cGame_ChangeState( game, cGameState_Battle );
    }
 }
