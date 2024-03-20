@@ -24,7 +24,7 @@
 #define TILE_ENCOUNTERABLE_FLAG   0x40
 #define TILE_HIGHRATE_FLAG        0x80
 
-#define TEXT_TILES                71
+#define TEXT_TILES                73
 
 #define SPRITE_SIZE               16
 #define PACKED_SPRITE_SIZE        8

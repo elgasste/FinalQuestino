@@ -2650,6 +2650,22 @@ void cScreen_LoadTextBitFields( cScreen_t* screen )
    screen->textBitFields[70][5] = 0x10;
    screen->textBitFields[70][6] = 0x00;
    screen->textBitFields[70][7] = 0x00;
+   screen->textBitFields[71][0] = 0x00;
+   screen->textBitFields[71][1] = 0x18;
+   screen->textBitFields[71][2] = 0x18;
+   screen->textBitFields[71][3] = 0x00;
+   screen->textBitFields[71][4] = 0x00;
+   screen->textBitFields[71][5] = 0x18;
+   screen->textBitFields[71][6] = 0x18;
+   screen->textBitFields[71][7] = 0x00;
+   screen->textBitFields[72][0] = 0x02;
+   screen->textBitFields[72][1] = 0x06;
+   screen->textBitFields[72][2] = 0x0C;
+   screen->textBitFields[72][3] = 0x18;
+   screen->textBitFields[72][4] = 0x30;
+   screen->textBitFields[72][5] = 0x60;
+   screen->textBitFields[72][6] = 0x40;
+   screen->textBitFields[72][7] = 0x00;
 }
 
 void cPlayer_LoadSprite( cPlayer_t* player )
