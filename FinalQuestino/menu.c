@@ -2,6 +2,7 @@
 
 static void cMenu_DrawCarat( cGame_t* game );
 static void cMenu_WipeCarat( cGame_t* game );
+static void cMenu_MapMenuSelect( cGame_t* game );
 
 void cMenu_Load( cMenu_t* menu, cMenuIndex_t index )
 {
@@ -13,7 +14,7 @@ void cMenu_Load( cMenu_t* menu, cMenuIndex_t index )
    switch( index )
    {
       case cMenuIndex_Map:
-         menu->optionCount = 3;
+         menu->optionCount = 5;
          break;
    }
 }
@@ -23,10 +24,12 @@ void cMenu_Draw( cGame_t* game )
    switch( game->menu.index )
    {
       case cMenuIndex_Map:
-         cScreen_DrawRect( &( game->screen ), 16, 16, 72, 56, BLACK );
-         cScreen_DrawText( &( game->screen ), "hi", 32, 24, BLACK, WHITE );
-         cScreen_DrawText( &( game->screen ), "hello", 32, 40, BLACK, WHITE );
-         cScreen_DrawText( &( game->screen ), "howdy", 32, 56, BLACK, WHITE );
+         cScreen_DrawRect( &( game->screen ), 16, 16, 76, 88, BLACK );
+         cScreen_DrawText( &( game->screen ), "TALK", 32, 24, BLACK, WHITE );
+         cScreen_DrawText( &( game->screen ), "STATUS", 32, 40, BLACK, WHITE );
+         cScreen_DrawText( &( game->screen ), "SEARCH", 32, 56, BLACK, WHITE );
+         cScreen_DrawText( &( game->screen ), "SPELL", 32, 72, BLACK, WHITE );
+         cScreen_DrawText( &( game->screen ), "ITEM", 32, 88, BLACK, WHITE );
          break;
    }
 
@@ -38,7 +41,7 @@ void cMenu_Wipe( cGame_t* game )
    switch( game->menu.index )
    {
       case cMenuIndex_Map:
-         cScreen_WipeTileMapSection( &( game->screen ), &( game->tileMap ), 16, 16, 72, 56 );
+         cScreen_WipeTileMapSection( &( game->screen ), &( game->tileMap ), 16, 16, 76, 88 );
          cScreen_WipeTileMapSection( &( game->screen ), &( game->tileMap ),
                                      game->player.position.x + game->player.spriteOffset.x,
                                      game->player.position.y + game->player.spriteOffset.y,
@@ -128,4 +131,36 @@ void cMenu_ScrollUp( cGame_t* game )
    }
 
    cMenu_DrawCarat( game );
+}
+
+void cMenu_Select( cGame_t* game )
+{
+   switch( game->menu.index )
+   {
+      case cMenuIndex_Map:
+         cMenu_MapMenuSelect( game );
+         break;
+   }
+}
+
+static void cMenu_MapMenuSelect( cGame_t* game )
+{
+   switch( game->menu.optionIndex )
+   {
+      case 0: // talk
+         cGame_ShowMessage( game, "Nobody's there." );
+         break;
+      case 1: // status
+         cGame_ShowMessage( game, "You exist." );
+         break;
+      case 2: // search
+         cGame_ShowMessage( game, "You didn't find anything." );
+         break;
+      case 3: // spell
+         cGame_ShowMessage( game, "You don't know any spells." );
+         break;
+      case 4: // item
+         cGame_ShowMessage( game, "You don't have any items." );
+         break;
+   }
 }

@@ -40,7 +40,7 @@ void cGame_Tic( cGame_t* game )
          cGame_ChangeState( game, cGameState_Map );
          break;
       case cGameState_Map:
-         cPhysics_MovePlayer( game );
+         cPhysics_Tic( game );
          break;
       case cGameState_MapMenu:
          cMenu_Tic( game );
@@ -81,10 +81,20 @@ void cGame_ChangeState( cGame_t *game, cGameState_t newState )
          }
          break;
       case cGameState_MapMenu:
+         switch( newState )
+         {
+            case cGameState_Map:
+            case cGameState_MapMessage:
+               game->state = newState;
+               cMenu_Wipe( game );
+               break;
+         }
+         break;
+      case cGameState_MapMessage:
          if ( newState == cGameState_Map )
          {
             game->state = newState;
-            cMenu_Wipe( game );
+            cScreen_WipeTileMapSection( &( game->screen ), &( game->tileMap ), 48, 128, 224, 96 );
          }
          break;
    }
@@ -120,4 +130,11 @@ void cGame_SteppedOnTile( cGame_t* game, uint16_t tileIndex )
   {
      // TODO: roll for encounter
   }
+}
+
+void cGame_ShowMessage( cGame_t* game, const char* message )
+{
+   cGame_ChangeState( game, cGameState_MapMessage );
+   cScreen_DrawRect( &( game->screen ), 48, 128, 224, 96, BLACK );
+   cScreen_DrawWrappedText( &( game->screen ), message, 56, 136, 26, 8, BLACK, WHITE );
 }

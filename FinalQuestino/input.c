@@ -7,6 +7,7 @@
 static void cInput_UpdateButtonState( cButtonState_t* buttonState, cBool_t down );
 static void cInput_HandleMapStateInput( cGame_t* game );
 static void cInput_HandleMapMenuStateInput( cGame_t* game );
+static void cInput_HandleMapMessageStateInput( cGame_t* game );
 
 void cInput_Init( cInput_t* input )
 {
@@ -62,6 +63,9 @@ void cInput_Handle( cGame_t* game )
          break;
       case cGameState_MapMenu:
          cInput_HandleMapMenuStateInput( game );
+         break;
+      case cGameState_MapMessage:
+         cInput_HandleMapMessageStateInput( game );
          break;
    }
 }
@@ -156,7 +160,11 @@ static void cInput_HandleMapMenuStateInput( cGame_t* game )
 {
    cBool_t upIsDown, downIsDown;
 
-   if ( game->input.buttonStates[cButton_B].pressed )
+   if ( game->input.buttonStates[cButton_A].pressed )
+   {
+      cMenu_Select( game );
+   }
+   else if ( game->input.buttonStates[cButton_B].pressed )
    {
       cGame_ChangeState( game, cGameState_Map );
    }
@@ -173,5 +181,13 @@ static void cInput_HandleMapMenuStateInput( cGame_t* game )
       {
          cMenu_ScrollDown( game );
       }
+   }
+}
+
+static void cInput_HandleMapMessageStateInput( cGame_t* game )
+{
+   if ( game->input.buttonStates[cButton_A].pressed || game->input.buttonStates[cButton_B].pressed )
+   {
+      cGame_ChangeState( game, cGameState_Map );
    }
 }

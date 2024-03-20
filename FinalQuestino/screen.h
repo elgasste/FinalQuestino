@@ -125,6 +125,9 @@ void cScreen_DrawTile( cScreen_t* screen, uint8_t* tileTexture, uint16_t x, uint
 void cScreen_DrawTileMap( cScreen_t* screen, cTileMap_t* map );
 void cScreen_DrawText( cScreen_t* screen, const char* text, uint16_t x, uint16_t y,
                        uint16_t backgroundColor, uint16_t foregroundColor );
+void cScreen_DrawWrappedText( cScreen_t* screen, const char* text, uint16_t x, uint16_t y,
+                              uint8_t lineChars, uint8_t lineHeight,
+                              uint16_t backgroundColor, uint16_t foregroundColor );
 void cScreen_DrawSprite( cScreen_t* screen, cSprite_t* sprite, cTileMap_t* map, float x, float y );
 void cScreen_WipeTileMapSection( cScreen_t* screen, cTileMap_t* map, float x, float y, uint16_t w, uint16_t h );
 

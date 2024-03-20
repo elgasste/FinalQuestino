@@ -8,7 +8,7 @@ void cPhysics_Init( cPhysics_t* physics )
    physics->tileIndexCache = TILES_X * TILES_Y; // off the map
 }
 
-void cPhysics_MovePlayer( cGame_t* game )
+void cPhysics_Tic( cGame_t* game )
 {
    cVector2f_t newPos;
    cPlayer_t* player = &( game->player );
