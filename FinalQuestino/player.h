@@ -16,8 +16,9 @@ typedef struct cPlayer_t
    cSprite_t sprite;
    cVector2f_t spriteOffset;
 
-   uint16_t experience;
    cBattleStats_t stats;
+   uint16_t experience;
+   uint16_t gold;
 }
 cPlayer_t;
 

@@ -30,6 +30,7 @@ void cPlayer_Init( cPlayer_t* player )
    player->stats.Agility = 2;
 
    player->experience = 0;
+   player->gold = 0;
 }
 
 uint8_t cPlayer_GetLevel( cPlayer_t* player )
