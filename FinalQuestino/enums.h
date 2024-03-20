@@ -17,7 +17,8 @@ typedef enum cGameState_t
    cGameState_Init = 0,
    cGameState_Map,
    cGameState_MapMenu,
-   cGameState_MapMessage
+   cGameState_MapMessage,
+   cGameState_MapStatus
 }
 cGameState_t;
 

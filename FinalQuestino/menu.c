@@ -161,7 +161,7 @@ static void cMenu_MapMenuSelect( cGame_t* game )
          cGame_ShowMessage( game, "Nobody's there." );
          break;
       case 1: // status
-         cGame_ShowMessage( game, "You exist." );
+         cGame_ChangeState( game, cGameState_MapStatus );
          break;
       case 2: // search
          cGame_ShowMessage( game, "You didn't find anything." );
