@@ -86,8 +86,7 @@
 #define SCREEN_WIDTH  320
 #define SCREEN_HEIGHT 240
 
-typedef struct cSprite_t cSprite_t;
-typedef struct cTileMap_t cTileMap_t;
+typedef struct cGame_t cGame_t;
 
 typedef struct cScreen_t
 {
@@ -121,15 +120,15 @@ extern "C" {
 void cScreen_Init( cScreen_t* screen );
 void cScreen_Begin( cScreen_t* screen );
 void cScreen_DrawRect( cScreen_t* screen, uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color );
-void cScreen_DrawTile( cScreen_t* screen, uint8_t* tileTexture, uint16_t x, uint16_t y );
-void cScreen_DrawTileMap( cScreen_t* screen, cTileMap_t* map );
+void cScreen_DrawTileMap( cGame_t* game );
 void cScreen_DrawText( cScreen_t* screen, const char* text, uint16_t x, uint16_t y,
                        uint16_t backgroundColor, uint16_t foregroundColor );
 void cScreen_DrawWrappedText( cScreen_t* screen, const char* text, uint16_t x, uint16_t y,
                               uint8_t lineChars, uint8_t lineHeight,
                               uint16_t backgroundColor, uint16_t foregroundColor );
-void cScreen_DrawSprite( cScreen_t* screen, cSprite_t* sprite, cTileMap_t* map, float x, float y );
-void cScreen_WipeTileMapSection( cScreen_t* screen, cTileMap_t* map, float x, float y, uint16_t w, uint16_t h );
+void cScreen_DrawPlayer( cGame_t* game );
+void cScreen_WipePlayer( cGame_t* game );
+void cScreen_WipeTileMapSection( cGame_t* game, float x, float y, uint16_t w, uint16_t h );
 
 // data_loader.c
 void cScreen_LoadPalette( cScreen_t* screen, uint8_t index );

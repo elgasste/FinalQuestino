@@ -64,7 +64,7 @@ void cPhysics_Tic( cGame_t* game )
          {
             tile = game->tileMap.tiles[col + ( row * TILES_X )];
 
-            if ( !( tile & TILE_PASSABLE_FLAG ) )
+            if ( !( tile & TILE_FLAG_PASSABLE ) )
             {
                newPos.x = ( ( col + 1 ) * TILE_SIZE );
                break;
@@ -80,7 +80,7 @@ void cPhysics_Tic( cGame_t* game )
          {
             tile = game->tileMap.tiles[col + ( row * TILES_X )];
 
-            if ( !( tile & TILE_PASSABLE_FLAG ) )
+            if ( !( tile & TILE_FLAG_PASSABLE ) )
             {
                newPos.x = ( col * TILE_SIZE ) - player->hitBoxSize.x - COLLISION_PADDING;
                break;
@@ -104,7 +104,7 @@ void cPhysics_Tic( cGame_t* game )
          {
             tile = game->tileMap.tiles[col + ( row * TILES_X )];
 
-            if ( !( tile & TILE_PASSABLE_FLAG ) )
+            if ( !( tile & TILE_FLAG_PASSABLE ) )
             {
                newPos.y = ( ( row + 1 ) * TILE_SIZE );
                break;
@@ -120,7 +120,7 @@ void cPhysics_Tic( cGame_t* game )
          {
             tile = game->tileMap.tiles[col + ( row * TILES_X )];
 
-            if ( !( tile & TILE_PASSABLE_FLAG ) )
+            if ( !( tile & TILE_FLAG_PASSABLE ) )
             {
                newPos.y = ( row * TILE_SIZE ) - player->hitBoxSize.y - COLLISION_PADDING;
                break;
@@ -133,18 +133,13 @@ void cPhysics_Tic( cGame_t* game )
 
    if ( posChanged || player->sprite.currentFrame != game->physics.spriteFrameCache )
    {
-      cScreen_WipeTileMapSection( &( game->screen ), &( game->tileMap ),
-                                  player->position.x + player->spriteOffset.x,
-                                  player->position.y + player->spriteOffset.y,
-                                  SPRITE_SIZE, SPRITE_SIZE );
+      cScreen_WipePlayer( game );
       game->physics.spriteFrameCache = player->sprite.currentFrame;
    }
 
    player->position.x = newPos.x;
    player->position.y = newPos.y;
-   cScreen_DrawSprite( &( game->screen ), &( player->sprite ), &( game->tileMap ),
-                       player->position.x + player->spriteOffset.x,
-                       player->position.y + player->spriteOffset.y );
+   cScreen_DrawPlayer( game );
 
    if ( posChanged )
    {

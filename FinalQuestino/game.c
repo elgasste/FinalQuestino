@@ -1,4 +1,6 @@
 #include "game.h"
+#include "random.h"
+#include "battle.h"
 
 static void cGame_DrawMapStatus( cGame_t* game );
 
@@ -29,6 +31,8 @@ void cGame_Init( cGame_t* game )
    game->player.spriteOffset.y = -4;
 
    game->state = cGameState_Init;
+
+   cRandom_Seed();
 }
 
 void cGame_Tic( cGame_t* game )
@@ -55,10 +59,8 @@ void cGame_Refresh( cGame_t* game )
    if ( game->state == cGameState_Map )
    {
       cTileMap_LoadTileMap( &( game->tileMap ), game->tileMapIndex );
-      cScreen_DrawTileMap( &( game->screen ), &( game->tileMap ) );
-      cScreen_DrawSprite( &( game->screen ), &( game->player.sprite ), &( game->tileMap ),
-                          game->player.position.x + game->player.spriteOffset.x,
-                          game->player.position.y + game->player.spriteOffset.y );
+      cScreen_DrawTileMap( game );
+      cScreen_DrawPlayer( game );
       cPhysics_UpdateTileIndexCache( game );
    }
 }
@@ -75,11 +77,18 @@ void cGame_ChangeState( cGame_t *game, cGameState_t newState )
          }
          break;
       case cGameState_Map:
-         if ( newState == cGameState_MapMenu )
+         switch( newState )
          {
-            game->state = newState;
-            cMenu_Load( &( game->menu ), cMenuIndex_Map );
-            cMenu_Draw( game );
+            case cGameState_MapMenu:
+               game->state = newState;
+               cMenu_Load( &( game->menu ), cMenuIndex_Map );
+               cMenu_Draw( game );
+               break;
+            case cGameState_Battle:
+               game->state = newState;
+               cScreen_WipePlayer( game );
+               cBattle_Start( game );
+               break;
          }
          break;
       case cGameState_MapMenu:
@@ -101,14 +110,22 @@ void cGame_ChangeState( cGame_t *game, cGameState_t newState )
          if ( newState == cGameState_Map )
          {
             game->state = newState;
-            cScreen_WipeTileMapSection( &( game->screen ), &( game->tileMap ), 48, 128, 224, 96 );
+            cGame_WipeMessage( game );
          }
          break;
       case cGameState_MapStatus:
          if ( newState == cGameState_Map )
          {
             game->state = newState;
-            cScreen_WipeTileMapSection( &( game->screen ), &( game->tileMap ), 16, 16, 112, 96 );
+            cScreen_WipeTileMapSection( game, 16, 16, 112, 96 );
+         }
+         break;
+      case cGameState_Battle:
+         if ( newState == cGameState_Map )
+         {
+            game->state = newState;
+            cBattle_Done( game );
+            cScreen_DrawPlayer( game );
          }
          break;
    }
@@ -135,22 +152,29 @@ void cGame_SteppedOnTile( cGame_t* game, uint16_t tileIndex )
       }
    }
 
-  if ( tile & TILE_DAMAGE_FLAG )
+  if ( tile & TILE_FLAG_DAMAGE )
   {
      // TODO: inflict damage
   }
 
-  if ( tile & TILE_ENCOUNTERABLE_FLAG )
+  if ( tile & TILE_FLAG_ENCOUNTERABLE )
   {
-     // TODO: roll for encounter
+     cGame_RollEncounter( game, ( tile & TILE_FLAG_HIGHENCOUNTERRATE ) ? cTrue : cFalse );
   }
 }
 
 void cGame_ShowMessage( cGame_t* game, const char* message )
 {
-   cGame_ChangeState( game, cGameState_MapMessage );
-   cScreen_DrawRect( &( game->screen ), 48, 128, 224, 96, BLACK );
-   cScreen_DrawWrappedText( &( game->screen ), message, 56, 136, 26, 8, BLACK, WHITE );
+   cScreen_DrawRect( &( game->screen ), 48, 160, 224, 64, BLACK );
+   cScreen_DrawWrappedText( &( game->screen ), message, 56, 168, 26, 8, BLACK, WHITE );
+}
+
+void cGame_WipeMessage( cGame_t* game )
+{
+   if ( game->state == cGameState_Map )
+   {
+      cScreen_WipeTileMapSection( game, 48, 160, 224, 64 );
+   }
 }
 
 static void cGame_DrawMapStatus( cGame_t* game )
@@ -174,4 +198,14 @@ static void cGame_DrawMapStatus( cGame_t* game )
    cScreen_DrawText( &( game->screen ), str, 24, 84, BLACK, WHITE );
    snprintf( str, 13, "Exp: %u", player->experience );
    cScreen_DrawText( &( game->screen ), str, 24, 96, BLACK, WHITE );
+}
+
+void cGame_RollEncounter( cGame_t* game, cBool_t highRate )
+{
+   cBool_t spawnEncounter = highRate ? ( cRandom_Percent() <= ENCOUNTER_RATE_HIGH ) : ( cRandom_Percent() <= ENCOUNTER_RATE_NORMAL );
+
+   if ( spawnEncounter )
+   {
+      cGame_ChangeState( game, cGameState_Battle );
+   }
 }

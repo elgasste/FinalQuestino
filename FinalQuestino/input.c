@@ -65,6 +65,7 @@ void cInput_Handle( cGame_t* game )
          break;
       case cGameState_MapMessage:
       case cGameState_MapStatus:
+      case cGameState_Battle:
          if ( game->input.buttonStates[cButton_A].pressed || game->input.buttonStates[cButton_B].pressed )
          {
             cGame_ChangeState( game, cGameState_Map );
