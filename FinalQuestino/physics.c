@@ -133,18 +133,13 @@ void cPhysics_Tic( cGame_t* game )
 
    if ( posChanged || player->sprite.currentFrame != game->physics.spriteFrameCache )
    {
-      cScreen_WipeTileMapSection( &( game->screen ), &( game->tileMap ),
-                                  player->position.x + player->spriteOffset.x,
-                                  player->position.y + player->spriteOffset.y,
-                                  SPRITE_SIZE, SPRITE_SIZE );
+      cScreen_WipePlayer( game );
       game->physics.spriteFrameCache = player->sprite.currentFrame;
    }
 
    player->position.x = newPos.x;
    player->position.y = newPos.y;
-   cScreen_DrawSprite( &( game->screen ), &( player->sprite ), &( game->tileMap ),
-                       player->position.x + player->spriteOffset.x,
-                       player->position.y + player->spriteOffset.y );
+   cScreen_DrawPlayer( game );
 
    if ( posChanged )
    {

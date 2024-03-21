@@ -1,5 +1,6 @@
 #include "game.h"
 #include "random.h"
+#include "battle.h"
 
 static void cGame_DrawMapStatus( cGame_t* game );
 
@@ -58,10 +59,8 @@ void cGame_Refresh( cGame_t* game )
    if ( game->state == cGameState_Map )
    {
       cTileMap_LoadTileMap( &( game->tileMap ), game->tileMapIndex );
-      cScreen_DrawTileMap( &( game->screen ), &( game->tileMap ) );
-      cScreen_DrawSprite( &( game->screen ), &( game->player.sprite ), &( game->tileMap ),
-                          game->player.position.x + game->player.spriteOffset.x,
-                          game->player.position.y + game->player.spriteOffset.y );
+      cScreen_DrawTileMap( game );
+      cScreen_DrawPlayer( game );
       cPhysics_UpdateTileIndexCache( game );
    }
 }
@@ -87,10 +86,8 @@ void cGame_ChangeState( cGame_t *game, cGameState_t newState )
                break;
             case cGameState_Battle:
                game->state = newState;
-
-               // MUFFINS: draw the spiral rect
-               cScreen_DrawRect( &( game->screen ),  )
-
+               cScreen_WipePlayer( game );
+               cBattle_Start( game );
                break;
          }
          break;
@@ -113,21 +110,22 @@ void cGame_ChangeState( cGame_t *game, cGameState_t newState )
          if ( newState == cGameState_Map )
          {
             game->state = newState;
-            cScreen_WipeTileMapSection( &( game->screen ), &( game->tileMap ), 48, 128, 224, 96 );
+            cGame_WipeMessage( game );
          }
          break;
       case cGameState_MapStatus:
          if ( newState == cGameState_Map )
          {
             game->state = newState;
-            cScreen_WipeTileMapSection( &( game->screen ), &( game->tileMap ), 16, 16, 112, 96 );
+            cScreen_WipeTileMapSection( game, 16, 16, 112, 96 );
          }
          break;
       case cGameState_Battle:
          if ( newState == cGameState_Map )
          {
             game->state = newState;
-            // MUFFINS: wipe the spiral rect
+            cBattle_Done( game );
+            cScreen_DrawPlayer( game );
          }
          break;
    }
@@ -167,9 +165,16 @@ void cGame_SteppedOnTile( cGame_t* game, uint16_t tileIndex )
 
 void cGame_ShowMessage( cGame_t* game, const char* message )
 {
-   cGame_ChangeState( game, cGameState_MapMessage );
-   cScreen_DrawRect( &( game->screen ), 48, 128, 224, 96, BLACK );
-   cScreen_DrawWrappedText( &( game->screen ), message, 56, 136, 26, 8, BLACK, WHITE );
+   cScreen_DrawRect( &( game->screen ), 48, 160, 224, 64, BLACK );
+   cScreen_DrawWrappedText( &( game->screen ), message, 56, 168, 26, 8, BLACK, WHITE );
+}
+
+void cGame_WipeMessage( cGame_t* game )
+{
+   if ( game->state == cGameState_Map )
+   {
+      cScreen_WipeTileMapSection( game, 48, 160, 224, 64 );
+   }
 }
 
 static void cGame_DrawMapStatus( cGame_t* game )

@@ -1,8 +1,4 @@
-#include <string.h>
-
-#include "screen.h"
-#include "sprite.h"
-#include "tile_map.h"
+#include "game.h"
 
 #define NEGATIVE_CLAMP_THETA 0.9999f
 
@@ -176,38 +172,13 @@ void cScreen_DrawRect( cScreen_t* screen, uint16_t x, uint16_t y, uint16_t w, ui
    CS_IDLE;
 }
 
-void cScreen_DrawTile( cScreen_t* screen, uint8_t* tileTexture, uint16_t x, uint16_t y )
-{
-   uint8_t pixelPair, paletteIndex;
-   uint16_t i, color;
-
-   CS_ACTIVE;
-   cScreen_SetAddrWindow( screen, x, y, x + TILE_SIZE - 1, y + TILE_SIZE - 1 );
-   CD_COMMAND;
-   write8( 0x2C );
-   CD_DATA;
-
-   for ( i = 0; i < TILE_TEXTURE_SIZE_BYTES; i++ )
-   {
-      pixelPair = tileTexture[i];
-
-      paletteIndex = pixelPair >> 4;
-      color = screen->palette[paletteIndex];
-      write16( color >> 8, color );
-
-      paletteIndex = pixelPair & 0x0F;
-      color = screen->palette[paletteIndex];
-      write16( color >> 8, color );
-   }
-
-   CS_IDLE;
-}
-
-void cScreen_DrawTileMap( cScreen_t* screen, cTileMap_t* map )
+void cScreen_DrawTileMap( cGame_t* game )
 {
    uint16_t tileRow, tileCol, color, colorCache;
    uint8_t pixelRow, pixelCol, pixelPair, paletteIndex;
    uint8_t tile;
+   cScreen_t* screen = &( game->screen );
+   cTileMap_t* map = &( game->tileMap );
 
    CS_ACTIVE;
    cScreen_SetAddrWindow( screen, 0, 0, ( TILE_SIZE * TILES_X ) - 1, ( TILE_SIZE * TILES_Y ) - 1 );
@@ -411,13 +382,17 @@ static uint16_t cScreen_GetTilePixelColor( cScreen_t* screen, cTileMap_t* map, u
    }
 }
 
-void cScreen_DrawSprite( cScreen_t* screen, cSprite_t* sprite, cTileMap_t* map, float x, float y )
+void cScreen_DrawPlayer( cGame_t* game )
 {
    uint8_t pixelPair, paletteIndex, skipLeft, skipTop, skipRight, skipBottom, curX, curY;
    uint16_t color;
    uint16_t frameBytes = PACKED_SPRITE_SIZE * SPRITE_SIZE;
-   uint16_t startByte = ( (uint8_t)( sprite->direction ) * SPRITE_FRAMES * frameBytes ) + ( sprite->currentFrame * frameBytes );
+   uint16_t startByte = ( (uint8_t)( game->player.sprite.direction ) * SPRITE_FRAMES * frameBytes ) + ( game->player.sprite.currentFrame * frameBytes );
    uint16_t i, pixel, ux, uy;
+   cScreen_t* screen = &( game->screen );
+   cTileMap_t* map = &( game->tileMap );
+   float x = game->player.position.x + game->player.spriteOffset.x;
+   float y = game->player.position.y + game->player.spriteOffset.y;
 
    if ( x >= ( TILE_SIZE * TILES_X ) || y >= ( TILE_SIZE * TILES_Y ) || x + SPRITE_SIZE < 0 || y + SPRITE_SIZE < 0 )
    {
@@ -458,7 +433,7 @@ void cScreen_DrawSprite( cScreen_t* screen, cSprite_t* sprite, cTileMap_t* map, 
 
    for ( i = startByte, pixel = 0, curX = 0, curY = 0; i < startByte + frameBytes; i++ )
    {
-      pixelPair = sprite->frameTextures[i];
+      pixelPair = game->player.sprite.frameTextures[i];
 
       if ( curX >= skipLeft && curX < ( TILE_SIZE - skipRight ) && curY >= skipTop && curY < ( TILE_SIZE - skipBottom ) )
       {
@@ -507,11 +482,21 @@ void cScreen_DrawSprite( cScreen_t* screen, cSprite_t* sprite, cTileMap_t* map, 
    CS_IDLE;
 }
 
-void cScreen_WipeTileMapSection( cScreen_t* screen, cTileMap_t* map, float x, float y, uint16_t w, uint16_t h )
+void cScreen_WipePlayer( cGame_t* game )
+{
+   cScreen_WipeTileMapSection( game,
+                               game->player.position.x + game->player.spriteOffset.x,
+                               game->player.position.y + game->player.spriteOffset.y,
+                               SPRITE_SIZE, SPRITE_SIZE );
+}
+
+void cScreen_WipeTileMapSection( cGame_t* game, float x, float y, uint16_t w, uint16_t h )
 {
    uint8_t pixelPair, paletteIndex, curX, curY;
    uint16_t color;
    uint16_t ux, uy, row, col;
+   cScreen_t* screen = &( game->screen );
+   cTileMap_t* map = &( game->tileMap );
 
    if ( x >= ( TILE_SIZE * TILES_X ) || y >= ( TILE_SIZE * TILES_Y ) ||
         x + w < 0 || y + h < 0 )
