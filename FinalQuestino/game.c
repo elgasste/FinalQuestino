@@ -202,10 +202,14 @@ static void cGame_DrawMapStatus( cGame_t* game )
 
 void cGame_RollEncounter( cGame_t* game, cBool_t highRate )
 {
+#if defined( DEBUG_NOENCOUNTERS )
+   return;
+#else
    cBool_t spawnEncounter = highRate ? ( cRandom_Percent() <= ENCOUNTER_RATE_HIGH ) : ( cRandom_Percent() <= ENCOUNTER_RATE_NORMAL );
 
    if ( spawnEncounter )
    {
       cGame_ChangeState( game, cGameState_Battle );
    }
+#endif
 }
