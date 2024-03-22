@@ -7,7 +7,9 @@
 #include <string.h>
 
 // un-comment to use cSerial_PrintLn
-//#define SERIAL_DEBUG
+//#define DEBUG_SERIAL
+// un-comment to turn off encounters
+//#define DEBUG_NOENCOUNTERS
 
 #define GAME_FPS                    30
 
@@ -48,7 +50,7 @@ typedef uint8_t cBool_t;
 extern "C" {
 #endif
 
-#if defined( SERIAL_DEBUG )
+#if defined( DEBUG_SERIAL )
 void cSerial_PrintLn( const char* msg );
 #endif
 

@@ -3,7 +3,7 @@
 
 cGame_t g_game;
 
-#if defined( SERIAL_DEBUG )
+#if defined( DEBUG_SERIAL )
 void cSerial_PrintLn( const char* msg )
 {
    Serial.println( msg );
@@ -12,7 +12,7 @@ void cSerial_PrintLn( const char* msg )
 
 void setup()
 {
-#if defined( SERIAL_DEBUG )
+#if defined( DEBUG_SERIAL )
    Serial.begin( 9600 );
 #endif
 
