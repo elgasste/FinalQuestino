@@ -1,4 +1,3 @@
-#include "battle.h"
 #include "game.h"
 
 static cBattle_AnimateStart( cGame_t* game );
@@ -7,13 +6,15 @@ void cBattle_Start( cGame_t* game )
 {
    char str[10];
 
+   cEnemy_Generate( &( game->battle.enemy ) );
+
    cBattle_AnimateStart( game );
 
    // quick stats
    cScreen_DrawRect( &( game->screen ), 16, 16, 76, 36, BLACK );
-   snprintf( str, 9, "HP:%u", game->player.stats.HitPoints );
+   snprintf( str, 10, "HP:%u", game->player.stats.HitPoints );
    cScreen_DrawText( &( game->screen ), str, 24, 24, BLACK, WHITE );
-   snprintf( str, 9, "MP:%u", game->player.stats.MagicPoints );
+   snprintf( str, 10, "MP:%u", game->player.stats.MagicPoints );
    cScreen_DrawText( &( game->screen ), str, 24, 36, BLACK, WHITE );
 
    cGame_ShowMessage( game, "An enemy approaches! However, due to a lack of funding, we can't tell you what it is. Press A or B to get on with your life." );

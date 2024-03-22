@@ -2,8 +2,15 @@
 #define BATTLE_H
 
 #include "common.h"
+#include "enemy.h"
 
 typedef struct cGame_t cGame_t;
+
+typedef struct cBattle_t
+{
+   cEnemy_t enemy;
+}
+cBattle_t;
 
 #if defined( __cplusplus )
 extern "C" {

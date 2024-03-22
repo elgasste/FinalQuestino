@@ -28,13 +28,13 @@ void cMenu_Draw( cGame_t* game )
       case cMenuIndex_Map:
          // quick stats
          cScreen_DrawRect( &( game->screen ), 16, 16, 76, 60, BLACK );
-         snprintf( str, 9, "HP:%u", game->player.stats.HitPoints );
+         snprintf( str, 10, "HP:%u", game->player.stats.HitPoints );
          cScreen_DrawText( &( game->screen ), str, 24, 24, BLACK, WHITE );
-         snprintf( str, 9, "MP:%u", game->player.stats.MagicPoints );
+         snprintf( str, 10, "MP:%u", game->player.stats.MagicPoints );
          cScreen_DrawText( &( game->screen ), str, 24, 36, BLACK, WHITE );
-         snprintf( str, 9, " G:%u", game->player.gold );
+         snprintf( str, 10, " G:%u", game->player.gold );
          cScreen_DrawText( &( game->screen ), str, 24, 48, BLACK, WHITE );
-         snprintf( str, 9, "EX:%u", game->player.experience );
+         snprintf( str, 10, "EX:%u", game->player.experience );
          cScreen_DrawText( &( game->screen ), str, 24, 60, BLACK, WHITE );
          // menu items
          cScreen_DrawRect( &( game->screen ), 16, 88, 76, 88, BLACK );

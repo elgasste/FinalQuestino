@@ -9,6 +9,7 @@
 #include "input.h"
 #include "physics.h"
 #include "player.h"
+#include "battle.h"
 
 typedef struct cGame_t
 {
@@ -26,6 +27,8 @@ typedef struct cGame_t
 
    cGameState_t state;
    cPlayer_t player;
+
+   cBattle_t battle;
 }
 cGame_t;
 
