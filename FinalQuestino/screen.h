@@ -109,7 +109,7 @@ typedef struct cScreen_t
    uint8_t rdPinUnset;
 
    uint16_t palette[16];
-   uint8_t textBitFields[TEXT_TILES][8];
+   uint8_t textBitFields[TEXT_TILE_COUNT][8];
 }
 cScreen_t;
 

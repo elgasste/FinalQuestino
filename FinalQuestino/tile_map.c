@@ -10,20 +10,20 @@ void cTileMap_Init( cTileMap_t* map )
    {
       tileTexture = map->tileTextures[i];
 
-      for ( j = 0; j < TILE_TEXTURE_SIZE_BYTES; j++ )
+      for ( j = 0; j < MAP_TILE_TEXTURE_SIZE_BYTES; j++ )
       {
          tileTexture[j] = 0;
       }
    }
 
-   for ( i = 0; i < TILE_COUNT; i++ )
+   for ( i = 0; i < MAP_TILE_COUNT; i++ )
    {
       map->tiles[i] = 0;
    }
 
-   for ( i = 0; i < PORTAL_COUNT; i++ )
+   for ( i = 0; i < MAP_PORTAL_COUNT; i++ )
    {
-      map->portals[i] = (uint32_t)( TILES_X * TILES_Y ) << 21; // off the map
+      map->portals[i] = (uint32_t)( MAP_TILES_X * MAP_TILES_Y ) << 21; // off the map
    }
 
    map->stride = 1;

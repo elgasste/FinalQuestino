@@ -23,8 +23,8 @@ void cGame_Init( cGame_t* game )
    cPlayer_Init( &( game->player ) );
    game->player.sprite.direction = cDirection_Down;
    game->player.sprite.frameSeconds = 0.2f;
-   game->player.position.x = TILE_SIZE * 10;
-   game->player.position.y = TILE_SIZE * 6;
+   game->player.position.x = MAP_TILE_SIZE * 10;
+   game->player.position.y = MAP_TILE_SIZE * 6;
    game->player.hitBoxSize.x = 12;
    game->player.hitBoxSize.y = 12;
    game->player.spriteOffset.x = -2;
@@ -137,29 +137,29 @@ void cGame_SteppedOnTile( cGame_t* game, uint16_t tileIndex )
    uint8_t tile = game->tileMap.tiles[tileIndex];
    uint16_t newTileIndex, newTileX, newTileY;
 
-   for ( i = 0; i < PORTAL_COUNT; i++ )
+   for ( i = 0; i < MAP_PORTAL_COUNT; i++ )
    {
       if ( ( game->tileMap.portals[i] >> 21 ) == tileIndex )
       {
          game->tileMapIndex = ( game->tileMap.portals[i] >> 11 ) & 0x3FF;
          newTileIndex = game->tileMap.portals[i] & 0x7FF;
-         newTileY = newTileIndex / TILES_X;
-         newTileX = newTileIndex - ( newTileY * TILES_X );
-         game->player.position.x = ( newTileX * TILE_SIZE ) + ( ( TILE_SIZE - game->player.hitBoxSize.x ) / 2 );
-         game->player.position.y = ( newTileY * TILE_SIZE ) + ( TILE_SIZE - game->player.hitBoxSize.y ) - COLLISION_PADDING;
+         newTileY = newTileIndex / MAP_TILES_X;
+         newTileX = newTileIndex - ( newTileY * MAP_TILES_X );
+         game->player.position.x = ( newTileX * MAP_TILE_SIZE ) + ( ( MAP_TILE_SIZE - game->player.hitBoxSize.x ) / 2 );
+         game->player.position.y = ( newTileY * MAP_TILE_SIZE ) + ( MAP_TILE_SIZE - game->player.hitBoxSize.y ) - COLLISION_PADDING;
          cGame_Refresh( game );
          return;
       }
    }
 
-  if ( tile & TILE_FLAG_DAMAGE )
+  if ( tile & MAP_TILE_FLAG_DAMAGE )
   {
      // TODO: inflict damage
   }
 
-  if ( tile & TILE_FLAG_ENCOUNTERABLE )
+  if ( tile & MAP_TILE_FLAG_ENCOUNTERABLE )
   {
-     cGame_RollEncounter( game, ( tile & TILE_FLAG_HIGHENCOUNTERRATE ) ? cTrue : cFalse );
+     cGame_RollEncounter( game, ( tile & MAP_TILE_FLAG_HIGHENCOUNTERRATE ) ? cTrue : cFalse );
   }
 }
 

@@ -18,12 +18,16 @@ void cBattle_Start( cGame_t* game )
    cScreen_DrawText( &( game->screen ), str, 24, 36, BLACK, WHITE );
 
    cGame_ShowMessage( game, "An enemy approaches! However, due to a lack of funding, we can't tell you what it is. Press A or B to get on with your life." );
+
+   // MUFFINS: so this is the space we can work with. if we split it up into 8x8 tiles,
+   // that's 10x12, or 120 tiles.
+   cScreen_DrawRect( &( game->screen ), 144, 40, 80, 96, MAGENTA );
 }
 
 void cBattle_Done( cGame_t* game )
 {
    cScreen_WipeTileMapSection( game, 16, 16, 76, 36 );
-   cScreen_WipeTileMapSection( game, 112, 32, 128, 112 );
+   cScreen_WipeTileMapSection( game, 128, 32, 112, 112 );
    cGame_WipeMessage( game );
 }
 
