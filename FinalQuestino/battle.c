@@ -1,12 +1,15 @@
 #include "game.h"
+#include "random.h"
 
 static cBattle_AnimateStart( cGame_t* game );
 
 void cBattle_Start( cGame_t* game )
 {
+   uint8_t enemyIndex;
    char str[10];
 
-   cEnemy_Generate( &( game->battle.enemy ), 0 );
+   enemyIndex = ( game->tileMap.enemyIndexCount == 0 ) ? 0 : cRandom_Uint8( 0, game->tileMap.enemyIndexCount - 1 );
+   cEnemy_Generate( &( game->battle.enemy ), enemyIndex );
 
    cBattle_AnimateStart( game );
 
