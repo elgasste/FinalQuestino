@@ -6,7 +6,7 @@ void cBattle_Start( cGame_t* game )
 {
    char str[10];
 
-   cEnemy_Generate( &( game->battle.enemy ) );
+   cEnemy_Generate( &( game->battle.enemy ), 0 );
 
    cBattle_AnimateStart( game );
 

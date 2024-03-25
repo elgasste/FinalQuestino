@@ -20,6 +20,7 @@
 #define MAP_TILE_COUNT                    300
 #define MAP_TILE_TEXTURE_SIZE_BYTES       128 // 16x16 bit-packed, so 16/2 * 16
 #define MAP_PORTAL_COUNT                  4
+#define MAP_TILE_ENEMY_INDEX_COUNT        4
 
 #define MAP_TILE_FLAG_PASSABLE            0x10
 #define MAP_TILE_FLAG_DAMAGE              0x20

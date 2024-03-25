@@ -26,5 +26,11 @@ void cTileMap_Init( cTileMap_t* map )
       map->portals[i] = (uint32_t)( MAP_TILES_X * MAP_TILES_Y ) << 21; // off the map
    }
 
+   for ( i = 0; i < MAP_TILE_ENEMY_INDEX_COUNT; i++ )
+   {
+      map->enemyIndexes[i] = 0;
+   }
+
    map->stride = 1;
+   map->enemyIndexCount = 0;
 }

@@ -18,7 +18,7 @@ cEnemy_t;
 extern "C" {
 #endif
 
-void cEnemy_Generate( cEnemy_t* enemy );
+void cEnemy_Generate( cEnemy_t* enemy, uint8_t index );
 
 #if defined( __cplusplus )
 }

@@ -19,6 +19,9 @@ typedef struct cTileMap_t
    // middle 10 bits are the destination tile map index
    // low 11 bits are the destination tile index
    uint32_t portals[MAP_PORTAL_COUNT];
+
+   uint8_t enemyIndexes[MAP_TILE_ENEMY_INDEX_COUNT];
+   uint8_t enemyIndexCount;
 }
 cTileMap_t;
 
