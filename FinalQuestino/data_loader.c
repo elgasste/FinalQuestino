@@ -4005,6 +4005,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 1 )
    {
@@ -4313,6 +4315,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 2 )
    {
@@ -4621,6 +4625,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 3 )
    {
@@ -4929,6 +4935,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 4 )
    {
@@ -5237,6 +5245,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 5 )
    {
@@ -5545,6 +5555,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 6 )
    {
@@ -5853,6 +5865,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 7 )
    {
@@ -6161,6 +6175,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 8 )
    {
@@ -6469,6 +6485,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 9 )
    {
@@ -6777,6 +6795,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 10 )
    {
@@ -7085,6 +7105,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 11 )
    {
@@ -7393,6 +7415,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 12 )
    {
@@ -7701,6 +7725,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 13 )
    {
@@ -8009,6 +8035,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 14 )
    {
@@ -8317,6 +8345,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 15 )
    {
@@ -8625,6 +8655,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 16 )
    {
@@ -8933,6 +8965,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 17 )
    {
@@ -9241,6 +9275,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 18 )
    {
@@ -9549,6 +9585,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 19 )
    {
@@ -9857,6 +9895,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 20 )
    {
@@ -10165,6 +10205,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 21 )
    {
@@ -10473,6 +10515,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 22 )
    {
@@ -10781,6 +10825,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 23 )
    {
@@ -11089,6 +11135,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 24 )
    {
@@ -11397,6 +11445,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 25 )
    {
@@ -11705,6 +11755,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 26 )
    {
@@ -12013,6 +12065,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x1D4208E2;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 27 )
    {
@@ -12321,6 +12375,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 28 )
    {
@@ -12629,6 +12685,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 29 )
    {
@@ -12937,6 +12995,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 30 )
    {
@@ -13245,6 +13305,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 31 )
    {
@@ -13553,6 +13615,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 32 )
    {
@@ -13861,6 +13925,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 33 )
    {
@@ -14169,6 +14235,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 34 )
    {
@@ -14477,6 +14545,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 35 )
    {
@@ -14785,6 +14855,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 36 )
    {
@@ -15093,6 +15165,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 37 )
    {
@@ -15401,6 +15475,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 38 )
    {
@@ -15709,6 +15785,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 39 )
    {
@@ -16017,6 +16095,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 40 )
    {
@@ -16325,6 +16405,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 41 )
    {
@@ -16633,6 +16715,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 42 )
    {
@@ -16941,6 +17025,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 43 )
    {
@@ -17249,6 +17335,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 44 )
    {
@@ -17557,6 +17645,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 45 )
    {
@@ -17865,6 +17955,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 46 )
    {
@@ -18173,6 +18265,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 47 )
    {
@@ -18481,6 +18575,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 48 )
    {
@@ -18789,6 +18885,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 49 )
    {
@@ -19097,6 +19195,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 50 )
    {
@@ -19405,6 +19505,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 51 )
    {
@@ -19713,6 +19815,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 52 )
    {
@@ -20021,6 +20125,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 53 )
    {
@@ -20329,6 +20435,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 54 )
    {
@@ -20637,6 +20745,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 55 )
    {
@@ -20945,6 +21055,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 56 )
    {
@@ -21253,6 +21365,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 57 )
    {
@@ -21561,6 +21675,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 58 )
    {
@@ -21869,6 +21985,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 59 )
    {
@@ -22177,6 +22295,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 60 )
    {
@@ -22485,6 +22605,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 61 )
    {
@@ -22793,6 +22915,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 62 )
    {
@@ -23101,6 +23225,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 63 )
    {
@@ -23409,6 +23535,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 64 )
    {
@@ -23717,6 +23845,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 65 )
    {
@@ -24025,6 +24155,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
    else if ( index == 66 )
    {
@@ -24333,5 +24465,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->enemyIndexCount = 1;
+      map->enemyIndexes[0] = 0;
    }
 }

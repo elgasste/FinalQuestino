@@ -87,6 +87,80 @@
          new() { new( 145, 64, 212 ), new(), new(), new() }    // 66 (stairs to basement 1)
       };
 
+      public static List<MapEnemyTierData> MapEnemyIndexes = new()
+      {
+         // overworld
+         new( 1, new() { 0 } ),  // 0
+         new( 1, new() { 0 } ),  // 1
+         new( 1, new() { 0 } ),  // 2
+         new( 1, new() { 0 } ),  // 3
+         new( 1, new() { 0 } ),  // 4
+         new( 1, new() { 0 } ),  // 5
+         new( 1, new() { 0 } ),  // 6
+         new( 1, new() { 0 } ),  // 7
+         new( 1, new() { 0 } ),  // 8
+         new( 1, new() { 0 } ),  // 9
+         new( 1, new() { 0 } ),  // 10
+         new( 1, new() { 0 } ),  // 11
+         new( 1, new() { 0 } ),  // 12
+         new( 1, new() { 0 } ),  // 13
+         new( 1, new() { 0 } ),  // 14
+         new( 1, new() { 0 } ),  // 15
+         new( 1, new() { 0 } ),  // 16
+         new( 1, new() { 0 } ),  // 17
+         new( 1, new() { 0 } ),  // 18
+         new( 1, new() { 0 } ),  // 19
+         new( 1, new() { 0 } ),  // 20
+         new( 1, new() { 0 } ),  // 21
+         new( 1, new() { 0 } ),  // 22
+         new( 1, new() { 0 } ),  // 23
+         new( 1, new() { 0 } ),  // 24
+         new( 1, new() { 0 } ),  // 25
+         new( 1, new() { 0 } ),  // 26 (swamp cave entrance and exit)
+         new( 1, new() { 0 } ),  // 27
+         new( 1, new() { 0 } ),  // 28
+         new( 1, new() { 0 } ),  // 29
+         new( 1, new() { 0 } ),  // 30
+         new( 1, new() { 0 } ),  // 31
+         new( 1, new() { 0 } ),  // 32
+         new( 1, new() { 0 } ),  // 33
+         new( 1, new() { 0 } ),  // 34
+         new( 1, new() { 0 } ),  // 35
+         new( 1, new() { 0 } ),  // 36
+         new( 1, new() { 0 } ),  // 37
+         new( 1, new() { 0 } ),  // 38
+         new( 1, new() { 0 } ),  // 39
+         new( 1, new() { 0 } ),  // 40
+         new( 1, new() { 0 } ),  // 41
+         new( 1, new() { 0 } ),  // 42
+         new( 1, new() { 0 } ),  // 43
+         new( 1, new() { 0 } ),  // 44
+         new( 1, new() { 0 } ),  // 45
+         new( 1, new() { 0 } ),  // 46
+         new( 1, new() { 0 } ),  // 47
+         new( 1, new() { 0 } ),  // 48
+         new( 1, new() { 0 } ),  // 49
+         new( 1, new() { 0 } ),  // 50
+         new( 1, new() { 0 } ),  // 51
+         new( 1, new() { 0 } ),  // 52
+         new( 1, new() { 0 } ),  // 53
+         new( 1, new() { 0 } ),  // 54
+         new( 1, new() { 0 } ),  // 55
+         new( 1, new() { 0 } ),  // 56
+         new( 1, new() { 0 } ),  // 57
+         new( 1, new() { 0 } ),  // 58
+         new( 1, new() { 0 } ),  // 59
+         new( 1, new() { 0 } ),  // 60
+         new( 1, new() { 0 } ),  // 61
+         new( 1, new() { 0 } ),  // 62
+
+         // swamp cave
+         new( 1, new() { 0 } ),  // 63 (entrance from the north)
+         new( 1, new() { 0 } ),  // 64 (stairs to basement 2)
+         new( 1, new() { 0 } ),  // 65 (entrance from the south)
+         new( 1, new() { 0 } )   // 66 (stairs to basement 1)
+      };
+
       public static List<List<int>> MapTiles = new()
       {
          // LEGEND:
