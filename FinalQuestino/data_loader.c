@@ -2,26 +2,26 @@
 
 #include "game.h"
 
-void cScreen_LoadPalette( cScreen_t* screen, uint8_t index )
+void cScreen_LoadMapPalette( cScreen_t* screen, uint8_t index )
 {
    if ( index == 0 )
    {
-      screen->palette[0] = 0x9720;
-      screen->palette[1] = 0x4521;
-      screen->palette[2] = 0x0000;
-      screen->palette[3] = 0xFEB3;
-      screen->palette[4] = 0x7BEF;
-      screen->palette[5] = 0x3AFE;
-      screen->palette[6] = 0xFFFF;
-      screen->palette[7] = 0xB5D6;
-      screen->palette[8] = 0xDA60;
-      screen->palette[9] = 0xFCE0;
-      screen->palette[10] = 0xF81F;
-      screen->palette[11] = 0x39FF;
-      screen->palette[12] = 0xFDBC;
-      screen->palette[13] = 0x0000;
-      screen->palette[14] = 0x0000;
-      screen->palette[15] = 0x0000;
+      screen->mapPalette[0] = 0x9720;
+      screen->mapPalette[1] = 0x4521;
+      screen->mapPalette[2] = 0x0000;
+      screen->mapPalette[3] = 0xFEB3;
+      screen->mapPalette[4] = 0x7BEF;
+      screen->mapPalette[5] = 0x3AFE;
+      screen->mapPalette[6] = 0xFFFF;
+      screen->mapPalette[7] = 0xB5D6;
+      screen->mapPalette[8] = 0xDA60;
+      screen->mapPalette[9] = 0xFCE0;
+      screen->mapPalette[10] = 0xF81F;
+      screen->mapPalette[11] = 0x39FF;
+      screen->mapPalette[12] = 0xFDBC;
+      screen->mapPalette[13] = 0x0000;
+      screen->mapPalette[14] = 0x0000;
+      screen->mapPalette[15] = 0x0000;
    }
 }
 

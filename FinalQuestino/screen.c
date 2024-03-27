@@ -44,7 +44,7 @@ void cScreen_Init( cScreen_t* screen )
 
    for ( i = 0; i < 16; i++ )
    {
-      screen->palette[i] = 0;
+      screen->mapPalette[i] = 0;
    }
 
    cScreen_LoadTextBitFields( screen );
@@ -199,11 +199,11 @@ void cScreen_DrawTileMap( cGame_t* game )
                pixelPair = map->tileTextures[tile & 0xF][pixelCol + ( pixelRow * MAP_PACKED_TILE_SIZE )];
 
                paletteIndex = pixelPair >> 4;
-               color = screen->palette[paletteIndex];
+               color = screen->mapPalette[paletteIndex];
                write16( color >> 8, color );
 
                paletteIndex = pixelPair & 0x0F;
-               color = screen->palette[paletteIndex];
+               color = screen->mapPalette[paletteIndex];
                write16( color >> 8, color );
             }
          }
@@ -374,11 +374,11 @@ static uint16_t cScreen_GetTilePixelColor( cScreen_t* screen, cTileMap_t* map, u
 
    if ( pixelOffsetX % 2 == 0 )
    {
-      return screen->palette[tileTexture[( pixelOffsetX / 2 ) + ( pixelOffsetY * MAP_PACKED_TILE_SIZE )] >> 4];
+      return screen->mapPalette[tileTexture[( pixelOffsetX / 2 ) + ( pixelOffsetY * MAP_PACKED_TILE_SIZE )] >> 4];
    }
    else
    {
-      return screen->palette[tileTexture[( pixelOffsetX / 2 ) + ( pixelOffsetY * MAP_PACKED_TILE_SIZE )] & 0xF];
+      return screen->mapPalette[tileTexture[( pixelOffsetX / 2 ) + ( pixelOffsetY * MAP_PACKED_TILE_SIZE )] & 0xF];
    }
 }
 
@@ -438,7 +438,7 @@ void cScreen_DrawPlayer( cGame_t* game )
       if ( curX >= skipLeft && curX < ( MAP_TILE_SIZE - skipRight ) && curY >= skipTop && curY < ( MAP_TILE_SIZE - skipBottom ) )
       {
          paletteIndex = pixelPair >> 4;
-         color = screen->palette[paletteIndex];
+         color = screen->mapPalette[paletteIndex];
 
          if ( color == TRANSPARENT_COLOR )
          {
@@ -454,7 +454,7 @@ void cScreen_DrawPlayer( cGame_t* game )
       if ( curX >= skipLeft && curX < ( MAP_TILE_SIZE - skipRight ) && curY >= skipTop && curY < ( MAP_TILE_SIZE - skipBottom ) )
       {
          paletteIndex = pixelPair & 0x0F;
-         color = screen->palette[paletteIndex];
+         color = screen->mapPalette[paletteIndex];
 
          if ( color == TRANSPARENT_COLOR )
          {

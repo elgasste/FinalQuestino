@@ -11,7 +11,7 @@ void cGame_Init( cGame_t* game )
    game->tileMapIndex = 23;
 
    cScreen_Init( &( game->screen ) );
-   cScreen_LoadPalette( &( game->screen ), game->paletteIndex );
+   cScreen_LoadMapPalette( &( game->screen ), game->paletteIndex );
    cScreen_Begin( &( game->screen ) );
 
    cClock_Init( &( game->clock ) );

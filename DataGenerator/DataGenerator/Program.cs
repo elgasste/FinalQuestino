@@ -2,8 +2,10 @@
 using System.Windows.Media;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
-var _palette = new List<ushort>();
+var _mapPalette = new List<ushort>();
+var _battlePalettes = new List<List<ushort>>();
 var _textTextureMap = new List<byte>();
 var _tileTextureMapBytes = new List<byte>();
 var _playerSpriteTextureMapBytes = new List<byte>();
@@ -52,23 +54,23 @@ static Color GetPixelColor( BitmapSource bitmap, int x, int y )
 
 static ushort GetPixelColor16( BitmapSource bitmap, int x, int y ) => ColortoUInt16( GetPixelColor( bitmap, x, y ) );
 
-int PaletteIndexFromColor( ushort color )
+int PaletteIndexFromColor( ushort color, List<ushort> palette )
 {
-   if ( _palette is null )
+   if ( palette is null )
    {
-      throw new Exception( "Somehow the palette is null, no idea how it happened." );
+      throw new Exception( "Somehow a palette is null, no idea how it happened." );
    }
-   else if ( _palette.Count > 15 )
+   else if ( palette.Count > 15 )
    {
-      throw new Exception( "Trying to add too many colors to the palette." );
+      throw new Exception( "Trying to add too many colors to a palette." );
    }
 
-   int paletteIndex = _palette.IndexOf( color );
+   int paletteIndex = palette.IndexOf( color );
 
    if ( paletteIndex < 0 )
    {
-      _palette.Add( color );
-      paletteIndex = _palette.Count - 1;
+      palette.Add( color );
+      paletteIndex = palette.Count - 1;
    }
 
    return paletteIndex;
@@ -110,13 +112,17 @@ void LoadWorldTextureMap( BitmapSource bitmap )
    {
       throw new Exception( "Trying to add too many tile textures." );
    }
+   else if ( _mapPalette is null )
+   {
+      throw new Exception( "Somehow the map palette is null, no idea how it happened." );
+   }
 
    for ( int row = 0; row < bitmap.PixelHeight; row++ )
    {
       for ( int col = 0; col < bitmap.PixelWidth; col++ )
       {
          var pixelColor = GetPixelColor16( bitmap, col, row );
-         _tileTextureMapBytes.Add( (byte)PaletteIndexFromColor( pixelColor ) );
+         _tileTextureMapBytes.Add( (byte)PaletteIndexFromColor( pixelColor, _mapPalette ) );
       }
    }
 }
@@ -127,38 +133,77 @@ void LoadPlayerSpriteTextureMap( BitmapSource bitmap )
    {
       throw new Exception( "Somehow the player sprite texture map is null, no idea how it happened." );
    }
+   else if ( _mapPalette is null )
+   {
+      throw new Exception( "Somehow the map palette is null, no idea how it happened." );
+   }
 
    for ( int row = 0; row < bitmap.PixelHeight; row++ )
    {
       for ( int col = 0; col < bitmap.PixelWidth; col++ )
       {
          var pixelColor = GetPixelColor16( bitmap, col, row );
-         _playerSpriteTextureMapBytes.Add( (byte)PaletteIndexFromColor( pixelColor ) );
+         _playerSpriteTextureMapBytes.Add( (byte)PaletteIndexFromColor( pixelColor, _mapPalette ) );
       }
    }
 }
 
-string BuildPaletteOutputString()
+// MUFFINS: I'm thinking each enemy should have a JSON file that defines all the data.
+void LoadEnemyTextureMap( BitmapSource bitmap )
 {
-   if ( _palette is null )
+   if ( ( bitmap.PixelHeight * bitmap.PixelWidth ) != ( 80 * 96 ) )
    {
-      throw new Exception( "Somehow the palette is null, I have no idea what could have happened." );
+      throw new Exception( "Enemy texture map is the wrong size." );
+   }
+   else if ( _battlePalettes is null )
+   {
+      throw new Exception( "Somehow the battle palette is null, no idea how it happened." );
    }
 
-   string outputString = "void cScreen_LoadPalette( cScreen_t* screen, uint8_t index )\n";
+   var textureMapBytes = new List<byte>();
+
+   // MUFFINS: when we generate an enemy, load the palette based on the enemy's index
+   _battlePalettes.Add( new() );
+   int paletteIndex = _battlePalettes.Count - 1;
+
+   for ( int row = 0; row < bitmap.PixelHeight; row++ )
+   {
+      for ( int col = 0; col < bitmap.PixelWidth; col++ )
+      {
+         var pixelColor = GetPixelColor16( bitmap, col, row );
+         // MUFFINS
+         textureMapBytes.Add( (byte)PaletteIndexFromColor( pixelColor, _battlePalettes[paletteIndex] ) );
+
+         // MUFFINS: once we have all the data...
+         //
+         // - go over it in 8x8 tiles
+         // - if a tile is not completely black, add it to a tile list for this enemy
+         //      - need a list of tiles for each enemy (80 max)
+      }
+   }
+}
+
+string BuildMapPaletteOutputString()
+{
+   if ( _mapPalette is null )
+   {
+      throw new Exception( "Somehow the map palette is null, I have no idea what could have happened." );
+   }
+
+   string outputString = "void cScreen_LoadMapPalette( cScreen_t* screen, uint8_t index )\n";
    outputString += "{\n";
    outputString += "   if ( index == 0 )\n";
    outputString += "   {\n";
 
    for ( int i = 0; i < 16; i++ )
    {
-      if ( i < _palette.Count )
+      if ( i < _mapPalette.Count )
       {
-         outputString += string.Format( "      screen->palette[{0}] = 0x{1};\n", i, _palette[i].ToString( "X4" ) );
+         outputString += string.Format( "      screen->mapPalette[{0}] = 0x{1};\n", i, _mapPalette[i].ToString( "X4" ) );
       }
       else
       {
-         outputString += string.Format( "      screen->palette[{0}] = 0x0000;\n", i );
+         outputString += string.Format( "      screen->mapPalette[{0}] = 0x0000;\n", i );
       }
    }
 
@@ -170,9 +215,9 @@ string BuildPaletteOutputString()
 
 string BuildTileTexturesOutputString()
 {
-   if ( _palette is null )
+   if ( _mapPalette is null )
    {
-      throw new Exception( "Somehow the palette is null, I have no idea what could have happened." );
+      throw new Exception( "Somehow the map palette is null, I have no idea what could have happened." );
    }
    else if ( _tileTextureMapBytes is null )
    {
@@ -316,7 +361,7 @@ string BuildMapTilesOutputString()
    return outputString;
 }
 
-void GenerateOutputData()
+void LoadData()
 {
    var textFileStream = new FileStream( "text_tileset.png", FileMode.Open, FileAccess.Read, FileShare.Read );
    var textDecoder = new PngBitmapDecoder( textFileStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default );
@@ -335,6 +380,15 @@ void GenerateOutputData()
    BitmapSource playerSpriteBitmap = playerSpriteDecoder.Frames[0];
    BitmapSanityCheck( playerSpriteBitmap );
    LoadPlayerSpriteTextureMap( playerSpriteBitmap );
+
+   foreach ( var enemyImage in Directory.GetFiles( "Enemies", "*.png", SearchOption.TopDirectoryOnly ) )
+   {
+      var enemyFileStream = new FileStream( enemyImage, FileMode.Open, FileAccess.Read, FileShare.Read );
+      var enemyDecoder = new PngBitmapDecoder( enemyFileStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default );
+      BitmapSource enemyBitmap = enemyDecoder.Frames[0];
+      BitmapSanityCheck( enemyBitmap );
+      LoadEnemyTextureMap( enemyBitmap );
+   }
 }
 
 try
@@ -342,12 +396,12 @@ try
    string outputString = "/* This file was generated from DataGenerator, please do not edit */\n\n";
    outputString += "#include \"game.h\"\n\n";
 
-   Console.Write( "Generating data..." );
-   GenerateOutputData();
+   Console.Write( "Loading data..." );
+   LoadData();
    Console.Write( "Done!\n" );
 
    Console.Write( "Generating palette loader..." );
-   outputString += BuildPaletteOutputString();
+   outputString += BuildMapPaletteOutputString();
    Console.Write( "Done!\n" );
 
    Console.Write( "Generating tile texture loader..." );

@@ -35,4 +35,10 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="Enemies\**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

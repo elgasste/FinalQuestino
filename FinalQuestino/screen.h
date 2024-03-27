@@ -108,7 +108,8 @@ typedef struct cScreen_t
    uint8_t wrPinUnset;
    uint8_t rdPinUnset;
 
-   uint16_t palette[16];
+   uint16_t mapPalette[16];
+   uint16_t battlePalette[16];
    uint8_t textBitFields[TEXT_TILE_COUNT][8];
 }
 cScreen_t;
@@ -131,7 +132,7 @@ void cScreen_WipePlayer( cGame_t* game );
 void cScreen_WipeTileMapSection( cGame_t* game, float x, float y, uint16_t w, uint16_t h );
 
 // data_loader.c
-void cScreen_LoadPalette( cScreen_t* screen, uint8_t index );
+void cScreen_LoadMapPalette( cScreen_t* screen, uint8_t index );
 void cScreen_LoadTextBitFields( cScreen_t* screen );
 
 #if defined( __cplusplus )
