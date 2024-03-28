@@ -9,7 +9,7 @@ void cBattle_Start( cGame_t* game )
    char str[10];
 
    enemyIndex = ( game->tileMap.enemyIndexCount == 0 ) ? 0 : cRandom_Uint8( 0, game->tileMap.enemyIndexCount - 1 );
-   cEnemy_Generate( &( game->battle.enemy ), enemyIndex );
+   cEnemy_Load( &( game->battle.enemy ), enemyIndex );
 
    cBattle_AnimateStart( game );
 
@@ -22,9 +22,7 @@ void cBattle_Start( cGame_t* game )
 
    cGame_ShowMessage( game, "An enemy approaches! However, due to a lack of funding, we can't tell you what it is. Press A or B to get on with your life." );
 
-   // MUFFINS: so this is the space we can work with. if we split it up into 8x8 tiles,
-   // that's 10x12, or 120 tiles.
-   cScreen_DrawRect( &( game->screen ), 144, 40, 80, 96, MAGENTA );
+   cScreen_DrawEnemy( game, 144, 40 );
 }
 
 void cBattle_Done( cGame_t* game )

@@ -10,7 +10,8 @@ typedef struct cEnemy_t
    cBattleStats_t stats;
 
    uint8_t tileTextures[ENEMY_TILE_TEXTURE_COUNT][ENEMY_TILE_TEXTURE_SIZE_BYTES];
-   uint8_t tileTextureIndexes[ENEMY_TILE_COUNT];
+   int8_t tileTextureIndexes[ENEMY_TILE_COUNT];
+   uint16_t palette[16];
 }
 cEnemy_t;
 
@@ -18,7 +19,7 @@ cEnemy_t;
 extern "C" {
 #endif
 
-void cEnemy_Generate( cEnemy_t* enemy, uint8_t index );
+void cEnemy_Load( cEnemy_t* enemy, uint8_t index );
 
 #if defined( __cplusplus )
 }

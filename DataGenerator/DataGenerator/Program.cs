@@ -2,13 +2,16 @@
 using System.Windows.Media;
 using System.Windows;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using DataGenerator;
+using Newtonsoft.Json;
+using System.Windows.Controls;
+using System.Diagnostics.Metrics;
 
 var _mapPalette = new List<ushort>();
-var _battlePalettes = new List<List<ushort>>();
 var _textTextureMap = new List<byte>();
 var _tileTextureMapBytes = new List<byte>();
 var _playerSpriteTextureMapBytes = new List<byte>();
+var EnemyRepo = new EnemyRepo();
 
 Console.WriteLine();
 Console.WriteLine( "=====================================================" );
@@ -148,38 +151,76 @@ void LoadPlayerSpriteTextureMap( BitmapSource bitmap )
    }
 }
 
-// MUFFINS: I'm thinking each enemy should have a JSON file that defines all the data.
-void LoadEnemyTextureMap( BitmapSource bitmap )
+void LoadEnemyTextureMap( Enemy enemy, BitmapSource bitmap )
 {
    if ( ( bitmap.PixelHeight * bitmap.PixelWidth ) != ( 80 * 96 ) )
    {
       throw new Exception( "Enemy texture map is the wrong size." );
    }
-   else if ( _battlePalettes is null )
-   {
-      throw new Exception( "Somehow the battle palette is null, no idea how it happened." );
-   }
 
    var textureMapBytes = new List<byte>();
-
-   // MUFFINS: when we generate an enemy, load the palette based on the enemy's index
-   _battlePalettes.Add( new() );
-   int paletteIndex = _battlePalettes.Count - 1;
 
    for ( int row = 0; row < bitmap.PixelHeight; row++ )
    {
       for ( int col = 0; col < bitmap.PixelWidth; col++ )
       {
          var pixelColor = GetPixelColor16( bitmap, col, row );
-         // MUFFINS
-         textureMapBytes.Add( (byte)PaletteIndexFromColor( pixelColor, _battlePalettes[paletteIndex] ) );
-
-         // MUFFINS: once we have all the data...
-         //
-         // - go over it in 8x8 tiles
-         // - if a tile is not completely black, add it to a tile list for this enemy
-         //      - need a list of tiles for each enemy (80 max)
+         textureMapBytes.Add( (byte)PaletteIndexFromColor( pixelColor, enemy.palette ) );
       }
+   }
+
+   for ( int tileRow = 0; tileRow < 12; tileRow++ )
+   {
+      for ( int tileCol = 0; tileCol < 10; tileCol++ )
+      {
+         bool blankTexture = true;
+         var tileTextureBytes = new List<byte>();
+
+         for ( int pixelRow = 0; pixelRow < 8; pixelRow++ )
+         {
+            for ( int pixelCol = 0; pixelCol < 8; pixelCol++ )
+            {
+               int pixelIndex = ( tileRow * 10 * 8 * 8 ) + ( pixelRow * 10 * 8 ) + ( tileCol * 8 ) + pixelCol;
+               tileTextureBytes.Add( textureMapBytes[pixelIndex] );
+            }
+         }
+
+         foreach ( var textureByte in tileTextureBytes )
+         {
+            if ( textureByte != 0 )
+            {
+               blankTexture = false;
+               break;
+            }
+         }
+
+         if ( blankTexture )
+         {
+            enemy.textureIndexes.Add( -1 );
+         }
+         else
+         {
+            // TODO: what if this tile texture already exists for this enemy? should we check for that?
+            enemy.tileTextures.Add( tileTextureBytes );
+            enemy.textureIndexes.Add( enemy.tileTextures.Count - 1 );
+         }
+      }
+   }
+}
+
+void LoadEnemies()
+{
+   using StreamReader r = new( "Enemies/enemies.json" );
+   var json = r.ReadToEnd();
+   EnemyRepo = JsonConvert.DeserializeObject<EnemyRepo>( json );
+
+   foreach ( var enemy in EnemyRepo.enemies )
+   {
+      var enemyFileStream = new FileStream( "Enemies/" + enemy.name + ".png", FileMode.Open, FileAccess.Read, FileShare.Read );
+      var enemyDecoder = new PngBitmapDecoder( enemyFileStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default );
+      BitmapSource enemyBitmap = enemyDecoder.Frames[0];
+      BitmapSanityCheck( enemyBitmap );
+      LoadEnemyTextureMap( enemy, enemyBitmap );
    }
 }
 
@@ -213,7 +254,7 @@ string BuildMapPaletteOutputString()
    return outputString;
 }
 
-string BuildTileTexturesOutputString()
+string BuildMapTileTexturesOutputString()
 {
    if ( _mapPalette is null )
    {
@@ -322,7 +363,7 @@ string BuildMapTilesOutputString()
    string outputString = "void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )\n";
    outputString += "{\n";
 
-   for ( int i = 0; i < DataGenerator.MapData.MapTiles.Count; i++ )
+   for ( int i = 0; i < MapData.MapTiles.Count; i++ )
    {
       if ( i == 0 )
       {
@@ -334,23 +375,74 @@ string BuildMapTilesOutputString()
       }
       outputString += "   {\n";
 
-      for ( int j = 0; j < DataGenerator.MapData.MapTiles[i].Count; j++ )
+      for ( int j = 0; j < MapData.MapTiles[i].Count; j++ )
       {
-         outputString += string.Format( "      map->tiles[{0}] = 0x{1};\n", j, DataGenerator.MapData.MapTiles[i][j].ToString( "X2" ) );
+         outputString += string.Format( "      map->tiles[{0}] = 0x{1};\n", j, MapData.MapTiles[i][j].ToString( "X2" ) );
       }
 
-      outputString += string.Format( "      map->stride = {0};\n", DataGenerator.MapData.MapStrides[i] );
+      outputString += string.Format( "      map->stride = {0};\n", MapData.MapStrides[i] );
 
       for ( int j = 0; j < 4; j++ )
       {
-         outputString += string.Format( "      map->portals[{0}] = 0x{1};\n", j, DataGenerator.MapData.MapPortals[i][j].CompiledData.ToString( "X2" ) );
+         outputString += string.Format( "      map->portals[{0}] = 0x{1};\n", j, MapData.MapPortals[i][j].CompiledData.ToString( "X2" ) );
       }
 
-      outputString += string.Format( "      map->enemyIndexCount = {0};\n", DataGenerator.MapData.MapEnemyIndexes[i].IndexCount );
+      outputString += string.Format( "      map->enemyIndexCount = {0};\n", MapData.MapEnemyIndexes[i].IndexCount );
 
-      for ( int j = 0; j < DataGenerator.MapData.MapEnemyIndexes[i].IndexCount; j++ )
+      for ( int j = 0; j < MapData.MapEnemyIndexes[i].IndexCount; j++ )
       {
-         outputString += string.Format( "      map->enemyIndexes[{0}] = {1};\n", j, DataGenerator.MapData.MapEnemyIndexes[i].Indexes[j] );
+         outputString += string.Format( "      map->enemyIndexes[{0}] = {1};\n", j, MapData.MapEnemyIndexes[i].Indexes[j] );
+      }
+
+      outputString += "   }\n";
+   }
+
+   outputString += "}\n";
+
+   return outputString;
+}
+
+string BuildEnemyOutputString()
+{
+   var sortedEnemies = EnemyRepo.enemies.OrderBy( e => e.index ).ToList();
+
+   string outputString = "\nvoid cEnemy_Load( cEnemy_t* enemy, uint8_t index )\n";
+   outputString += "{\n";
+   bool first = true;
+
+   foreach ( var enemy in sortedEnemies )
+   {
+      if ( first )
+      {
+         outputString += string.Format( "   if ( index == {0} )\n", enemy.index );
+         first = false;
+      }
+      else
+      {
+         outputString += string.Format( "   else if ( index == {0} )\n", enemy.index );
+      }
+
+      outputString += "   {\n";
+
+      for ( int i = 0; i < enemy.palette.Count; i++ )
+      {
+         outputString += string.Format( "      enemy->palette[{0}] = 0x{1};\n", i, enemy.palette[i].ToString( "X4" ) );
+      }
+
+      for ( int i = 0; i < enemy.textureIndexes.Count; i++ )
+      {
+         outputString += string.Format( "      enemy->tileTextureIndexes[{0}] = {1};\n", i, enemy.textureIndexes[i] );
+      }
+
+      for ( int i = 0; i < enemy.tileTextures.Count; i++ )
+      {
+         for ( int j = 0, idx = 0; j < enemy.tileTextures[i].Count; j++, idx++ )
+         {
+            var unpackedPixel1 = (ushort)enemy.tileTextures[i][j++];
+            var unpackedPixel2 = (ushort)enemy.tileTextures[i][j];
+            var packedPixels = (ushort)( ( unpackedPixel1 << 4 ) | unpackedPixel2 );
+            outputString += string.Format( "      enemy->tileTextures[{0}][{1}] = 0x{2};\n", i, idx, packedPixels.ToString( "X2" ) );
+         }
       }
 
       outputString += "   }\n";
@@ -381,14 +473,7 @@ void LoadData()
    BitmapSanityCheck( playerSpriteBitmap );
    LoadPlayerSpriteTextureMap( playerSpriteBitmap );
 
-   foreach ( var enemyImage in Directory.GetFiles( "Enemies", "*.png", SearchOption.TopDirectoryOnly ) )
-   {
-      var enemyFileStream = new FileStream( enemyImage, FileMode.Open, FileAccess.Read, FileShare.Read );
-      var enemyDecoder = new PngBitmapDecoder( enemyFileStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default );
-      BitmapSource enemyBitmap = enemyDecoder.Frames[0];
-      BitmapSanityCheck( enemyBitmap );
-      LoadEnemyTextureMap( enemyBitmap );
-   }
+   LoadEnemies();
 }
 
 try
@@ -400,12 +485,12 @@ try
    LoadData();
    Console.Write( "Done!\n" );
 
-   Console.Write( "Generating palette loader..." );
+   Console.Write( "Generating map palette loader..." );
    outputString += BuildMapPaletteOutputString();
    Console.Write( "Done!\n" );
 
-   Console.Write( "Generating tile texture loader..." );
-   outputString += BuildTileTexturesOutputString();
+   Console.Write( "Generating map tile texture loader..." );
+   outputString += BuildMapTileTexturesOutputString();
    Console.Write( "Done!\n" );
 
    Console.Write( "Generating text bit field loader..." );
@@ -416,8 +501,12 @@ try
    outputString += BuildPlayerSpriteTexturesOutputString();
    Console.Write( "Done!\n" );
 
-   Console.Write( "Generating map tiles..." );
+   Console.Write( "Generating map data loader..." );
    outputString += BuildMapTilesOutputString();
+   Console.Write( "Done!\n" );
+
+   Console.Write( "Generating enemy data loader..." );
+   outputString += BuildEnemyOutputString();
    Console.Write( "Done!\n" );
 
    Console.Write( "Writing source file..." );

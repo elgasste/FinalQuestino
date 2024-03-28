@@ -490,6 +490,47 @@ void cScreen_WipePlayer( cGame_t* game )
                                SPRITE_SIZE, SPRITE_SIZE );
 }
 
+void cScreen_DrawEnemy( cGame_t* game, uint16_t x, uint16_t y )
+{
+   uint8_t i, j, pixelPair, paletteIndex;
+   uint16_t tileOffsetX, tileOffsetY, tileX, tileY, color;
+   cScreen_t* screen = &( game->screen );
+   cEnemy_t* enemy = &( game->battle.enemy );
+
+   CS_ACTIVE;
+
+   for ( i = 0; i < ENEMY_TILE_COUNT; i++ )
+   {
+      if ( enemy->tileTextureIndexes[i] >= 0 )
+      {
+         tileOffsetX = ( i % ENEMY_TILES_X ) * ENEMY_TILE_SIZE;
+         tileOffsetY = ( i / ENEMY_TILES_X ) * ENEMY_TILE_SIZE;
+         tileX = x + tileOffsetX;
+         tileY = y + tileOffsetY;
+
+         cScreen_SetAddrWindow( screen, tileX, tileY, tileX + ENEMY_TILE_SIZE - 1, tileY + ENEMY_TILE_SIZE - 1 );
+         CD_COMMAND;
+         write8( 0x2C );
+         CD_DATA;
+
+         for ( j = 0; j < ENEMY_TILE_TEXTURE_SIZE_BYTES; j++ )
+         {
+            pixelPair = enemy->tileTextures[ enemy->tileTextureIndexes[i] ][j];
+
+            paletteIndex = pixelPair >> 4;
+            color = enemy->palette[paletteIndex];
+            write16( color >> 8, color );
+
+            paletteIndex = pixelPair & 0x0F;
+            color = enemy->palette[paletteIndex];
+            write16( color >> 8, color );
+         }
+      }
+   }
+
+   CS_IDLE;
+}
+
 void cScreen_WipeTileMapSection( cGame_t* game, float x, float y, uint16_t w, uint16_t h )
 {
    uint8_t pixelPair, paletteIndex, curX, curY;

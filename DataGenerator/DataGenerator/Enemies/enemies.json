@@ -1,0 +1,26 @@
+{
+	"enemies": [
+		{
+			"index": 0,
+			"name": "slime",
+			"hp": 3,
+			"mp": 0,
+			"atk": 1,
+			"def": 1,
+			"agl": 1,
+			"exp": 1,
+			"gold": 2
+		},
+		{
+			"index": 1,
+			"name": "red slime",
+			"hp": 4,
+			"mp": 0,
+			"atk": 1,
+			"def": 1,
+			"agl": 2,
+			"exp": 2,
+			"gold": 3
+		}
+	]
+}
