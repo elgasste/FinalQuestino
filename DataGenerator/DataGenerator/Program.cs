@@ -387,11 +387,13 @@ string BuildMapTilesOutputString()
          outputString += string.Format( "      map->portals[{0}] = 0x{1};\n", j, MapData.MapPortals[i][j].CompiledData.ToString( "X2" ) );
       }
 
-      outputString += string.Format( "      map->enemyIndexCount = {0};\n", MapData.MapEnemyIndexes[i].IndexCount );
-
-      for ( int j = 0; j < MapData.MapEnemyIndexes[i].IndexCount; j++ )
+      for ( int j = 0; j < 4; j++ )
       {
          outputString += string.Format( "      map->enemyIndexes[{0}] = {1};\n", j, MapData.MapEnemyIndexes[i].Indexes[j] );
+      }
+      for ( int j = 0; j < 4; j++ )
+      {
+         outputString += string.Format( "      map->enemySpecialIndexes[{0}] = {1};\n", j, MapData.MapEnemyIndexes[i].SpecialIndexes[j] );
       }
 
       outputString += "   }\n";

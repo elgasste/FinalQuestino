@@ -2,13 +2,13 @@
 {
    internal class MapEnemyTierData
    {
-      public int IndexCount { get; }
       public List<int> Indexes { get; }
+      public List<int> SpecialIndexes { get; }
 
-      public MapEnemyTierData( int indexCount, List<int> indexes )
+      public MapEnemyTierData( List<int> indexes, List<int> specialIndexes )
       {
-         IndexCount = indexCount;
          Indexes = indexes;
+         SpecialIndexes = specialIndexes;
       }
    }
 }

@@ -29,8 +29,12 @@ void cTileMap_Init( cTileMap_t* map )
    for ( i = 0; i < MAP_TILE_ENEMY_INDEX_COUNT; i++ )
    {
       map->enemyIndexes[i] = 0;
+      map->enemySpecialIndexes[i] = 0;
    }
 
    map->stride = 1;
-   map->enemyIndexCount = 0;
+   map->enemySpecialRegion.x = MAP_TILES_X;
+   map->enemySpecialRegion.y = MAP_TILES_Y;
+   map->enemySpecialRegion.w = 0;
+   map->enemySpecialRegion.h = 0;
 }

@@ -310,7 +310,7 @@ void cScreen_DrawWrappedText( cScreen_t* screen, const char* text, uint16_t x, u
    uint8_t textIndex, lineIndex, lastSpaceIndex, currentLine;
    uint16_t strLen = strlen( text );
    cBool_t endOfLine, endOfText;
-   char line[256];
+   char line[32];
    char curChar;
 
    for ( textIndex = 0, lineIndex = 0, lastSpaceIndex = 0, currentLine = 0; textIndex < strLen; textIndex++ )

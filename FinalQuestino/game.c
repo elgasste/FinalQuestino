@@ -3,6 +3,7 @@
 #include "battle.h"
 
 static void cGame_DrawMapStatus( cGame_t* game );
+static void cGame_RollEncounter( cGame_t* game, cBool_t highRate );
 
 void cGame_Init( cGame_t* game )
 {
@@ -200,7 +201,7 @@ static void cGame_DrawMapStatus( cGame_t* game )
    cScreen_DrawText( &( game->screen ), str, 24, 96, BLACK, WHITE );
 }
 
-void cGame_RollEncounter( cGame_t* game, cBool_t highRate )
+static void cGame_RollEncounter( cGame_t* game, cBool_t highRate )
 {
 #if defined( DEBUG_NOENCOUNTERS )
    return;

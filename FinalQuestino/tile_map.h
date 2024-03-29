@@ -2,6 +2,7 @@
 #define TILE_MAP_H
 
 #include "common.h"
+#include "vector.h"
 
 typedef struct cTileMap_t
 {
@@ -20,8 +21,9 @@ typedef struct cTileMap_t
    // low 11 bits are the destination tile index
    uint32_t portals[MAP_PORTAL_COUNT];
 
+   cVector4u8_t enemySpecialRegion;
    uint8_t enemyIndexes[MAP_TILE_ENEMY_INDEX_COUNT];
-   uint8_t enemyIndexCount;
+   uint8_t enemySpecialIndexes[MAP_TILE_ENEMY_INDEX_COUNT];
 }
 cTileMap_t;
 

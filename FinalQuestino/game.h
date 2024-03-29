@@ -43,7 +43,6 @@ void cGame_ChangeState( cGame_t *game, cGameState_t newState );
 void cGame_SteppedOnTile( cGame_t* game, uint16_t tileIndex );
 void cGame_ShowMessage( cGame_t* game, const char* message );
 void cGame_WipeMessage( cGame_t* game );
-void cGame_RollEncounter( cGame_t* game, cBool_t highRate );
 
 #if defined( __cplusplus )
 }
