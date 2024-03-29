@@ -6,7 +6,7 @@ static cBattle_AnimateStart( cGame_t* game );
 void cBattle_Start( cGame_t* game )
 {
    uint8_t enemyIndex;
-   char str[10];
+   char str[32];
 
    enemyIndex = ( game->tileMap.enemyIndexCount == 0 ) ? 0 : cRandom_Uint8( 0, game->tileMap.enemyIndexCount - 1 );
    cEnemy_Load( &( game->battle.enemy ), game->tileMap.enemyIndexes[enemyIndex] );
@@ -15,12 +15,13 @@ void cBattle_Start( cGame_t* game )
 
    // quick stats
    cScreen_DrawRect( &( game->screen ), 16, 16, 76, 36, BLACK );
-   snprintf( str, 10, "HP:%u", game->player.stats.HitPoints );
+   snprintf( str, 32, "HP:%u", game->player.stats.HitPoints );
    cScreen_DrawText( &( game->screen ), str, 24, 24, BLACK, WHITE );
-   snprintf( str, 10, "MP:%u", game->player.stats.MagicPoints );
+   snprintf( str, 32, "MP:%u", game->player.stats.MagicPoints );
    cScreen_DrawText( &( game->screen ), str, 24, 36, BLACK, WHITE );
 
-   cGame_ShowMessage( game, "An enemy approaches! However, due to a lack of funding, we can't tell you what it is. Press A or B to get on with your life." );
+   snprintf( str, 32, "A %s approaches!", game->battle.enemy.name );
+   cGame_ShowMessage( game, str );
 
    cScreen_DrawEnemy( game, 144, 40 );
 }

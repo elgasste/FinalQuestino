@@ -90,9 +90,9 @@
       public static List<MapEnemyTierData> MapEnemyIndexes = new()
       {
          // overworld
-         new( 1, new() { 0 } ),  // 0
-         new( 1, new() { 0 } ),  // 1
-         new( 1, new() { 0 } ),  // 2
+         new( 4, new() { 1, 3, 6, 9 } ),  // 0
+         new( 4, new() { 1, 3, 6, 9 } ),  // 1
+         new( 4, new() { 1, 3, 6, 9 } ),  // 2
          new( 1, new() { 0 } ),  // 3
          new( 1, new() { 0 } ),  // 4
          new( 1, new() { 0 } ),  // 5
@@ -113,10 +113,10 @@
          new( 1, new() { 0 } ),  // 20
          new( 1, new() { 0 } ),  // 21
          new( 1, new() { 0 } ),  // 22
-         new( 1, new() { 0 } ),  // 23
+         new( 2, new() { 0, 1 } ),  // 23
          new( 1, new() { 0 } ),  // 24
          new( 1, new() { 0 } ),  // 25
-         new( 1, new() { 0 } ),  // 26 (swamp cave entrance and exit)
+         new( 4, new() { 6, 4, 19, 9 } ),  // 26
          new( 1, new() { 0 } ),  // 27
          new( 1, new() { 0 } ),  // 28
          new( 1, new() { 0 } ),  // 29
@@ -155,10 +155,10 @@
          new( 1, new() { 0 } ),  // 62
 
          // swamp cave
-         new( 1, new() { 0 } ),  // 63 (entrance from the north)
-         new( 1, new() { 0 } ),  // 64 (stairs to basement 2)
-         new( 1, new() { 0 } ),  // 65 (entrance from the south)
-         new( 1, new() { 0 } )   // 66 (stairs to basement 1)
+         new( 4, new() { 12, 6, 9, 15 } ),  // 63 (entrance from the north)
+         new( 4, new() { 12, 6, 9, 15 } ),  // 64 (stairs to basement 2)
+         new( 4, new() { 12, 6, 9, 15 } ),  // 65 (entrance from the south)
+         new( 4, new() { 12, 6, 9, 15 } )   // 66 (stairs to basement 1)
       };
 
       public static List<List<int>> MapTiles = new()

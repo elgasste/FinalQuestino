@@ -4005,8 +4005,11 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexCount = 1;
-      map->enemyIndexes[0] = 0;
+      map->enemyIndexCount = 4;
+      map->enemyIndexes[0] = 1;
+      map->enemyIndexes[1] = 3;
+      map->enemyIndexes[2] = 6;
+      map->enemyIndexes[3] = 9;
    }
    else if ( index == 1 )
    {
@@ -4315,8 +4318,11 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexCount = 1;
-      map->enemyIndexes[0] = 0;
+      map->enemyIndexCount = 4;
+      map->enemyIndexes[0] = 1;
+      map->enemyIndexes[1] = 3;
+      map->enemyIndexes[2] = 6;
+      map->enemyIndexes[3] = 9;
    }
    else if ( index == 2 )
    {
@@ -4625,8 +4631,11 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexCount = 1;
-      map->enemyIndexes[0] = 0;
+      map->enemyIndexCount = 4;
+      map->enemyIndexes[0] = 1;
+      map->enemyIndexes[1] = 3;
+      map->enemyIndexes[2] = 6;
+      map->enemyIndexes[3] = 9;
    }
    else if ( index == 3 )
    {
@@ -11135,8 +11144,9 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexCount = 1;
+      map->enemyIndexCount = 2;
       map->enemyIndexes[0] = 0;
+      map->enemyIndexes[1] = 1;
    }
    else if ( index == 24 )
    {
@@ -12065,8 +12075,11 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x1D4208E2;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexCount = 1;
-      map->enemyIndexes[0] = 0;
+      map->enemyIndexCount = 4;
+      map->enemyIndexes[0] = 6;
+      map->enemyIndexes[1] = 4;
+      map->enemyIndexes[2] = 19;
+      map->enemyIndexes[3] = 9;
    }
    else if ( index == 27 )
    {
@@ -23535,8 +23548,11 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexCount = 1;
-      map->enemyIndexes[0] = 0;
+      map->enemyIndexCount = 4;
+      map->enemyIndexes[0] = 12;
+      map->enemyIndexes[1] = 6;
+      map->enemyIndexes[2] = 9;
+      map->enemyIndexes[3] = 15;
    }
    else if ( index == 64 )
    {
@@ -23845,8 +23861,11 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexCount = 1;
-      map->enemyIndexes[0] = 0;
+      map->enemyIndexCount = 4;
+      map->enemyIndexes[0] = 12;
+      map->enemyIndexes[1] = 6;
+      map->enemyIndexes[2] = 9;
+      map->enemyIndexes[3] = 15;
    }
    else if ( index == 65 )
    {
@@ -24155,8 +24174,11 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexCount = 1;
-      map->enemyIndexes[0] = 0;
+      map->enemyIndexCount = 4;
+      map->enemyIndexes[0] = 12;
+      map->enemyIndexes[1] = 6;
+      map->enemyIndexes[2] = 9;
+      map->enemyIndexes[3] = 15;
    }
    else if ( index == 66 )
    {
@@ -24465,8 +24487,11 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexCount = 1;
-      map->enemyIndexes[0] = 0;
+      map->enemyIndexCount = 4;
+      map->enemyIndexes[0] = 12;
+      map->enemyIndexes[1] = 6;
+      map->enemyIndexes[2] = 9;
+      map->enemyIndexes[3] = 15;
    }
 }
 
@@ -24474,6 +24499,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
 {
    if ( index == 0 )
    {
+      snprintf( enemy->name, 16, "slime" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x3C77;
       enemy->palette[2] = 0xFFFF;
@@ -24729,6 +24755,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 1 )
    {
+      snprintf( enemy->name, 16, "red slime" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xDA60;
       enemy->palette[2] = 0xFFFF;
@@ -24983,6 +25010,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 2 )
    {
+      snprintf( enemy->name, 16, "metal slime" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x7BEF;
       enemy->palette[2] = 0xFFFF;
@@ -25237,6 +25265,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 3 )
    {
+      snprintf( enemy->name, 16, "drakee" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x1815;
       enemy->palette[2] = 0xFFFF;
@@ -25652,6 +25681,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 4 )
    {
+      snprintf( enemy->name, 16, "magidrakee" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xD1EB;
       enemy->palette[2] = 0xFFFF;
@@ -26066,6 +26096,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 5 )
    {
+      snprintf( enemy->name, 16, "drakeema" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFE36;
       enemy->palette[2] = 0xFAF5;
@@ -26480,6 +26511,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 6 )
    {
+      snprintf( enemy->name, 16, "ghost" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x89FD;
       enemy->palette[2] = 0x2A6F;
@@ -27025,6 +27057,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 7 )
    {
+      snprintf( enemy->name, 16, "poltergeist" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x6EF1;
       enemy->palette[2] = 0x44EC;
@@ -27570,6 +27603,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 8 )
    {
+      snprintf( enemy->name, 16, "specter" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFCE0;
       enemy->palette[2] = 0x71E0;
@@ -28147,6 +28181,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 9 )
    {
+      snprintf( enemy->name, 16, "magician" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x7BEF;
       enemy->palette[2] = 0xFE36;
@@ -28722,6 +28757,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 10 )
    {
+      snprintf( enemy->name, 16, "warlock" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xD1EB;
       enemy->palette[2] = 0x5CFF;
@@ -29396,6 +29432,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 11 )
    {
+      snprintf( enemy->name, 16, "specter" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFCE0;
       enemy->palette[2] = 0x71E0;
@@ -29973,6 +30010,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 12 )
    {
+      snprintf( enemy->name, 16, "scorpion" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFBA5;
       enemy->palette[2] = 0x89FD;
@@ -30644,6 +30682,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 13 )
    {
+      snprintf( enemy->name, 16, "metal scorpion" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xB5D6;
       enemy->palette[2] = 0xD1EB;
@@ -31315,6 +31354,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 14 )
    {
+      snprintf( enemy->name, 16, "rogue scorpion" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x3C77;
       enemy->palette[2] = 0x9960;
@@ -31986,6 +32026,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 15 )
    {
+      snprintf( enemy->name, 16, "druin" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFBA5;
       enemy->palette[2] = 0x5873;
@@ -32724,6 +32765,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 16 )
    {
+      snprintf( enemy->name, 16, "druinlord" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x89FD;
       enemy->palette[2] = 0xA865;
@@ -33462,6 +33504,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 17 )
    {
+      snprintf( enemy->name, 16, "droll" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x71E0;
       enemy->palette[2] = 0xFFFF;
@@ -34167,6 +34210,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 18 )
    {
+      snprintf( enemy->name, 16, "drollmagi" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xB5D6;
       enemy->palette[2] = 0xFFFF;
@@ -34871,6 +34915,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 19 )
    {
+      snprintf( enemy->name, 16, "skeleton" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFFFF;
       enemy->palette[2] = 0x7BEF;
@@ -35705,6 +35750,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 20 )
    {
+      snprintf( enemy->name, 16, "wraith" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFFFF;
       enemy->palette[2] = 0x7BEF;
@@ -36570,6 +36616,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 21 )
    {
+      snprintf( enemy->name, 16, "wraith knight" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFFFF;
       enemy->palette[2] = 0x7BEF;
@@ -37437,6 +37484,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 22 )
    {
+      snprintf( enemy->name, 16, "demon knight" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x2965;
       enemy->tileTextureIndexes[0] = -1;
@@ -38266,6 +38314,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 23 )
    {
+      snprintf( enemy->name, 16, "wolf" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x5E7B;
       enemy->palette[2] = 0xFFFF;
@@ -39163,6 +39212,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 24 )
    {
+      snprintf( enemy->name, 16, "wolflord" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x9960;
       enemy->palette[2] = 0xFFFF;
@@ -40060,6 +40110,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 25 )
    {
+      snprintf( enemy->name, 16, "werewolf" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFCE0;
       enemy->palette[2] = 0xFFFF;
@@ -40956,6 +41007,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 26 )
    {
+      snprintf( enemy->name, 16, "goldman" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFEB3;
       enemy->palette[2] = 0xFCE0;
@@ -42138,6 +42190,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 27 )
    {
+      snprintf( enemy->name, 16, "golem" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFBA5;
       enemy->palette[2] = 0xDA60;
@@ -43321,6 +43374,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 28 )
    {
+      snprintf( enemy->name, 16, "stoneman" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xB5D6;
       enemy->palette[2] = 0x7BEF;
@@ -44503,6 +44557,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 29 )
    {
+      snprintf( enemy->name, 16, "wyvern" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x2A6F;
       enemy->palette[2] = 0xFFFF;
@@ -45304,6 +45359,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 30 )
    {
+      snprintf( enemy->name, 16, "magiwyvern" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x9960;
       enemy->palette[2] = 0xFFFF;
@@ -46105,6 +46161,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 31 )
    {
+      snprintf( enemy->name, 16, "starwyvern" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xD1EB;
       enemy->palette[2] = 0x8E7F;
@@ -46907,6 +46964,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 32 )
    {
+      snprintf( enemy->name, 16, "knight" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xD1EB;
       enemy->palette[2] = 0x5CFF;
@@ -47899,6 +47957,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 33 )
    {
+      snprintf( enemy->name, 16, "axe knight" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFFFF;
       enemy->palette[2] = 0x2A6F;
@@ -49053,6 +49112,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 34 )
    {
+      snprintf( enemy->name, 16, "armored knight" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFCE0;
       enemy->palette[2] = 0xFEB3;
@@ -50334,6 +50394,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 35 )
    {
+      snprintf( enemy->name, 16, "green dragon" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xB5D6;
       enemy->palette[2] = 0x4521;
@@ -51425,6 +51486,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 36 )
    {
+      snprintf( enemy->name, 16, "blue dragon" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xBB60;
       enemy->palette[2] = 0x3C77;
@@ -52515,6 +52577,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 37 )
    {
+      snprintf( enemy->name, 16, "red dragon" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x4BFF;
       enemy->palette[2] = 0xBB60;
@@ -53605,6 +53668,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 38 )
    {
+      snprintf( enemy->name, 16, "dragonlord human" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x2A6F;
       enemy->palette[2] = 0xFBA5;
@@ -54375,6 +54439,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 39 )
    {
+      snprintf( enemy->name, 16, "dragonlord dragon" );
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xD1EB;
       enemy->palette[2] = 0x4BFF;

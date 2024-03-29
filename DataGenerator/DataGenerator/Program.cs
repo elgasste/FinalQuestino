@@ -423,6 +423,7 @@ string BuildEnemyOutputString()
       }
 
       outputString += "   {\n";
+      outputString += string.Format( "      snprintf( enemy->name, 16, \"{0}\" );\n", enemy.name );
 
       for ( int i = 0; i < enemy.palette.Count; i++ )
       {
