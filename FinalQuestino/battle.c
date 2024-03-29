@@ -9,7 +9,7 @@ void cBattle_Start( cGame_t* game )
    char str[10];
 
    enemyIndex = ( game->tileMap.enemyIndexCount == 0 ) ? 0 : cRandom_Uint8( 0, game->tileMap.enemyIndexCount - 1 );
-   cEnemy_Load( &( game->battle.enemy ), enemyIndex );
+   cEnemy_Load( &( game->battle.enemy ), game->tileMap.enemyIndexes[enemyIndex] );
 
    cBattle_AnimateStart( game );
 
