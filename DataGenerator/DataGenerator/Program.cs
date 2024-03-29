@@ -396,6 +396,11 @@ string BuildMapTilesOutputString()
          outputString += string.Format( "      map->enemySpecialIndexes[{0}] = {1};\n", j, MapData.MapEnemyIndexes[i].SpecialIndexes[j] );
       }
 
+      outputString += string.Format( "      map->enemySpecialRegion.x = {0};\n", MapData.MapEnemySpecialRegions[i].Left );
+      outputString += string.Format( "      map->enemySpecialRegion.y = {0};\n", MapData.MapEnemySpecialRegions[i].Top );
+      outputString += string.Format( "      map->enemySpecialRegion.w = {0};\n", MapData.MapEnemySpecialRegions[i].Width );
+      outputString += string.Format( "      map->enemySpecialRegion.h = {0};\n", MapData.MapEnemySpecialRegions[i].Height );
+
       outputString += "   }\n";
    }
 
