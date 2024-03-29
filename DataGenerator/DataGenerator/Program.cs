@@ -408,6 +408,7 @@ string BuildEnemyOutputString()
 
    string outputString = "\nvoid cEnemy_Load( cEnemy_t* enemy, uint8_t index )\n";
    outputString += "{\n";
+   outputString += "   uint8_t i;\n\n";
    bool first = true;
 
    foreach ( var enemy in sortedEnemies )
@@ -430,9 +431,14 @@ string BuildEnemyOutputString()
          outputString += string.Format( "      enemy->palette[{0}] = 0x{1};\n", i, enemy.palette[i].ToString( "X4" ) );
       }
 
+      outputString += string.Format( "      for ( i = 0; i < {0}; i++ ) {{ enemy->tileTextureIndexes[i] = -1; }}\n", enemy.textureIndexes.Count );
+
       for ( int i = 0; i < enemy.textureIndexes.Count; i++ )
       {
-         outputString += string.Format( "      enemy->tileTextureIndexes[{0}] = {1};\n", i, enemy.textureIndexes[i] );
+         if ( enemy.textureIndexes[i] >= 0 )
+         {
+            outputString += string.Format( "      enemy->tileTextureIndexes[{0}] = {1};\n", i, enemy.textureIndexes[i] );
+         }
       }
 
       for ( int i = 0; i < enemy.tileTextures.Count; i++ )
