@@ -8,10 +8,8 @@
 
 // un-comment to use cSerial_PrintLn
 //#define DEBUG_SERIAL
-// un-comment to turn off encounters
-//#define DEBUG_NOENCOUNTERS
-// un-comment to turn on no-B-button encounters (hold B to avoid encounters)
-//#define DEBUG_NO_BBUTTONENCOUNTERS
+// un-comment to turn off encounters when the B button is pressed
+//#define DEBUG_NOENCOUNTERSONB
 // un-comment to turn on fast walk mode
 //#define DEBUG_FASTWALK
 

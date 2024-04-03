@@ -203,13 +203,9 @@ static void cGame_DrawMapStatus( cGame_t* game )
 
 static void cGame_RollEncounter( cGame_t* game, cBool_t highRate )
 {
-#if defined( DEBUG_NOENCOUNTERS )
-   return;
-#else
-
    cBool_t spawnEncounter = highRate ? ( cRandom_Percent() <= ENCOUNTER_RATE_HIGH ) : ( cRandom_Percent() <= ENCOUNTER_RATE_NORMAL );
 
-#if defined( DEBUG_NO_BBUTTONENCOUNTERS )
+#if defined( DEBUG_NOENCOUNTERSONB )
    if ( game->input.buttonStates[cButton_B].down )
    {
       return;
@@ -220,6 +216,4 @@ static void cGame_RollEncounter( cGame_t* game, cBool_t highRate )
    {
       cGame_ChangeState( game, cGameState_Battle );
    }
-
-#endif
 }
