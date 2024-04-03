@@ -10,6 +10,10 @@
 //#define DEBUG_SERIAL
 // un-comment to turn off encounters
 //#define DEBUG_NOENCOUNTERS
+// un-comment to turn on no-B-button encounters (hold B to avoid encounters)
+//#define DEBUG_NO_BBUTTONENCOUNTERS
+// un-comment to turn on fast walk mode
+//#define DEBUG_FASTWALK
 
 #define GAME_FPS                          30
 
@@ -40,7 +44,11 @@
 #define ENEMY_TILES_Y                     12
 #define ENEMY_TILE_COUNT                  120
 
-#define PLAYER_VELOCITY_MAX               48
+#if defined( DEBUG_FASTWALK )
+#define PLAYER_VELOCITY_MAX               96
+#else
+#define PLAYER_VELOCITY_MAX               54
+#endif
 
 #define MENU_CARAT_BLINKRATE              0.3f
 

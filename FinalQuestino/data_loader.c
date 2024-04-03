@@ -4009,10 +4009,10 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemyIndexes[1] = 3;
       map->enemyIndexes[2] = 6;
       map->enemyIndexes[3] = 9;
-      map->enemySpecialIndexes[0] = 1;
-      map->enemySpecialIndexes[1] = 3;
-      map->enemySpecialIndexes[2] = 6;
-      map->enemySpecialIndexes[3] = 9;
+      map->enemySpecialIndexes[0] = 0;
+      map->enemySpecialIndexes[1] = 0;
+      map->enemySpecialIndexes[2] = 0;
+      map->enemySpecialIndexes[3] = 0;
       map->enemySpecialRegion.x = 20;
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
@@ -4329,10 +4329,10 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemyIndexes[1] = 3;
       map->enemyIndexes[2] = 6;
       map->enemyIndexes[3] = 9;
-      map->enemySpecialIndexes[0] = 1;
-      map->enemySpecialIndexes[1] = 3;
-      map->enemySpecialIndexes[2] = 6;
-      map->enemySpecialIndexes[3] = 9;
+      map->enemySpecialIndexes[0] = 0;
+      map->enemySpecialIndexes[1] = 0;
+      map->enemySpecialIndexes[2] = 0;
+      map->enemySpecialIndexes[3] = 0;
       map->enemySpecialRegion.x = 20;
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
@@ -4645,14 +4645,14 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 1;
-      map->enemyIndexes[1] = 3;
-      map->enemyIndexes[2] = 6;
-      map->enemyIndexes[3] = 9;
-      map->enemySpecialIndexes[0] = 1;
-      map->enemySpecialIndexes[1] = 3;
-      map->enemySpecialIndexes[2] = 6;
-      map->enemySpecialIndexes[3] = 9;
+      map->enemyIndexes[0] = 0;
+      map->enemyIndexes[1] = 1;
+      map->enemyIndexes[2] = 3;
+      map->enemyIndexes[3] = 6;
+      map->enemySpecialIndexes[0] = 0;
+      map->enemySpecialIndexes[1] = 0;
+      map->enemySpecialIndexes[2] = 0;
+      map->enemySpecialIndexes[3] = 0;
       map->enemySpecialRegion.x = 20;
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
@@ -4966,17 +4966,17 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[1] = 1;
+      map->enemyIndexes[2] = 3;
+      map->enemyIndexes[3] = 6;
+      map->enemySpecialIndexes[0] = 1;
+      map->enemySpecialIndexes[1] = 3;
+      map->enemySpecialIndexes[2] = 6;
+      map->enemySpecialIndexes[3] = 9;
+      map->enemySpecialRegion.x = 18;
+      map->enemySpecialRegion.y = 9;
+      map->enemySpecialRegion.w = 2;
+      map->enemySpecialRegion.h = 6;
    }
    else if ( index == 4 )
    {
@@ -5285,18 +5285,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 1;
+      map->enemyIndexes[1] = 3;
+      map->enemyIndexes[2] = 6;
+      map->enemyIndexes[3] = 9;
+      map->enemySpecialIndexes[0] = 4;
+      map->enemySpecialIndexes[1] = 9;
+      map->enemySpecialIndexes[2] = 12;
+      map->enemySpecialIndexes[3] = 19;
+      map->enemySpecialRegion.x = 5;
+      map->enemySpecialRegion.y = 7;
+      map->enemySpecialRegion.w = 15;
+      map->enemySpecialRegion.h = 8;
    }
    else if ( index == 5 )
    {
@@ -5605,10 +5605,10 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
+      map->enemyIndexes[0] = 4;
+      map->enemyIndexes[1] = 9;
+      map->enemyIndexes[2] = 12;
+      map->enemyIndexes[3] = 19;
       map->enemySpecialIndexes[0] = 0;
       map->enemySpecialIndexes[1] = 0;
       map->enemySpecialIndexes[2] = 0;
@@ -5925,10 +5925,10 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
+      map->enemyIndexes[0] = 4;
+      map->enemyIndexes[1] = 9;
+      map->enemyIndexes[2] = 12;
+      map->enemyIndexes[3] = 19;
       map->enemySpecialIndexes[0] = 0;
       map->enemySpecialIndexes[1] = 0;
       map->enemySpecialIndexes[2] = 0;
@@ -6245,18 +6245,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
+      map->enemyIndexes[0] = 1;
+      map->enemyIndexes[1] = 3;
+      map->enemyIndexes[2] = 6;
+      map->enemyIndexes[3] = 9;
       map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemySpecialIndexes[1] = 1;
+      map->enemySpecialIndexes[2] = 3;
+      map->enemySpecialIndexes[3] = 6;
+      map->enemySpecialRegion.x = 5;
+      map->enemySpecialRegion.y = 7;
+      map->enemySpecialRegion.w = 15;
+      map->enemySpecialRegion.h = 8;
    }
    else if ( index == 8 )
    {
@@ -6567,8 +6567,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[3] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
+      map->enemyIndexes[2] = 1;
+      map->enemyIndexes[3] = 3;
       map->enemySpecialIndexes[0] = 0;
       map->enemySpecialIndexes[1] = 0;
       map->enemySpecialIndexes[2] = 0;
@@ -6886,9 +6886,9 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
+      map->enemyIndexes[1] = 1;
+      map->enemyIndexes[2] = 3;
+      map->enemyIndexes[3] = 6;
       map->enemySpecialIndexes[0] = 0;
       map->enemySpecialIndexes[1] = 0;
       map->enemySpecialIndexes[2] = 0;
@@ -7206,17 +7206,17 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[1] = 1;
+      map->enemyIndexes[2] = 3;
+      map->enemyIndexes[3] = 6;
+      map->enemySpecialIndexes[0] = 1;
+      map->enemySpecialIndexes[1] = 3;
+      map->enemySpecialIndexes[2] = 6;
+      map->enemySpecialIndexes[3] = 9;
+      map->enemySpecialRegion.x = 9;
+      map->enemySpecialRegion.y = 0;
+      map->enemySpecialRegion.w = 11;
+      map->enemySpecialRegion.h = 15;
    }
    else if ( index == 11 )
    {
@@ -7525,18 +7525,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 1;
+      map->enemyIndexes[1] = 3;
+      map->enemyIndexes[2] = 6;
+      map->enemyIndexes[3] = 9;
+      map->enemySpecialIndexes[0] = 4;
+      map->enemySpecialIndexes[1] = 6;
+      map->enemySpecialIndexes[2] = 9;
+      map->enemySpecialIndexes[3] = 12;
+      map->enemySpecialRegion.x = 16;
+      map->enemySpecialRegion.y = 0;
+      map->enemySpecialRegion.w = 4;
+      map->enemySpecialRegion.h = 7;
    }
    else if ( index == 12 )
    {
@@ -7845,14 +7845,14 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
+      map->enemyIndexes[0] = 4;
+      map->enemyIndexes[1] = 9;
+      map->enemyIndexes[2] = 12;
+      map->enemyIndexes[3] = 19;
+      map->enemySpecialIndexes[0] = 4;
+      map->enemySpecialIndexes[1] = 9;
+      map->enemySpecialIndexes[2] = 12;
+      map->enemySpecialIndexes[3] = 19;
       map->enemySpecialRegion.x = 20;
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
@@ -8165,14 +8165,14 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
+      map->enemyIndexes[0] = 4;
+      map->enemyIndexes[1] = 9;
+      map->enemyIndexes[2] = 12;
+      map->enemyIndexes[3] = 19;
+      map->enemySpecialIndexes[0] = 4;
+      map->enemySpecialIndexes[1] = 9;
+      map->enemySpecialIndexes[2] = 12;
+      map->enemySpecialIndexes[3] = 19;
       map->enemySpecialRegion.x = 20;
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
@@ -8485,18 +8485,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 1;
+      map->enemyIndexes[1] = 3;
+      map->enemyIndexes[2] = 6;
+      map->enemyIndexes[3] = 9;
+      map->enemySpecialIndexes[0] = 3;
+      map->enemySpecialIndexes[1] = 4;
+      map->enemySpecialIndexes[2] = 9;
+      map->enemySpecialIndexes[3] = 12;
+      map->enemySpecialRegion.x = 11;
+      map->enemySpecialRegion.y = 7;
+      map->enemySpecialRegion.w = 9;
+      map->enemySpecialRegion.h = 8;
    }
    else if ( index == 15 )
    {
@@ -8805,18 +8805,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 1;
+      map->enemyIndexes[1] = 3;
+      map->enemyIndexes[2] = 6;
+      map->enemyIndexes[3] = 9;
+      map->enemySpecialIndexes[0] = 3;
+      map->enemySpecialIndexes[1] = 4;
+      map->enemySpecialIndexes[2] = 9;
+      map->enemySpecialIndexes[3] = 12;
+      map->enemySpecialRegion.x = 0;
+      map->enemySpecialRegion.y = 9;
+      map->enemySpecialRegion.w = 14;
+      map->enemySpecialRegion.h = 6;
    }
    else if ( index == 16 )
    {
@@ -9127,16 +9127,16 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[3] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
+      map->enemyIndexes[2] = 1;
+      map->enemyIndexes[3] = 3;
       map->enemySpecialIndexes[0] = 0;
       map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemySpecialIndexes[2] = 1;
+      map->enemySpecialIndexes[3] = 1;
+      map->enemySpecialRegion.x = 0;
+      map->enemySpecialRegion.y = 8;
+      map->enemySpecialRegion.w = 20;
+      map->enemySpecialRegion.h = 7;
    }
    else if ( index == 17 )
    {
@@ -9446,17 +9446,17 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[1] = 1;
+      map->enemyIndexes[2] = 3;
+      map->enemyIndexes[3] = 6;
+      map->enemySpecialIndexes[0] = 1;
+      map->enemySpecialIndexes[1] = 3;
+      map->enemySpecialIndexes[2] = 6;
+      map->enemySpecialIndexes[3] = 9;
+      map->enemySpecialRegion.x = 12;
+      map->enemySpecialRegion.y = 0;
+      map->enemySpecialRegion.w = 8;
+      map->enemySpecialRegion.h = 5;
    }
    else if ( index == 18 )
    {
@@ -9765,10 +9765,10 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
+      map->enemyIndexes[0] = 1;
+      map->enemyIndexes[1] = 3;
+      map->enemyIndexes[2] = 6;
+      map->enemyIndexes[3] = 9;
       map->enemySpecialIndexes[0] = 0;
       map->enemySpecialIndexes[1] = 0;
       map->enemySpecialIndexes[2] = 0;
@@ -10085,18 +10085,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 4;
+      map->enemyIndexes[1] = 6;
+      map->enemyIndexes[2] = 9;
+      map->enemyIndexes[3] = 12;
+      map->enemySpecialIndexes[0] = 4;
+      map->enemySpecialIndexes[1] = 9;
+      map->enemySpecialIndexes[2] = 12;
+      map->enemySpecialIndexes[3] = 19;
+      map->enemySpecialRegion.x = 13;
+      map->enemySpecialRegion.y = 0;
+      map->enemySpecialRegion.w = 7;
+      map->enemySpecialRegion.h = 15;
    }
    else if ( index == 20 )
    {
@@ -10405,10 +10405,10 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
+      map->enemyIndexes[0] = 4;
+      map->enemyIndexes[1] = 9;
+      map->enemyIndexes[2] = 12;
+      map->enemyIndexes[3] = 19;
       map->enemySpecialIndexes[0] = 0;
       map->enemySpecialIndexes[1] = 0;
       map->enemySpecialIndexes[2] = 0;
@@ -10725,18 +10725,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 4;
+      map->enemyIndexes[1] = 6;
+      map->enemyIndexes[2] = 9;
+      map->enemyIndexes[3] = 12;
+      map->enemySpecialIndexes[0] = 4;
+      map->enemySpecialIndexes[1] = 9;
+      map->enemySpecialIndexes[2] = 12;
+      map->enemySpecialIndexes[3] = 19;
+      map->enemySpecialRegion.x = 12;
+      map->enemySpecialRegion.y = 8;
+      map->enemySpecialRegion.w = 8;
+      map->enemySpecialRegion.h = 7;
    }
    else if ( index == 22 )
    {
@@ -11045,18 +11045,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
+      map->enemyIndexes[0] = 4;
+      map->enemyIndexes[1] = 6;
+      map->enemyIndexes[2] = 9;
+      map->enemyIndexes[3] = 12;
       map->enemySpecialIndexes[0] = 0;
       map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemySpecialIndexes[2] = 1;
+      map->enemySpecialIndexes[3] = 3;
+      map->enemySpecialRegion.x = 9;
+      map->enemySpecialRegion.y = 0;
+      map->enemySpecialRegion.w = 11;
+      map->enemySpecialRegion.h = 15;
    }
    else if ( index == 23 )
    {
@@ -11614,7 +11614,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->tiles[231] = 0x53;
       map->tiles[232] = 0x53;
       map->tiles[233] = 0x53;
-      map->tiles[234] = 0x06;
+      map->tiles[234] = 0x16;
       map->tiles[235] = 0x53;
       map->tiles[236] = 0x53;
       map->tiles[237] = 0x53;
@@ -11686,17 +11686,17 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[1] = 1;
+      map->enemyIndexes[2] = 3;
+      map->enemyIndexes[3] = 6;
+      map->enemySpecialIndexes[0] = 21;
+      map->enemySpecialIndexes[1] = 22;
+      map->enemySpecialIndexes[2] = 25;
+      map->enemySpecialIndexes[3] = 30;
+      map->enemySpecialRegion.x = 0;
+      map->enemySpecialRegion.y = 10;
+      map->enemySpecialRegion.w = 20;
+      map->enemySpecialRegion.h = 5;
    }
    else if ( index == 25 )
    {
@@ -12005,18 +12005,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 1;
+      map->enemyIndexes[1] = 3;
+      map->enemyIndexes[2] = 6;
+      map->enemyIndexes[3] = 9;
+      map->enemySpecialIndexes[0] = 10;
+      map->enemySpecialIndexes[1] = 12;
+      map->enemySpecialIndexes[2] = 19;
+      map->enemySpecialIndexes[3] = 23;
+      map->enemySpecialRegion.x = 0;
+      map->enemySpecialRegion.y = 7;
+      map->enemySpecialRegion.w = 20;
+      map->enemySpecialRegion.h = 8;
    }
    else if ( index == 26 )
    {
@@ -12325,18 +12325,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x1D4208E2;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 6;
-      map->enemyIndexes[1] = 4;
-      map->enemyIndexes[2] = 19;
+      map->enemyIndexes[0] = 1;
+      map->enemyIndexes[1] = 3;
+      map->enemyIndexes[2] = 6;
       map->enemyIndexes[3] = 9;
-      map->enemySpecialIndexes[0] = 6;
-      map->enemySpecialIndexes[1] = 4;
-      map->enemySpecialIndexes[2] = 19;
-      map->enemySpecialIndexes[3] = 9;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemySpecialIndexes[0] = 4;
+      map->enemySpecialIndexes[1] = 10;
+      map->enemySpecialIndexes[2] = 12;
+      map->enemySpecialIndexes[3] = 19;
+      map->enemySpecialRegion.x = 0;
+      map->enemySpecialRegion.y = 7;
+      map->enemySpecialRegion.w = 20;
+      map->enemySpecialRegion.h = 8;
    }
    else if ( index == 27 )
    {
@@ -12645,18 +12645,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 4;
+      map->enemyIndexes[1] = 9;
+      map->enemyIndexes[2] = 12;
+      map->enemyIndexes[3] = 19;
+      map->enemySpecialIndexes[0] = 4;
+      map->enemySpecialIndexes[1] = 10;
+      map->enemySpecialIndexes[2] = 12;
+      map->enemySpecialIndexes[3] = 19;
+      map->enemySpecialRegion.x = 0;
+      map->enemySpecialRegion.y = 8;
+      map->enemySpecialRegion.w = 20;
+      map->enemySpecialRegion.h = 7;
    }
    else if ( index == 28 )
    {
@@ -12965,10 +12965,10 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
+      map->enemyIndexes[0] = 4;
+      map->enemyIndexes[1] = 9;
+      map->enemyIndexes[2] = 12;
+      map->enemyIndexes[3] = 19;
       map->enemySpecialIndexes[0] = 0;
       map->enemySpecialIndexes[1] = 0;
       map->enemySpecialIndexes[2] = 0;
@@ -13285,18 +13285,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
+      map->enemyIndexes[0] = 4;
+      map->enemyIndexes[1] = 9;
+      map->enemyIndexes[2] = 12;
+      map->enemyIndexes[3] = 19;
       map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemySpecialIndexes[1] = 1;
+      map->enemySpecialIndexes[2] = 3;
+      map->enemySpecialIndexes[3] = 3;
+      map->enemySpecialRegion.x = 15;
+      map->enemySpecialRegion.y = 0;
+      map->enemySpecialRegion.w = 5;
+      map->enemySpecialRegion.h = 2;
    }
    else if ( index == 30 )
    {
@@ -13605,18 +13605,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 1;
+      map->enemyIndexes[1] = 3;
+      map->enemyIndexes[2] = 6;
+      map->enemyIndexes[3] = 9;
+      map->enemySpecialIndexes[0] = 21;
+      map->enemySpecialIndexes[1] = 31;
+      map->enemySpecialIndexes[2] = 32;
+      map->enemySpecialIndexes[3] = 35;
+      map->enemySpecialRegion.x = 18;
+      map->enemySpecialRegion.y = 0;
+      map->enemySpecialRegion.w = 2;
+      map->enemySpecialRegion.h = 11;
    }
    else if ( index == 31 )
    {
@@ -13925,18 +13925,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 21;
+      map->enemyIndexes[1] = 31;
+      map->enemyIndexes[2] = 32;
+      map->enemyIndexes[3] = 35;
+      map->enemySpecialIndexes[0] = 22;
+      map->enemySpecialIndexes[1] = 25;
+      map->enemySpecialIndexes[2] = 31;
+      map->enemySpecialIndexes[3] = 32;
+      map->enemySpecialRegion.x = 4;
+      map->enemySpecialRegion.y = 0;
+      map->enemySpecialRegion.w = 6;
+      map->enemySpecialRegion.h = 11;
    }
    else if ( index == 32 )
    {
@@ -14245,18 +14245,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 10;
+      map->enemyIndexes[1] = 12;
+      map->enemyIndexes[2] = 19;
+      map->enemyIndexes[3] = 23;
+      map->enemySpecialIndexes[0] = 10;
+      map->enemySpecialIndexes[1] = 13;
+      map->enemySpecialIndexes[2] = 19;
+      map->enemySpecialIndexes[3] = 23;
+      map->enemySpecialRegion.x = 6;
+      map->enemySpecialRegion.y = 4;
+      map->enemySpecialRegion.w = 14;
+      map->enemySpecialRegion.h = 11;
    }
    else if ( index == 33 )
    {
@@ -14565,18 +14565,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 10;
+      map->enemyIndexes[1] = 12;
+      map->enemyIndexes[2] = 19;
+      map->enemyIndexes[3] = 23;
+      map->enemySpecialIndexes[0] = 10;
+      map->enemySpecialIndexes[1] = 13;
+      map->enemySpecialIndexes[2] = 19;
+      map->enemySpecialIndexes[3] = 23;
+      map->enemySpecialRegion.x = 0;
+      map->enemySpecialRegion.y = 7;
+      map->enemySpecialRegion.w = 20;
+      map->enemySpecialRegion.h = 8;
    }
    else if ( index == 34 )
    {
@@ -14885,18 +14885,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 10;
+      map->enemyIndexes[1] = 12;
+      map->enemyIndexes[2] = 19;
+      map->enemyIndexes[3] = 23;
+      map->enemySpecialIndexes[0] = 10;
+      map->enemySpecialIndexes[1] = 13;
+      map->enemySpecialIndexes[2] = 19;
+      map->enemySpecialIndexes[3] = 23;
+      map->enemySpecialRegion.x = 0;
+      map->enemySpecialRegion.y = 7;
+      map->enemySpecialRegion.w = 20;
+      map->enemySpecialRegion.h = 8;
    }
    else if ( index == 35 )
    {
@@ -15205,18 +15205,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 14;
+      map->enemyIndexes[1] = 21;
+      map->enemyIndexes[2] = 22;
+      map->enemyIndexes[3] = 32;
+      map->enemySpecialIndexes[0] = 4;
+      map->enemySpecialIndexes[1] = 9;
+      map->enemySpecialIndexes[2] = 12;
+      map->enemySpecialIndexes[3] = 19;
+      map->enemySpecialRegion.x = 17;
+      map->enemySpecialRegion.y = 0;
+      map->enemySpecialRegion.w = 3;
+      map->enemySpecialRegion.h = 2;
    }
    else if ( index == 36 )
    {
@@ -15525,18 +15525,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
+      map->enemyIndexes[0] = 4;
+      map->enemyIndexes[1] = 9;
+      map->enemyIndexes[2] = 12;
+      map->enemyIndexes[3] = 19;
+      map->enemySpecialIndexes[0] = 2;
+      map->enemySpecialIndexes[1] = 21;
+      map->enemySpecialIndexes[2] = 30;
+      map->enemySpecialIndexes[3] = 32;
+      map->enemySpecialRegion.x = 0;
       map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemySpecialRegion.w = 11;
+      map->enemySpecialRegion.h = 4;
    }
    else if ( index == 37 )
    {
@@ -15845,18 +15845,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 4;
+      map->enemyIndexes[1] = 6;
+      map->enemyIndexes[2] = 9;
+      map->enemyIndexes[3] = 12;
+      map->enemySpecialIndexes[0] = 13;
+      map->enemySpecialIndexes[1] = 20;
+      map->enemySpecialIndexes[2] = 24;
+      map->enemySpecialIndexes[3] = 26;
+      map->enemySpecialRegion.x = 0;
+      map->enemySpecialRegion.y = 8;
+      map->enemySpecialRegion.w = 20;
+      map->enemySpecialRegion.h = 7;
    }
    else if ( index == 38 )
    {
@@ -16165,10 +16165,10 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
+      map->enemyIndexes[0] = 22;
+      map->enemyIndexes[1] = 25;
+      map->enemyIndexes[2] = 30;
+      map->enemyIndexes[3] = 32;
       map->enemySpecialIndexes[0] = 0;
       map->enemySpecialIndexes[1] = 0;
       map->enemySpecialIndexes[2] = 0;
@@ -16485,18 +16485,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 22;
+      map->enemyIndexes[1] = 25;
+      map->enemyIndexes[2] = 30;
+      map->enemyIndexes[3] = 32;
+      map->enemySpecialIndexes[0] = 13;
+      map->enemySpecialIndexes[1] = 20;
+      map->enemySpecialIndexes[2] = 24;
+      map->enemySpecialIndexes[3] = 26;
+      map->enemySpecialRegion.x = 12;
+      map->enemySpecialRegion.y = 0;
+      map->enemySpecialRegion.w = 8;
+      map->enemySpecialRegion.h = 11;
    }
    else if ( index == 40 )
    {
@@ -16805,18 +16805,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 10;
+      map->enemyIndexes[1] = 13;
+      map->enemyIndexes[2] = 19;
+      map->enemyIndexes[3] = 23;
+      map->enemySpecialIndexes[0] = 13;
+      map->enemySpecialIndexes[1] = 20;
+      map->enemySpecialIndexes[2] = 24;
+      map->enemySpecialIndexes[3] = 26;
+      map->enemySpecialRegion.x = 12;
+      map->enemySpecialRegion.y = 8;
+      map->enemySpecialRegion.w = 8;
+      map->enemySpecialRegion.h = 7;
    }
    else if ( index == 41 )
    {
@@ -17125,10 +17125,10 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
+      map->enemyIndexes[0] = 10;
+      map->enemyIndexes[1] = 13;
+      map->enemyIndexes[2] = 19;
+      map->enemyIndexes[3] = 23;
       map->enemySpecialIndexes[0] = 0;
       map->enemySpecialIndexes[1] = 0;
       map->enemySpecialIndexes[2] = 0;
@@ -17445,10 +17445,10 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
+      map->enemyIndexes[0] = 14;
+      map->enemyIndexes[1] = 21;
+      map->enemyIndexes[2] = 22;
+      map->enemyIndexes[3] = 32;
       map->enemySpecialIndexes[0] = 0;
       map->enemySpecialIndexes[1] = 0;
       map->enemySpecialIndexes[2] = 0;
@@ -17765,10 +17765,10 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
+      map->enemyIndexes[0] = 14;
+      map->enemyIndexes[1] = 21;
+      map->enemyIndexes[2] = 22;
+      map->enemyIndexes[3] = 32;
       map->enemySpecialIndexes[0] = 0;
       map->enemySpecialIndexes[1] = 0;
       map->enemySpecialIndexes[2] = 0;
@@ -18085,18 +18085,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 13;
+      map->enemyIndexes[1] = 20;
+      map->enemyIndexes[2] = 24;
+      map->enemyIndexes[3] = 26;
+      map->enemySpecialIndexes[0] = 2;
+      map->enemySpecialIndexes[1] = 21;
+      map->enemySpecialIndexes[2] = 22;
+      map->enemySpecialIndexes[3] = 30;
+      map->enemySpecialRegion.x = 0;
+      map->enemySpecialRegion.y = 4;
+      map->enemySpecialRegion.w = 20;
+      map->enemySpecialRegion.h = 11;
    }
    else if ( index == 45 )
    {
@@ -18405,10 +18405,10 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
+      map->enemyIndexes[0] = 22;
+      map->enemyIndexes[1] = 25;
+      map->enemyIndexes[2] = 30;
+      map->enemyIndexes[3] = 32;
       map->enemySpecialIndexes[0] = 0;
       map->enemySpecialIndexes[1] = 0;
       map->enemySpecialIndexes[2] = 0;
@@ -18725,18 +18725,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 22;
+      map->enemyIndexes[1] = 25;
+      map->enemyIndexes[2] = 30;
+      map->enemyIndexes[3] = 32;
+      map->enemySpecialIndexes[0] = 11;
+      map->enemySpecialIndexes[1] = 25;
+      map->enemySpecialIndexes[2] = 31;
+      map->enemySpecialIndexes[3] = 35;
+      map->enemySpecialRegion.x = 0;
+      map->enemySpecialRegion.y = 7;
+      map->enemySpecialRegion.w = 18;
+      map->enemySpecialRegion.h = 8;
    }
    else if ( index == 47 )
    {
@@ -19045,18 +19045,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 13;
+      map->enemyIndexes[1] = 20;
+      map->enemyIndexes[2] = 24;
+      map->enemyIndexes[3] = 26;
+      map->enemySpecialIndexes[0] = 20;
+      map->enemySpecialIndexes[1] = 24;
+      map->enemySpecialIndexes[2] = 26;
+      map->enemySpecialIndexes[3] = 29;
+      map->enemySpecialRegion.x = 3;
+      map->enemySpecialRegion.y = 7;
+      map->enemySpecialRegion.w = 17;
+      map->enemySpecialRegion.h = 8;
    }
    else if ( index == 48 )
    {
@@ -19365,18 +19365,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 13;
+      map->enemyIndexes[1] = 20;
+      map->enemyIndexes[2] = 24;
+      map->enemyIndexes[3] = 26;
+      map->enemySpecialIndexes[0] = 20;
+      map->enemySpecialIndexes[1] = 24;
+      map->enemySpecialIndexes[2] = 26;
+      map->enemySpecialIndexes[3] = 29;
+      map->enemySpecialRegion.x = 0;
+      map->enemySpecialRegion.y = 7;
+      map->enemySpecialRegion.w = 10;
+      map->enemySpecialRegion.h = 8;
    }
    else if ( index == 49 )
    {
@@ -19685,18 +19685,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 14;
+      map->enemyIndexes[1] = 21;
+      map->enemyIndexes[2] = 22;
+      map->enemyIndexes[3] = 32;
+      map->enemySpecialIndexes[0] = 21;
+      map->enemySpecialIndexes[1] = 22;
+      map->enemySpecialIndexes[2] = 30;
+      map->enemySpecialIndexes[3] = 32;
+      map->enemySpecialRegion.x = 10;
+      map->enemySpecialRegion.y = 7;
+      map->enemySpecialRegion.w = 10;
+      map->enemySpecialRegion.h = 8;
    }
    else if ( index == 50 )
    {
@@ -20005,18 +20005,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 14;
+      map->enemyIndexes[1] = 21;
+      map->enemyIndexes[2] = 22;
+      map->enemyIndexes[3] = 32;
+      map->enemySpecialIndexes[0] = 21;
+      map->enemySpecialIndexes[1] = 22;
+      map->enemySpecialIndexes[2] = 30;
+      map->enemySpecialIndexes[3] = 32;
+      map->enemySpecialRegion.x = 0;
+      map->enemySpecialRegion.y = 7;
+      map->enemySpecialRegion.w = 20;
+      map->enemySpecialRegion.h = 8;
    }
    else if ( index == 51 )
    {
@@ -20325,18 +20325,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 21;
+      map->enemyIndexes[1] = 22;
+      map->enemyIndexes[2] = 30;
+      map->enemyIndexes[3] = 32;
+      map->enemySpecialIndexes[0] = 22;
+      map->enemySpecialIndexes[1] = 25;
+      map->enemySpecialIndexes[2] = 30;
+      map->enemySpecialIndexes[3] = 32;
+      map->enemySpecialRegion.x = 0;
+      map->enemySpecialRegion.y = 7;
+      map->enemySpecialRegion.w = 20;
+      map->enemySpecialRegion.h = 8;
    }
    else if ( index == 52 )
    {
@@ -20645,10 +20645,10 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
+      map->enemyIndexes[0] = 11;
+      map->enemyIndexes[1] = 25;
+      map->enemyIndexes[2] = 31;
+      map->enemyIndexes[3] = 35;
       map->enemySpecialIndexes[0] = 0;
       map->enemySpecialIndexes[1] = 0;
       map->enemySpecialIndexes[2] = 0;
@@ -20965,18 +20965,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 11;
+      map->enemyIndexes[1] = 25;
+      map->enemyIndexes[2] = 31;
+      map->enemyIndexes[3] = 35;
+      map->enemySpecialIndexes[0] = 22;
+      map->enemySpecialIndexes[1] = 25;
+      map->enemySpecialIndexes[2] = 30;
+      map->enemySpecialIndexes[3] = 32;
+      map->enemySpecialRegion.x = 8;
+      map->enemySpecialRegion.y = 7;
+      map->enemySpecialRegion.w = 12;
+      map->enemySpecialRegion.h = 8;
    }
    else if ( index == 54 )
    {
@@ -21285,18 +21285,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 13;
+      map->enemyIndexes[1] = 20;
+      map->enemyIndexes[2] = 24;
+      map->enemyIndexes[3] = 26;
+      map->enemySpecialIndexes[0] = 20;
+      map->enemySpecialIndexes[1] = 24;
+      map->enemySpecialIndexes[2] = 26;
+      map->enemySpecialIndexes[3] = 29;
+      map->enemySpecialRegion.x = 0;
+      map->enemySpecialRegion.y = 3;
+      map->enemySpecialRegion.w = 20;
+      map->enemySpecialRegion.h = 12;
    }
    else if ( index == 55 )
    {
@@ -21605,18 +21605,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 13;
+      map->enemyIndexes[1] = 20;
+      map->enemyIndexes[2] = 24;
+      map->enemyIndexes[3] = 26;
+      map->enemySpecialIndexes[0] = 20;
+      map->enemySpecialIndexes[1] = 24;
+      map->enemySpecialIndexes[2] = 26;
+      map->enemySpecialIndexes[3] = 29;
+      map->enemySpecialRegion.x = 0;
+      map->enemySpecialRegion.y = 6;
+      map->enemySpecialRegion.w = 8;
+      map->enemySpecialRegion.h = 9;
    }
    else if ( index == 56 )
    {
@@ -21925,10 +21925,10 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
+      map->enemyIndexes[0] = 21;
+      map->enemyIndexes[1] = 22;
+      map->enemyIndexes[2] = 30;
+      map->enemyIndexes[3] = 32;
       map->enemySpecialIndexes[0] = 0;
       map->enemySpecialIndexes[1] = 0;
       map->enemySpecialIndexes[2] = 0;
@@ -22245,18 +22245,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 21;
+      map->enemyIndexes[1] = 22;
+      map->enemyIndexes[2] = 30;
+      map->enemyIndexes[3] = 32;
+      map->enemySpecialIndexes[0] = 22;
+      map->enemySpecialIndexes[1] = 25;
+      map->enemySpecialIndexes[2] = 30;
+      map->enemySpecialIndexes[3] = 32;
+      map->enemySpecialRegion.x = 13;
+      map->enemySpecialRegion.y = 2;
+      map->enemySpecialRegion.w = 7;
+      map->enemySpecialRegion.h = 13;
    }
    else if ( index == 58 )
    {
@@ -22565,18 +22565,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 22;
+      map->enemyIndexes[1] = 25;
+      map->enemyIndexes[2] = 30;
+      map->enemyIndexes[3] = 32;
+      map->enemySpecialIndexes[0] = 11;
+      map->enemySpecialIndexes[1] = 25;
+      map->enemySpecialIndexes[2] = 31;
+      map->enemySpecialIndexes[3] = 35;
+      map->enemySpecialRegion.x = 17;
+      map->enemySpecialRegion.y = 0;
+      map->enemySpecialRegion.w = 3;
+      map->enemySpecialRegion.h = 4;
    }
    else if ( index == 59 )
    {
@@ -22885,10 +22885,10 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
+      map->enemyIndexes[0] = 11;
+      map->enemyIndexes[1] = 25;
+      map->enemyIndexes[2] = 31;
+      map->enemyIndexes[3] = 35;
       map->enemySpecialIndexes[0] = 0;
       map->enemySpecialIndexes[1] = 0;
       map->enemySpecialIndexes[2] = 0;
@@ -23205,18 +23205,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 11;
+      map->enemyIndexes[1] = 25;
+      map->enemyIndexes[2] = 31;
+      map->enemyIndexes[3] = 35;
+      map->enemySpecialIndexes[0] = 22;
+      map->enemySpecialIndexes[1] = 25;
+      map->enemySpecialIndexes[2] = 30;
+      map->enemySpecialIndexes[3] = 32;
+      map->enemySpecialRegion.x = 6;
+      map->enemySpecialRegion.y = 0;
+      map->enemySpecialRegion.w = 14;
+      map->enemySpecialRegion.h = 4;
    }
    else if ( index == 61 )
    {
@@ -23525,18 +23525,18 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
-      map->enemySpecialIndexes[0] = 0;
-      map->enemySpecialIndexes[1] = 0;
-      map->enemySpecialIndexes[2] = 0;
-      map->enemySpecialIndexes[3] = 0;
-      map->enemySpecialRegion.x = 20;
-      map->enemySpecialRegion.y = 15;
-      map->enemySpecialRegion.w = 0;
-      map->enemySpecialRegion.h = 0;
+      map->enemyIndexes[0] = 22;
+      map->enemyIndexes[1] = 25;
+      map->enemyIndexes[2] = 30;
+      map->enemyIndexes[3] = 32;
+      map->enemySpecialIndexes[0] = 20;
+      map->enemySpecialIndexes[1] = 24;
+      map->enemySpecialIndexes[2] = 26;
+      map->enemySpecialIndexes[3] = 29;
+      map->enemySpecialRegion.x = 12;
+      map->enemySpecialRegion.y = 0;
+      map->enemySpecialRegion.w = 8;
+      map->enemySpecialRegion.h = 7;
    }
    else if ( index == 62 )
    {
@@ -23845,10 +23845,10 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
-      map->enemyIndexes[0] = 0;
-      map->enemyIndexes[1] = 0;
-      map->enemyIndexes[2] = 0;
-      map->enemyIndexes[3] = 0;
+      map->enemyIndexes[0] = 20;
+      map->enemyIndexes[1] = 24;
+      map->enemyIndexes[2] = 26;
+      map->enemyIndexes[3] = 29;
       map->enemySpecialIndexes[0] = 0;
       map->enemySpecialIndexes[1] = 0;
       map->enemySpecialIndexes[2] = 0;

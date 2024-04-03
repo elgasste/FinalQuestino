@@ -153,15 +153,15 @@ void cGame_SteppedOnTile( cGame_t* game, uint16_t tileIndex )
       }
    }
 
-  if ( tile & MAP_TILE_FLAG_DAMAGE )
-  {
-     // TODO: inflict damage
-  }
+   if ( tile & MAP_TILE_FLAG_DAMAGE )
+   {
+      // TODO: inflict damage
+   }
 
-  if ( tile & MAP_TILE_FLAG_ENCOUNTERABLE )
-  {
-     cGame_RollEncounter( game, ( tile & MAP_TILE_FLAG_HIGHENCOUNTERRATE ) ? cTrue : cFalse );
-  }
+   if ( tile & MAP_TILE_FLAG_ENCOUNTERABLE )
+   {
+      cGame_RollEncounter( game, ( tile & MAP_TILE_FLAG_HIGHENCOUNTERRATE ) ? cTrue : cFalse );
+   }
 }
 
 void cGame_ShowMessage( cGame_t* game, const char* message )
@@ -206,11 +206,20 @@ static void cGame_RollEncounter( cGame_t* game, cBool_t highRate )
 #if defined( DEBUG_NOENCOUNTERS )
    return;
 #else
+
    cBool_t spawnEncounter = highRate ? ( cRandom_Percent() <= ENCOUNTER_RATE_HIGH ) : ( cRandom_Percent() <= ENCOUNTER_RATE_NORMAL );
+
+#if defined( DEBUG_NO_BBUTTONENCOUNTERS )
+   if ( game->input.buttonStates[cButton_B].down )
+   {
+      return;
+   }
+#endif
 
    if ( spawnEncounter )
    {
       cGame_ChangeState( game, cGameState_Battle );
    }
+
 #endif
 }
