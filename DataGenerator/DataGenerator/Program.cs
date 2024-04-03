@@ -4,8 +4,6 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using DataGenerator;
 using Newtonsoft.Json;
-using System.Windows.Controls;
-using System.Diagnostics.Metrics;
 
 var _mapPalette = new List<ushort>();
 var _textTextureMap = new List<byte>();
@@ -165,7 +163,7 @@ void LoadEnemyTextureMap( Enemy enemy, BitmapSource bitmap )
       for ( int col = 0; col < bitmap.PixelWidth; col++ )
       {
          var pixelColor = GetPixelColor16( bitmap, col, row );
-         textureMapBytes.Add( (byte)PaletteIndexFromColor( pixelColor, enemy.palette ) );
+         textureMapBytes.Add( (byte)PaletteIndexFromColor( pixelColor, enemy.Palette ) );
       }
    }
 
@@ -196,13 +194,13 @@ void LoadEnemyTextureMap( Enemy enemy, BitmapSource bitmap )
 
          if ( blankTexture )
          {
-            enemy.textureIndexes.Add( -1 );
+            enemy.TextureIndexes.Add( -1 );
          }
          else
          {
             // TODO: what if this tile texture already exists for this enemy? should we check for that?
-            enemy.tileTextures.Add( tileTextureBytes );
-            enemy.textureIndexes.Add( enemy.tileTextures.Count - 1 );
+            enemy.TileTextures.Add( tileTextureBytes );
+            enemy.TextureIndexes.Add( enemy.TileTextures.Count - 1 );
          }
       }
    }
@@ -216,7 +214,7 @@ void LoadEnemies()
 
    foreach ( var enemy in EnemyRepo.enemies )
    {
-      var enemyFileStream = new FileStream( "Enemies/" + enemy.name + ".png", FileMode.Open, FileAccess.Read, FileShare.Read );
+      var enemyFileStream = new FileStream( "Enemies/" + enemy.Name + ".png", FileMode.Open, FileAccess.Read, FileShare.Read );
       var enemyDecoder = new PngBitmapDecoder( enemyFileStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default );
       BitmapSource enemyBitmap = enemyDecoder.Frames[0];
       BitmapSanityCheck( enemyBitmap );
@@ -411,7 +409,7 @@ string BuildMapTilesOutputString()
 
 string BuildEnemyOutputString()
 {
-   var sortedEnemies = EnemyRepo.enemies.OrderBy( e => e.index ).ToList();
+   var sortedEnemies = EnemyRepo.enemies.OrderBy( e => e.Index ).ToList();
 
    string outputString = "\nvoid cEnemy_Load( cEnemy_t* enemy, uint8_t index )\n";
    outputString += "{\n";
@@ -422,38 +420,46 @@ string BuildEnemyOutputString()
    {
       if ( first )
       {
-         outputString += string.Format( "   if ( index == {0} )\n", enemy.index );
+         outputString += string.Format( "   if ( index == {0} )\n", enemy.Index );
          first = false;
       }
       else
       {
-         outputString += string.Format( "   else if ( index == {0} )\n", enemy.index );
+         outputString += string.Format( "   else if ( index == {0} )\n", enemy.Index );
       }
 
+      // MUFFINS: output all the battle stats
       outputString += "   {\n";
-      outputString += string.Format( "      snprintf( enemy->name, 16, \"{0}\" );\n", enemy.name );
+      outputString += string.Format( "      snprintf( enemy->name, 16, \"{0}\" );\n", enemy.Name );
+      outputString += string.Format( "      enemy->stats.HitPoints = {0};\n", enemy.HitPoints );
+      outputString += string.Format( "      enemy->stats.MaxHitPoints = {0};\n", enemy.HitPoints );
+      outputString += string.Format( "      enemy->stats.MagicPoints = {0};\n", 255 );
+      outputString += string.Format( "      enemy->stats.MaxMagicPoints = {0};\n", enemy.MagicPoints );
+      outputString += string.Format( "      enemy->stats.AttackPower = {0};\n", enemy.AttackPower );
+      outputString += string.Format( "      enemy->stats.DefensePower = {0};\n", enemy.DefensePower );
+      outputString += string.Format( "      enemy->stats.Agility = {0};\n", enemy.Agility );
 
-      for ( int i = 0; i < enemy.palette.Count; i++ )
+      for ( int i = 0; i < enemy.Palette.Count; i++ )
       {
-         outputString += string.Format( "      enemy->palette[{0}] = 0x{1};\n", i, enemy.palette[i].ToString( "X4" ) );
+         outputString += string.Format( "      enemy->palette[{0}] = 0x{1};\n", i, enemy.Palette[i].ToString( "X4" ) );
       }
 
-      outputString += string.Format( "      for ( i = 0; i < {0}; i++ ) {{ enemy->tileTextureIndexes[i] = -1; }}\n", enemy.textureIndexes.Count );
+      outputString += string.Format( "      for ( i = 0; i < {0}; i++ ) {{ enemy->tileTextureIndexes[i] = -1; }}\n", enemy.TextureIndexes.Count );
 
-      for ( int i = 0; i < enemy.textureIndexes.Count; i++ )
+      for ( int i = 0; i < enemy.TextureIndexes.Count; i++ )
       {
-         if ( enemy.textureIndexes[i] >= 0 )
+         if ( enemy.TextureIndexes[i] >= 0 )
          {
-            outputString += string.Format( "      enemy->tileTextureIndexes[{0}] = {1};\n", i, enemy.textureIndexes[i] );
+            outputString += string.Format( "      enemy->tileTextureIndexes[{0}] = {1};\n", i, enemy.TextureIndexes[i] );
          }
       }
 
-      for ( int i = 0; i < enemy.tileTextures.Count; i++ )
+      for ( int i = 0; i < enemy.TileTextures.Count; i++ )
       {
-         for ( int j = 0, idx = 0; j < enemy.tileTextures[i].Count; j++, idx++ )
+         for ( int j = 0, idx = 0; j < enemy.TileTextures[i].Count; j++, idx++ )
          {
-            var unpackedPixel1 = (ushort)enemy.tileTextures[i][j++];
-            var unpackedPixel2 = (ushort)enemy.tileTextures[i][j];
+            var unpackedPixel1 = (ushort)enemy.TileTextures[i][j++];
+            var unpackedPixel2 = (ushort)enemy.TileTextures[i][j];
             var packedPixels = (ushort)( ( unpackedPixel1 << 4 ) | unpackedPixel2 );
             outputString += string.Format( "      enemy->tileTextures[{0}][{1}] = 0x{2};\n", i, idx, packedPixels.ToString( "X2" ) );
          }

@@ -11614,7 +11614,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->tiles[231] = 0x53;
       map->tiles[232] = 0x53;
       map->tiles[233] = 0x53;
-      map->tiles[234] = 0x16;
+      map->tiles[234] = 0x06;
       map->tiles[235] = 0x53;
       map->tiles[236] = 0x53;
       map->tiles[237] = 0x53;
@@ -25147,6 +25147,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    if ( index == 0 )
    {
       snprintf( enemy->name, 16, "slime" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x3C77;
       enemy->palette[2] = 0xFFFF;
@@ -25288,6 +25295,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 1 )
    {
       snprintf( enemy->name, 16, "red slime" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xDA60;
       enemy->palette[2] = 0xFFFF;
@@ -25428,6 +25442,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 2 )
    {
       snprintf( enemy->name, 16, "metal slime" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x7BEF;
       enemy->palette[2] = 0xFFFF;
@@ -25568,6 +25589,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 3 )
    {
       snprintf( enemy->name, 16, "drakee" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x1815;
       enemy->palette[2] = 0xFFFF;
@@ -25874,6 +25902,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 4 )
    {
       snprintf( enemy->name, 16, "magidrakee" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xD1EB;
       enemy->palette[2] = 0xFFFF;
@@ -26179,6 +26214,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 5 )
    {
       snprintf( enemy->name, 16, "drakeema" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFE36;
       enemy->palette[2] = 0xFAF5;
@@ -26484,6 +26526,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 6 )
    {
       snprintf( enemy->name, 16, "ghost" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x89FD;
       enemy->palette[2] = 0x2A6F;
@@ -26924,6 +26973,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 7 )
    {
       snprintf( enemy->name, 16, "poltergeist" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x6EF1;
       enemy->palette[2] = 0x44EC;
@@ -27364,6 +27420,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 8 )
    {
       snprintf( enemy->name, 16, "specter" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFCE0;
       enemy->palette[2] = 0x71E0;
@@ -27837,6 +27900,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 9 )
    {
       snprintf( enemy->name, 16, "magician" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x7BEF;
       enemy->palette[2] = 0xFE36;
@@ -28308,6 +28378,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 10 )
    {
       snprintf( enemy->name, 16, "warlock" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xD1EB;
       enemy->palette[2] = 0x5CFF;
@@ -28881,6 +28958,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 11 )
    {
       snprintf( enemy->name, 16, "wizard" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFBA5;
       enemy->palette[2] = 0x3C77;
@@ -29487,6 +29571,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 12 )
    {
       snprintf( enemy->name, 16, "scorpion" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFBA5;
       enemy->palette[2] = 0x89FD;
@@ -30057,6 +30148,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 13 )
    {
       snprintf( enemy->name, 16, "metal scorpion" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xB5D6;
       enemy->palette[2] = 0xD1EB;
@@ -30627,6 +30725,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 14 )
    {
       snprintf( enemy->name, 16, "rogue scorpion" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x3C77;
       enemy->palette[2] = 0x9960;
@@ -31197,6 +31302,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 15 )
    {
       snprintf( enemy->name, 16, "druin" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFBA5;
       enemy->palette[2] = 0x5873;
@@ -31836,6 +31948,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 16 )
    {
       snprintf( enemy->name, 16, "druinlord" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x89FD;
       enemy->palette[2] = 0xA865;
@@ -32475,6 +32594,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 17 )
    {
       snprintf( enemy->name, 16, "droll" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x71E0;
       enemy->palette[2] = 0xFFFF;
@@ -33080,6 +33206,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 18 )
    {
       snprintf( enemy->name, 16, "drollmagi" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xB5D6;
       enemy->palette[2] = 0xFFFF;
@@ -33684,6 +33817,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 19 )
    {
       snprintf( enemy->name, 16, "skeleton" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFFFF;
       enemy->palette[2] = 0x7BEF;
@@ -34422,6 +34562,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 20 )
    {
       snprintf( enemy->name, 16, "wraith" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFFFF;
       enemy->palette[2] = 0x7BEF;
@@ -35192,6 +35339,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 21 )
    {
       snprintf( enemy->name, 16, "wraith knight" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFFFF;
       enemy->palette[2] = 0x7BEF;
@@ -35964,6 +36118,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 22 )
    {
       snprintf( enemy->name, 16, "demon knight" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x2965;
       for ( i = 0; i < 120; i++ ) { enemy->tileTextureIndexes[i] = -1; }
@@ -36697,6 +36858,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 23 )
    {
       snprintf( enemy->name, 16, "wolf" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x5E7B;
       enemy->palette[2] = 0xFFFF;
@@ -37500,6 +37668,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 24 )
    {
       snprintf( enemy->name, 16, "wolflord" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x9960;
       enemy->palette[2] = 0xFFFF;
@@ -38303,6 +38478,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 25 )
    {
       snprintf( enemy->name, 16, "werewolf" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFCE0;
       enemy->palette[2] = 0xFFFF;
@@ -39105,6 +39287,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 26 )
    {
       snprintf( enemy->name, 16, "goldman" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFEB3;
       enemy->palette[2] = 0xFCE0;
@@ -40202,6 +40391,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 27 )
    {
       snprintf( enemy->name, 16, "golem" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFBA5;
       enemy->palette[2] = 0xDA60;
@@ -41300,6 +41496,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 28 )
    {
       snprintf( enemy->name, 16, "stoneman" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xB5D6;
       enemy->palette[2] = 0x7BEF;
@@ -42397,6 +42600,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 29 )
    {
       snprintf( enemy->name, 16, "wyvern" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x2A6F;
       enemy->palette[2] = 0xFFFF;
@@ -43101,6 +43311,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 30 )
    {
       snprintf( enemy->name, 16, "magiwyvern" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x9960;
       enemy->palette[2] = 0xFFFF;
@@ -43805,6 +44022,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 31 )
    {
       snprintf( enemy->name, 16, "starwyvern" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xD1EB;
       enemy->palette[2] = 0x8E7F;
@@ -44510,6 +44734,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 32 )
    {
       snprintf( enemy->name, 16, "knight" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xD1EB;
       enemy->palette[2] = 0x5CFF;
@@ -45411,6 +45642,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 33 )
    {
       snprintf( enemy->name, 16, "axe knight" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFFFF;
       enemy->palette[2] = 0x2A6F;
@@ -46479,6 +46717,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 34 )
    {
       snprintf( enemy->name, 16, "armored knight" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFCE0;
       enemy->palette[2] = 0xFEB3;
@@ -47678,6 +47923,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 35 )
    {
       snprintf( enemy->name, 16, "green dragon" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xB5D6;
       enemy->palette[2] = 0x4521;
@@ -48681,6 +48933,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 36 )
    {
       snprintf( enemy->name, 16, "blue dragon" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xBB60;
       enemy->palette[2] = 0x3C77;
@@ -49683,6 +49942,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 37 )
    {
       snprintf( enemy->name, 16, "red dragon" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x4BFF;
       enemy->palette[2] = 0xBB60;
@@ -50684,7 +50950,14 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    }
    else if ( index == 38 )
    {
-      snprintf( enemy->name, 16, "dragonlord human" );
+      snprintf( enemy->name, 16, "dragonlord wizard" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x2A6F;
       enemy->palette[2] = 0xFBA5;
@@ -51357,6 +51630,13 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 39 )
    {
       snprintf( enemy->name, 16, "dragonlord dragon" );
+      enemy->stats.HitPoints = 0;
+      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.MagicPoints = 255;
+      enemy->stats.MaxMagicPoints = 0;
+      enemy->stats.AttackPower = 0;
+      enemy->stats.DefensePower = 0;
+      enemy->stats.Agility = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xD1EB;
       enemy->palette[2] = 0x4BFF;
