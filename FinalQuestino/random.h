@@ -9,6 +9,7 @@ extern "C" {
 
 void cRandom_Seed();
 uint8_t cRandom_Percent();
+uint8_t cRandom_Uint8( uint8_t min, uint8_t max );
 
 #if defined( __cplusplus )
 }

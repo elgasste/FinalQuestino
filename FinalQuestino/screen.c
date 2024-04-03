@@ -44,7 +44,7 @@ void cScreen_Init( cScreen_t* screen )
 
    for ( i = 0; i < 16; i++ )
    {
-      screen->palette[i] = 0;
+      screen->mapPalette[i] = 0;
    }
 
    cScreen_LoadTextBitFields( screen );
@@ -181,29 +181,29 @@ void cScreen_DrawTileMap( cGame_t* game )
    cTileMap_t* map = &( game->tileMap );
 
    CS_ACTIVE;
-   cScreen_SetAddrWindow( screen, 0, 0, ( TILE_SIZE * TILES_X ) - 1, ( TILE_SIZE * TILES_Y ) - 1 );
+   cScreen_SetAddrWindow( screen, 0, 0, ( MAP_TILE_SIZE * MAP_TILES_X ) - 1, ( MAP_TILE_SIZE * MAP_TILES_Y ) - 1 );
    CD_COMMAND;
    write8( 0x2C );
    CD_DATA;
 
-   for ( tileRow = 0; tileRow < TILES_Y; tileRow++ )
+   for ( tileRow = 0; tileRow < MAP_TILES_Y; tileRow++ )
    {
-      for ( pixelRow = 0; pixelRow < TILE_SIZE; pixelRow++ )
+      for ( pixelRow = 0; pixelRow < MAP_TILE_SIZE; pixelRow++ )
       {
-         for ( tileCol = 0; tileCol < TILES_X; tileCol++ )
+         for ( tileCol = 0; tileCol < MAP_TILES_X; tileCol++ )
          {
-            tile = map->tiles[tileCol + ( tileRow * TILES_X )];
+            tile = map->tiles[tileCol + ( tileRow * MAP_TILES_X )];
 
-            for ( pixelCol = 0; pixelCol < PACKED_TILE_SIZE; pixelCol++ )
+            for ( pixelCol = 0; pixelCol < MAP_PACKED_TILE_SIZE; pixelCol++ )
             {
-               pixelPair = map->tileTextures[tile & 0xF][pixelCol + ( pixelRow * PACKED_TILE_SIZE )];
+               pixelPair = map->tileTextures[tile & 0xF][pixelCol + ( pixelRow * MAP_PACKED_TILE_SIZE )];
 
                paletteIndex = pixelPair >> 4;
-               color = screen->palette[paletteIndex];
+               color = screen->mapPalette[paletteIndex];
                write16( color >> 8, color );
 
                paletteIndex = pixelPair & 0x0F;
-               color = screen->palette[paletteIndex];
+               color = screen->mapPalette[paletteIndex];
                write16( color >> 8, color );
             }
          }
@@ -310,7 +310,7 @@ void cScreen_DrawWrappedText( cScreen_t* screen, const char* text, uint16_t x, u
    uint8_t textIndex, lineIndex, lastSpaceIndex, currentLine;
    uint16_t strLen = strlen( text );
    cBool_t endOfLine, endOfText;
-   char line[256];
+   char line[32];
    char curChar;
 
    for ( textIndex = 0, lineIndex = 0, lastSpaceIndex = 0, currentLine = 0; textIndex < strLen; textIndex++ )
@@ -367,18 +367,18 @@ void cScreen_DrawWrappedText( cScreen_t* screen, const char* text, uint16_t x, u
 
 static uint16_t cScreen_GetTilePixelColor( cScreen_t* screen, cTileMap_t* map, uint16_t x, uint16_t y )
 {
-   uint8_t tile = map->tiles[( ( y / TILE_SIZE ) * TILES_X ) + ( x / TILE_SIZE )];
+   uint8_t tile = map->tiles[( ( y / MAP_TILE_SIZE ) * MAP_TILES_X ) + ( x / MAP_TILE_SIZE )];
    uint8_t* tileTexture = map->tileTextures[tile & 0xF];
-   uint8_t pixelOffsetX = x % TILE_SIZE;
-   uint8_t pixelOffsetY = y % TILE_SIZE;
+   uint8_t pixelOffsetX = x % MAP_TILE_SIZE;
+   uint8_t pixelOffsetY = y % MAP_TILE_SIZE;
 
    if ( pixelOffsetX % 2 == 0 )
    {
-      return screen->palette[tileTexture[( pixelOffsetX / 2 ) + ( pixelOffsetY * PACKED_TILE_SIZE )] >> 4];
+      return screen->mapPalette[tileTexture[( pixelOffsetX / 2 ) + ( pixelOffsetY * MAP_PACKED_TILE_SIZE )] >> 4];
    }
    else
    {
-      return screen->palette[tileTexture[( pixelOffsetX / 2 ) + ( pixelOffsetY * PACKED_TILE_SIZE )] & 0xF];
+      return screen->mapPalette[tileTexture[( pixelOffsetX / 2 ) + ( pixelOffsetY * MAP_PACKED_TILE_SIZE )] & 0xF];
    }
 }
 
@@ -394,7 +394,7 @@ void cScreen_DrawPlayer( cGame_t* game )
    float x = game->player.position.x + game->player.spriteOffset.x;
    float y = game->player.position.y + game->player.spriteOffset.y;
 
-   if ( x >= ( TILE_SIZE * TILES_X ) || y >= ( TILE_SIZE * TILES_Y ) || x + SPRITE_SIZE < 0 || y + SPRITE_SIZE < 0 )
+   if ( x >= ( MAP_TILE_SIZE * MAP_TILES_X ) || y >= ( MAP_TILE_SIZE * MAP_TILES_Y ) || x + SPRITE_SIZE < 0 || y + SPRITE_SIZE < 0 )
    {
       return;
    }
@@ -409,7 +409,7 @@ void cScreen_DrawPlayer( cGame_t* game )
    {
       ux = (uint16_t)x;
       skipLeft = 0;
-      skipRight = ( ux + SPRITE_SIZE ) >= ( TILE_SIZE * TILES_X ) ? TILE_SIZE - ( ( TILE_SIZE * TILES_X ) - ux ) : 0;
+      skipRight = ( ux + SPRITE_SIZE ) >= ( MAP_TILE_SIZE * MAP_TILES_X ) ? MAP_TILE_SIZE - ( ( MAP_TILE_SIZE * MAP_TILES_X ) - ux ) : 0;
    }
 
    if ( y < 0 )
@@ -422,7 +422,7 @@ void cScreen_DrawPlayer( cGame_t* game )
    {
       uy = (uint16_t)y;
       skipTop = 0;
-      skipBottom = ( uy + SPRITE_SIZE ) >= ( TILE_SIZE * TILES_Y ) ? TILE_SIZE - ( ( TILE_SIZE * TILES_Y ) - uy ) : 0;
+      skipBottom = ( uy + SPRITE_SIZE ) >= ( MAP_TILE_SIZE * MAP_TILES_Y ) ? MAP_TILE_SIZE - ( ( MAP_TILE_SIZE * MAP_TILES_Y ) - uy ) : 0;
    }
 
    CS_ACTIVE;
@@ -435,10 +435,10 @@ void cScreen_DrawPlayer( cGame_t* game )
    {
       pixelPair = game->player.sprite.frameTextures[i];
 
-      if ( curX >= skipLeft && curX < ( TILE_SIZE - skipRight ) && curY >= skipTop && curY < ( TILE_SIZE - skipBottom ) )
+      if ( curX >= skipLeft && curX < ( MAP_TILE_SIZE - skipRight ) && curY >= skipTop && curY < ( MAP_TILE_SIZE - skipBottom ) )
       {
          paletteIndex = pixelPair >> 4;
-         color = screen->palette[paletteIndex];
+         color = screen->mapPalette[paletteIndex];
 
          if ( color == TRANSPARENT_COLOR )
          {
@@ -451,10 +451,10 @@ void cScreen_DrawPlayer( cGame_t* game )
       pixel++;
       curX++;
 
-      if ( curX >= skipLeft && curX < ( TILE_SIZE - skipRight ) && curY >= skipTop && curY < ( TILE_SIZE - skipBottom ) )
+      if ( curX >= skipLeft && curX < ( MAP_TILE_SIZE - skipRight ) && curY >= skipTop && curY < ( MAP_TILE_SIZE - skipBottom ) )
       {
          paletteIndex = pixelPair & 0x0F;
-         color = screen->palette[paletteIndex];
+         color = screen->mapPalette[paletteIndex];
 
          if ( color == TRANSPARENT_COLOR )
          {
@@ -490,6 +490,47 @@ void cScreen_WipePlayer( cGame_t* game )
                                SPRITE_SIZE, SPRITE_SIZE );
 }
 
+void cScreen_DrawEnemy( cGame_t* game, uint16_t x, uint16_t y )
+{
+   uint8_t i, j, pixelPair, paletteIndex;
+   uint16_t tileOffsetX, tileOffsetY, tileX, tileY, color;
+   cScreen_t* screen = &( game->screen );
+   cEnemy_t* enemy = &( game->battle.enemy );
+
+   CS_ACTIVE;
+
+   for ( i = 0; i < ENEMY_TILE_COUNT; i++ )
+   {
+      if ( enemy->tileTextureIndexes[i] >= 0 )
+      {
+         tileOffsetX = ( i % ENEMY_TILES_X ) * ENEMY_TILE_SIZE;
+         tileOffsetY = ( i / ENEMY_TILES_X ) * ENEMY_TILE_SIZE;
+         tileX = x + tileOffsetX;
+         tileY = y + tileOffsetY;
+
+         cScreen_SetAddrWindow( screen, tileX, tileY, tileX + ENEMY_TILE_SIZE - 1, tileY + ENEMY_TILE_SIZE - 1 );
+         CD_COMMAND;
+         write8( 0x2C );
+         CD_DATA;
+
+         for ( j = 0; j < ENEMY_TILE_TEXTURE_SIZE_BYTES; j++ )
+         {
+            pixelPair = enemy->tileTextures[ enemy->tileTextureIndexes[i] ][j];
+
+            paletteIndex = pixelPair >> 4;
+            color = enemy->palette[paletteIndex];
+            write16( color >> 8, color );
+
+            paletteIndex = pixelPair & 0x0F;
+            color = enemy->palette[paletteIndex];
+            write16( color >> 8, color );
+         }
+      }
+   }
+
+   CS_IDLE;
+}
+
 void cScreen_WipeTileMapSection( cGame_t* game, float x, float y, uint16_t w, uint16_t h )
 {
    uint8_t pixelPair, paletteIndex, curX, curY;
@@ -498,7 +539,7 @@ void cScreen_WipeTileMapSection( cGame_t* game, float x, float y, uint16_t w, ui
    cScreen_t* screen = &( game->screen );
    cTileMap_t* map = &( game->tileMap );
 
-   if ( x >= ( TILE_SIZE * TILES_X ) || y >= ( TILE_SIZE * TILES_Y ) ||
+   if ( x >= ( MAP_TILE_SIZE * MAP_TILES_X ) || y >= ( MAP_TILE_SIZE * MAP_TILES_Y ) ||
         x + w < 0 || y + h < 0 )
    {
       return;
@@ -512,7 +553,7 @@ void cScreen_WipeTileMapSection( cGame_t* game, float x, float y, uint16_t w, ui
    else
    {
       ux = (uint16_t)x;
-      w = ( ux + w ) >= ( TILE_SIZE * TILES_X ) ? ( TILE_SIZE * TILES_X ) - ux : w;
+      w = ( ux + w ) >= ( MAP_TILE_SIZE * MAP_TILES_X ) ? ( MAP_TILE_SIZE * MAP_TILES_X ) - ux : w;
    }
 
    if ( y < 0 )
@@ -523,7 +564,7 @@ void cScreen_WipeTileMapSection( cGame_t* game, float x, float y, uint16_t w, ui
    else
    {
       uy = (uint16_t)y;
-      h = ( uy + h ) >= ( TILE_SIZE * TILES_Y ) ? ( TILE_SIZE * TILES_Y ) - uy : h;
+      h = ( uy + h ) >= ( MAP_TILE_SIZE * MAP_TILES_Y ) ? ( MAP_TILE_SIZE * MAP_TILES_Y ) - uy : h;
    }
 
    CS_ACTIVE;

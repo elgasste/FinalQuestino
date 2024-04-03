@@ -2,10 +2,11 @@
 #define TILE_MAP_H
 
 #include "common.h"
+#include "vector.h"
 
 typedef struct cTileMap_t
 {
-   uint8_t tileTextures[16][TILE_TEXTURE_SIZE_BYTES];
+   uint8_t tileTextures[16][MAP_TILE_TEXTURE_SIZE_BYTES];
    uint8_t stride;
 
    // high 4 bits are flags, low 4 bits are tile texture index
@@ -13,12 +14,16 @@ typedef struct cTileMap_t
    // flag 0010: causes damage
    // flag 0100: is encounterable
    // flag 1000: has high encounter rate
-   uint8_t tiles[TILE_COUNT];
+   uint8_t tiles[MAP_TILE_COUNT];
 
    // high 11 bits are the origin tile index
    // middle 10 bits are the destination tile map index
    // low 11 bits are the destination tile index
-   uint32_t portals[PORTAL_COUNT];
+   uint32_t portals[MAP_PORTAL_COUNT];
+
+   cVector4u8_t enemySpecialRegion;
+   uint8_t enemyIndexes[MAP_TILE_ENEMY_INDEX_COUNT];
+   uint8_t enemySpecialIndexes[MAP_TILE_ENEMY_INDEX_COUNT];
 }
 cTileMap_t;
 

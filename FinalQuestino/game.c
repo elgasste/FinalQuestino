@@ -3,6 +3,7 @@
 #include "battle.h"
 
 static void cGame_DrawMapStatus( cGame_t* game );
+static void cGame_RollEncounter( cGame_t* game, cBool_t highRate );
 
 void cGame_Init( cGame_t* game )
 {
@@ -11,7 +12,7 @@ void cGame_Init( cGame_t* game )
    game->tileMapIndex = 23;
 
    cScreen_Init( &( game->screen ) );
-   cScreen_LoadPalette( &( game->screen ), game->paletteIndex );
+   cScreen_LoadMapPalette( &( game->screen ), game->paletteIndex );
    cScreen_Begin( &( game->screen ) );
 
    cClock_Init( &( game->clock ) );
@@ -23,8 +24,8 @@ void cGame_Init( cGame_t* game )
    cPlayer_Init( &( game->player ) );
    game->player.sprite.direction = cDirection_Down;
    game->player.sprite.frameSeconds = 0.2f;
-   game->player.position.x = TILE_SIZE * 10;
-   game->player.position.y = TILE_SIZE * 6;
+   game->player.position.x = MAP_TILE_SIZE * 10;
+   game->player.position.y = MAP_TILE_SIZE * 6;
    game->player.hitBoxSize.x = 12;
    game->player.hitBoxSize.y = 12;
    game->player.spriteOffset.x = -2;
@@ -137,30 +138,30 @@ void cGame_SteppedOnTile( cGame_t* game, uint16_t tileIndex )
    uint8_t tile = game->tileMap.tiles[tileIndex];
    uint16_t newTileIndex, newTileX, newTileY;
 
-   for ( i = 0; i < PORTAL_COUNT; i++ )
+   for ( i = 0; i < MAP_PORTAL_COUNT; i++ )
    {
       if ( ( game->tileMap.portals[i] >> 21 ) == tileIndex )
       {
          game->tileMapIndex = ( game->tileMap.portals[i] >> 11 ) & 0x3FF;
          newTileIndex = game->tileMap.portals[i] & 0x7FF;
-         newTileY = newTileIndex / TILES_X;
-         newTileX = newTileIndex - ( newTileY * TILES_X );
-         game->player.position.x = ( newTileX * TILE_SIZE ) + ( ( TILE_SIZE - game->player.hitBoxSize.x ) / 2 );
-         game->player.position.y = ( newTileY * TILE_SIZE ) + ( TILE_SIZE - game->player.hitBoxSize.y ) - COLLISION_PADDING;
+         newTileY = newTileIndex / MAP_TILES_X;
+         newTileX = newTileIndex - ( newTileY * MAP_TILES_X );
+         game->player.position.x = ( newTileX * MAP_TILE_SIZE ) + ( ( MAP_TILE_SIZE - game->player.hitBoxSize.x ) / 2 );
+         game->player.position.y = ( newTileY * MAP_TILE_SIZE ) + ( MAP_TILE_SIZE - game->player.hitBoxSize.y ) - COLLISION_PADDING;
          cGame_Refresh( game );
          return;
       }
    }
 
-  if ( tile & TILE_FLAG_DAMAGE )
-  {
-     // TODO: inflict damage
-  }
+   if ( tile & MAP_TILE_FLAG_DAMAGE )
+   {
+      // TODO: inflict damage
+   }
 
-  if ( tile & TILE_FLAG_ENCOUNTERABLE )
-  {
-     cGame_RollEncounter( game, ( tile & TILE_FLAG_HIGHENCOUNTERRATE ) ? cTrue : cFalse );
-  }
+   if ( tile & MAP_TILE_FLAG_ENCOUNTERABLE )
+   {
+      cGame_RollEncounter( game, ( tile & MAP_TILE_FLAG_HIGHENCOUNTERRATE ) ? cTrue : cFalse );
+   }
 }
 
 void cGame_ShowMessage( cGame_t* game, const char* message )
@@ -184,32 +185,35 @@ static void cGame_DrawMapStatus( cGame_t* game )
 
    cScreen_DrawRect( &( game->screen ), 16, 16, 112, 96, BLACK );
 
-   snprintf( str, 13, "Lvl: %u", cPlayer_GetLevel( player ) );
+   snprintf( str, 14, "Lvl: %u", cPlayer_GetLevel( player ) );
    cScreen_DrawText( &( game->screen ), str, 24, 24, BLACK, WHITE );
-   snprintf( str, 13, " HP: %u/%u", player->stats.HitPoints, player->stats.MaxHitPoints );
+   snprintf( str, 14, " HP: %u/%u", player->stats.HitPoints, player->stats.MaxHitPoints );
    cScreen_DrawText( &( game->screen ), str, 24, 36, BLACK, WHITE );
-   snprintf( str, 13, " MP: %u/%u", player->stats.MagicPoints, player->stats.MaxMagicPoints );
+   snprintf( str, 14, " MP: %u/%u", player->stats.MagicPoints, player->stats.MaxMagicPoints );
    cScreen_DrawText( &( game->screen ), str, 24, 48, BLACK, WHITE );
-   snprintf( str, 13, "Atk: %u", player->stats.AttackPower );
+   snprintf( str, 14, "Atk: %u", player->stats.AttackPower );
    cScreen_DrawText( &( game->screen ), str, 24, 60, BLACK, WHITE );
-   snprintf( str, 13, "Def: %u", player->stats.DefensePower );
+   snprintf( str, 14, "Def: %u", player->stats.DefensePower );
    cScreen_DrawText( &( game->screen ), str, 24, 72, BLACK, WHITE );
-   snprintf( str, 13, "Agl: %u", player->stats.Agility );
+   snprintf( str, 14, "Agl: %u", player->stats.Agility );
    cScreen_DrawText( &( game->screen ), str, 24, 84, BLACK, WHITE );
-   snprintf( str, 13, "Exp: %u", player->experience );
+   snprintf( str, 14, "Exp: %u", player->experience );
    cScreen_DrawText( &( game->screen ), str, 24, 96, BLACK, WHITE );
 }
 
-void cGame_RollEncounter( cGame_t* game, cBool_t highRate )
+static void cGame_RollEncounter( cGame_t* game, cBool_t highRate )
 {
-#if defined( DEBUG_NOENCOUNTERS )
-   return;
-#else
    cBool_t spawnEncounter = highRate ? ( cRandom_Percent() <= ENCOUNTER_RATE_HIGH ) : ( cRandom_Percent() <= ENCOUNTER_RATE_NORMAL );
+
+#if defined( DEBUG_NOENCOUNTERSONB )
+   if ( game->input.buttonStates[cButton_B].down )
+   {
+      return;
+   }
+#endif
 
    if ( spawnEncounter )
    {
       cGame_ChangeState( game, cGameState_Battle );
    }
-#endif
 }

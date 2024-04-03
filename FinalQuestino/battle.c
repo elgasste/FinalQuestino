@@ -1,28 +1,48 @@
-#include "battle.h"
 #include "game.h"
+#include "random.h"
 
 static cBattle_AnimateStart( cGame_t* game );
 
 void cBattle_Start( cGame_t* game )
 {
-   char str[10];
+   uint8_t enemyIndex;
+   uint8_t playerTileX, playerTileY;
+   cVector4u8_t* specialRegion = &( game->tileMap.enemySpecialRegion );
+   char str[32];
+
+   enemyIndex = cRandom_Uint8( 0, MAP_TILE_ENEMY_INDEX_COUNT - 1 );
+   playerTileX = ( game->player.position.x + ( game->player.hitBoxSize.x / 2 ) ) / MAP_TILE_SIZE;
+   playerTileY = ( game->player.position.y + ( game->player.hitBoxSize.y / 2 ) ) / MAP_TILE_SIZE;
+
+   if ( playerTileX >= specialRegion->x && playerTileX <= ( specialRegion->x + specialRegion->w ) &&
+        playerTileY >= specialRegion->y && playerTileY <= ( specialRegion->y + specialRegion->h ) )
+   {
+      cEnemy_Load( &( game->battle.enemy ), game->tileMap.enemySpecialIndexes[enemyIndex] );
+   }
+   else
+   {
+      cEnemy_Load( &( game->battle.enemy ), game->tileMap.enemyIndexes[enemyIndex] );
+   }
 
    cBattle_AnimateStart( game );
 
    // quick stats
    cScreen_DrawRect( &( game->screen ), 16, 16, 76, 36, BLACK );
-   snprintf( str, 9, "HP:%u", game->player.stats.HitPoints );
+   snprintf( str, 32, "HP:%u", game->player.stats.HitPoints );
    cScreen_DrawText( &( game->screen ), str, 24, 24, BLACK, WHITE );
-   snprintf( str, 9, "MP:%u", game->player.stats.MagicPoints );
+   snprintf( str, 32, "MP:%u", game->player.stats.MagicPoints );
    cScreen_DrawText( &( game->screen ), str, 24, 36, BLACK, WHITE );
 
-   cGame_ShowMessage( game, "An enemy approaches! However, due to a lack of funding, we can't tell you what it is. Press A or B to get on with your life." );
+   snprintf( str, 32, "A %s approaches!", game->battle.enemy.name );
+   cGame_ShowMessage( game, str );
+
+   cScreen_DrawEnemy( game, 144, 40 );
 }
 
 void cBattle_Done( cGame_t* game )
 {
    cScreen_WipeTileMapSection( game, 16, 16, 76, 36 );
-   cScreen_WipeTileMapSection( game, 112, 32, 128, 112 );
+   cScreen_WipeTileMapSection( game, 128, 32, 112, 112 );
    cGame_WipeMessage( game );
 }
 

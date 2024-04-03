@@ -1,0 +1,404 @@
+{
+	"enemies": [
+		{
+			"index": 0,
+			"name": "slime",
+			"hp": 3,
+			"atk": 5,
+			"def": 3,
+			"agl": 15,
+			"exp": 1,
+			"gold": 1
+		},
+		{
+			"index": 1,
+			"name": "red slime",
+			"hp": 4,
+			"atk": 7,
+			"def": 3,
+			"agl": 15,
+			"exp": 1,
+			"gold": 2
+		},
+		{
+			"index": 2,
+			"name": "metal slime",
+			"hp": 4,
+			"atk": 10,
+			"def": 225,
+			"agl": 255,
+			"exp": 115,
+			"gold": 6
+		},
+		{
+			"index": 3,
+			"name": "drakee",
+			"hp": 6,
+			"atk": 9,
+			"def": 6,
+			"agl": 15,
+			"exp": 2,
+			"gold": 2
+		},
+		{
+			"index": 4,
+			"name": "magidrakee",
+			"hp": 15,
+			"atk": 14,
+			"def": 14,
+			"agl": 0,
+			"exp": 5,
+			"gold": 12
+		},
+		{
+			"index": 5,
+			"name": "drakeema",
+			"hp": 20,
+			"atk": 22,
+			"def": 26,
+			"agl": 32,
+			"exp": 11,
+			"gold": 20
+		},
+		{
+			"index": 6,
+			"name": "ghost",
+			"hp": 7,
+			"atk": 11,
+			"def": 8,
+			"agl": 15,
+			"exp": 3,
+			"gold": 4
+		},
+		{
+			"index": 7,
+			"name": "poltergeist",
+			"hp": 23,
+			"atk": 18,
+			"def": 20,
+			"agl": 0,
+			"exp": 7,
+			"gold": 18
+		},
+		{
+			"index": 8,
+			"name": "specter",
+			"hp": 36,
+			"atk": 40,
+			"def": 38,
+			"agl": 49,
+			"exp": 18,
+			"gold": 70
+		},
+		{
+			"index": 9,
+			"name": "magician",
+			"hp": 12,
+			"atk": 11,
+			"def": 12,
+			"agl": 0,
+			"exp": 4,
+			"gold": 11
+		},
+		{
+			"index": 10,
+			"name": "warlock",
+			"hp": 30,
+			"atk": 28,
+			"def": 22,
+			"agl": 49,
+			"exp": 14,
+			"gold": 35
+		},
+		{
+			"index": 11,
+			"name": "wizard",
+			"hp": 65,
+			"atk": 80,
+			"def": 70,
+			"agl": 247,
+			"exp": 50,
+			"gold": 65
+		},
+		{
+			"index": 12,
+			"name": "scorpion",
+			"hp": 20,
+			"atk": 18,
+			"def": 16,
+			"agl": 15,
+			"exp": 6,
+			"gold": 16
+		},
+		{
+			"index": 13,
+			"name": "metal scorpion",
+			"hp": 22,
+			"atk": 36,
+			"def": 42,
+			"agl": 15,
+			"exp": 14,
+			"gold": 40
+		},
+		{
+			"index": 14,
+			"name": "rogue scorpion",
+			"hp": 35,
+			"atk": 60,
+			"def": 90,
+			"agl": 127,
+			"exp": 26,
+			"gold": 110
+		},
+		{
+			"index": 15,
+			"name": "druin",
+			"hp": 22,
+			"atk": 22,
+			"def": 18,
+			"agl": 15,
+			"exp": 7,
+			"gold": 16
+		},
+		{
+			"index": 16,
+			"name": "druinlord",
+			"hp": 35,
+			"atk": 47,
+			"def": 40,
+			"agl": 240,
+			"exp": 20,
+			"gold": 85
+		},
+		{
+			"index": 17,
+			"name": "droll",
+			"hp": 25,
+			"atk": 24,
+			"def": 24,
+			"agl": 14,
+			"exp": 10,
+			"gold": 25
+		},
+		{
+			"index": 18,
+			"name": "drollmagi",
+			"hp": 38,
+			"atk": 52,
+			"def": 50,
+			"agl": 34,
+			"exp": 22,
+			"gold": 90
+		},
+		{
+			"index": 19,
+			"name": "skeleton",
+			"hp": 30,
+			"atk": 28,
+			"def": 22,
+			"agl": 15,
+			"exp": 11,
+			"gold": 30
+		},
+		{
+			"index": 20,
+			"name": "wraith",
+			"hp": 36,
+			"atk": 44,
+			"def": 34,
+			"agl": 112,
+			"exp": 17,
+			"gold": 60
+		},
+		{
+			"index": 21,
+			"name": "wraith knight",
+			"hp": 46,
+			"atk": 68,
+			"def": 56,
+			"agl": 80,
+			"exp": 28,
+			"gold": 120
+		},
+		{
+			"index": 22,
+			"name": "demon knight",
+			"hp": 50,
+			"atk": 79,
+			"def": 64,
+			"agl": 255,
+			"exp": 37,
+			"gold": 150
+		},
+		{
+			"index": 23,
+			"name": "wolf",
+			"hp": 34,
+			"atk": 40,
+			"def": 30,
+			"agl": 31,
+			"exp": 16,
+			"gold": 45
+		},
+		{
+			"index": 24,
+			"name": "wolflord",
+			"hp": 38,
+			"atk": 50,
+			"def": 36,
+			"agl": 71,
+			"exp": 20,
+			"gold": 80
+		},
+		{
+			"index": 25,
+			"name": "werewolf",
+			"hp": 60,
+			"atk": 86,
+			"def": 70,
+			"agl": 127,
+			"exp": 40,
+			"gold": 155
+		},
+		{
+			"index": 26,
+			"name": "goldman",
+			"hp": 50,
+			"atk": 48,
+			"def": 40,
+			"agl": 223,
+			"exp": 6,
+			"gold": 200
+		},
+		{
+			"index": 27,
+			"name": "golem",
+			"hp": 70,
+			"atk": 120,
+			"def": 60,
+			"agl": 255,
+			"exp": 5,
+			"gold": 10
+		},
+		{
+			"index": 28,
+			"name": "stoneman",
+			"hp": 160,
+			"atk": 100,
+			"def": 40,
+			"agl": 47,
+			"exp": 65,
+			"gold": 140
+		},
+		{
+			"index": 29,
+			"name": "wyvern",
+			"hp": 42,
+			"atk": 56,
+			"def": 48,
+			"agl": 79,
+			"exp": 24,
+			"gold": 100
+		},
+		{
+			"index": 30,
+			"name": "magiwyvern",
+			"hp": 58,
+			"atk": 78,
+			"def": 68,
+			"agl": 32,
+			"exp": 34,
+			"gold": 140
+		},
+		{
+			"index": 31,
+			"name": "starwyvern",
+			"hp": 65,
+			"atk": 86,
+			"def": 80,
+			"agl": 128,
+			"exp": 43,
+			"gold": 160
+		},
+		{
+			"index": 32,
+			"name": "knight",
+			"hp": 55,
+			"atk": 76,
+			"def": 78,
+			"agl": 103,
+			"exp": 33,
+			"gold": 150
+		},
+		{
+			"index": 33,
+			"name": "axe knight",
+			"hp": 70,
+			"atk": 94,
+			"def": 82,
+			"agl": 243,
+			"exp": 54,
+			"gold": 165
+		},
+		{
+			"index": 34,
+			"name": "armored knight",
+			"hp": 90,
+			"atk": 105,
+			"def": 86,
+			"agl": 147,
+			"exp": 70,
+			"gold": 140
+		},
+		{
+			"index": 35,
+			"name": "green dragon",
+			"hp": 65,
+			"atk": 88,
+			"def": 74,
+			"agl": 127,
+			"exp": 45,
+			"gold": 110
+		},
+		{
+			"index": 36,
+			"name": "blue dragon",
+			"hp": 70,
+			"atk": 98,
+			"def": 84,
+			"agl": 255,
+			"exp": 60,
+			"gold": 150
+		},
+		{
+			"index": 37,
+			"name": "red dragon",
+			"hp": 100,
+			"atk": 120,
+			"def": 90,
+			"agl": 247,
+			"exp": 100,
+			"gold": 140
+		},
+		{
+			"index": 38,
+			"name": "dragonlord wizard",
+			"hp": 100,
+			"atk": 60,
+			"def": 50,
+			"agl": 60,
+			"exp": 0,
+			"gold": 0
+		},
+		{
+			"index": 39,
+			"name": "dragonlord dragon",
+			"hp": 200,
+			"atk": 180,
+			"def": 200,
+			"agl": 100,
+			"exp": 0,
+			"gold": 0
+		},
+	]
+}
