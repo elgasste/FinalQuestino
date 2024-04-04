@@ -29,6 +29,8 @@ typedef struct cGame_t
    cPlayer_t player;
 
    cBattle_t battle;
+
+   uint8_t specialEnemyFlags;
 }
 cGame_t;
 
@@ -43,6 +45,7 @@ void cGame_ChangeState( cGame_t *game, cGameState_t newState );
 void cGame_SteppedOnTile( cGame_t* game, uint16_t tileIndex );
 void cGame_ShowMessage( cGame_t* game, const char* message );
 void cGame_WipeMessage( cGame_t* game );
+cBool_t cGame_OnSpecialEnemyTile( cGame_t* game, uint8_t specialEnemyId );
 
 #if defined( __cplusplus )
 }

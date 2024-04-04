@@ -4,12 +4,14 @@
 
 static void cGame_DrawMapStatus( cGame_t* game );
 static void cGame_RollEncounter( cGame_t* game, cBool_t highRate );
+static cBool_t cGame_OnAnySpecialEnemyTile( cGame_t* game );
 
 void cGame_Init( cGame_t* game )
 {
    game->paletteIndex = 0;
    game->tileTexturesIndex = 0;
    game->tileMapIndex = 23;
+   game->specialEnemyFlags = 0xFF;
 
    cScreen_Init( &( game->screen ) );
    cScreen_LoadMapPalette( &( game->screen ), game->paletteIndex );
@@ -138,12 +140,15 @@ void cGame_SteppedOnTile( cGame_t* game, uint16_t tileIndex )
    uint8_t tile = game->tileMap.tiles[tileIndex];
    uint16_t newTileIndex, newTileX, newTileY;
 
+   game->tileMap.tileIndexCache = tileIndex;
+
    for ( i = 0; i < MAP_PORTAL_COUNT; i++ )
    {
       if ( ( game->tileMap.portals[i] >> 21 ) == tileIndex )
       {
          game->tileMapIndex = ( game->tileMap.portals[i] >> 11 ) & 0x3FF;
          newTileIndex = game->tileMap.portals[i] & 0x7FF;
+         game->tileMap.tileIndexCache = newTileIndex;
          newTileY = newTileIndex / MAP_TILES_X;
          newTileX = newTileIndex - ( newTileY * MAP_TILES_X );
          game->player.position.x = ( newTileX * MAP_TILE_SIZE ) + ( ( MAP_TILE_SIZE - game->player.hitBoxSize.x ) / 2 );
@@ -158,7 +163,11 @@ void cGame_SteppedOnTile( cGame_t* game, uint16_t tileIndex )
       // TODO: inflict damage
    }
 
-   if ( tile & MAP_TILE_FLAG_ENCOUNTERABLE )
+   if ( cGame_OnAnySpecialEnemyTile( game ) )
+   {
+      cGame_ChangeState( game, cGameState_Battle );
+   }
+   else if ( tile & MAP_TILE_FLAG_ENCOUNTERABLE )
    {
       cGame_RollEncounter( game, ( tile & MAP_TILE_FLAG_HIGHENCOUNTERRATE ) ? cTrue : cFalse );
    }
@@ -216,4 +225,27 @@ static void cGame_RollEncounter( cGame_t* game, cBool_t highRate )
    {
       cGame_ChangeState( game, cGameState_Battle );
    }
+}
+
+cBool_t cGame_OnSpecialEnemyTile( cGame_t* game, uint8_t specialEnemyId )
+{
+   switch( specialEnemyId )
+   {
+      case SPECIALENEMYID_GREENDRAGON:
+         return game->tileMapIndex == SPECIALENEMYMAP_GREENDRAGON &&
+                game->tileMap.tileIndexCache == SPECIALENEMYTILE_GREENDRAGON &&
+                ( game->specialEnemyFlags & SPECIALENEMYFLAG_GREENDRAGON ) != 0;
+      case SPECIALENEMYID_GOLEM:
+         return game->tileMapIndex == SPECIALENEMYMAP_GOLEM &&
+                game->tileMap.tileIndexCache == SPECIALENEMYTILE_GOLEM &&
+                ( game->specialEnemyFlags & SPECIALENEMYFLAG_GOLEM ) != 0;
+   }
+
+   return cFalse;
+}
+
+static cBool_t cGame_OnAnySpecialEnemyTile( cGame_t* game )
+{
+   return cGame_OnSpecialEnemyTile( game, SPECIALENEMYID_GREENDRAGON ) ||
+          cGame_OnSpecialEnemyTile( game, SPECIALENEMYID_GOLEM );
 }

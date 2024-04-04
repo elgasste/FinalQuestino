@@ -42,6 +42,18 @@
 #define ENEMY_TILES_Y                     12
 #define ENEMY_TILE_COUNT                  120
 
+#define SPECIALENEMYID_GREENDRAGON        35
+#define SPECIALENEMYID_GOLEM              27
+
+#define SPECIALENEMYMAP_GREENDRAGON       64
+#define SPECIALENEMYMAP_GOLEM             53
+
+#define SPECIALENEMYTILE_GREENDRAGON      190
+#define SPECIALENEMYTILE_GOLEM            44
+
+#define SPECIALENEMYFLAG_GREENDRAGON      0x1
+#define SPECIALENEMYFLAG_GOLEM            0x2
+
 #if defined( DEBUG_FASTWALK )
 #define PLAYER_VELOCITY_MAX               96
 #else

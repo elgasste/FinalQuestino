@@ -15,6 +15,7 @@ typedef struct cTileMap_t
    // flag 0100: is encounterable
    // flag 1000: has high encounter rate
    uint8_t tiles[MAP_TILE_COUNT];
+   uint16_t tileIndexCache;
 
    // high 11 bits are the origin tile index
    // middle 10 bits are the destination tile map index
