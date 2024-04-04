@@ -10,18 +10,29 @@ void cBattle_Start( cGame_t* game )
    cVector4u8_t* specialRegion = &( game->tileMap.enemySpecialRegion );
    char str[32];
 
-   enemyIndex = cRandom_Uint8( 0, MAP_TILE_ENEMY_INDEX_COUNT - 1 );
-   playerTileX = ( game->player.position.x + ( game->player.hitBoxSize.x / 2 ) ) / MAP_TILE_SIZE;
-   playerTileY = ( game->player.position.y + ( game->player.hitBoxSize.y / 2 ) ) / MAP_TILE_SIZE;
-
-   if ( playerTileX >= specialRegion->x && playerTileX <= ( specialRegion->x + specialRegion->w ) &&
-        playerTileY >= specialRegion->y && playerTileY <= ( specialRegion->y + specialRegion->h ) )
+   if ( cGame_OnSpecialEnemyTile( game, SPECIALENEMYID_GREENDRAGON ) )
    {
-      cEnemy_Load( &( game->battle.enemy ), game->tileMap.enemySpecialIndexes[enemyIndex] );
+      cEnemy_Load( &( game->battle.enemy ), SPECIALENEMYID_GREENDRAGON );
+   }
+   else if ( cGame_OnSpecialEnemyTile( game, SPECIALENEMYID_GOLEM ) )
+   {
+      cEnemy_Load( &( game->battle.enemy ), SPECIALENEMYID_GOLEM );
    }
    else
    {
-      cEnemy_Load( &( game->battle.enemy ), game->tileMap.enemyIndexes[enemyIndex] );
+      enemyIndex = cRandom_Uint8( 0, MAP_TILE_ENEMY_INDEX_COUNT - 1 );
+      playerTileX = ( game->player.position.x + ( game->player.hitBoxSize.x / 2 ) ) / MAP_TILE_SIZE;
+      playerTileY = ( game->player.position.y + ( game->player.hitBoxSize.y / 2 ) ) / MAP_TILE_SIZE;
+
+      if ( playerTileX >= specialRegion->x && playerTileX <= ( specialRegion->x + specialRegion->w ) &&
+           playerTileY >= specialRegion->y && playerTileY <= ( specialRegion->y + specialRegion->h ) )
+      {
+         cEnemy_Load( &( game->battle.enemy ), game->tileMap.enemySpecialIndexes[enemyIndex] );
+      }
+      else
+      {
+         cEnemy_Load( &( game->battle.enemy ), game->tileMap.enemyIndexes[enemyIndex] );
+      }
    }
 
    cBattle_AnimateStart( game );

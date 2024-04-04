@@ -21,6 +21,8 @@ void cTileMap_Init( cTileMap_t* map )
       map->tiles[i] = 0;
    }
 
+   map->tileIndexCache = MAP_TILES_X * MAP_TILES_Y; // off the map
+
    for ( i = 0; i < MAP_PORTAL_COUNT; i++ )
    {
       map->portals[i] = (uint32_t)( MAP_TILES_X * MAP_TILES_Y ) << 21; // off the map
