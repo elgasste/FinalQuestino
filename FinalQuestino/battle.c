@@ -18,6 +18,10 @@ void cBattle_Start( cGame_t* game )
    {
       cEnemy_Load( &( game->battle.enemy ), SPECIALENEMYID_GOLEM );
    }
+   else if ( cGame_OnSpecialEnemyTile( game, SPECIALENEMYID_AXEKNIGHT ) )
+   {
+      cEnemy_Load( &( game->battle.enemy ), SPECIALENEMYID_AXEKNIGHT );
+   }
    else
    {
       enemyIndex = cRandom_Uint8( 0, MAP_TILE_ENEMY_INDEX_COUNT - 1 );

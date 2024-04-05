@@ -239,6 +239,10 @@ cBool_t cGame_OnSpecialEnemyTile( cGame_t* game, uint8_t specialEnemyId )
          return game->tileMapIndex == SPECIALENEMYMAP_GOLEM &&
                 game->tileMap.tileIndexCache == SPECIALENEMYTILE_GOLEM &&
                 ( game->specialEnemyFlags & SPECIALENEMYFLAG_GOLEM ) != 0;
+      case SPECIALENEMYID_AXEKNIGHT:
+         return game->tileMapIndex == SPECIALENEMYMAP_AXEKNIGHT &&
+                game->tileMap.tileIndexCache == SPECIALENEMYTILE_AXEKNIGHT &&
+                ( game->specialEnemyFlags & SPECIALENEMYFLAG_AXEKNIGHT ) != 0;
    }
 
    return cFalse;
@@ -247,5 +251,6 @@ cBool_t cGame_OnSpecialEnemyTile( cGame_t* game, uint8_t specialEnemyId )
 static cBool_t cGame_OnAnySpecialEnemyTile( cGame_t* game )
 {
    return cGame_OnSpecialEnemyTile( game, SPECIALENEMYID_GREENDRAGON ) ||
-          cGame_OnSpecialEnemyTile( game, SPECIALENEMYID_GOLEM );
+          cGame_OnSpecialEnemyTile( game, SPECIALENEMYID_GOLEM ) ||
+          cGame_OnSpecialEnemyTile( game, SPECIALENEMYID_AXEKNIGHT );
 }
