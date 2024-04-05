@@ -413,8 +413,10 @@ string BuildEnemyOutputString()
 
    string outputString = "\nvoid cEnemy_Load( cEnemy_t* enemy, uint8_t index )\n";
    outputString += "{\n";
-   outputString += "   uint8_t i;\n\n";
+   outputString += "   uint8_t i, j;\n\n";
    bool first = true;
+
+   outputString += "   for ( i = 0; i < 78; i++ ) { for ( j = 0; j < 32; j++ ) { enemy->tileTextures[i][j] = 0; } };\n";
 
    foreach ( var enemy in sortedEnemies )
    {
@@ -428,7 +430,6 @@ string BuildEnemyOutputString()
          outputString += string.Format( "   else if ( index == {0} )\n", enemy.Index );
       }
 
-      // MUFFINS: output all the battle stats
       outputString += "   {\n";
       outputString += string.Format( "      snprintf( enemy->name, 16, \"{0}\" );\n", enemy.Name );
       outputString += string.Format( "      enemy->stats.HitPoints = {0};\n", enemy.HitPoints );
@@ -461,7 +462,11 @@ string BuildEnemyOutputString()
             var unpackedPixel1 = (ushort)enemy.TileTextures[i][j++];
             var unpackedPixel2 = (ushort)enemy.TileTextures[i][j];
             var packedPixels = (ushort)( ( unpackedPixel1 << 4 ) | unpackedPixel2 );
-            outputString += string.Format( "      enemy->tileTextures[{0}][{1}] = 0x{2};\n", i, idx, packedPixels.ToString( "X2" ) );
+
+            if ( packedPixels != 0 )
+            {
+               outputString += string.Format( "      enemy->tileTextures[{0}][{1}] = 0x{2};\n", i, idx, packedPixels.ToString( "X2" ) );
+            }
          }
       }
 
