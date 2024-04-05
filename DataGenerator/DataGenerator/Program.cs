@@ -367,6 +367,7 @@ string BuildMapTilesOutputString()
 {
    string outputString = "void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )\n";
    outputString += "{\n";
+   outputString += "   uint16_t i;\n\n";
 
    for ( int i = 0; i < MapData.MapTiles.Count; i++ )
    {
@@ -380,9 +381,40 @@ string BuildMapTilesOutputString()
       }
       outputString += "   {\n";
 
+      var tileCounts = new Dictionary<int, int>();
+
+      for ( int j = 0; j < MapData.MapTiles.Count; j++ )
+      {
+         if ( tileCounts.ContainsKey( MapData.MapTiles[i][j] ) )
+         {
+            tileCounts[MapData.MapTiles[i][j]]++;
+         }
+         else
+         {
+            tileCounts[MapData.MapTiles[i][j]] = 1;
+         }
+      }
+
+      int highestCount = 0;
+      int mostCommonTile = -1;
+
+      foreach ( var tile in tileCounts.Keys )
+      {
+         if ( tileCounts[tile] > highestCount )
+         {
+            highestCount = tileCounts[tile];
+            mostCommonTile = tile;
+         }
+      }
+
+      outputString += string.Format( "      for ( i = 0; i < {0}; i++ ) {{ map->tiles[i] = 0x{1}; }}\n", MapData.MapTiles[i].Count, mostCommonTile.ToString( "X2" ) );
+
       for ( int j = 0; j < MapData.MapTiles[i].Count; j++ )
       {
-         outputString += string.Format( "      map->tiles[{0}] = 0x{1};\n", j, MapData.MapTiles[i][j].ToString( "X2" ) );
+         if ( MapData.MapTiles[i][j] != mostCommonTile )
+         {
+            outputString += string.Format( "      map->tiles[{0}] = 0x{1};\n", j, MapData.MapTiles[i][j].ToString( "X2" ) );
+         }
       }
 
       outputString += string.Format( "      map->stride = {0};\n", MapData.MapStrides[i] );
