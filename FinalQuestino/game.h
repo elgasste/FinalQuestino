@@ -16,7 +16,6 @@ typedef struct cGame_t
    cScreen_t screen;
    cTileMap_t tileMap;
    uint8_t paletteIndex;
-   uint8_t tileTexturesIndex;
    uint8_t tileMapIndex;
 
    cMenu_t menu;

@@ -263,12 +263,16 @@ string BuildMapTileTexturesOutputString()
       throw new Exception( "Somehow the tile texture map is null, I have no idea what went wrong." );
    }
 
-   string outputString = "void cTileMap_LoadTileTextures( cTileMap_t* map, uint8_t index )\n";
+   string outputString = "void cTileMap_LoadTileTextures( cTileMap_t* map )\n";
    outputString += "{\n";
-   outputString += "   if ( index == 0 )\n";
-   outputString += "   {\n";
 
    int tileTextureCount = _tileTextureMapBytes.Count / 16 / 16;
+
+   // last time I checked, the most common value of packedPixels was 0x22 (by far),
+   // so we can save some program space by pre-loading that value. if any of the
+   // tile textures change in the future, this should be re-visited
+   outputString += "   uint8_t i, j;\n\n";
+   outputString += "   for ( i = 0; i < 16; i++ ) { for ( j = 0; j < 128; j++ ) { map->tileTextures[i][j] = 0x22; } }\n\n";
 
    for ( int i = 0; i < tileTextureCount; i++ )
    {
@@ -280,12 +284,15 @@ string BuildMapTileTexturesOutputString()
             var unpackedPixel1 = (ushort)_tileTextureMapBytes[idx++];
             var unpackedPixel2 = (ushort)_tileTextureMapBytes[idx];
             var packedPixels = (ushort)( ( unpackedPixel1 << 4 ) | unpackedPixel2 );
-            outputString += string.Format( "      map->tileTextures[{0}][{1}] = 0x{2};\n", i, counter, packedPixels.ToString( "X2" ) );
+
+            if ( packedPixels != 0x22 )
+            {
+               outputString += string.Format( "   map->tileTextures[{0}][{1}] = 0x{2};\n", i, counter, packedPixels.ToString( "X2" ) );
+            }
          }
       }
    }
 
-   outputString += "   }\n";
    outputString += "}\n\n";
 
    return outputString;
