@@ -9,7 +9,6 @@ static cBool_t cGame_OnAnySpecialEnemyTile( cGame_t* game );
 void cGame_Init( cGame_t* game )
 {
    game->paletteIndex = 0;
-   game->tileTexturesIndex = 0;
    game->tileMapIndex = 23;
    game->specialEnemyFlags = 0xFF;
 
@@ -21,7 +20,7 @@ void cGame_Init( cGame_t* game )
    cInput_Init( &( game->input ) );
 
    cTileMap_Init( &( game->tileMap ) );
-   cTileMap_LoadTileTextures( &( game->tileMap ), game->tileTexturesIndex );
+   cTileMap_LoadTileTextures( &( game->tileMap ) );
 
    cPlayer_Init( &( game->player ) );
    game->player.sprite.direction = cDirection_Down;

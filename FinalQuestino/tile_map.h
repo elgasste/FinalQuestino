@@ -35,7 +35,7 @@ extern "C" {
 void cTileMap_Init( cTileMap_t* map );
 
 // data_loader.c
-void cTileMap_LoadTileTextures( cTileMap_t* map, uint8_t index );
+void cTileMap_LoadTileTextures( cTileMap_t* map );
 void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index );
 
 #if defined( __cplusplus )

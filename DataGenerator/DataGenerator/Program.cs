@@ -263,12 +263,16 @@ string BuildMapTileTexturesOutputString()
       throw new Exception( "Somehow the tile texture map is null, I have no idea what went wrong." );
    }
 
-   string outputString = "void cTileMap_LoadTileTextures( cTileMap_t* map, uint8_t index )\n";
+   string outputString = "void cTileMap_LoadTileTextures( cTileMap_t* map )\n";
    outputString += "{\n";
-   outputString += "   if ( index == 0 )\n";
-   outputString += "   {\n";
 
    int tileTextureCount = _tileTextureMapBytes.Count / 16 / 16;
+
+   // last time I checked, the most common value of packedPixels was 0x22 (by far),
+   // so we can save some program space by pre-loading that value. if any of the
+   // tile textures change in the future, this should be re-visited
+   outputString += "   uint8_t i, j;\n\n";
+   outputString += "   for ( i = 0; i < 16; i++ ) { for ( j = 0; j < 128; j++ ) { map->tileTextures[i][j] = 0x22; } }\n\n";
 
    for ( int i = 0; i < tileTextureCount; i++ )
    {
@@ -280,12 +284,15 @@ string BuildMapTileTexturesOutputString()
             var unpackedPixel1 = (ushort)_tileTextureMapBytes[idx++];
             var unpackedPixel2 = (ushort)_tileTextureMapBytes[idx];
             var packedPixels = (ushort)( ( unpackedPixel1 << 4 ) | unpackedPixel2 );
-            outputString += string.Format( "      map->tileTextures[{0}][{1}] = 0x{2};\n", i, counter, packedPixels.ToString( "X2" ) );
+
+            if ( packedPixels != 0x22 )
+            {
+               outputString += string.Format( "   map->tileTextures[{0}][{1}] = 0x{2};\n", i, counter, packedPixels.ToString( "X2" ) );
+            }
          }
       }
    }
 
-   outputString += "   }\n";
    outputString += "}\n\n";
 
    return outputString;
@@ -360,6 +367,7 @@ string BuildMapTilesOutputString()
 {
    string outputString = "void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )\n";
    outputString += "{\n";
+   outputString += "   uint16_t i;\n\n";
 
    for ( int i = 0; i < MapData.MapTiles.Count; i++ )
    {
@@ -373,9 +381,40 @@ string BuildMapTilesOutputString()
       }
       outputString += "   {\n";
 
+      var tileCounts = new Dictionary<int, int>();
+
+      for ( int j = 0; j < MapData.MapTiles.Count; j++ )
+      {
+         if ( tileCounts.ContainsKey( MapData.MapTiles[i][j] ) )
+         {
+            tileCounts[MapData.MapTiles[i][j]]++;
+         }
+         else
+         {
+            tileCounts[MapData.MapTiles[i][j]] = 1;
+         }
+      }
+
+      int highestCount = 0;
+      int mostCommonTile = -1;
+
+      foreach ( var tile in tileCounts.Keys )
+      {
+         if ( tileCounts[tile] > highestCount )
+         {
+            highestCount = tileCounts[tile];
+            mostCommonTile = tile;
+         }
+      }
+
+      outputString += string.Format( "      for ( i = 0; i < {0}; i++ ) {{ map->tiles[i] = 0x{1}; }}\n", MapData.MapTiles[i].Count, mostCommonTile.ToString( "X2" ) );
+
       for ( int j = 0; j < MapData.MapTiles[i].Count; j++ )
       {
-         outputString += string.Format( "      map->tiles[{0}] = 0x{1};\n", j, MapData.MapTiles[i][j].ToString( "X2" ) );
+         if ( MapData.MapTiles[i][j] != mostCommonTile )
+         {
+            outputString += string.Format( "      map->tiles[{0}] = 0x{1};\n", j, MapData.MapTiles[i][j].ToString( "X2" ) );
+         }
       }
 
       outputString += string.Format( "      map->stride = {0};\n", MapData.MapStrides[i] );
