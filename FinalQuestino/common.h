@@ -9,9 +9,9 @@
 // un-comment to use cSerial_PrintLn
 //#define DEBUG_SERIAL
 // un-comment to turn off encounters when the B button is pressed
-//#define DEBUG_NOENCOUNTERSONB
+#define DEBUG_NOENCOUNTERSONB
 // un-comment to turn on fast walk mode
-//#define DEBUG_FASTWALK
+#define DEBUG_FASTWALK
 
 #define GAME_FPS                          30
 
