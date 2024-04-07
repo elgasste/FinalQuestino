@@ -196,7 +196,7 @@ void cScreen_DrawTileMap( cGame_t* game )
 
             for ( pixelCol = 0; pixelCol < MAP_PACKED_TILE_SIZE; pixelCol++ )
             {
-               pixelPair = map->tileTextures[tile & 0xF][pixelCol + ( pixelRow * MAP_PACKED_TILE_SIZE )];
+               pixelPair = map->tileTextures[tile & 0x1F][pixelCol + ( pixelRow * MAP_PACKED_TILE_SIZE )];
 
                paletteIndex = pixelPair >> 4;
                color = screen->mapPalette[paletteIndex];
