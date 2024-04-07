@@ -157,11 +157,6 @@ void cGame_SteppedOnTile( cGame_t* game, uint16_t tileIndex )
       }
    }
 
-   if ( tile & MAP_TILE_FLAG_DAMAGE )
-   {
-      // TODO: inflict damage
-   }
-
    if ( cGame_OnAnySpecialEnemyTile( game ) )
    {
       cGame_ChangeState( game, cGameState_Battle );

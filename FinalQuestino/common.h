@@ -9,9 +9,9 @@
 // un-comment to use cSerial_PrintLn
 //#define DEBUG_SERIAL
 // un-comment to turn off encounters when the B button is pressed
-//#define DEBUG_NOENCOUNTERSONB
+#define DEBUG_NOENCOUNTERSONB
 // un-comment to turn on fast walk mode
-//#define DEBUG_FASTWALK
+#define DEBUG_FASTWALK
 
 #define GAME_FPS                          30
 
@@ -24,8 +24,7 @@
 #define MAP_PORTAL_COUNT                  4
 #define MAP_TILE_ENEMY_INDEX_COUNT        4
 
-#define MAP_TILE_FLAG_PASSABLE            0x10
-#define MAP_TILE_FLAG_DAMAGE              0x20
+#define MAP_TILE_FLAG_PASSABLE            0x20
 #define MAP_TILE_FLAG_ENCOUNTERABLE       0x40
 #define MAP_TILE_FLAG_HIGHENCOUNTERRATE   0x80
 
