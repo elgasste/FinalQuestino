@@ -24,8 +24,7 @@
 #define MAP_PORTAL_COUNT                  4
 #define MAP_TILE_ENEMY_INDEX_COUNT        4
 
-#define MAP_TILE_FLAG_PASSABLE            0x10
-#define MAP_TILE_FLAG_DAMAGE              0x20
+#define MAP_TILE_FLAG_PASSABLE            0x20
 #define MAP_TILE_FLAG_ENCOUNTERABLE       0x40
 #define MAP_TILE_FLAG_HIGHENCOUNTERRATE   0x80
 

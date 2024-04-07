@@ -9,11 +9,10 @@ typedef struct cTileMap_t
    uint8_t tileTextures[16][MAP_TILE_TEXTURE_SIZE_BYTES];
    uint8_t stride;
 
-   // high 4 bits are flags, low 4 bits are tile texture index
-   // flag 0001: is passable
-   // flag 0010: causes damage
-   // flag 0100: is encounterable
-   // flag 1000: has high encounter rate
+   // high 3 bits are flags, low 5 bits are tile texture index
+   // flag 001: is passable
+   // flag 010: is encounterable
+   // flag 100: has high encounter rate
    uint8_t tiles[MAP_TILE_COUNT];
    uint16_t tileIndexCache;
 
