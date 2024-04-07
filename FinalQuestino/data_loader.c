@@ -29,7 +29,7 @@ void cTileMap_LoadTileTextures( cTileMap_t* map )
 {
    uint8_t i, j;
 
-   for ( i = 0; i < 16; i++ ) { for ( j = 0; j < 128; j++ ) { map->tileTextures[i][j] = 0x22; } }
+   for ( i = 0; i < 18; i++ ) { for ( j = 0; j < 128; j++ ) { map->tileTextures[i][j] = 0x22; } }
 
    map->tileTextures[0][0] = 0x00;
    map->tileTextures[0][1] = 0x00;
@@ -15722,7 +15722,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->tiles[15] = 0x0B;
       map->tiles[16] = 0x0B;
       map->tiles[17] = 0x0B;
-      map->tiles[18] = 0x0B;
+      map->tiles[18] = 0x11;
       map->tiles[19] = 0x0B;
       map->tiles[30] = 0x0B;
       map->tiles[31] = 0xE1;
@@ -15867,6 +15867,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->tiles[103] = 0x6C;
       map->tiles[105] = 0x6C;
       map->tiles[106] = 0x6C;
+      map->tiles[107] = 0x11;
       map->tiles[109] = 0x0B;
       map->tiles[120] = 0x60;
       map->tiles[121] = 0x60;
@@ -16156,7 +16157,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->tiles[40] = 0x0B;
       map->tiles[41] = 0x20;
       map->tiles[42] = 0x0B;
-      map->tiles[43] = 0x0B;
+      map->tiles[43] = 0x11;
       map->tiles[44] = 0x0B;
       map->tiles[45] = 0x20;
       map->tiles[46] = 0x20;
@@ -16330,10 +16331,14 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->tiles[39] = 0x0B;
       map->tiles[40] = 0x0B;
       map->tiles[48] = 0x06;
+      map->tiles[49] = 0x30;
+      map->tiles[50] = 0x30;
       map->tiles[51] = 0x06;
       map->tiles[59] = 0x0B;
       map->tiles[60] = 0x0B;
       map->tiles[68] = 0x06;
+      map->tiles[69] = 0x30;
+      map->tiles[70] = 0x30;
       map->tiles[71] = 0x06;
       map->tiles[79] = 0x0B;
       map->tiles[80] = 0x0B;
@@ -16397,7 +16402,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->tiles[228] = 0x0B;
       map->tiles[231] = 0x0B;
       map->tiles[232] = 0x0B;
-      map->tiles[238] = 0x0B;
+      map->tiles[238] = 0x11;
       map->tiles[240] = 0x0B;
       map->tiles[241] = 0x06;
       map->tiles[242] = 0x06;
