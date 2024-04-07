@@ -157,6 +157,13 @@ void cGame_SteppedOnTile( cGame_t* game, uint16_t tileIndex )
       }
    }
 
+#if defined( DEBUG_NOENCOUNTERSONB )
+   if ( game->input.buttonStates[cButton_B].down )
+   {
+      return;
+   }
+#endif
+
    if ( cGame_OnAnySpecialEnemyTile( game ) )
    {
       cGame_ChangeState( game, cGameState_Battle );
