@@ -15,8 +15,8 @@ void cPhysics_Tic( cGame_t* game )
    uint8_t tileRowStartIndex, tileRowEndIndex, tileColStartIndex, tileColEndIndex, row, col, tile;
    cBool_t posChanged;
 
-   newPos.x = player->position.x + ( player->velocity.x * game->clock.frameSeconds );
-   newPos.y = player->position.y + ( player->velocity.y * game->clock.frameSeconds );
+   newPos.x = player->position.x + ( player->velocity.x * FRAME_SECONDS );
+   newPos.y = player->position.y + ( player->velocity.y * FRAME_SECONDS );
 
    // check screen boundaries
    if ( newPos.x < 0 )

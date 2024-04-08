@@ -14,6 +14,8 @@
 //#define DEBUG_FASTWALK
 
 #define GAME_FPS                          30
+#define FRAME_MICROSECONDS                33333
+#define FRAME_SECONDS                     0.03333333f
 
 #define MAP_TILE_SIZE                     16
 #define MAP_PACKED_TILE_SIZE              8

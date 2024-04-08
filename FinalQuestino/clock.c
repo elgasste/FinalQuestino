@@ -3,8 +3,6 @@
 void cClock_Init( cClock_t* clock )
 {
    clock->frameStartMicro = 0;
-   clock->frameMicro = 1000000 / GAME_FPS;
-   clock->frameSeconds = 1.0f / GAME_FPS;
 }
 
 void cClock_StartFrame( cClock_t* clock )
@@ -27,10 +25,10 @@ void cClock_EndFrame( cClock_t* clock )
       elapsedMicro = frameEndMicro - clock->frameStartMicro;
    }
 
-   if ( elapsedMicro <= clock->frameMicro )
+   if ( elapsedMicro <= FRAME_MICROSECONDS )
    {
       // I'd like to use delayMicroseconds here, but there are some serious
       // issues with precision. regular "delay" works much better, strangely.
-      delay( ( clock->frameMicro - elapsedMicro ) / 1000 );
+      delay( ( FRAME_MICROSECONDS - elapsedMicro ) / 1000 );
    }
 }
