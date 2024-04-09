@@ -196,7 +196,7 @@ void cScreen_DrawTileMap( cGame_t* game )
 
             for ( pixelCol = 0; pixelCol < MAP_PACKED_TILE_SIZE; pixelCol++ )
             {
-               pixelPair = map->tileTextures[tile & 0x1F][pixelCol + ( pixelRow * MAP_PACKED_TILE_SIZE )];
+               pixelPair = map->tileTextures[tile & 0x1F].pixels[pixelCol + ( pixelRow * MAP_PACKED_TILE_SIZE )];
 
                paletteIndex = pixelPair >> 4;
                color = screen->mapPalette[paletteIndex];
@@ -368,7 +368,7 @@ void cScreen_DrawWrappedText( cScreen_t* screen, const char* text, uint16_t x, u
 static uint16_t cScreen_GetTilePixelColor( cScreen_t* screen, cTileMap_t* map, uint16_t x, uint16_t y )
 {
    uint8_t tile = map->tiles[( ( y / MAP_TILE_SIZE ) * MAP_TILES_X ) + ( x / MAP_TILE_SIZE )];
-   uint8_t* tileTexture = map->tileTextures[tile & 0x1F];
+   uint8_t* tileTexture = &( map->tileTextures[tile & 0x1F].pixels );
    uint8_t pixelOffsetX = x % MAP_TILE_SIZE;
    uint8_t pixelOffsetY = y % MAP_TILE_SIZE;
 

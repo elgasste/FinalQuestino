@@ -4,15 +4,15 @@ void cTileMap_Init( cTileMap_t* map )
 {
    uint16_t i;
    uint8_t j;
-   uint8_t* tileTexture;
+   cTileTexture_t* tileTexture;
 
    for ( i = 0; i < 16; i++ )
    {
-      tileTexture = map->tileTextures[i];
+      tileTexture = &( map->tileTextures[i] );
 
       for ( j = 0; j < MAP_TILE_TEXTURE_SIZE_BYTES; j++ )
       {
-         tileTexture[j] = 0;
+         tileTexture->pixels[j] = 0;
       }
    }
 

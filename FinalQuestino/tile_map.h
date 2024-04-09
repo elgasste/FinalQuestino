@@ -2,11 +2,12 @@
 #define TILE_MAP_H
 
 #include "common.h"
+#include "tile_texture.h"
 #include "vector.h"
 
 typedef struct cTileMap_t
 {
-   uint8_t tileTextures[MAP_TILE_TEXTURE_COUNT][MAP_TILE_TEXTURE_SIZE_BYTES];
+   cTileTexture_t tileTextures[18];
    uint8_t stride;
 
    // high 3 bits are flags, low 5 bits are tile texture index

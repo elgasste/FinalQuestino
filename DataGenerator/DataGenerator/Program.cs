@@ -272,7 +272,7 @@ string BuildMapTileTexturesOutputString()
    // so we can save some program space by pre-loading that value. if any of the
    // tile textures change in the future, this should be re-visited
    outputString += "   uint8_t i, j;\n\n";
-   outputString += string.Format( "   for ( i = 0; i < {0}; i++ ) {{ for ( j = 0; j < 128; j++ ) {{ map->tileTextures[i][j] = 0x22; }} }}\n\n", tileTextureCount );
+   outputString += string.Format( "   for ( i = 0; i < {0}; i++ ) {{ for ( j = 0; j < 128; j++ ) {{ map->tileTextures[i].pixels[j] = 0x22; }} }}\n\n", tileTextureCount );
 
    for ( int i = 0; i < tileTextureCount; i++ )
    {
@@ -287,7 +287,7 @@ string BuildMapTileTexturesOutputString()
 
             if ( packedPixels != 0x22 )
             {
-               outputString += string.Format( "   map->tileTextures[{0}][{1}] = 0x{2};\n", i, counter, packedPixels.ToString( "X2" ) );
+               outputString += string.Format( "   map->tileTextures[{0}].pixels[{1}] = 0x{2};\n", i, counter, packedPixels.ToString( "X2" ) );
             }
          }
       }
