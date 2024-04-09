@@ -12,7 +12,7 @@ cSprite_Init( cSprite_t* sprite )
 
 cSprite_Tic( cSprite_t* sprite, cClock_t* clock )
 {
-   sprite->elapsedSeconds += clock->frameSeconds;
+   sprite->elapsedSeconds += FRAME_SECONDS;
 
    while ( sprite->elapsedSeconds >= sprite->frameSeconds )
    {

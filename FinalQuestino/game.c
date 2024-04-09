@@ -27,10 +27,6 @@ void cGame_Init( cGame_t* game )
    game->player.sprite.frameSeconds = 0.2f;
    game->player.position.x = MAP_TILE_SIZE * 10;
    game->player.position.y = MAP_TILE_SIZE * 6;
-   game->player.hitBoxSize.x = 12;
-   game->player.hitBoxSize.y = 12;
-   game->player.spriteOffset.x = -2;
-   game->player.spriteOffset.y = -4;
 
    game->state = cGameState_Init;
 
@@ -150,8 +146,8 @@ void cGame_SteppedOnTile( cGame_t* game, uint16_t tileIndex )
          game->tileMap.tileIndexCache = newTileIndex;
          newTileY = newTileIndex / MAP_TILES_X;
          newTileX = newTileIndex - ( newTileY * MAP_TILES_X );
-         game->player.position.x = ( newTileX * MAP_TILE_SIZE ) + ( ( MAP_TILE_SIZE - game->player.hitBoxSize.x ) / 2 );
-         game->player.position.y = ( newTileY * MAP_TILE_SIZE ) + ( MAP_TILE_SIZE - game->player.hitBoxSize.y ) - COLLISION_PADDING;
+         game->player.position.x = ( newTileX * MAP_TILE_SIZE ) + ( ( MAP_TILE_SIZE - PLAYER_HITBOX_SIZE ) / 2 );
+         game->player.position.y = ( newTileY * MAP_TILE_SIZE ) + ( MAP_TILE_SIZE - PLAYER_HITBOX_SIZE ) - COLLISION_PADDING;
          cGame_Refresh( game );
          return;
       }

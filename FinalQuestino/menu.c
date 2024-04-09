@@ -67,7 +67,7 @@ void cMenu_Tic( cGame_t* game )
    cMenu_t* menu = &( game->menu );
    cBool_t showCaratCache = menu->showCarat;
 
-   menu->caratSeconds += game->clock.frameSeconds;
+   menu->caratSeconds += FRAME_SECONDS;
 
    while( menu->caratSeconds >= MENU_CARAT_BLINKRATE )
    {
