@@ -22,11 +22,11 @@ void cPhysics_Tic( cGame_t* game )
    if ( newPos.x < 0 )
    {
       game->tileMapIndex--;
-      player->position.x = ( MAP_TILES_X * MAP_TILE_SIZE ) - player->hitBoxSize.x - COLLISION_PADDING;
+      player->position.x = ( MAP_TILES_X * MAP_TILE_SIZE ) - PLAYER_HITBOX_SIZE - COLLISION_PADDING;
       cGame_Refresh( game );
       return;
    }
-   else if ( ( newPos.x + player->hitBoxSize.x ) >= ( MAP_TILES_X * MAP_TILE_SIZE ) )
+   else if ( ( newPos.x + PLAYER_HITBOX_SIZE ) >= ( MAP_TILES_X * MAP_TILE_SIZE ) )
    {
       game->tileMapIndex++;
       player->position.x = COLLISION_PADDING;
@@ -37,11 +37,11 @@ void cPhysics_Tic( cGame_t* game )
    if ( newPos.y < 0 )
    {
       game->tileMapIndex -= game->tileMap.stride;
-      player->position.y = ( MAP_TILES_Y * MAP_TILE_SIZE ) - player->hitBoxSize.y - COLLISION_PADDING;
+      player->position.y = ( MAP_TILES_Y * MAP_TILE_SIZE ) - PLAYER_HITBOX_SIZE - COLLISION_PADDING;
       cGame_Refresh( game );
       return;
    }
-   else if ( ( newPos.y + player->hitBoxSize.y ) >= ( MAP_TILES_Y * MAP_TILE_SIZE ) )
+   else if ( ( newPos.y + PLAYER_HITBOX_SIZE ) >= ( MAP_TILES_Y * MAP_TILE_SIZE ) )
    {
       game->tileMapIndex += game->tileMap.stride;
       player->position.y = COLLISION_PADDING;
@@ -53,7 +53,7 @@ void cPhysics_Tic( cGame_t* game )
    if ( newPos.x != player->position.x )
    {
       tileRowStartIndex = player->position.y / MAP_TILE_SIZE;
-      tileRowEndIndex = ( player->position.y + player->hitBoxSize.y ) / MAP_TILE_SIZE;
+      tileRowEndIndex = ( player->position.y + PLAYER_HITBOX_SIZE ) / MAP_TILE_SIZE;
 
       if ( newPos.x < player->position.x )
       {
@@ -74,7 +74,7 @@ void cPhysics_Tic( cGame_t* game )
          else
          {
          // moving right, check rightward tiles
-         col = ( newPos.x + player->hitBoxSize.x ) / MAP_TILE_SIZE;
+         col = ( newPos.x + PLAYER_HITBOX_SIZE ) / MAP_TILE_SIZE;
 
          for ( row = tileRowStartIndex; row <= tileRowEndIndex; row++ )
          {
@@ -82,7 +82,7 @@ void cPhysics_Tic( cGame_t* game )
 
             if ( !( tile & MAP_TILE_FLAG_PASSABLE ) )
             {
-               newPos.x = ( col * MAP_TILE_SIZE ) - player->hitBoxSize.x - COLLISION_PADDING;
+               newPos.x = ( col * MAP_TILE_SIZE ) - PLAYER_HITBOX_SIZE - COLLISION_PADDING;
                break;
             }
          }
@@ -93,7 +93,7 @@ void cPhysics_Tic( cGame_t* game )
    if ( newPos.y != player->position.y )
    {
       tileColStartIndex = player->position.x / MAP_TILE_SIZE;
-      tileColEndIndex = ( player->position.x + player->hitBoxSize.x ) / MAP_TILE_SIZE;
+      tileColEndIndex = ( player->position.x + PLAYER_HITBOX_SIZE ) / MAP_TILE_SIZE;
 
       if ( newPos.y < player->position.y )
       {
@@ -114,7 +114,7 @@ void cPhysics_Tic( cGame_t* game )
          else
          {
          // moving down, check downward tiles
-         row = ( newPos.y + player->hitBoxSize.y ) / MAP_TILE_SIZE;
+         row = ( newPos.y + PLAYER_HITBOX_SIZE ) / MAP_TILE_SIZE;
 
          for ( col = tileColStartIndex; col <= tileColEndIndex; col++ )
          {
@@ -122,7 +122,7 @@ void cPhysics_Tic( cGame_t* game )
 
             if ( !( tile & MAP_TILE_FLAG_PASSABLE ) )
             {
-               newPos.y = ( row * MAP_TILE_SIZE ) - player->hitBoxSize.y - COLLISION_PADDING;
+               newPos.y = ( row * MAP_TILE_SIZE ) - PLAYER_HITBOX_SIZE - COLLISION_PADDING;
                break;
             }
          }
@@ -152,8 +152,8 @@ void cPhysics_Tic( cGame_t* game )
 
 void cPhysics_UpdateTileIndexCache( cGame_t* game )
 {
-   uint16_t centerX = game->player.position.x + ( game->player.hitBoxSize.x / 2 );
-   uint16_t centerY = game->player.position.y + ( game->player.hitBoxSize.y / 2 );
+   uint16_t centerX = game->player.position.x + ( PLAYER_HITBOX_SIZE / 2 );
+   uint16_t centerY = game->player.position.y + ( PLAYER_HITBOX_SIZE / 2 );
    uint16_t newTileIndex = ( centerX / MAP_TILE_SIZE ) + ( ( centerY / MAP_TILE_SIZE ) * MAP_TILES_X );
 
    if ( newTileIndex != game->physics.tileIndexCache )

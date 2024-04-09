@@ -25,8 +25,8 @@ void cBattle_Start( cGame_t* game )
    else
    {
       enemyIndex = cRandom_Uint8( 0, MAP_TILE_ENEMY_INDEX_COUNT - 1 );
-      playerTileX = ( game->player.position.x + ( game->player.hitBoxSize.x / 2 ) ) / MAP_TILE_SIZE;
-      playerTileY = ( game->player.position.y + ( game->player.hitBoxSize.y / 2 ) ) / MAP_TILE_SIZE;
+      playerTileX = ( game->player.position.x + ( PLAYER_HITBOX_SIZE / 2 ) ) / MAP_TILE_SIZE;
+      playerTileY = ( game->player.position.y + ( PLAYER_HITBOX_SIZE / 2 ) ) / MAP_TILE_SIZE;
 
       if ( playerTileX >= specialRegion->x && playerTileX <= ( specialRegion->x + specialRegion->w ) &&
            playerTileY >= specialRegion->y && playerTileY <= ( specialRegion->y + specialRegion->h ) )

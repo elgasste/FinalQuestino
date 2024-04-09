@@ -14,10 +14,6 @@ void cPlayer_Init( cPlayer_t* player )
    player->position.y = 0;
    player->velocity.x = 0;
    player->velocity.y = 0;
-   player->maxVelocity.x = PLAYER_VELOCITY_MAX;
-   player->maxVelocity.y = PLAYER_VELOCITY_MAX;
-   player->hitBoxSize.x = 0;
-   player->hitBoxSize.y = 0;
    player->spriteOffset.x = 0;
    player->spriteOffset.y = 0;
 

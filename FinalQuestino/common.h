@@ -22,6 +22,7 @@
 #define MAP_TILES_X                       20
 #define MAP_TILES_Y                       15
 #define MAP_TILE_COUNT                    300
+#define MAP_TILE_TEXTURE_COUNT            18
 #define MAP_TILE_TEXTURE_SIZE_BYTES       128 // 16x16 bit-packed, so 16/2 * 16
 #define MAP_PORTAL_COUNT                  4
 #define MAP_TILE_ENEMY_INDEX_COUNT        4
@@ -60,10 +61,11 @@
 #define SPECIALENEMYFLAG_AXEKNIGHT        0x4
 
 #if defined( DEBUG_FASTWALK )
-#define PLAYER_VELOCITY_MAX               96
+#define PLAYER_MOVE_VELOCITY              96
 #else
-#define PLAYER_VELOCITY_MAX               54
+#define PLAYER_MOVE_VELOCITY              54
 #endif
+#define PLAYER_HITBOX_SIZE                12
 
 #define MENU_CARAT_BLINKRATE              0.3f
 
