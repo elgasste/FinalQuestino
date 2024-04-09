@@ -1,11 +1,5 @@
 #include "player.h"
 
-static uint16_t experienceChart[30] = {
-   0, 7, 23, 47, 110, 220, 450, 800, 1300, 2000, 2900, 4000, 5500,
-   7500, 10000, 13000, 16000, 19000, 22000, 26000, 30000, 34000,
-   38000, 42000, 46000, 50000, 54000, 58000, 62000, 65535
-};
-
 void cPlayer_Init( cPlayer_t* player )
 {
    cPlayer_LoadSprite( player );
@@ -14,8 +8,6 @@ void cPlayer_Init( cPlayer_t* player )
    player->position.y = 0;
    player->velocity.x = 0;
    player->velocity.y = 0;
-   player->spriteOffset.x = 0;
-   player->spriteOffset.y = 0;
 
    player->stats.HitPoints = 12;
    player->stats.MaxHitPoints = 12;
@@ -31,15 +23,34 @@ void cPlayer_Init( cPlayer_t* player )
 
 uint8_t cPlayer_GetLevel( cPlayer_t* player )
 {
-   uint8_t i;
-
-   for ( i = 0; i < 30; i++ )
-   {
-      if ( player->experience <= experienceChart[i] )
-      {
-         return i + 1;
-      }
-   }
-
-   return 0;
+   if ( player->experience < 7 ) { return 1; }
+   else if ( player->experience < 23 ) { return 2; }
+   else if ( player->experience < 47 ) { return 3; }
+   else if ( player->experience < 110 ) { return 4; }
+   else if ( player->experience < 220 ) { return 5; }
+   else if ( player->experience < 450 ) { return 6; }
+   else if ( player->experience < 800 ) { return 7; }
+   else if ( player->experience < 1300 ) { return 8; }
+   else if ( player->experience < 2000 ) { return 9; }
+   else if ( player->experience < 2900 ) { return 10; }
+   else if ( player->experience < 4000 ) { return 11; }
+   else if ( player->experience < 5500 ) { return 12; }
+   else if ( player->experience < 7500 ) { return 13; }
+   else if ( player->experience < 10000 ) { return 14; }
+   else if ( player->experience < 13000 ) { return 15; }
+   else if ( player->experience < 16000 ) { return 16; }
+   else if ( player->experience < 19000 ) { return 17; }
+   else if ( player->experience < 22000 ) { return 18; }
+   else if ( player->experience < 26000 ) { return 19; }
+   else if ( player->experience < 30000 ) { return 20; }
+   else if ( player->experience < 34000 ) { return 21; }
+   else if ( player->experience < 38000 ) { return 22; }
+   else if ( player->experience < 42000 ) { return 23; }
+   else if ( player->experience < 46000 ) { return 24; }
+   else if ( player->experience < 50000 ) { return 25; }
+   else if ( player->experience < 54000 ) { return 26; }
+   else if ( player->experience < 58000 ) { return 27; }
+   else if ( player->experience < 62000 ) { return 28; }
+   else if ( player->experience < 65535 ) { return 29; }
+   else { return 30; }
 }

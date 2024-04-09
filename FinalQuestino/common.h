@@ -66,6 +66,8 @@
 #define PLAYER_MOVE_VELOCITY              54
 #endif
 #define PLAYER_HITBOX_SIZE                12
+#define PLAYER_SPRITEOFFSET_X             -2
+#define PLAYER_SPRITEOFFSET_Y             -4
 
 #define MENU_CARAT_BLINKRATE              0.3f
 

@@ -391,8 +391,8 @@ void cScreen_DrawPlayer( cGame_t* game )
    uint16_t i, pixel, ux, uy;
    cScreen_t* screen = &( game->screen );
    cTileMap_t* map = &( game->tileMap );
-   float x = game->player.position.x + game->player.spriteOffset.x;
-   float y = game->player.position.y + game->player.spriteOffset.y;
+   float x = game->player.position.x + PLAYER_SPRITEOFFSET_X;
+   float y = game->player.position.y + PLAYER_SPRITEOFFSET_Y;
 
    if ( x >= ( MAP_TILE_SIZE * MAP_TILES_X ) || y >= ( MAP_TILE_SIZE * MAP_TILES_Y ) || x + SPRITE_SIZE < 0 || y + SPRITE_SIZE < 0 )
    {
@@ -485,8 +485,8 @@ void cScreen_DrawPlayer( cGame_t* game )
 void cScreen_WipePlayer( cGame_t* game )
 {
    cScreen_WipeTileMapSection( game,
-                               game->player.position.x + game->player.spriteOffset.x,
-                               game->player.position.y + game->player.spriteOffset.y,
+                               game->player.position.x + PLAYER_SPRITEOFFSET_X,
+                               game->player.position.y + PLAYER_SPRITEOFFSET_Y,
                                SPRITE_SIZE, SPRITE_SIZE );
 }
 

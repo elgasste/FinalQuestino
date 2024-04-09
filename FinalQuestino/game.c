@@ -27,8 +27,6 @@ void cGame_Init( cGame_t* game )
    game->player.sprite.frameSeconds = 0.2f;
    game->player.position.x = MAP_TILE_SIZE * 10;
    game->player.position.y = MAP_TILE_SIZE * 6;
-   game->player.spriteOffset.x = -2;
-   game->player.spriteOffset.y = -4;
 
    game->state = cGameState_Init;
 
