@@ -263,7 +263,7 @@ string BuildMapTileTexturesOutputString()
       throw new Exception( "Somehow the tile texture map is null, I have no idea what went wrong." );
    }
 
-   string outputString = "void cTileMap_LoadTileTextures( cTileMap_t* map )\n";
+   string outputString = "void cTileTexture_LoadTileTextures( cTileMap_t* map )\n";
    outputString += "{\n";
 
    int tileTextureCount = _tileTextureMapBytes.Count / 16 / 16;
@@ -291,6 +291,58 @@ string BuildMapTileTexturesOutputString()
             }
          }
       }
+
+      ushort textureFlags = 0x0;
+
+      // encounter rate (2 bits)
+      switch ( i )
+      {
+         case 0:  // grass
+         case 4:  // swamp
+         case 9:  // bridge
+         case 12: // brick
+         case 16: // barrier
+            textureFlags |= 0x1;
+            break;
+         case 1:  // forest
+         case 2:  // hills
+            textureFlags |= 0x2;
+            break;
+         case 3:  // desert
+            textureFlags |= 0x3;
+            break;
+         default:
+            break;
+      }
+
+      // walking speed (2 bits)
+      switch ( i )
+      {
+         case 1:  // forest
+         case 3:  // desert
+            textureFlags |= 0x4;
+            break;
+         case 2:  // hills
+         case 4:  // swamp
+            textureFlags |= 0x8;
+            break;
+         case 16: // barrier
+            textureFlags |= 0xC;
+            break;
+         default:
+            break;
+      }
+
+      if ( i == 4 ) // causes damage
+      {
+         textureFlags |= 0x10;
+      }
+      else if ( i == 16 ) // causes super damage
+      {
+         textureFlags|= 0x20;
+      }
+
+      outputString += string.Format( "   map->tileTextures[{0}].flags = 0x{1};\n", i, textureFlags.ToString( "X2" ) );
    }
 
    outputString += "}\n\n";

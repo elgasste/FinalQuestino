@@ -5,6 +5,8 @@
 #include "tile_texture.h"
 #include "vector.h"
 
+typedef struct cGame_t cGame_t;
+
 typedef struct cTileMap_t
 {
    cTileTexture_t tileTextures[18];
@@ -13,7 +15,7 @@ typedef struct cTileMap_t
    // high 3 bits are flags, low 5 bits are tile texture index
    // flag 001: is passable
    // flag 010: is encounterable
-   // flag 100: has high encounter rate
+   // flag 100: reserved
    uint8_t tiles[MAP_TILE_COUNT];
    uint16_t tileIndexCache;
 
@@ -32,10 +34,10 @@ cTileMap_t;
 extern "C" {
 #endif
 
-void cTileMap_Init( cTileMap_t* map );
+void cTileMap_Init( cTileMap_t* tileMap );
+uint16_t cTileMap_GetTileIndexFromPos( cTileMap_t* tileMap, cVector2f_t* pos );
 
 // data_loader.c
-void cTileMap_LoadTileTextures( cTileMap_t* map );
 void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index );
 
 #if defined( __cplusplus )
