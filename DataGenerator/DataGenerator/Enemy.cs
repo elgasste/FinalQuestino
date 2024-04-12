@@ -4,6 +4,7 @@
    {
       public int Index = 0;
       public string Name = string.Empty;
+      public string IndefiniteArticle = string.Empty;
       public int HitPoints = 0;
       public int MagicPoints = 0;
       public int AttackPower = 0;

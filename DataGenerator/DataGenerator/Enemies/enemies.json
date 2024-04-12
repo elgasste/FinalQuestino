@@ -3,6 +3,7 @@
 		{
 			"index": 0,
 			"name": "slime",
+			"indefiniteArticle": "A",
 			"hp": 3,
 			"atk": 5,
 			"def": 3,
@@ -13,6 +14,7 @@
 		{
 			"index": 1,
 			"name": "red slime",
+			"indefiniteArticle": "A",
 			"hp": 4,
 			"atk": 7,
 			"def": 3,
@@ -23,6 +25,7 @@
 		{
 			"index": 2,
 			"name": "metal slime",
+			"indefiniteArticle": "A",
 			"hp": 4,
 			"atk": 10,
 			"def": 225,
@@ -33,6 +36,7 @@
 		{
 			"index": 3,
 			"name": "drakee",
+			"indefiniteArticle": "A",
 			"hp": 6,
 			"atk": 9,
 			"def": 6,
@@ -43,6 +47,7 @@
 		{
 			"index": 4,
 			"name": "magidrakee",
+			"indefiniteArticle": "A",
 			"hp": 15,
 			"atk": 14,
 			"def": 14,
@@ -53,6 +58,7 @@
 		{
 			"index": 5,
 			"name": "drakeema",
+			"indefiniteArticle": "A",
 			"hp": 20,
 			"atk": 22,
 			"def": 26,
@@ -63,6 +69,7 @@
 		{
 			"index": 6,
 			"name": "ghost",
+			"indefiniteArticle": "A",
 			"hp": 7,
 			"atk": 11,
 			"def": 8,
@@ -73,6 +80,7 @@
 		{
 			"index": 7,
 			"name": "poltergeist",
+			"indefiniteArticle": "A",
 			"hp": 23,
 			"atk": 18,
 			"def": 20,
@@ -83,6 +91,7 @@
 		{
 			"index": 8,
 			"name": "specter",
+			"indefiniteArticle": "A",
 			"hp": 36,
 			"atk": 40,
 			"def": 38,
@@ -93,6 +102,7 @@
 		{
 			"index": 9,
 			"name": "magician",
+			"indefiniteArticle": "A",
 			"hp": 12,
 			"atk": 11,
 			"def": 12,
@@ -103,6 +113,7 @@
 		{
 			"index": 10,
 			"name": "warlock",
+			"indefiniteArticle": "A",
 			"hp": 30,
 			"atk": 28,
 			"def": 22,
@@ -113,6 +124,7 @@
 		{
 			"index": 11,
 			"name": "wizard",
+			"indefiniteArticle": "A",
 			"hp": 65,
 			"atk": 80,
 			"def": 70,
@@ -123,6 +135,7 @@
 		{
 			"index": 12,
 			"name": "scorpion",
+			"indefiniteArticle": "A",
 			"hp": 20,
 			"atk": 18,
 			"def": 16,
@@ -133,6 +146,7 @@
 		{
 			"index": 13,
 			"name": "metal scorpion",
+			"indefiniteArticle": "A",
 			"hp": 22,
 			"atk": 36,
 			"def": 42,
@@ -143,6 +157,7 @@
 		{
 			"index": 14,
 			"name": "rogue scorpion",
+			"indefiniteArticle": "A",
 			"hp": 35,
 			"atk": 60,
 			"def": 90,
@@ -153,6 +168,7 @@
 		{
 			"index": 15,
 			"name": "druin",
+			"indefiniteArticle": "A",
 			"hp": 22,
 			"atk": 22,
 			"def": 18,
@@ -163,6 +179,7 @@
 		{
 			"index": 16,
 			"name": "druinlord",
+			"indefiniteArticle": "A",
 			"hp": 35,
 			"atk": 47,
 			"def": 40,
@@ -173,6 +190,7 @@
 		{
 			"index": 17,
 			"name": "droll",
+			"indefiniteArticle": "A",
 			"hp": 25,
 			"atk": 24,
 			"def": 24,
@@ -183,6 +201,7 @@
 		{
 			"index": 18,
 			"name": "drollmagi",
+			"indefiniteArticle": "A",
 			"hp": 38,
 			"atk": 52,
 			"def": 50,
@@ -193,6 +212,7 @@
 		{
 			"index": 19,
 			"name": "skeleton",
+			"indefiniteArticle": "A",
 			"hp": 30,
 			"atk": 28,
 			"def": 22,
@@ -203,6 +223,7 @@
 		{
 			"index": 20,
 			"name": "wraith",
+			"indefiniteArticle": "A",
 			"hp": 36,
 			"atk": 44,
 			"def": 34,
@@ -213,6 +234,7 @@
 		{
 			"index": 21,
 			"name": "wraith knight",
+			"indefiniteArticle": "A",
 			"hp": 46,
 			"atk": 68,
 			"def": 56,
@@ -223,6 +245,7 @@
 		{
 			"index": 22,
 			"name": "demon knight",
+			"indefiniteArticle": "A",
 			"hp": 50,
 			"atk": 79,
 			"def": 64,
@@ -233,6 +256,7 @@
 		{
 			"index": 23,
 			"name": "wolf",
+			"indefiniteArticle": "A",
 			"hp": 34,
 			"atk": 40,
 			"def": 30,
@@ -243,6 +267,7 @@
 		{
 			"index": 24,
 			"name": "wolflord",
+			"indefiniteArticle": "A",
 			"hp": 38,
 			"atk": 50,
 			"def": 36,
@@ -253,6 +278,7 @@
 		{
 			"index": 25,
 			"name": "werewolf",
+			"indefiniteArticle": "A",
 			"hp": 60,
 			"atk": 86,
 			"def": 70,
@@ -263,6 +289,7 @@
 		{
 			"index": 26,
 			"name": "goldman",
+			"indefiniteArticle": "A",
 			"hp": 50,
 			"atk": 48,
 			"def": 40,
@@ -273,6 +300,7 @@
 		{
 			"index": 27,
 			"name": "golem",
+			"indefiniteArticle": "A",
 			"hp": 70,
 			"atk": 120,
 			"def": 60,
@@ -283,6 +311,7 @@
 		{
 			"index": 28,
 			"name": "stoneman",
+			"indefiniteArticle": "A",
 			"hp": 160,
 			"atk": 100,
 			"def": 40,
@@ -293,6 +322,7 @@
 		{
 			"index": 29,
 			"name": "wyvern",
+			"indefiniteArticle": "A",
 			"hp": 42,
 			"atk": 56,
 			"def": 48,
@@ -303,6 +333,7 @@
 		{
 			"index": 30,
 			"name": "magiwyvern",
+			"indefiniteArticle": "A",
 			"hp": 58,
 			"atk": 78,
 			"def": 68,
@@ -313,6 +344,7 @@
 		{
 			"index": 31,
 			"name": "starwyvern",
+			"indefiniteArticle": "A",
 			"hp": 65,
 			"atk": 86,
 			"def": 80,
@@ -323,6 +355,7 @@
 		{
 			"index": 32,
 			"name": "knight",
+			"indefiniteArticle": "A",
 			"hp": 55,
 			"atk": 76,
 			"def": 78,
@@ -333,6 +366,7 @@
 		{
 			"index": 33,
 			"name": "axe knight",
+			"indefiniteArticle": "An",
 			"hp": 70,
 			"atk": 94,
 			"def": 82,
@@ -343,6 +377,7 @@
 		{
 			"index": 34,
 			"name": "armored knight",
+			"indefiniteArticle": "An",
 			"hp": 90,
 			"atk": 105,
 			"def": 86,
@@ -353,6 +388,7 @@
 		{
 			"index": 35,
 			"name": "green dragon",
+			"indefiniteArticle": "A",
 			"hp": 65,
 			"atk": 88,
 			"def": 74,
@@ -363,6 +399,7 @@
 		{
 			"index": 36,
 			"name": "blue dragon",
+			"indefiniteArticle": "A",
 			"hp": 70,
 			"atk": 98,
 			"def": 84,
@@ -373,6 +410,7 @@
 		{
 			"index": 37,
 			"name": "red dragon",
+			"indefiniteArticle": "A",
 			"hp": 100,
 			"atk": 120,
 			"def": 90,
@@ -383,6 +421,7 @@
 		{
 			"index": 38,
 			"name": "dragonlord wizard",
+			"indefiniteArticle": "A",
 			"hp": 100,
 			"atk": 60,
 			"def": 50,
@@ -393,6 +432,7 @@
 		{
 			"index": 39,
 			"name": "dragonlord dragon",
+			"indefiniteArticle": "A",
 			"hp": 200,
 			"atk": 180,
 			"def": 200,
