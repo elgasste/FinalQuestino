@@ -6,13 +6,13 @@ Basically a version of Dragon Warrior (Dragon Quest) ported to Arduino.
 
 The FinalQuestino project can be built and uploaded using the [standard Arduino IDE](https://www.arduino.cc/en/software).
 
-Almost all of the game data is generated from the "DataGenerator" project, which is a Visual Studio 2022 solution built on the .NET 6.0 platform. This project generates the `data_loader.c` file and automatically copies it to the FinalQuestino directory.
+Almost all of the game data is generated from the "DataGenerator" project, which is a Visual Studio 2022 solution built on the .NET 6.0 platform. This project generates the `data_loader.c` file and automatically copies it to the FinalQuestino directory. If you don't plan on changing any of the game data, you can disregard this project entirely.
 
 ## Hardware
 
 ### Arduino Board
 
-Although it might be possible to port it to some other board, this repo was built to work with the [Arduino Mega 2560 Rev3](https://store.arduino.cc/products/arduino-mega-2560-rev3). One major reason for this is that the board offers a relatively large 256k of program storage space, making it possible to load all the various maps without using an external SD card.
+Although it might be possible to port it to some other board, this repo was built to work with the [Arduino Mega 2560 Rev3](https://store.arduino.cc/products/arduino-mega-2560-rev3). One major reason for this is that the board offers a relatively large 256k of program storage space, making it possible to load all the various maps and sprites without using an external SD card.
 
 ### LCD Screen
 
