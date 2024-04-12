@@ -48,7 +48,15 @@ void cBattle_Start( cGame_t* game )
    snprintf( str, 32, "MP:%u", game->player.stats.MagicPoints );
    cScreen_DrawText( &( game->screen ), str, 24, 36, BLACK, WHITE );
 
-   snprintf( str, 32, "A %s approaches!", game->battle.enemy.name );
+   if ( game->battle.enemy.indefiniteArticle == cIndefiniteArticle_A )
+   {
+      snprintf( str, 32, "A %s approaches!", game->battle.enemy.name );
+   }
+   else
+   {
+      snprintf( str, 32, "An %s approaches!", game->battle.enemy.name );
+   }
+   
    cGame_ShowMessage( game, str );
 
    cScreen_DrawEnemy( game, 144, 40 );

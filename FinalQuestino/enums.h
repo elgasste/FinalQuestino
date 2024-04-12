@@ -43,4 +43,11 @@ typedef enum cMenuIndex_t
 }
 cMenuIndex_t;
 
+typedef enum cIndefiniteArticle_t
+{
+   cIndefiniteArticle_A = 0,
+   cIndefiniteArticle_An
+}
+cIndefiniteArticle_t;
+
 #endif // ENUMS_H

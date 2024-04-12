@@ -7,6 +7,7 @@
 typedef struct cEnemy_t
 {
    char name[16];
+   cIndefiniteArticle_t indefiniteArticle;
    cBattleStats_t stats;
 
    uint8_t tileTextures[ENEMY_TILE_TEXTURE_COUNT][ENEMY_TILE_TEXTURE_SIZE_BYTES];
