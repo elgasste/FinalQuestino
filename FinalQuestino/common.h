@@ -29,7 +29,6 @@
 
 #define MAP_TILE_FLAG_PASSABLE            0x20
 #define MAP_TILE_FLAG_ENCOUNTERABLE       0x40
-#define MAP_TILE_FLAG_HIGHENCOUNTERRATE   0x80
 
 #define TEXT_TILE_COUNT                   73
 
@@ -61,9 +60,15 @@
 #define SPECIALENEMYFLAG_AXEKNIGHT        0x4
 
 #if defined( DEBUG_FASTWALK )
-#define PLAYER_MOVE_VELOCITY              96
+#define PLAYERVELOCITY_NORMAL             96
+#define PLAYERVELOCITY_SLOW               96
+#define PLAYERVELOCITY_SLOWER             96
+#define PLAYERVELOCITY_CRAWL              96
 #else
-#define PLAYER_MOVE_VELOCITY              54
+#define PLAYERVELOCITY_NORMAL             60
+#define PLAYERVELOCITY_SLOW               50
+#define PLAYERVELOCITY_SLOWER             40
+#define PLAYERVELOCITY_CRAWL              24
 #endif
 #define PLAYER_HITBOX_SIZE                12
 #define PLAYER_SPRITEOFFSET_X             -2
@@ -73,8 +78,9 @@
 
 #define COLLISION_PADDING                 0.001f
 
-#define ENCOUNTER_RATE_NORMAL             4
-#define ENCOUNTER_RATE_HIGH               7
+#define ENCOUNTERRATE_LOW                4
+#define ENCOUNTERRATE_MEDIUM             6
+#define ENCOUNTERRATE_HIGH               8
 
 typedef uint8_t cBool_t;
 #define cTrue 1

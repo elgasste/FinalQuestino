@@ -3,7 +3,7 @@
 #include "battle.h"
 
 static void cGame_DrawMapStatus( cGame_t* game );
-static void cGame_RollEncounter( cGame_t* game, cBool_t highRate );
+static void cGame_RollEncounter( cGame_t* game, uint8_t encounterRate );
 static cBool_t cGame_OnAnySpecialEnemyTile( cGame_t* game );
 
 void cGame_Init( cGame_t* game )
@@ -20,7 +20,7 @@ void cGame_Init( cGame_t* game )
    cInput_Init( &( game->input ) );
 
    cTileMap_Init( &( game->tileMap ) );
-   cTileMap_LoadTileTextures( &( game->tileMap ) );
+   cTileTexture_LoadTileTextures( &( game->tileMap ) );
 
    cPlayer_Init( &( game->player ) );
    game->player.sprite.direction = cDirection_Down;
@@ -131,7 +131,7 @@ void cGame_ChangeState( cGame_t *game, cGameState_t newState )
 
 void cGame_SteppedOnTile( cGame_t* game, uint16_t tileIndex )
 {
-   uint8_t i;
+   uint8_t i, tileFlags, tileSpeed, encounterRate;
    uint8_t tile = game->tileMap.tiles[tileIndex];
    uint16_t newTileIndex, newTileX, newTileY;
 
@@ -153,6 +153,17 @@ void cGame_SteppedOnTile( cGame_t* game, uint16_t tileIndex )
       }
    }
 
+   tileFlags = game->tileMap.tileTextures[tile & 0x1F].flags;
+   tileSpeed = ( tileFlags & 0xC ) >> 2;
+
+   switch( tileSpeed )
+   {
+      case 1: game->player.maxVelocity = PLAYERVELOCITY_SLOW; break;
+      case 2: game->player.maxVelocity = PLAYERVELOCITY_SLOWER; break;
+      case 3: game->player.maxVelocity = PLAYERVELOCITY_CRAWL; break;
+      default: game->player.maxVelocity = PLAYERVELOCITY_NORMAL; break;
+   }
+
 #if defined( DEBUG_NOENCOUNTERSONB )
    if ( game->input.buttonStates[cButton_B].down )
    {
@@ -166,7 +177,12 @@ void cGame_SteppedOnTile( cGame_t* game, uint16_t tileIndex )
    }
    else if ( tile & MAP_TILE_FLAG_ENCOUNTERABLE )
    {
-      cGame_RollEncounter( game, ( tile & MAP_TILE_FLAG_HIGHENCOUNTERRATE ) ? cTrue : cFalse );
+      encounterRate = game->tileMap.tileTextures[tile & 0x1F].flags & 0x3;
+
+      if ( encounterRate > 0 )
+      {
+         cGame_RollEncounter( game, encounterRate );
+      }
    }
 }
 
@@ -207,9 +223,9 @@ static void cGame_DrawMapStatus( cGame_t* game )
    cScreen_DrawText( &( game->screen ), str, 24, 96, BLACK, WHITE );
 }
 
-static void cGame_RollEncounter( cGame_t* game, cBool_t highRate )
+static void cGame_RollEncounter( cGame_t* game, uint8_t encounterRate )
 {
-   cBool_t spawnEncounter = highRate ? ( cRandom_Percent() <= ENCOUNTER_RATE_HIGH ) : ( cRandom_Percent() <= ENCOUNTER_RATE_NORMAL );
+   cBool_t spawnEncounter;
 
 #if defined( DEBUG_NOENCOUNTERSONB )
    if ( game->input.buttonStates[cButton_B].down )
@@ -217,6 +233,14 @@ static void cGame_RollEncounter( cGame_t* game, cBool_t highRate )
       return;
    }
 #endif
+
+   switch( encounterRate )
+   {
+      case 1: spawnEncounter = cRandom_Percent() <= ENCOUNTERRATE_LOW; break;
+      case 2: spawnEncounter = cRandom_Percent() <= ENCOUNTERRATE_MEDIUM; break;
+      case 3: spawnEncounter = cRandom_Percent() <= ENCOUNTERRATE_HIGH; break;
+      default: return;
+   }
 
    if ( spawnEncounter )
    {
