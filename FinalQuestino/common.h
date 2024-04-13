@@ -35,6 +35,7 @@
 #define SPRITE_SIZE                       16
 #define PACKED_SPRITE_SIZE                8
 #define SPRITE_FRAMES                     2
+#define SPRITE_TEXTURE_SIZE_BYTES         128 // 16x16 bit-packed, so 16/2 * 16
 
 #define ENEMY_TILE_TEXTURE_COUNT          78
 #define ENEMY_TILE_TEXTURE_SIZE_BYTES     32 // 8x8 bit-packed, so 8/2 * 8

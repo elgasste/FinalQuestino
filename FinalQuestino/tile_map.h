@@ -24,6 +24,9 @@ typedef struct cTileMap_t
    // low 11 bits are the destination tile index
    uint32_t portals[MAP_PORTAL_COUNT];
 
+   // TODO: should we call this something else?
+   uint8_t generalSprite[128];
+
    cVector4u8_t enemySpecialRegion;
    uint8_t enemyIndexes[MAP_TILE_ENEMY_INDEX_COUNT];
    uint8_t enemySpecialIndexes[MAP_TILE_ENEMY_INDEX_COUNT];
