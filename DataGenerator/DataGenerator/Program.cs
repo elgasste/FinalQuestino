@@ -300,7 +300,7 @@ string BuildMapTileTexturesOutputString()
          case 0:  // grass
          case 4:  // swamp
          case 9:  // bridge
-         case 12: // brick
+         case 11: // brick
          case 16: // barrier
             textureFlags |= 0x1;
             break;
