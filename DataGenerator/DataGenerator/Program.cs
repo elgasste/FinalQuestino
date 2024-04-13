@@ -109,7 +109,7 @@ void LoadWorldTextureMap( BitmapSource bitmap )
    {
       throw new Exception( "Somehow the world texture map is null, no idea how it happened." );
    }
-   else if ( ( bitmap.PixelHeight * bitmap.PixelWidth ) > ( 16 * 16 * 18 ) )
+   else if ( ( bitmap.PixelHeight * bitmap.PixelWidth ) > ( 16 * 16 * 19 ) )
    {
       throw new Exception( "Trying to add too many tile textures." );
    }
