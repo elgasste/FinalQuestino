@@ -9,7 +9,7 @@ typedef struct cGame_t cGame_t;
 
 typedef struct cTileMap_t
 {
-   cTileTexture_t tileTextures[18];
+   cTileTexture_t tileTextures[MAP_TILE_TEXTURE_COUNT];
    uint8_t stride;
 
    // high 3 bits are flags, low 5 bits are tile texture index
