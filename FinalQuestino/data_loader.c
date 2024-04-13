@@ -16862,7 +16862,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
    }
    else if ( index == 77 )
    {
-      for ( i = 0; i < 300; i++ ) { map->tiles[i] = 0x0D; }
+      for ( i = 0; i < 300; i++ ) { map->tiles[i] = 0x12; }
       map->tiles[45] = 0x0B;
       map->tiles[46] = 0x0B;
       map->tiles[47] = 0x0B;
@@ -16885,22 +16885,22 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->tiles[74] = 0x0B;
       map->tiles[85] = 0x0B;
       map->tiles[86] = 0x2C;
-      map->tiles[87] = 0x2C;
-      map->tiles[88] = 0x2C;
-      map->tiles[89] = 0x2C;
-      map->tiles[90] = 0x2C;
-      map->tiles[91] = 0x2C;
-      map->tiles[92] = 0x2C;
+      map->tiles[87] = 0x11;
+      map->tiles[88] = 0x11;
+      map->tiles[89] = 0x11;
+      map->tiles[90] = 0x11;
+      map->tiles[91] = 0x11;
+      map->tiles[92] = 0x11;
       map->tiles[93] = 0x2C;
       map->tiles[94] = 0x0B;
       map->tiles[105] = 0x0B;
       map->tiles[106] = 0x2C;
-      map->tiles[107] = 0x2C;
+      map->tiles[107] = 0x11;
       map->tiles[108] = 0x2C;
-      map->tiles[109] = 0x2C;
-      map->tiles[110] = 0x2C;
+      map->tiles[109] = 0x11;
+      map->tiles[110] = 0x11;
       map->tiles[111] = 0x2C;
-      map->tiles[112] = 0x2C;
+      map->tiles[112] = 0x11;
       map->tiles[113] = 0x2C;
       map->tiles[114] = 0x0B;
       map->tiles[125] = 0x0B;
