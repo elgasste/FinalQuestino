@@ -87,16 +87,18 @@ typedef uint8_t cBool_t;
 #define cFalse 0
 #define TOGGLE_BOOL( b ) b = b ? cFalse : cTrue
 
-#ifdef __cplusplus
+#if defined( DEBUG_SERIAL )
+
+#if defined( __cplusplus )
 extern "C" {
 #endif
 
-#if defined( DEBUG_SERIAL )
 void cSerial_PrintLn( const char* msg );
-#endif
 
-#ifdef __cplusplus
+#if defined( __cplusplus )
 }
 #endif
+
+#endif // DEBUG_SERIAL
 
 #endif // COMMON_H
