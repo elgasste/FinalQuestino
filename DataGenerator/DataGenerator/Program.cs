@@ -301,7 +301,7 @@ string BuildMapTileTexturesOutputString()
          case 4:  // swamp
          case 9:  // bridge
          case 11: // brick
-         case 16: // barrier
+         case 13: // barrier
             textureFlags |= 0x1;
             break;
          case 1:  // forest
@@ -326,7 +326,7 @@ string BuildMapTileTexturesOutputString()
          case 4:  // swamp
             textureFlags |= 0x8;
             break;
-         case 16: // barrier
+         case 13: // barrier
             textureFlags |= 0xC;
             break;
          default:
