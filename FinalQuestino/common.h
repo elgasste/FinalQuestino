@@ -65,8 +65,8 @@
 #define PLAYERVELOCITY_SLOWER             96
 #define PLAYERVELOCITY_CRAWL              96
 #else
-#define PLAYERVELOCITY_NORMAL             60
-#define PLAYERVELOCITY_SLOW               50
+#define PLAYERVELOCITY_NORMAL             64
+#define PLAYERVELOCITY_SLOW               56
 #define PLAYERVELOCITY_SLOWER             40
 #define PLAYERVELOCITY_CRAWL              24
 #endif
