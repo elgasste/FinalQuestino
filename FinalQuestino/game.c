@@ -29,8 +29,6 @@ void cGame_Init( cGame_t* game )
    game->player.position.y = MAP_TILE_SIZE * 6;
 
    game->state = cGameState_Init;
-
-   cRandom_Seed();
 }
 
 void cGame_Tic( cGame_t* game )
@@ -149,6 +147,7 @@ void cGame_SteppedOnTile( cGame_t* game, uint16_t tileIndex )
          game->player.position.x = ( newTileX * MAP_TILE_SIZE ) + ( ( MAP_TILE_SIZE - PLAYER_HITBOX_SIZE ) / 2 );
          game->player.position.y = ( newTileY * MAP_TILE_SIZE ) + ( MAP_TILE_SIZE - PLAYER_HITBOX_SIZE ) - COLLISION_PADDING;
          cGame_Refresh( game );
+         cRandom_Seed();
          return;
       }
    }

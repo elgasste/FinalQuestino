@@ -1,10 +1,8 @@
-#include <time.h>
-
 #include "random.h"
 
 void cRandom_Seed()
 {
-   srand( (uint32_t)time( 0 ) );
+   srand( micros() & (uint16_t)0xFFFF );
 }
 
 uint8_t cRandom_Percent()
