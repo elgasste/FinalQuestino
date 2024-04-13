@@ -1329,102 +1329,6 @@ void cTileTexture_LoadTileTextures( cTileMap_t* map )
    map->tileTextures[11].pixels[118] = 0x44;
    map->tileTextures[11].pixels[119] = 0x44;
    map->tileTextures[11].flags = 0x01;
-   map->tileTextures[12].pixels[0] = 0x88;
-   map->tileTextures[12].pixels[1] = 0x88;
-   map->tileTextures[12].pixels[2] = 0x24;
-   map->tileTextures[12].pixels[3] = 0x88;
-   map->tileTextures[12].pixels[4] = 0x88;
-   map->tileTextures[12].pixels[5] = 0x88;
-   map->tileTextures[12].pixels[6] = 0x24;
-   map->tileTextures[12].pixels[7] = 0x88;
-   map->tileTextures[12].pixels[8] = 0x88;
-   map->tileTextures[12].pixels[9] = 0x88;
-   map->tileTextures[12].pixels[10] = 0x24;
-   map->tileTextures[12].pixels[11] = 0x88;
-   map->tileTextures[12].pixels[12] = 0x88;
-   map->tileTextures[12].pixels[13] = 0x88;
-   map->tileTextures[12].pixels[14] = 0x24;
-   map->tileTextures[12].pixels[15] = 0x88;
-   map->tileTextures[12].pixels[16] = 0x44;
-   map->tileTextures[12].pixels[17] = 0x44;
-   map->tileTextures[12].pixels[18] = 0x24;
-   map->tileTextures[12].pixels[19] = 0x44;
-   map->tileTextures[12].pixels[20] = 0x44;
-   map->tileTextures[12].pixels[21] = 0x44;
-   map->tileTextures[12].pixels[22] = 0x24;
-   map->tileTextures[12].pixels[23] = 0x44;
-   map->tileTextures[12].pixels[32] = 0x24;
-   map->tileTextures[12].pixels[33] = 0x88;
-   map->tileTextures[12].pixels[34] = 0x88;
-   map->tileTextures[12].pixels[35] = 0x88;
-   map->tileTextures[12].pixels[36] = 0x24;
-   map->tileTextures[12].pixels[37] = 0x88;
-   map->tileTextures[12].pixels[38] = 0x88;
-   map->tileTextures[12].pixels[39] = 0x88;
-   map->tileTextures[12].pixels[40] = 0x24;
-   map->tileTextures[12].pixels[41] = 0x88;
-   map->tileTextures[12].pixels[42] = 0x88;
-   map->tileTextures[12].pixels[43] = 0x88;
-   map->tileTextures[12].pixels[44] = 0x24;
-   map->tileTextures[12].pixels[45] = 0x88;
-   map->tileTextures[12].pixels[46] = 0x88;
-   map->tileTextures[12].pixels[47] = 0x88;
-   map->tileTextures[12].pixels[48] = 0x24;
-   map->tileTextures[12].pixels[49] = 0x44;
-   map->tileTextures[12].pixels[50] = 0x44;
-   map->tileTextures[12].pixels[51] = 0x44;
-   map->tileTextures[12].pixels[52] = 0x24;
-   map->tileTextures[12].pixels[53] = 0x44;
-   map->tileTextures[12].pixels[54] = 0x44;
-   map->tileTextures[12].pixels[55] = 0x44;
-   map->tileTextures[12].pixels[64] = 0x88;
-   map->tileTextures[12].pixels[65] = 0x88;
-   map->tileTextures[12].pixels[66] = 0x24;
-   map->tileTextures[12].pixels[67] = 0x88;
-   map->tileTextures[12].pixels[68] = 0x88;
-   map->tileTextures[12].pixels[69] = 0x88;
-   map->tileTextures[12].pixels[70] = 0x24;
-   map->tileTextures[12].pixels[71] = 0x88;
-   map->tileTextures[12].pixels[72] = 0x88;
-   map->tileTextures[12].pixels[73] = 0x88;
-   map->tileTextures[12].pixels[74] = 0x24;
-   map->tileTextures[12].pixels[75] = 0x88;
-   map->tileTextures[12].pixels[76] = 0x88;
-   map->tileTextures[12].pixels[77] = 0x88;
-   map->tileTextures[12].pixels[78] = 0x24;
-   map->tileTextures[12].pixels[79] = 0x88;
-   map->tileTextures[12].pixels[80] = 0x44;
-   map->tileTextures[12].pixels[81] = 0x44;
-   map->tileTextures[12].pixels[82] = 0x24;
-   map->tileTextures[12].pixels[83] = 0x44;
-   map->tileTextures[12].pixels[84] = 0x44;
-   map->tileTextures[12].pixels[85] = 0x44;
-   map->tileTextures[12].pixels[86] = 0x24;
-   map->tileTextures[12].pixels[87] = 0x44;
-   map->tileTextures[12].pixels[96] = 0x24;
-   map->tileTextures[12].pixels[97] = 0x88;
-   map->tileTextures[12].pixels[98] = 0x88;
-   map->tileTextures[12].pixels[99] = 0x88;
-   map->tileTextures[12].pixels[100] = 0x24;
-   map->tileTextures[12].pixels[101] = 0x88;
-   map->tileTextures[12].pixels[102] = 0x88;
-   map->tileTextures[12].pixels[103] = 0x88;
-   map->tileTextures[12].pixels[104] = 0x24;
-   map->tileTextures[12].pixels[105] = 0x88;
-   map->tileTextures[12].pixels[106] = 0x88;
-   map->tileTextures[12].pixels[107] = 0x88;
-   map->tileTextures[12].pixels[108] = 0x24;
-   map->tileTextures[12].pixels[109] = 0x88;
-   map->tileTextures[12].pixels[110] = 0x88;
-   map->tileTextures[12].pixels[111] = 0x88;
-   map->tileTextures[12].pixels[112] = 0x24;
-   map->tileTextures[12].pixels[113] = 0x44;
-   map->tileTextures[12].pixels[114] = 0x44;
-   map->tileTextures[12].pixels[115] = 0x44;
-   map->tileTextures[12].pixels[116] = 0x24;
-   map->tileTextures[12].pixels[117] = 0x44;
-   map->tileTextures[12].pixels[118] = 0x44;
-   map->tileTextures[12].pixels[119] = 0x44;
    map->tileTextures[12].flags = 0x00;
    map->tileTextures[13].flags = 0x00;
    map->tileTextures[14].pixels[0] = 0x77;
@@ -14971,7 +14875,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
    }
    else if ( index == 63 )
    {
-      for ( i = 0; i < 300; i++ ) { map->tiles[i] = 0x0D; }
+      for ( i = 0; i < 300; i++ ) { map->tiles[i] = 0x0C; }
       map->tiles[44] = 0x0A;
       map->tiles[45] = 0x0A;
       map->tiles[46] = 0x0A;
@@ -15148,7 +15052,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
    }
    else if ( index == 64 )
    {
-      for ( i = 0; i < 300; i++ ) { map->tiles[i] = 0x0D; }
+      for ( i = 0; i < 300; i++ ) { map->tiles[i] = 0x0C; }
       map->tiles[4] = 0x0A;
       map->tiles[5] = 0x6B;
       map->tiles[6] = 0x0A;
@@ -15349,7 +15253,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
    }
    else if ( index == 65 )
    {
-      for ( i = 0; i < 300; i++ ) { map->tiles[i] = 0x0D; }
+      for ( i = 0; i < 300; i++ ) { map->tiles[i] = 0x0C; }
       map->tiles[4] = 0x0A;
       map->tiles[5] = 0x6B;
       map->tiles[6] = 0x0A;
@@ -15526,7 +15430,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
    }
    else if ( index == 66 )
    {
-      for ( i = 0; i < 300; i++ ) { map->tiles[i] = 0x0D; }
+      for ( i = 0; i < 300; i++ ) { map->tiles[i] = 0x0C; }
       map->tiles[83] = 0x0A;
       map->tiles[84] = 0x0A;
       map->tiles[85] = 0x0A;
@@ -16274,7 +16178,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
    }
    else if ( index == 72 )
    {
-      for ( i = 0; i < 300; i++ ) { map->tiles[i] = 0x0D; }
+      for ( i = 0; i < 300; i++ ) { map->tiles[i] = 0x0C; }
       map->tiles[0] = 0x0A;
       map->tiles[1] = 0x0A;
       map->tiles[2] = 0x0A;
@@ -16609,7 +16513,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
    }
    else if ( index == 74 )
    {
-      for ( i = 0; i < 300; i++ ) { map->tiles[i] = 0x0D; }
+      for ( i = 0; i < 300; i++ ) { map->tiles[i] = 0x0C; }
       map->tiles[0] = 0x0A;
       map->tiles[1] = 0x2B;
       map->tiles[2] = 0x2B;
@@ -16780,7 +16684,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
    }
    else if ( index == 75 )
    {
-      for ( i = 0; i < 300; i++ ) { map->tiles[i] = 0x0D; }
+      for ( i = 0; i < 300; i++ ) { map->tiles[i] = 0x0C; }
       map->stride = 2;
       map->portals[0] = 0x7FFFFFFF;
       map->portals[1] = 0x7FFFFFFF;
@@ -16801,7 +16705,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
    }
    else if ( index == 76 )
    {
-      for ( i = 0; i < 300; i++ ) { map->tiles[i] = 0x0D; }
+      for ( i = 0; i < 300; i++ ) { map->tiles[i] = 0x0C; }
       map->tiles[0] = 0x06;
       map->tiles[1] = 0x06;
       map->tiles[2] = 0x06;
@@ -17003,7 +16907,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
    }
    else if ( index == 78 )
    {
-      for ( i = 0; i < 300; i++ ) { map->tiles[i] = 0x0D; }
+      for ( i = 0; i < 300; i++ ) { map->tiles[i] = 0x0C; }
       map->tiles[44] = 0x0A;
       map->tiles[45] = 0x0A;
       map->tiles[46] = 0x0A;
@@ -18023,7 +17927,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
    }
    else if ( index == 83 )
    {
-      for ( i = 0; i < 300; i++ ) { map->tiles[i] = 0x0D; }
+      for ( i = 0; i < 300; i++ ) { map->tiles[i] = 0x0C; }
       map->tiles[106] = 0x0A;
       map->tiles[107] = 0x0A;
       map->tiles[108] = 0x0A;
@@ -18084,7 +17988,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
    }
    else if ( index == 84 )
    {
-      for ( i = 0; i < 300; i++ ) { map->tiles[i] = 0x0D; }
+      for ( i = 0; i < 300; i++ ) { map->tiles[i] = 0x0C; }
       map->tiles[107] = 0x0A;
       map->tiles[108] = 0x2B;
       map->tiles[109] = 0x0A;
