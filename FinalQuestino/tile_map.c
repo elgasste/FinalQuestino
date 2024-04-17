@@ -30,7 +30,14 @@ void cTileMap_Init( cTileMap_t* tileMap )
 
    for ( i = 0; i < SPRITE_TEXTURE_SIZE_BYTES; i++ )
    {
-      tileMap->generalSprite[i] = (uint8_t)i;
+      tileMap->spriteTexture[i] = (uint8_t)i;
+   }
+
+   tileMap->spriteCount = 0;
+
+   for ( i = 0; i < MAP_SPRITE_COUNT; i++ )
+   {
+      tileMap->spriteData[MAP_SPRITE_COUNT] = 0;
    }
 
    for ( i = 0; i < MAP_TILE_ENEMY_INDEX_COUNT; i++ )

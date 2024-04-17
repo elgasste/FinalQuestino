@@ -490,6 +490,9 @@ string BuildMapTilesOutputString()
       outputString += string.Format( "      map->enemySpecialRegion.w = {0};\n", MapData.MapEnemySpecialRegions[i].Width );
       outputString += string.Format( "      map->enemySpecialRegion.h = {0};\n", MapData.MapEnemySpecialRegions[i].Height );
 
+      // TODO: add a new class for all of these
+      outputString += "      map->spriteCount = 0;\n";
+
       outputString += "   }\n";
    }
 

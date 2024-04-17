@@ -3386,6 +3386,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 1 )
    {
@@ -3542,6 +3543,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 2 )
    {
@@ -3661,6 +3663,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 3 )
    {
@@ -3744,6 +3747,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 9;
       map->enemySpecialRegion.w = 2;
       map->enemySpecialRegion.h = 6;
+      map->spriteCount = 0;
    }
    else if ( index == 4 )
    {
@@ -3859,6 +3863,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 7;
       map->enemySpecialRegion.w = 15;
       map->enemySpecialRegion.h = 8;
+      map->spriteCount = 0;
    }
    else if ( index == 5 )
    {
@@ -4027,6 +4032,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 6 )
    {
@@ -4084,6 +4090,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 7 )
    {
@@ -4223,6 +4230,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 7;
       map->enemySpecialRegion.w = 15;
       map->enemySpecialRegion.h = 8;
+      map->spriteCount = 0;
    }
    else if ( index == 8 )
    {
@@ -4403,6 +4411,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 9 )
    {
@@ -4545,6 +4554,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 10 )
    {
@@ -4801,6 +4811,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 0;
       map->enemySpecialRegion.w = 11;
       map->enemySpecialRegion.h = 15;
+      map->spriteCount = 0;
    }
    else if ( index == 11 )
    {
@@ -5005,6 +5016,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 0;
       map->enemySpecialRegion.w = 4;
       map->enemySpecialRegion.h = 7;
+      map->spriteCount = 0;
    }
    else if ( index == 12 )
    {
@@ -5194,6 +5206,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 13 )
    {
@@ -5325,6 +5338,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 14 )
    {
@@ -5461,6 +5475,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 7;
       map->enemySpecialRegion.w = 9;
       map->enemySpecialRegion.h = 8;
+      map->spriteCount = 0;
    }
    else if ( index == 15 )
    {
@@ -5714,6 +5729,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 9;
       map->enemySpecialRegion.w = 14;
       map->enemySpecialRegion.h = 6;
+      map->spriteCount = 0;
    }
    else if ( index == 16 )
    {
@@ -5909,6 +5925,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 8;
       map->enemySpecialRegion.w = 20;
       map->enemySpecialRegion.h = 7;
+      map->spriteCount = 0;
    }
    else if ( index == 17 )
    {
@@ -6168,6 +6185,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 0;
       map->enemySpecialRegion.w = 8;
       map->enemySpecialRegion.h = 5;
+      map->spriteCount = 0;
    }
    else if ( index == 18 )
    {
@@ -6361,6 +6379,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 19 )
    {
@@ -6638,6 +6657,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 0;
       map->enemySpecialRegion.w = 7;
       map->enemySpecialRegion.h = 15;
+      map->spriteCount = 0;
    }
    else if ( index == 20 )
    {
@@ -6781,6 +6801,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 21 )
    {
@@ -6920,6 +6941,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 8;
       map->enemySpecialRegion.w = 8;
       map->enemySpecialRegion.h = 7;
+      map->spriteCount = 0;
    }
    else if ( index == 22 )
    {
@@ -7178,6 +7200,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 0;
       map->enemySpecialRegion.w = 11;
       map->enemySpecialRegion.h = 15;
+      map->spriteCount = 0;
    }
    else if ( index == 23 )
    {
@@ -7438,6 +7461,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 9;
       map->enemySpecialRegion.w = 4;
       map->enemySpecialRegion.h = 6;
+      map->spriteCount = 0;
    }
    else if ( index == 24 )
    {
@@ -7596,6 +7620,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 10;
       map->enemySpecialRegion.w = 20;
       map->enemySpecialRegion.h = 5;
+      map->spriteCount = 0;
    }
    else if ( index == 25 )
    {
@@ -7792,6 +7817,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 7;
       map->enemySpecialRegion.w = 20;
       map->enemySpecialRegion.h = 8;
+      map->spriteCount = 0;
    }
    else if ( index == 26 )
    {
@@ -8057,6 +8083,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 7;
       map->enemySpecialRegion.w = 20;
       map->enemySpecialRegion.h = 8;
+      map->spriteCount = 0;
    }
    else if ( index == 27 )
    {
@@ -8159,6 +8186,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 8;
       map->enemySpecialRegion.w = 20;
       map->enemySpecialRegion.h = 7;
+      map->spriteCount = 0;
    }
    else if ( index == 28 )
    {
@@ -8300,6 +8328,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 29 )
    {
@@ -8524,6 +8553,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 0;
       map->enemySpecialRegion.w = 5;
       map->enemySpecialRegion.h = 2;
+      map->spriteCount = 0;
    }
    else if ( index == 30 )
    {
@@ -8685,6 +8715,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 0;
       map->enemySpecialRegion.w = 2;
       map->enemySpecialRegion.h = 11;
+      map->spriteCount = 0;
    }
    else if ( index == 31 )
    {
@@ -8852,6 +8883,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 0;
       map->enemySpecialRegion.w = 6;
       map->enemySpecialRegion.h = 11;
+      map->spriteCount = 0;
    }
    else if ( index == 32 )
    {
@@ -9114,6 +9146,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 4;
       map->enemySpecialRegion.w = 14;
       map->enemySpecialRegion.h = 11;
+      map->spriteCount = 0;
    }
    else if ( index == 33 )
    {
@@ -9350,6 +9383,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 7;
       map->enemySpecialRegion.w = 20;
       map->enemySpecialRegion.h = 8;
+      map->spriteCount = 0;
    }
    else if ( index == 34 )
    {
@@ -9570,6 +9604,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 7;
       map->enemySpecialRegion.w = 20;
       map->enemySpecialRegion.h = 8;
+      map->spriteCount = 0;
    }
    else if ( index == 35 )
    {
@@ -9674,6 +9709,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 0;
       map->enemySpecialRegion.w = 3;
       map->enemySpecialRegion.h = 2;
+      map->spriteCount = 0;
    }
    else if ( index == 36 )
    {
@@ -9906,6 +9942,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 11;
       map->enemySpecialRegion.h = 4;
+      map->spriteCount = 0;
    }
    else if ( index == 37 )
    {
@@ -10091,6 +10128,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 8;
       map->enemySpecialRegion.w = 20;
       map->enemySpecialRegion.h = 7;
+      map->spriteCount = 0;
    }
    else if ( index == 38 )
    {
@@ -10179,6 +10217,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 39 )
    {
@@ -10342,6 +10381,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 0;
       map->enemySpecialRegion.w = 8;
       map->enemySpecialRegion.h = 11;
+      map->spriteCount = 0;
    }
    else if ( index == 40 )
    {
@@ -10496,6 +10536,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 8;
       map->enemySpecialRegion.w = 8;
       map->enemySpecialRegion.h = 7;
+      map->spriteCount = 0;
    }
    else if ( index == 41 )
    {
@@ -10657,6 +10698,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 42 )
    {
@@ -10788,6 +10830,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 43 )
    {
@@ -11046,6 +11089,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 44 )
    {
@@ -11332,6 +11376,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 4;
       map->enemySpecialRegion.w = 20;
       map->enemySpecialRegion.h = 11;
+      map->spriteCount = 0;
    }
    else if ( index == 45 )
    {
@@ -11584,6 +11629,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 46 )
    {
@@ -11805,6 +11851,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 7;
       map->enemySpecialRegion.w = 18;
       map->enemySpecialRegion.h = 8;
+      map->spriteCount = 0;
    }
    else if ( index == 47 )
    {
@@ -12002,6 +12049,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 7;
       map->enemySpecialRegion.w = 17;
       map->enemySpecialRegion.h = 8;
+      map->spriteCount = 0;
    }
    else if ( index == 48 )
    {
@@ -12121,6 +12169,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 7;
       map->enemySpecialRegion.w = 10;
       map->enemySpecialRegion.h = 8;
+      map->spriteCount = 0;
    }
    else if ( index == 49 )
    {
@@ -12264,6 +12313,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 7;
       map->enemySpecialRegion.w = 10;
       map->enemySpecialRegion.h = 8;
+      map->spriteCount = 0;
    }
    else if ( index == 50 )
    {
@@ -12485,6 +12535,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 7;
       map->enemySpecialRegion.w = 20;
       map->enemySpecialRegion.h = 8;
+      map->spriteCount = 0;
    }
    else if ( index == 51 )
    {
@@ -12675,6 +12726,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 7;
       map->enemySpecialRegion.w = 20;
       map->enemySpecialRegion.h = 8;
+      map->spriteCount = 0;
    }
    else if ( index == 52 )
    {
@@ -12927,6 +12979,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 53 )
    {
@@ -13214,6 +13267,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 7;
       map->enemySpecialRegion.w = 12;
       map->enemySpecialRegion.h = 8;
+      map->spriteCount = 0;
    }
    else if ( index == 54 )
    {
@@ -13411,6 +13465,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 3;
       map->enemySpecialRegion.w = 20;
       map->enemySpecialRegion.h = 12;
+      map->spriteCount = 0;
    }
    else if ( index == 55 )
    {
@@ -13505,6 +13560,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 6;
       map->enemySpecialRegion.w = 8;
       map->enemySpecialRegion.h = 9;
+      map->spriteCount = 0;
    }
    else if ( index == 56 )
    {
@@ -13545,6 +13601,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 57 )
    {
@@ -13791,6 +13848,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 2;
       map->enemySpecialRegion.w = 7;
       map->enemySpecialRegion.h = 13;
+      map->spriteCount = 0;
    }
    else if ( index == 58 )
    {
@@ -14067,6 +14125,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 0;
       map->enemySpecialRegion.w = 3;
       map->enemySpecialRegion.h = 4;
+      map->spriteCount = 0;
    }
    else if ( index == 59 )
    {
@@ -14333,6 +14392,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 60 )
    {
@@ -14589,6 +14649,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 0;
       map->enemySpecialRegion.w = 14;
       map->enemySpecialRegion.h = 4;
+      map->spriteCount = 0;
    }
    else if ( index == 61 )
    {
@@ -14652,6 +14713,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 0;
       map->enemySpecialRegion.w = 8;
       map->enemySpecialRegion.h = 7;
+      map->spriteCount = 0;
    }
    else if ( index == 62 )
    {
@@ -14690,6 +14752,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 63 )
    {
@@ -14867,6 +14930,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 64 )
    {
@@ -15068,6 +15132,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 65 )
    {
@@ -15245,6 +15310,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 66 )
    {
@@ -15364,6 +15430,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 67 )
    {
@@ -15465,6 +15532,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 68 )
    {
@@ -15574,6 +15642,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 69 )
    {
@@ -15680,6 +15749,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 70 )
    {
@@ -15781,6 +15851,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 71 )
    {
@@ -15993,6 +16064,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 72 )
    {
@@ -16164,6 +16236,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 73 )
    {
@@ -16328,6 +16401,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 74 )
    {
@@ -16499,6 +16573,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 75 )
    {
@@ -16520,6 +16595,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 76 )
    {
@@ -16591,6 +16667,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 77 )
    {
@@ -16722,6 +16799,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 78 )
    {
@@ -16875,6 +16953,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 79 )
    {
@@ -17067,6 +17146,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 80 )
    {
@@ -17268,6 +17348,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 81 )
    {
@@ -17464,6 +17545,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 82 )
    {
@@ -17742,6 +17824,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 83 )
    {
@@ -17803,6 +17886,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
    else if ( index == 84 )
    {
@@ -17854,6 +17938,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
+      map->spriteCount = 0;
    }
 }
 
