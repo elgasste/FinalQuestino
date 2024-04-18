@@ -382,13 +382,66 @@ static uint16_t cScreen_GetTilePixelColor( cScreen_t* screen, cTileMap_t* map, u
    }
 }
 
+void cScreen_DrawMapSprites( cGame_t* game )
+{
+   uint8_t i, tileX, tileY, spriteIndex, pixelPair, paletteIndex;
+   uint16_t tileIndex, color, j, pixel, x, y;
+   cScreen_t* screen = &( game->screen );
+   cTileMap_t* map = &( game->tileMap );
+
+   CS_ACTIVE;
+
+   for ( i = 0; i < map->spriteCount; i++ )
+   {
+      tileIndex = map->spriteData[i] & 0x1FF;
+      spriteIndex = ( map->spriteData[i] >> 9 ) & 0xF;
+      cTileMap_LoadSprite( map, spriteIndex );
+
+      tileY = ( tileIndex / MAP_TILES_X );
+      tileX = ( tileIndex - ( tileY * MAP_TILES_X ) );
+      x = tileX * MAP_TILE_SIZE;
+      y = tileY * MAP_TILE_SIZE;
+
+      cScreen_SetAddrWindow( screen, x, y, x + SPRITE_SIZE - 1, y + SPRITE_SIZE - 1 );
+      CD_COMMAND;
+      write8( 0x2C );
+      CD_DATA;
+
+      for ( j = 0, pixel = 0; j < SPRITE_TEXTURE_SIZE_BYTES; j++ )
+      {
+         pixelPair = map->spriteTexture[j];
+         paletteIndex = pixelPair >> 4;
+         color = screen->mapPalette[paletteIndex];
+
+         if ( color == TRANSPARENT_COLOR )
+         {
+            color = cScreen_GetTilePixelColor( screen, map, x + ( pixel % SPRITE_SIZE ), y + ( pixel / SPRITE_SIZE ) );
+         }
+
+         write16( color >> 8, color );
+         pixel++;
+         paletteIndex = pixelPair & 0x0F;
+         color = screen->mapPalette[paletteIndex];
+
+         if ( color == TRANSPARENT_COLOR )
+         {
+            color = cScreen_GetTilePixelColor( screen, map, x + ( pixel % SPRITE_SIZE ), y + ( pixel / SPRITE_SIZE ) );
+         }
+
+         write16( color >> 8, color );
+         pixel++;
+      }
+   }
+
+   CS_IDLE;
+}
+
+
 void cScreen_DrawPlayer( cGame_t* game )
 {
    uint8_t pixelPair, paletteIndex, skipLeft, skipTop, skipRight, skipBottom, curX, curY;
-   uint16_t color;
-   uint16_t frameBytes = PACKED_SPRITE_SIZE * SPRITE_SIZE;
-   uint16_t startByte = ( (uint8_t)( game->player.sprite.direction ) * SPRITE_FRAMES * frameBytes ) + ( game->player.sprite.currentFrame * frameBytes );
-   uint16_t i, pixel, ux, uy;
+   uint16_t startByte = ( (uint8_t)( game->player.sprite.direction ) * SPRITE_FRAMES * SPRITE_TEXTURE_SIZE_BYTES ) + ( game->player.sprite.currentFrame * SPRITE_TEXTURE_SIZE_BYTES );
+   uint16_t color, i, pixel, ux, uy;
    cScreen_t* screen = &( game->screen );
    cTileMap_t* map = &( game->tileMap );
    float x = game->player.position.x + PLAYER_SPRITEOFFSET_X;
@@ -431,7 +484,7 @@ void cScreen_DrawPlayer( cGame_t* game )
    write8( 0x2C );
    CD_DATA;
 
-   for ( i = startByte, pixel = 0, curX = 0, curY = 0; i < startByte + frameBytes; i++ )
+   for ( i = startByte, pixel = 0, curX = 0, curY = 0; i < startByte + SPRITE_TEXTURE_SIZE_BYTES; i++ )
    {
       pixelPair = game->player.sprite.frameTextures[i];
 

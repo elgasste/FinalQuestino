@@ -59,6 +59,7 @@ void cMenu_Wipe( cGame_t* game )
          break;
    }
    
+   cScreen_DrawMapSprites( game );
    cScreen_DrawPlayer( game );
 }
 

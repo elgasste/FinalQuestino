@@ -294,10 +294,10 @@ namespace DataGenerator
          new( new() { 12, 6, 9, 15 }, new() { 12, 6, 9, 15 } ),  // 66 (stairs to basement 1)
 
          // hauksness
-         new( new() { 10, 13, 19, 23 }, new() { 0, 0, 0, 0 } ),  // 67 (upper-left)
-         new( new() { 10, 13, 19, 23 }, new() { 0, 0, 0, 0 } ),  // 68 (upper-right)
-         new( new() { 10, 13, 19, 23 }, new() { 0, 0, 0, 0 } ),  // 69 (lower-left)
-         new( new() { 10, 13, 19, 23 }, new() { 0, 0, 0, 0 } ),  // 70 (lower-right)
+         new( new() { 10, 13, 19, 23 }, new() { 0, 0, 0, 0 } ),  // 67
+         new( new() { 10, 13, 19, 23 }, new() { 0, 0, 0, 0 } ),  // 68
+         new( new() { 10, 13, 19, 23 }, new() { 0, 0, 0, 0 } ),  // 69
+         new( new() { 10, 13, 19, 23 }, new() { 0, 0, 0, 0 } ),  // 70
 
          // tantegel
          new( new() { 0, 0, 0, 0 }, new() { 0, 0, 0, 0 } ),  // 71
@@ -316,6 +316,115 @@ namespace DataGenerator
          new( new() { 0, 0, 0, 0 }, new() { 0, 0, 0, 0 } ),  // 82
          new( new() { 0, 0, 0, 0 }, new() { 0, 0, 0, 0 } ),  // 83
          new( new() { 0, 0, 0, 0 }, new() { 0, 0, 0, 0 } )   // 84
+      };
+
+      // SPRITE DATA LEGEND
+      //
+      // - low 9 bits are the tile index
+      // - middle 4 bits are the sprite texture index
+      // - high 3 bits are flags
+      //    - flag 001: is passable
+      //    - flag 010: reserved
+      //    - flag 100: reserved
+      //
+      // - use this format: ( 0 | ( passable << 13 ) | ( textureIndex << 9 ) | tileIndex )
+
+      public static List<Tuple<int, List<int>>> SpriteData = new()
+      {
+         // overworld
+         new( 0, new() ),     // 0
+         new( 0, new() ),     // 1
+         new( 0, new() ),     // 2
+         new( 0, new() ),     // 3
+         new( 0, new() ),     // 4
+         new( 0, new() ),     // 5
+         new( 0, new() ),     // 6
+         new( 0, new() ),     // 7
+         new( 0, new() ),     // 8
+         new( 0, new() ),     // 9
+         new( 0, new() ),     // 10
+         new( 0, new() ),     // 11
+         new( 0, new() ),     // 12
+         new( 0, new() ),     // 13
+         new( 0, new() ),     // 14
+         new( 0, new() ),     // 15
+         new( 0, new() ),     // 16
+         new( 0, new() ),     // 17
+         new( 0, new() ),     // 18
+         new( 0, new() ),     // 19
+         new( 0, new() ),     // 20
+         new( 0, new() ),     // 21
+         new( 0, new() ),     // 22
+         new( 0, new() ),     // 23 (start area)
+         new( 0, new() ),     // 24
+         new( 0, new() ),     // 25
+         new( 0, new() ),     // 26
+         new( 0, new() ),     // 27
+         new( 0, new() ),     // 28
+         new( 0, new() ),     // 29
+         new( 0, new() ),     // 30
+         new( 0, new() ),     // 31
+         new( 0, new() ),     // 32
+         new( 0, new() ),     // 33
+         new( 0, new() ),     // 34
+         new( 0, new() ),     // 35
+         new( 0, new() ),     // 36
+         new( 0, new() ),     // 37
+         new( 0, new() ),     // 38
+         new( 0, new() ),     // 39
+         new( 0, new() ),     // 40
+         new( 0, new() ),     // 41
+         new( 0, new() ),     // 42
+         new( 0, new() ),     // 43
+         new( 0, new() ),     // 44
+         new( 0, new() ),     // 45
+         new( 0, new() ),     // 46
+         new( 0, new() ),     // 47
+         new( 0, new() ),     // 48
+         new( 0, new() ),     // 49
+         new( 0, new() ),     // 50
+         new( 0, new() ),     // 51
+         new( 0, new() ),     // 52
+         new( 0, new() ),     // 53
+         new( 0, new() ),     // 54
+         new( 0, new() ),     // 55
+         new( 0, new() ),     // 56
+         new( 0, new() ),     // 57
+         new( 0, new() ),     // 58
+         new( 0, new() ),     // 59
+         new( 0, new() ),     // 60
+         new( 0, new() ),     // 61
+         new( 0, new() ),     // 62
+
+         // swamp cave
+         new( 0, new() ),     // 63
+         new( 0, new() ),     // 64
+         new( 0, new() ),     // 65
+         new( 0, new() ),     // 66
+
+         // hauksness
+         new( 0, new() ),     // 67
+         new( 0, new() ),     // 68
+         new( 0, new() ),     // 69
+         new( 0, new() ),     // 70
+
+         // tantegel
+         new( 1, new() { 0 | ( 1 << 13 ) | ( 2 << 9 ) | 146 } ), // 71
+         new( 0, new() ),     // 72
+         new( 0, new() ),     // 73
+         new( 0, new() ),     // 74
+         new( 0, new() ),     // 75
+         new( 0, new() ),     // 76
+         new( 1, new() { 0 | ( 1 << 13 ) | ( 3 << 9 ) | 233 } ), // 77
+         new( 0, new() ),     // 78
+
+         // brecconary
+         new( 0, new() ),     // 79
+         new( 0, new() ),     // 80
+         new( 0, new() ),     // 81
+         new( 0, new() ),     // 82
+         new( 0, new() ),     // 83
+         new( 0, new() )      // 84
       };
 
       public static List<List<int>> MapTiles = new()

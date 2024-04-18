@@ -50,6 +50,7 @@ uint16_t cTileMap_GetTileIndexFromPos( cTileMap_t* tileMap, cVector2f_t* pos );
 
 // data_loader.c
 void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index );
+void cTileMap_LoadSprite( cTileMap_t* map, uint8_t index );
 
 #if defined( __cplusplus )
 }
