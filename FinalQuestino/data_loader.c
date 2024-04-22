@@ -5701,7 +5701,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 7;
       map->enemySpecialRegion.w = 15;
       map->enemySpecialRegion.h = 8;
-      map->spriteCount = 0;
+      map->spriteCount = 1;
+      map->spriteData[0] = 0x26AB;
    }
    else if ( index == 5 )
    {
@@ -15307,7 +15308,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 3;
       map->enemySpecialRegion.w = 20;
       map->enemySpecialRegion.h = 12;
-      map->spriteCount = 0;
+      map->spriteCount = 1;
+      map->spriteData[0] = 0x26EE;
    }
    else if ( index == 55 )
    {
@@ -16772,7 +16774,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
-      map->spriteCount = 0;
+      map->spriteCount = 1;
+      map->spriteData[0] = 0x2441;
    }
    else if ( index == 64 )
    {
@@ -16974,7 +16977,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
-      map->spriteCount = 0;
+      map->spriteCount = 1;
+      map->spriteData[0] = 0x26D5;
    }
    else if ( index == 65 )
    {
@@ -17152,7 +17156,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
-      map->spriteCount = 0;
+      map->spriteCount = 1;
+      map->spriteData[0] = 0x24E1;
    }
    else if ( index == 66 )
    {
@@ -17272,7 +17277,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
-      map->spriteCount = 0;
+      map->spriteCount = 1;
+      map->spriteData[0] = 0x2491;
    }
    else if ( index == 67 )
    {
@@ -18510,7 +18516,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
-      map->spriteCount = 0;
+      map->spriteCount = 1;
+      map->spriteData[0] = 0x2644;
    }
    else if ( index == 77 )
    {
@@ -18802,7 +18809,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
-      map->spriteCount = 0;
+      map->spriteCount = 1;
+      map->spriteData[0] = 0x2491;
    }
    else if ( index == 79 )
    {

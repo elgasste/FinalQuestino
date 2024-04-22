@@ -336,7 +336,7 @@ namespace DataGenerator
          new( 0, new() ),     // 1
          new( 0, new() ),     // 2
          new( 0, new() ),     // 3
-         new( 0, new() ),     // 4
+         new( 1, new() { 0 | ( 1 << 13 ) | ( 3 << 9 ) | 171 } ), // 4
          new( 0, new() ),     // 5
          new( 0, new() ),     // 6
          new( 0, new() ),     // 7
@@ -387,7 +387,7 @@ namespace DataGenerator
          new( 0, new() ),     // 51
          new( 0, new() ),     // 52
          new( 0, new() ),     // 53
-         new( 0, new() ),     // 54
+         new( 1, new() { 0 | ( 1 << 13 ) | ( 3 << 9 ) | 238 } ), // 54
          new( 0, new() ),     // 55
          new( 0, new() ),     // 56
          new( 0, new() ),     // 57
@@ -398,10 +398,10 @@ namespace DataGenerator
          new( 0, new() ),     // 62
 
          // swamp cave
-         new( 0, new() ),     // 63
-         new( 0, new() ),     // 64
-         new( 0, new() ),     // 65
-         new( 0, new() ),     // 66
+         new( 1, new() { 0 | ( 1 << 13 ) | ( 2 << 9 ) | 65 } ),  // 63
+         new( 1, new() { 0 | ( 1 << 13 ) | ( 3 << 9 ) | 213 } ), // 64
+         new( 1, new() { 0 | ( 1 << 13 ) | ( 2 << 9 ) | 225 } ), // 65
+         new( 1, new() { 0 | ( 1 << 13 ) | ( 2 << 9 ) | 145 } ), // 66
 
          // hauksness
          new( 0, new() ),     // 67
@@ -415,14 +415,14 @@ namespace DataGenerator
          new( 0, new() ),     // 73
          new( 0, new() ),     // 74
          new( 0, new() ),     // 75
-         new( 0, new() ),     // 76
+         new( 1, new() { 0 | ( 1 << 13 ) | ( 3 << 9 ) | 68 } ), // 76
          new( 6, new() { 0 | ( 1 << 13 ) | ( 0 << 9 ) | 71,
                          0 | ( 0 << 13 ) | ( 8 << 9 ) | 108,
                          0 | ( 0 << 13 ) | ( 7 << 9 ) | 111,
                          0 | ( 1 << 13 ) | ( 0 << 9 ) | 129,
                          0 | ( 1 << 13 ) | ( 0 << 9 ) | 130,
                          0 | ( 1 << 13 ) | ( 3 << 9 ) | 233 } ), // 77 (throne room)
-         new( 0, new() ),     // 78
+         new( 1, new() { 0 | ( 1 << 13 ) | ( 2 << 9 ) | 145 } ), // 78
 
          // brecconary
          new( 0, new() ),     // 79
