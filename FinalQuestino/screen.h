@@ -110,6 +110,8 @@ typedef struct cScreen_t
 
    uint16_t mapPalette[16];
    uint8_t textBitFields[TEXT_TILE_COUNT][8];
+
+   uint8_t mapSpriteIndexCache;
 }
 cScreen_t;
 

@@ -48,6 +48,8 @@ void cScreen_Init( cScreen_t* screen )
    }
 
    cScreen_LoadTextBitFields( screen );
+
+   screen->mapSpriteIndexCache = 0xFF;
 }
 
 static void cScreen_Reset( cScreen_t* screen )
@@ -367,10 +369,37 @@ void cScreen_DrawWrappedText( cScreen_t* screen, const char* text, uint16_t x, u
 
 static uint16_t cScreen_GetTilePixelColor( cScreen_t* screen, cTileMap_t* map, uint16_t x, uint16_t y )
 {
-   uint8_t tile = map->tiles[( ( y / MAP_TILE_SIZE ) * MAP_TILES_X ) + ( x / MAP_TILE_SIZE )];
+   uint8_t i, spriteIndex;
+   uint16_t color;
+   uint16_t tileIndex = ( ( y / MAP_TILE_SIZE ) * MAP_TILES_X ) + ( x / MAP_TILE_SIZE );
+   uint8_t tile = map->tiles[tileIndex];
    uint8_t* tileTexture = &( map->tileTextures[tile & 0x1F].pixels );
    uint8_t pixelOffsetX = x % MAP_TILE_SIZE;
    uint8_t pixelOffsetY = y % MAP_TILE_SIZE;
+
+   // if there's a sprite on this tile, we need to take that into account
+   for ( i = 0; i < map->spriteCount; i++ )
+   {
+      if ( ( map->spriteData[i] & 0x1FF ) == tileIndex )
+      {
+         spriteIndex = ( map->spriteData[i] >> 9 ) & 0xF;
+
+         if ( spriteIndex != screen->mapSpriteIndexCache )
+         {
+            cTileMap_LoadSprite( map, spriteIndex );
+            screen->mapSpriteIndexCache = spriteIndex;
+         }
+
+         color = pixelOffsetX % 2 == 0
+            ? screen->mapPalette[map->spriteTexture[( pixelOffsetX / 2 ) + ( pixelOffsetY * SPRITE_PACKED_SIZE )] >> 4]
+            : screen->mapPalette[map->spriteTexture[( pixelOffsetX / 2 ) + ( pixelOffsetY * SPRITE_PACKED_SIZE )] & 0xF];
+         
+         if ( color != TRANSPARENT_COLOR )
+         {
+            return color;
+         }
+      }
+   }
 
    if ( pixelOffsetX % 2 == 0 )
    {
@@ -396,6 +425,7 @@ void cScreen_DrawMapSprites( cGame_t* game )
       tileIndex = map->spriteData[i] & 0x1FF;
       spriteIndex = ( map->spriteData[i] >> 9 ) & 0xF;
       cTileMap_LoadSprite( map, spriteIndex );
+      game->screen.mapSpriteIndexCache = spriteIndex;
 
       tileY = ( tileIndex / MAP_TILES_X );
       tileX = ( tileIndex - ( tileY * MAP_TILES_X ) );
@@ -435,7 +465,6 @@ void cScreen_DrawMapSprites( cGame_t* game )
 
    CS_IDLE;
 }
-
 
 void cScreen_DrawPlayer( cGame_t* game )
 {
