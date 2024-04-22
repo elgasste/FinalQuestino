@@ -18638,8 +18638,13 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
-      map->spriteCount = 1;
-      map->spriteData[0] = 0x26E9;
+      map->spriteCount = 6;
+      map->spriteData[0] = 0x2047;
+      map->spriteData[1] = 0x106C;
+      map->spriteData[2] = 0x0E6F;
+      map->spriteData[3] = 0x2081;
+      map->spriteData[4] = 0x2082;
+      map->spriteData[5] = 0x26E9;
    }
    else if ( index == 78 )
    {

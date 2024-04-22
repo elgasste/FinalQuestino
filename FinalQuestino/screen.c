@@ -377,7 +377,7 @@ static uint16_t cScreen_GetTilePixelColor( cScreen_t* screen, cTileMap_t* map, u
    uint8_t pixelOffsetX = x % MAP_TILE_SIZE;
    uint8_t pixelOffsetY = y % MAP_TILE_SIZE;
 
-   // if there's a sprite on this tile, we need to take that into account
+   // if there's a sprite on this tile, check that first
    for ( i = 0; i < map->spriteCount; i++ )
    {
       if ( ( map->spriteData[i] & 0x1FF ) == tileIndex )
