@@ -22,10 +22,11 @@
 #define MAP_TILES_X                       20
 #define MAP_TILES_Y                       15
 #define MAP_TILE_COUNT                    300
-#define MAP_TILE_TEXTURE_COUNT            19
+#define MAP_TILE_TEXTURE_COUNT            16
 #define MAP_TILE_TEXTURE_SIZE_BYTES       128 // 16x16 bit-packed, so 16/2 * 16
 #define MAP_PORTAL_COUNT                  4
 #define MAP_TILE_ENEMY_INDEX_COUNT        4
+#define MAP_SPRITE_COUNT                  16
 
 #define MAP_TILE_FLAG_PASSABLE            0x20
 #define MAP_TILE_FLAG_ENCOUNTERABLE       0x40
@@ -33,8 +34,9 @@
 #define TEXT_TILE_COUNT                   73
 
 #define SPRITE_SIZE                       16
-#define PACKED_SPRITE_SIZE                8
+#define SPRITE_PACKED_SIZE                8
 #define SPRITE_FRAMES                     2
+#define SPRITE_TEXTURE_SIZE_BYTES         128 // 16x16 bit-packed, so 16/2 * 16
 
 #define ENEMY_TILE_TEXTURE_COUNT          78
 #define ENEMY_TILE_TEXTURE_SIZE_BYTES     32 // 8x8 bit-packed, so 8/2 * 8

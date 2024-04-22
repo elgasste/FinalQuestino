@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 var _mapPalette = new List<ushort>();
 var _textTextureMap = new List<byte>();
 var _tileTextureMapBytes = new List<byte>();
+var _mapSpritesBytes = new List<byte>();
 var _playerSpriteTextureMapBytes = new List<byte>();
 var EnemyRepo = new EnemyRepo();
 
@@ -103,15 +104,15 @@ void LoadTextTextureMap( BitmapSource bitmap )
    }
 }
 
-void LoadWorldTextureMap( BitmapSource bitmap )
+void LoadMapTileset( BitmapSource bitmap )
 {
    if ( _tileTextureMapBytes is null )
    {
-      throw new Exception( "Somehow the world texture map is null, no idea how it happened." );
+      throw new Exception( "Somehow the map tileset is null, no idea how it happened." );
    }
    else if ( ( bitmap.PixelHeight * bitmap.PixelWidth ) > ( 16 * 16 * 19 ) )
    {
-      throw new Exception( "Trying to add too many tile textures." );
+      throw new Exception( "Trying to add too many map tile textures." );
    }
    else if ( _mapPalette is null )
    {
@@ -124,6 +125,31 @@ void LoadWorldTextureMap( BitmapSource bitmap )
       {
          var pixelColor = GetPixelColor16( bitmap, col, row );
          _tileTextureMapBytes.Add( (byte)PaletteIndexFromColor( pixelColor, _mapPalette ) );
+      }
+   }
+}
+
+void LoadMapSprites( BitmapSource bitmap )
+{
+   if ( _mapSpritesBytes is null )
+   {
+      throw new Exception( "Somehow the map sprites set is null, no idea how it happened." );
+   }
+   else if ( ( bitmap.PixelHeight * bitmap.PixelWidth ) > ( 16 * 16 * 14 ) )
+   {
+      throw new Exception( "Trying to add too many map sprites." );
+   }
+   else if ( _mapPalette is null )
+   {
+      throw new Exception( "Somehow the map palette is null, no idea how it happened." );
+   }
+
+   for ( int row = 0; row < bitmap.PixelHeight; row++ )
+   {
+      for ( int col = 0; col < bitmap.PixelWidth; col++ )
+      {
+         var pixelColor = GetPixelColor16( bitmap, col, row );
+         _mapSpritesBytes.Add( (byte)PaletteIndexFromColor( pixelColor, _mapPalette ) );
       }
    }
 }
@@ -300,8 +326,8 @@ string BuildMapTileTexturesOutputString()
          case 0:  // grass
          case 4:  // swamp
          case 9:  // bridge
-         case 12: // brick
-         case 16: // barrier
+         case 11: // brick
+         case 13: // barrier
             textureFlags |= 0x1;
             break;
          case 1:  // forest
@@ -326,7 +352,7 @@ string BuildMapTileTexturesOutputString()
          case 4:  // swamp
             textureFlags |= 0x8;
             break;
-         case 16: // barrier
+         case 13: // barrier
             textureFlags |= 0xC;
             break;
          default:
@@ -343,6 +369,55 @@ string BuildMapTileTexturesOutputString()
       }
 
       outputString += string.Format( "   map->tileTextures[{0}].flags = 0x{1};\n", i, textureFlags.ToString( "X2" ) );
+   }
+
+   outputString += "}\n\n";
+
+   return outputString;
+}
+
+string BuildMapSpriteTexturesOutputString()
+{
+   if ( _mapPalette is null )
+   {
+      throw new Exception( "Somehow the map palette is null, I have no idea what could have happened." );
+   }
+   else if ( _mapSpritesBytes is null )
+   {
+      throw new Exception( "Somehow the map sprites set is null, I have no idea what went wrong." );
+   }
+
+   string outputString = "void cTileMap_LoadSprite( cTileMap_t* map, uint8_t index )\n";
+   outputString += "{\n";
+
+   int spriteCount = _mapSpritesBytes.Count / 16 / 16;
+
+   for ( int i = 0; i < spriteCount; i++ )
+   {
+      if ( i == 0 )
+      {
+         outputString += string.Format( "   if ( index == {0} )\n", i );
+      }
+      else
+      {
+         outputString += string.Format( "   else if ( index == {0} )\n", i );
+      }
+
+      outputString += "   {\n";
+
+      for ( int row = 0, counter = 0; row < 16; row++ )
+      {
+         for ( int col = i * 16; col < ( i * 16 ) + 16; col += 2, counter++ )
+         {
+            int idx = col + ( row * ( spriteCount * 16 ) );
+            var unpackedPixel1 = (ushort)_mapSpritesBytes[idx++];
+            var unpackedPixel2 = (ushort)_mapSpritesBytes[idx];
+            var packedPixels = (ushort)( ( unpackedPixel1 << 4 ) | unpackedPixel2 );
+            outputString += string.Format( "      map->spriteTexture[{0}] = 0x{1};\n", counter, packedPixels.ToString( "X2" ) );
+         }
+      }
+
+      outputString += "   }\n";
    }
 
    outputString += "}\n\n";
@@ -490,6 +565,13 @@ string BuildMapTilesOutputString()
       outputString += string.Format( "      map->enemySpecialRegion.w = {0};\n", MapData.MapEnemySpecialRegions[i].Width );
       outputString += string.Format( "      map->enemySpecialRegion.h = {0};\n", MapData.MapEnemySpecialRegions[i].Height );
 
+      outputString += string.Format( "      map->spriteCount = {0};\n", MapData.SpriteData[i].Item1 );
+
+      for ( int j = 0; j < MapData.SpriteData[i].Item1; j++ )
+      {
+         outputString += string.Format( "      map->spriteData[{0}] = 0x{1};\n", j, MapData.SpriteData[i].Item2[j].ToString( "X4" ) );
+      }
+
       outputString += "   }\n";
    }
 
@@ -578,11 +660,17 @@ void LoadData()
    BitmapSanityCheck( textBitmap );
    LoadTextTextureMap( textBitmap );
 
-   var worldFileStream = new FileStream( "map_tileset.png", FileMode.Open, FileAccess.Read, FileShare.Read );
-   var worldDecoder = new PngBitmapDecoder( worldFileStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default );
-   BitmapSource worldBitmap = worldDecoder.Frames[0];
-   BitmapSanityCheck( worldBitmap );
-   LoadWorldTextureMap( worldBitmap );
+   var mapTilesetFileStream = new FileStream( "map_tileset.png", FileMode.Open, FileAccess.Read, FileShare.Read );
+   var mapTilesetDecoder = new PngBitmapDecoder( mapTilesetFileStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default );
+   BitmapSource mapTilesetBitmap = mapTilesetDecoder.Frames[0];
+   BitmapSanityCheck( mapTilesetBitmap );
+   LoadMapTileset( mapTilesetBitmap );
+
+   var mapSpritesFileStream = new FileStream( "map_sprite_tileset.png", FileMode.Open, FileAccess.Read, FileShare.Read );
+   var mapSpritesDecoder = new PngBitmapDecoder( mapSpritesFileStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default );
+   BitmapSource mapSpritesBitmap = mapSpritesDecoder.Frames[0];
+   BitmapSanityCheck( mapSpritesBitmap );
+   LoadMapSprites( mapSpritesBitmap );
 
    var playerSpriteFileStream = new FileStream( "player_sprite_tileset.png", FileMode.Open, FileAccess.Read, FileShare.Read );
    var playerSpriteDecoder = new PngBitmapDecoder( playerSpriteFileStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default );
@@ -608,6 +696,10 @@ try
 
    Console.Write( "Generating map tile texture loader..." );
    outputString += BuildMapTileTexturesOutputString();
+   Console.Write( "Done!\n" );
+
+   Console.Write( "Generating map sprite texture loader..." );
+   outputString += BuildMapSpriteTexturesOutputString();
    Console.Write( "Done!\n" );
 
    Console.Write( "Generating text bit field loader..." );

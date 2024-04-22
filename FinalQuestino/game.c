@@ -56,6 +56,12 @@ void cGame_Refresh( cGame_t* game )
    {
       cTileMap_LoadTileMap( &( game->tileMap ), game->tileMapIndex );
       cScreen_DrawTileMap( game );
+
+      if ( game->tileMap.spriteCount > 0 )
+      {
+         cScreen_DrawMapSprites( game );
+      }
+
       cScreen_DrawPlayer( game );
       cPhysics_UpdateTileIndexCache( game );
    }

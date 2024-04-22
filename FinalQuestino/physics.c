@@ -1,6 +1,7 @@
 #include "game.h"
 
 static void cPhysics_RefreshFromScreenSwap( cGame_t* game );
+static cBool_t cPhysics_TileHasImpassableSprite( cTileMap_t* map, uint16_t tileIndex );
 
 void cPhysics_Init( cPhysics_t* physics )
 {
@@ -13,6 +14,7 @@ void cPhysics_Tic( cGame_t* game )
    cVector2f_t newPos;
    cPlayer_t* player = &( game->player );
    uint8_t tileRowStartIndex, tileRowEndIndex, tileColStartIndex, tileColEndIndex, row, col, tile;
+   uint16_t tileIndex;
    cBool_t posChanged;
 
    newPos.x = player->position.x + ( player->velocity.x * FRAME_SECONDS );
@@ -62,25 +64,27 @@ void cPhysics_Tic( cGame_t* game )
 
          for ( row = tileRowStartIndex; row <= tileRowEndIndex; row++ )
          {
-            tile = game->tileMap.tiles[col + ( row * MAP_TILES_X )];
+            tileIndex = col + ( row * MAP_TILES_X );
+            tile = game->tileMap.tiles[tileIndex];
 
-            if ( !( tile & MAP_TILE_FLAG_PASSABLE ) )
+            if ( !( tile & MAP_TILE_FLAG_PASSABLE ) || cPhysics_TileHasImpassableSprite( &( game->tileMap ), tileIndex ) )
             {
                newPos.x = ( ( col + 1 ) * MAP_TILE_SIZE );
                break;
             }
          }
-         }
-         else
-         {
+      }
+      else
+      {
          // moving right, check rightward tiles
          col = ( newPos.x + PLAYER_HITBOX_SIZE ) / MAP_TILE_SIZE;
 
          for ( row = tileRowStartIndex; row <= tileRowEndIndex; row++ )
          {
-            tile = game->tileMap.tiles[col + ( row * MAP_TILES_X )];
+            tileIndex = col + ( row * MAP_TILES_X );
+            tile = game->tileMap.tiles[tileIndex];
 
-            if ( !( tile & MAP_TILE_FLAG_PASSABLE ) )
+            if ( !( tile & MAP_TILE_FLAG_PASSABLE ) || cPhysics_TileHasImpassableSprite( &( game->tileMap ), tileIndex ) )
             {
                newPos.x = ( col * MAP_TILE_SIZE ) - PLAYER_HITBOX_SIZE - COLLISION_PADDING;
                break;
@@ -102,25 +106,27 @@ void cPhysics_Tic( cGame_t* game )
 
          for ( col = tileColStartIndex; col <= tileColEndIndex; col++ )
          {
-            tile = game->tileMap.tiles[col + ( row * MAP_TILES_X )];
+            tileIndex = col + ( row * MAP_TILES_X );
+            tile = game->tileMap.tiles[tileIndex];
 
-            if ( !( tile & MAP_TILE_FLAG_PASSABLE ) )
+            if ( !( tile & MAP_TILE_FLAG_PASSABLE ) || cPhysics_TileHasImpassableSprite( &( game->tileMap ), tileIndex ) )
             {
                newPos.y = ( ( row + 1 ) * MAP_TILE_SIZE );
                break;
             }
          }
-         }
-         else
-         {
+      }
+      else
+      {
          // moving down, check downward tiles
          row = ( newPos.y + PLAYER_HITBOX_SIZE ) / MAP_TILE_SIZE;
 
          for ( col = tileColStartIndex; col <= tileColEndIndex; col++ )
          {
-            tile = game->tileMap.tiles[col + ( row * MAP_TILES_X )];
+            tileIndex = col + ( row * MAP_TILES_X );
+            tile = game->tileMap.tiles[tileIndex];
 
-            if ( !( tile & MAP_TILE_FLAG_PASSABLE ) )
+            if ( !( tile & MAP_TILE_FLAG_PASSABLE ) || cPhysics_TileHasImpassableSprite( &( game->tileMap ), tileIndex ) )
             {
                newPos.y = ( row * MAP_TILE_SIZE ) - PLAYER_HITBOX_SIZE - COLLISION_PADDING;
                break;
@@ -161,4 +167,19 @@ void cPhysics_UpdateTileIndexCache( cGame_t* game )
       game->physics.tileIndexCache = newTileIndex;
       cGame_SteppedOnTile( game, newTileIndex );
    }
+}
+
+static cBool_t cPhysics_TileHasImpassableSprite( cTileMap_t* map, uint16_t tileIndex )
+{
+   uint8_t i;
+
+   for ( i = 0; i < map->spriteCount; i++ )
+   {
+      if ( (uint16_t)( map->spriteData[i] & 0x1FF ) == tileIndex )
+      {
+         return ( ( map->spriteData[i] >> 13 ) & 0x1 ) ? cFalse : cTrue;
+      }
+   }
+
+   return cFalse;
 }

@@ -110,6 +110,8 @@ typedef struct cScreen_t
 
    uint16_t mapPalette[16];
    uint8_t textBitFields[TEXT_TILE_COUNT][8];
+
+   uint8_t mapSpriteIndexCache;
 }
 cScreen_t;
 
@@ -126,6 +128,7 @@ void cScreen_DrawText( cScreen_t* screen, const char* text, uint16_t x, uint16_t
 void cScreen_DrawWrappedText( cScreen_t* screen, const char* text, uint16_t x, uint16_t y,
                               uint8_t lineChars, uint8_t lineHeight,
                               uint16_t backgroundColor, uint16_t foregroundColor );
+void cScreen_DrawMapSprites( cGame_t* game );
 void cScreen_DrawPlayer( cGame_t* game );
 void cScreen_WipePlayer( cGame_t* game );
 void cScreen_DrawEnemy( cGame_t* game, uint16_t x, uint16_t y );

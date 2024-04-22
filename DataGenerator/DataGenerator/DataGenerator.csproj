@@ -9,6 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Update="map_sprite_tileset.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="map_tileset.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
