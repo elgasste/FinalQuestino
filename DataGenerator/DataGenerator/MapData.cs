@@ -340,7 +340,7 @@ namespace DataGenerator
          new( 0, new() ),     // 5
          new( 0, new() ),     // 6
          new( 0, new() ),     // 7
-         new( 0, new() ),     // 8
+         new( 1, new() { 0 | ( 1 << 13 ) | ( 6 << 9 ) | 98 } ), // 8
          new( 0, new() ),     // 9
          new( 0, new() ),     // 10
          new( 0, new() ),     // 11
@@ -358,10 +358,11 @@ namespace DataGenerator
          new( 0, new() ),     // 23 (start area)
          new( 0, new() ),     // 24
          new( 0, new() ),     // 25
-         new( 0, new() ),     // 26
+         new( 2, new() { 0 | ( 1 << 13 ) | ( 6 << 9 ) | 134,
+                         0 | ( 1 << 13 ) | ( 6 << 9 ) | 234 } ), // 26
          new( 0, new() ),     // 27
          new( 0, new() ),     // 28
-         new( 0, new() ),     // 29
+         new( 1, new() { 0 | ( 1 << 13 ) | ( 6 << 9 ) | 98 } ), // 29
          new( 0, new() ),     // 30
          new( 0, new() ),     // 31
          new( 0, new() ),     // 32
