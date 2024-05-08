@@ -30,6 +30,7 @@ typedef struct cGame_t
    cBattle_t battle;
 
    uint8_t specialEnemyFlags;
+   uint32_t treasureFlags;
 }
 cGame_t;
 
@@ -45,6 +46,8 @@ void cGame_SteppedOnTile( cGame_t* game, uint16_t tileIndex );
 void cGame_ShowMessage( cGame_t* game, const char* message );
 void cGame_WipeMessage( cGame_t* game );
 cBool_t cGame_OnSpecialEnemyTile( cGame_t* game, uint8_t specialEnemyId );
+void cGame_SearchMapTile( cGame_t* game );
+void cGame_ShowMapMessage( cGame_t* game, const char* message );
 
 #if defined( __cplusplus )
 }

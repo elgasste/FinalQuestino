@@ -5,12 +5,14 @@
 static void cGame_DrawMapStatus( cGame_t* game );
 static void cGame_RollEncounter( cGame_t* game, uint8_t encounterRate );
 static cBool_t cGame_OnAnySpecialEnemyTile( cGame_t* game );
+static cBool_t cGame_CollectTreasure( cGame_t* game, uint32_t treasureFlag );
 
 void cGame_Init( cGame_t* game )
 {
    game->paletteIndex = 0;
    game->tileMapIndex = 23;
    game->specialEnemyFlags = 0xFF;
+   game->treasureFlags = 0xFFFF;
 
    cScreen_Init( &( game->screen ) );
    cScreen_LoadMapPalette( &( game->screen ), game->paletteIndex );
@@ -202,6 +204,8 @@ void cGame_WipeMessage( cGame_t* game )
    if ( game->state == cGameState_Map )
    {
       cScreen_WipeTileMapSection( game, 48, 160, 224, 64 );
+      cScreen_DrawMapSprites( game );
+      cScreen_DrawPlayer( game );
    }
 }
 
@@ -279,4 +283,44 @@ static cBool_t cGame_OnAnySpecialEnemyTile( cGame_t* game )
    return cGame_OnSpecialEnemyTile( game, SPECIALENEMYID_GREENDRAGON ) ||
           cGame_OnSpecialEnemyTile( game, SPECIALENEMYID_GOLEM ) ||
           cGame_OnSpecialEnemyTile( game, SPECIALENEMYID_AXEKNIGHT );
+}
+
+void cGame_SearchMapTile( cGame_t* game )
+{
+   uint8_t x, y;
+   uint32_t treasureFlag = cTileMap_GetTreasureFlag( game, game->tileMapIndex, game->tileMap.tileIndexCache );
+
+   if ( treasureFlag && ( game->treasureFlags & treasureFlag ) )
+   {
+      if ( cGame_CollectTreasure( game, treasureFlag ) )
+      {
+         cGame_ShowMapMessage( game, "Time to quit your day job!" );
+
+         y = game->tileMap.tileIndexCache / MAP_TILES_X;
+         x = game->tileMap.tileIndexCache - ( y * MAP_TILES_X );
+         cScreen_WipeTileMapSection( game, x * MAP_TILE_SIZE, y * MAP_TILE_SIZE, MAP_TILE_SIZE, MAP_TILE_SIZE );
+         cScreen_DrawPlayer( game );
+      }
+      else
+      {
+         cGame_ShowMapMessage( game, "Can't carry any more of these." );
+      }
+   }
+   else
+   {
+      cGame_ShowMapMessage( game, "You didn't find anything." );
+   }
+}
+
+static cBool_t cGame_CollectTreasure( cGame_t* game, uint32_t treasureFlag )
+{
+   // TODO: check if we can carry any more of whatever this is
+   game->treasureFlags ^= treasureFlag;
+   return cTrue;
+}
+
+void cGame_ShowMapMessage( cGame_t* game, const char* message )
+{
+   cGame_ChangeState( game, cGameState_MapMessage );
+   cGame_ShowMessage( game, message );
 }
