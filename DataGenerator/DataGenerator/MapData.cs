@@ -433,6 +433,11 @@ namespace DataGenerator
          new( 0, new() )      // 84
       };
 
+      public static List<Tuple<int, List<Tuple<int, int>>>> MapTreasures = new()
+      {
+         new( 77, new() { new( 71, 0 ), new( 129, 1 ), new( 130, 2) } ) // tantegel throne room
+      };
+
       public static List<List<int>> MapTiles = new()
       {
          // LEGEND:

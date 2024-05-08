@@ -51,6 +51,7 @@ uint16_t cTileMap_GetTileIndexFromPos( cTileMap_t* tileMap, cVector2f_t* pos );
 // data_loader.c
 void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index );
 void cTileMap_LoadSprite( cTileMap_t* map, uint8_t index );
+uint32_t cTileMap_GetTreasureFlag( cGame_t* game, uint8_t tileMapIndex, uint16_t tileIndex );
 
 #if defined( __cplusplus )
 }

@@ -5,7 +5,7 @@
 static void cScreen_Reset( cScreen_t* screen );
 static void cScreen_SetAddrWindow( cScreen_t* screen, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2 );
 static int8_t cScreen_GetCharIndexFromChar( const char ch );
-static uint16_t cScreen_GetTilePixelColor( cScreen_t* screen, cTileMap_t* map, uint16_t x, uint16_t y );
+static uint16_t cScreen_GetTilePixelColor( cGame_t* game, uint16_t x, uint16_t y );
 
 void cScreen_Init( cScreen_t* screen )
 {
@@ -367,36 +367,43 @@ void cScreen_DrawWrappedText( cScreen_t* screen, const char* text, uint16_t x, u
    }
 }
 
-static uint16_t cScreen_GetTilePixelColor( cScreen_t* screen, cTileMap_t* map, uint16_t x, uint16_t y )
+static uint16_t cScreen_GetTilePixelColor( cGame_t* game, uint16_t x, uint16_t y )
 {
    uint8_t i, spriteIndex;
    uint16_t color;
    uint16_t tileIndex = ( ( y / MAP_TILE_SIZE ) * MAP_TILES_X ) + ( x / MAP_TILE_SIZE );
+   cTileMap_t* map = &( game->tileMap );
    uint8_t tile = map->tiles[tileIndex];
    uint8_t* tileTexture = &( map->tileTextures[tile & 0x1F].pixels );
    uint8_t pixelOffsetX = x % MAP_TILE_SIZE;
    uint8_t pixelOffsetY = y % MAP_TILE_SIZE;
+   uint32_t treasureFlag = cTileMap_GetTreasureFlag( game, game->tileMapIndex, tileIndex );
+   cScreen_t* screen = &( game->screen );
 
-   // if there's a sprite on this tile, check that first
-   for ( i = 0; i < map->spriteCount; i++ )
+   // check if this pixel is on a treasure that has already been collected
+   if ( !( treasureFlag && !( game->treasureFlags & treasureFlag ) ) )
    {
-      if ( ( map->spriteData[i] & 0x1FF ) == tileIndex )
+      // if there's a sprite on this tile, check that first
+      for ( i = 0; i < map->spriteCount; i++ )
       {
-         spriteIndex = ( map->spriteData[i] >> 9 ) & 0xF;
-
-         if ( spriteIndex != screen->mapSpriteIndexCache )
+         if ( ( map->spriteData[i] & 0x1FF ) == tileIndex )
          {
-            cTileMap_LoadSprite( map, spriteIndex );
-            screen->mapSpriteIndexCache = spriteIndex;
-         }
+            spriteIndex = ( map->spriteData[i] >> 9 ) & 0xF;
 
-         color = pixelOffsetX % 2 == 0
-            ? screen->mapPalette[map->spriteTexture[( pixelOffsetX / 2 ) + ( pixelOffsetY * SPRITE_PACKED_SIZE )] >> 4]
-            : screen->mapPalette[map->spriteTexture[( pixelOffsetX / 2 ) + ( pixelOffsetY * SPRITE_PACKED_SIZE )] & 0xF];
-         
-         if ( color != TRANSPARENT_COLOR )
-         {
-            return color;
+            if ( spriteIndex != screen->mapSpriteIndexCache )
+            {
+               cTileMap_LoadSprite( map, spriteIndex );
+               screen->mapSpriteIndexCache = spriteIndex;
+            }
+
+            color = pixelOffsetX % 2 == 0
+               ? screen->mapPalette[map->spriteTexture[( pixelOffsetX / 2 ) + ( pixelOffsetY * SPRITE_PACKED_SIZE )] >> 4]
+               : screen->mapPalette[map->spriteTexture[( pixelOffsetX / 2 ) + ( pixelOffsetY * SPRITE_PACKED_SIZE )] & 0xF];
+            
+            if ( color != TRANSPARENT_COLOR )
+            {
+               return color;
+            }
          }
       }
    }
@@ -417,12 +424,24 @@ void cScreen_DrawMapSprites( cGame_t* game )
    uint16_t tileIndex, color, j, pixel, x, y;
    cScreen_t* screen = &( game->screen );
    cTileMap_t* map = &( game->tileMap );
+   uint32_t treasureFlag;
 
    CS_ACTIVE;
 
    for ( i = 0; i < map->spriteCount; i++ )
    {
       tileIndex = map->spriteData[i] & 0x1FF;
+      treasureFlag = cTileMap_GetTreasureFlag( game, game->tileMapIndex, tileIndex );
+
+      if ( treasureFlag )
+      {
+         // this is a treasure chest that has already been collected
+         if ( treasureFlag && !( game->treasureFlags & treasureFlag ) )
+         {
+            continue;
+         }
+      }
+
       spriteIndex = ( map->spriteData[i] >> 9 ) & 0xF;
       cTileMap_LoadSprite( map, spriteIndex );
       game->screen.mapSpriteIndexCache = spriteIndex;
@@ -445,7 +464,7 @@ void cScreen_DrawMapSprites( cGame_t* game )
 
          if ( color == TRANSPARENT_COLOR )
          {
-            color = cScreen_GetTilePixelColor( screen, map, x + ( pixel % SPRITE_SIZE ), y + ( pixel / SPRITE_SIZE ) );
+            color = cScreen_GetTilePixelColor( game, x + ( pixel % SPRITE_SIZE ), y + ( pixel / SPRITE_SIZE ) );
          }
 
          write16( color >> 8, color );
@@ -455,7 +474,7 @@ void cScreen_DrawMapSprites( cGame_t* game )
 
          if ( color == TRANSPARENT_COLOR )
          {
-            color = cScreen_GetTilePixelColor( screen, map, x + ( pixel % SPRITE_SIZE ), y + ( pixel / SPRITE_SIZE ) );
+            color = cScreen_GetTilePixelColor( game, x + ( pixel % SPRITE_SIZE ), y + ( pixel / SPRITE_SIZE ) );
          }
 
          write16( color >> 8, color );
@@ -524,7 +543,7 @@ void cScreen_DrawPlayer( cGame_t* game )
 
          if ( color == TRANSPARENT_COLOR )
          {
-            color = cScreen_GetTilePixelColor( screen, map, ux + ( pixel % SPRITE_SIZE ), uy + ( pixel / SPRITE_SIZE ) );
+            color = cScreen_GetTilePixelColor( game, ux + ( pixel % SPRITE_SIZE ), uy + ( pixel / SPRITE_SIZE ) );
          }
 
          write16( color >> 8, color );
@@ -540,7 +559,7 @@ void cScreen_DrawPlayer( cGame_t* game )
 
          if ( color == TRANSPARENT_COLOR )
          {
-            color = cScreen_GetTilePixelColor( screen, map, ux + ( pixel % SPRITE_SIZE ), uy + ( pixel / SPRITE_SIZE ) );
+            color = cScreen_GetTilePixelColor( game, ux + ( pixel % SPRITE_SIZE ), uy + ( pixel / SPRITE_SIZE ) );
          }
 
          write16( color >> 8, color );
@@ -659,7 +678,7 @@ void cScreen_WipeTileMapSection( cGame_t* game, float x, float y, uint16_t w, ui
    {
       for ( col = ux; col < ux + w; col++ )
       {
-         color = cScreen_GetTilePixelColor( screen, map, col, row );
+         color = cScreen_GetTilePixelColor( game, col, row );
          write16( color >> 8, color );
       }
    }

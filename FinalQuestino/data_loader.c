@@ -19799,6 +19799,20 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
    }
 }
 
+uint32_t cTileMap_GetTreasureFlag( cGame_t* game, uint8_t tileMapIndex, uint16_t tileIndex )
+{
+   switch ( tileMapIndex )
+   {
+      case 77:
+         if ( tileIndex == 71 ) return 0x0001;
+         if ( tileIndex == 129 ) return 0x0002;
+         if ( tileIndex == 130 ) return 0x0004;
+         break;
+   }
+
+   return 0;
+}
+
 void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
 {
    uint8_t i, j;

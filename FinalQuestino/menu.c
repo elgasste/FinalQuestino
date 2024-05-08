@@ -157,23 +157,19 @@ static void cMenu_MapMenuSelect( cGame_t* game )
    switch( game->menu.optionIndex )
    {
       case 0: // talk
-         cGame_ChangeState( game, cGameState_MapMessage );
-         cGame_ShowMessage( game, "Nobody's there." );
+         cGame_ShowMapMessage( game, "Nobody's there." );
          break;
       case 1: // status
          cGame_ChangeState( game, cGameState_MapStatus );
          break;
       case 2: // search
-         cGame_ChangeState( game, cGameState_MapMessage );
-         cGame_ShowMessage( game, "You didn't find anything." );
+         cGame_SearchMapTile( game );
          break;
       case 3: // spell
-         cGame_ChangeState( game, cGameState_MapMessage );
-         cGame_ShowMessage( game, "You don't know any spells." );
+         cGame_ShowMapMessage( game, "You don't know any spells." );
          break;
       case 4: // item
-         cGame_ChangeState( game, cGameState_MapMessage );
-         cGame_ShowMessage( game, "You don't have any items." );
+         cGame_ShowMapMessage( game, "You don't have any items." );
          break;
    }
 }
