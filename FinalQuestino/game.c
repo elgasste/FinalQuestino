@@ -10,7 +10,7 @@ static cBool_t cGame_CollectTreasure( cGame_t* game, uint32_t treasureFlag );
 void cGame_Init( cGame_t* game )
 {
    game->paletteIndex = 0;
-   game->tileMapIndex = 23;
+   game->tileMapIndex = 77; // Tantegel throne room
    game->specialEnemyFlags = 0xFF;
    game->treasureFlags = 0xFFFF;
 
@@ -25,10 +25,10 @@ void cGame_Init( cGame_t* game )
    cTileTexture_LoadTileTextures( &( game->tileMap ) );
 
    cPlayer_Init( &( game->player ) );
-   game->player.sprite.direction = cDirection_Down;
+   game->player.sprite.direction = cDirection_Up;
    game->player.sprite.frameSeconds = 0.2f;
-   game->player.position.x = MAP_TILE_SIZE * 10;
-   game->player.position.y = MAP_TILE_SIZE * 6;
+   game->player.position.x = ( MAP_TILE_SIZE * 8 ) + 2;
+   game->player.position.y = ( MAP_TILE_SIZE * 6 ) + 4;
 
    game->state = cGameState_Init;
 }
