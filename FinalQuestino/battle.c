@@ -42,11 +42,11 @@ void cBattle_Start( cGame_t* game )
    cBattle_AnimateStart( game );
 
    // quick stats
-   cScreen_DrawRect( &( game->screen ), 16, 16, 76, 36, BLACK );
+   cScreen_DrawRect( &( game->screen ), 16, 16, 76, 36, DARKGRAY );
    snprintf( str, 32, "HP:%u", game->player.stats.HitPoints );
-   cScreen_DrawText( &( game->screen ), str, 24, 24, BLACK, WHITE );
+   cScreen_DrawText( &( game->screen ), str, 24, 24, DARKGRAY, WHITE );
    snprintf( str, 32, "MP:%u", game->player.stats.MagicPoints );
-   cScreen_DrawText( &( game->screen ), str, 24, 36, BLACK, WHITE );
+   cScreen_DrawText( &( game->screen ), str, 24, 36, DARKGRAY, WHITE );
 
    if ( game->battle.enemy.indefiniteArticle == cIndefiniteArticle_A )
    {

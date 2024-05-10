@@ -195,8 +195,8 @@ void cGame_SteppedOnTile( cGame_t* game, uint16_t tileIndex )
 
 void cGame_ShowMessage( cGame_t* game, const char* message )
 {
-   cScreen_DrawRect( &( game->screen ), 48, 160, 224, 64, BLACK );
-   cScreen_DrawWrappedText( &( game->screen ), message, 56, 168, 26, 8, BLACK, WHITE );
+   cScreen_DrawRect( &( game->screen ), 48, 160, 224, 64, DARKGRAY );
+   cScreen_DrawWrappedText( &( game->screen ), message, 56, 168, 26, 8, DARKGRAY, WHITE );
 }
 
 void cGame_WipeMessage( cGame_t* game )
@@ -214,22 +214,22 @@ static void cGame_DrawMapStatus( cGame_t* game )
    cPlayer_t* player = &( game->player );
    char str[14];
 
-   cScreen_DrawRect( &( game->screen ), 16, 16, 112, 96, BLACK );
+   cScreen_DrawRect( &( game->screen ), 16, 16, 112, 96, DARKGRAY );
 
    snprintf( str, 14, "Lvl: %u", cPlayer_GetLevel( player ) );
-   cScreen_DrawText( &( game->screen ), str, 24, 24, BLACK, WHITE );
+   cScreen_DrawText( &( game->screen ), str, 24, 24, DARKGRAY, WHITE );
    snprintf( str, 14, " HP: %u/%u", player->stats.HitPoints, player->stats.MaxHitPoints );
-   cScreen_DrawText( &( game->screen ), str, 24, 36, BLACK, WHITE );
+   cScreen_DrawText( &( game->screen ), str, 24, 36, DARKGRAY, WHITE );
    snprintf( str, 14, " MP: %u/%u", player->stats.MagicPoints, player->stats.MaxMagicPoints );
-   cScreen_DrawText( &( game->screen ), str, 24, 48, BLACK, WHITE );
+   cScreen_DrawText( &( game->screen ), str, 24, 48, DARKGRAY, WHITE );
    snprintf( str, 14, "Atk: %u", player->stats.AttackPower );
-   cScreen_DrawText( &( game->screen ), str, 24, 60, BLACK, WHITE );
+   cScreen_DrawText( &( game->screen ), str, 24, 60, DARKGRAY, WHITE );
    snprintf( str, 14, "Def: %u", player->stats.DefensePower );
-   cScreen_DrawText( &( game->screen ), str, 24, 72, BLACK, WHITE );
+   cScreen_DrawText( &( game->screen ), str, 24, 72, DARKGRAY, WHITE );
    snprintf( str, 14, "Agl: %u", player->stats.Agility );
-   cScreen_DrawText( &( game->screen ), str, 24, 84, BLACK, WHITE );
+   cScreen_DrawText( &( game->screen ), str, 24, 84, DARKGRAY, WHITE );
    snprintf( str, 14, "Exp: %u", player->experience );
-   cScreen_DrawText( &( game->screen ), str, 24, 96, BLACK, WHITE );
+   cScreen_DrawText( &( game->screen ), str, 24, 96, DARKGRAY, WHITE );
 }
 
 static void cGame_RollEncounter( cGame_t* game, uint8_t encounterRate )
