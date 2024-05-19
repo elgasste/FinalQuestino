@@ -546,7 +546,7 @@ string BuildMapTilesOutputString()
 
       outputString += string.Format( "      map->stride = {0};\n", MapData.MapStrides[i] );
 
-      for ( int j = 0; j < 4; j++ )
+      for ( int j = 0; j < 6; j++ )
       {
          outputString += string.Format( "      map->portals[{0}] = 0x{1};\n", j, MapData.MapPortals[i][j].CompiledData.ToString( "X2" ) );
       }
