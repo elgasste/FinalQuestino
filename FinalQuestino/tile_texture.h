@@ -3,9 +3,9 @@
 
 #include "common.h"
 
-typedef struct cTileMap_t cTileMap_t;
+typedef struct TileMap_t TileMap_t;
 
-typedef struct cTileTexture_t
+typedef struct TileTexture_t
 {
    uint8_t pixels[MAP_TILE_TEXTURE_SIZE_BYTES];
 
@@ -16,9 +16,9 @@ typedef struct cTileTexture_t
    // flag 1000: reserved
    uint8_t flags;
 }
-cTileTexture_t;
+TileTexture_t;
 
 // data_loader.c
-void cTileTexture_LoadTileTextures( cTileMap_t* map );
+void TileTexture_LoadTileTextures( TileMap_t* map );
 
 #endif // TILE_TEXTURE_H

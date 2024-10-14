@@ -1,16 +1,16 @@
 #include "clock.h"
 
-void cClock_Init( cClock_t* clock )
+void Clock_Init( Clock_t* clock )
 {
    clock->frameStartMicro = 0;
 }
 
-void cClock_StartFrame( cClock_t* clock )
+void Clock_StartFrame( Clock_t* clock )
 {
    clock->frameStartMicro = micros();
 }
 
-void cClock_EndFrame( cClock_t* clock )
+void Clock_EndFrame( Clock_t* clock )
 {
    uint32_t frameEndMicro = micros();
    uint32_t elapsedMicro;

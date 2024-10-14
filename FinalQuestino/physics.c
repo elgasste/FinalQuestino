@@ -1,21 +1,21 @@
 #include "game.h"
 
-static void cPhysics_RefreshFromScreenSwap( cGame_t* game );
-static cBool_t cPhysics_TileHasImpassableSprite( cTileMap_t* map, uint16_t tileIndex );
+static void Physics_RefreshFromScreenSwap( Game_t* game );
+static Bool_t Physics_TileHasImpassableSprite( TileMap_t* map, uint16_t tileIndex );
 
-void cPhysics_Init( cPhysics_t* physics )
+void Physics_Init( Physics_t* physics )
 {
    physics->spriteFrameCache = 0;
    physics->tileIndexCache = MAP_TILES_X * MAP_TILES_Y; // off the map
 }
 
-void cPhysics_Tic( cGame_t* game )
+void Physics_Tic( Game_t* game )
 {
    cVector2f_t newPos;
-   cPlayer_t* player = &( game->player );
+   Player_t* player = &( game->player );
    uint8_t tileRowStartIndex, tileRowEndIndex, tileColStartIndex, tileColEndIndex, row, col, tile;
    uint16_t tileIndex;
-   cBool_t posChanged;
+   Bool_t posChanged;
 
    newPos.x = player->position.x + ( player->velocity.x * FRAME_SECONDS );
    newPos.y = player->position.y + ( player->velocity.y * FRAME_SECONDS );
@@ -25,14 +25,14 @@ void cPhysics_Tic( cGame_t* game )
    {
       game->tileMapIndex--;
       player->position.x = ( MAP_TILES_X * MAP_TILE_SIZE ) - PLAYER_HITBOX_SIZE - COLLISION_PADDING;
-      cGame_Refresh( game );
+      Game_Refresh( game );
       return;
    }
    else if ( ( newPos.x + PLAYER_HITBOX_SIZE ) >= ( MAP_TILES_X * MAP_TILE_SIZE ) )
    {
       game->tileMapIndex++;
       player->position.x = COLLISION_PADDING;
-      cGame_Refresh( game );
+      Game_Refresh( game );
       return;
    }
 
@@ -40,14 +40,14 @@ void cPhysics_Tic( cGame_t* game )
    {
       game->tileMapIndex -= game->tileMap.stride;
       player->position.y = ( MAP_TILES_Y * MAP_TILE_SIZE ) - PLAYER_HITBOX_SIZE - COLLISION_PADDING;
-      cGame_Refresh( game );
+      Game_Refresh( game );
       return;
    }
    else if ( ( newPos.y + PLAYER_HITBOX_SIZE ) >= ( MAP_TILES_Y * MAP_TILE_SIZE ) )
    {
       game->tileMapIndex += game->tileMap.stride;
       player->position.y = COLLISION_PADDING;
-      cGame_Refresh( game );
+      Game_Refresh( game );
       return;
    }
 
@@ -67,7 +67,7 @@ void cPhysics_Tic( cGame_t* game )
             tileIndex = col + ( row * MAP_TILES_X );
             tile = game->tileMap.tiles[tileIndex];
 
-            if ( !( tile & MAP_TILE_FLAG_PASSABLE ) || cPhysics_TileHasImpassableSprite( &( game->tileMap ), tileIndex ) )
+            if ( !( tile & MAP_TILE_FLAG_PASSABLE ) || Physics_TileHasImpassableSprite( &( game->tileMap ), tileIndex ) )
             {
                newPos.x = ( ( col + 1 ) * MAP_TILE_SIZE );
                break;
@@ -84,7 +84,7 @@ void cPhysics_Tic( cGame_t* game )
             tileIndex = col + ( row * MAP_TILES_X );
             tile = game->tileMap.tiles[tileIndex];
 
-            if ( !( tile & MAP_TILE_FLAG_PASSABLE ) || cPhysics_TileHasImpassableSprite( &( game->tileMap ), tileIndex ) )
+            if ( !( tile & MAP_TILE_FLAG_PASSABLE ) || Physics_TileHasImpassableSprite( &( game->tileMap ), tileIndex ) )
             {
                newPos.x = ( col * MAP_TILE_SIZE ) - PLAYER_HITBOX_SIZE - COLLISION_PADDING;
                break;
@@ -109,7 +109,7 @@ void cPhysics_Tic( cGame_t* game )
             tileIndex = col + ( row * MAP_TILES_X );
             tile = game->tileMap.tiles[tileIndex];
 
-            if ( !( tile & MAP_TILE_FLAG_PASSABLE ) || cPhysics_TileHasImpassableSprite( &( game->tileMap ), tileIndex ) )
+            if ( !( tile & MAP_TILE_FLAG_PASSABLE ) || Physics_TileHasImpassableSprite( &( game->tileMap ), tileIndex ) )
             {
                newPos.y = ( ( row + 1 ) * MAP_TILE_SIZE );
                break;
@@ -126,7 +126,7 @@ void cPhysics_Tic( cGame_t* game )
             tileIndex = col + ( row * MAP_TILES_X );
             tile = game->tileMap.tiles[tileIndex];
 
-            if ( !( tile & MAP_TILE_FLAG_PASSABLE ) || cPhysics_TileHasImpassableSprite( &( game->tileMap ), tileIndex ) )
+            if ( !( tile & MAP_TILE_FLAG_PASSABLE ) || Physics_TileHasImpassableSprite( &( game->tileMap ), tileIndex ) )
             {
                newPos.y = ( row * MAP_TILE_SIZE ) - PLAYER_HITBOX_SIZE - COLLISION_PADDING;
                break;
@@ -139,24 +139,24 @@ void cPhysics_Tic( cGame_t* game )
 
    if ( posChanged || player->sprite.currentFrame != game->physics.spriteFrameCache )
    {
-      cScreen_WipePlayer( game );
+      Screen_WipePlayer( game );
       game->physics.spriteFrameCache = player->sprite.currentFrame;
    }
 
    player->position.x = newPos.x;
    player->position.y = newPos.y;
-   cScreen_DrawPlayer( game );
+   Screen_DrawPlayer( game );
 
    if ( posChanged )
    {
-      cPhysics_UpdateTileIndexCache( game );
+      Physics_UpdateTileIndexCache( game );
    }
 
    player->velocity.x = 0;
    player->velocity.y = 0;
 }
 
-void cPhysics_UpdateTileIndexCache( cGame_t* game )
+void Physics_UpdateTileIndexCache( Game_t* game )
 {
    uint16_t centerX = game->player.position.x + ( PLAYER_HITBOX_SIZE / 2 );
    uint16_t centerY = game->player.position.y + ( PLAYER_HITBOX_SIZE / 2 );
@@ -165,11 +165,11 @@ void cPhysics_UpdateTileIndexCache( cGame_t* game )
    if ( newTileIndex != game->physics.tileIndexCache )
    {
       game->physics.tileIndexCache = newTileIndex;
-      cGame_SteppedOnTile( game, newTileIndex );
+      Game_SteppedOnTile( game, newTileIndex );
    }
 }
 
-static cBool_t cPhysics_TileHasImpassableSprite( cTileMap_t* map, uint16_t tileIndex )
+static Bool_t Physics_TileHasImpassableSprite( TileMap_t* map, uint16_t tileIndex )
 {
    uint8_t i;
 
@@ -177,9 +177,9 @@ static cBool_t cPhysics_TileHasImpassableSprite( cTileMap_t* map, uint16_t tileI
    {
       if ( (uint16_t)( map->spriteData[i] & 0x1FF ) == tileIndex )
       {
-         return ( ( map->spriteData[i] >> 13 ) & 0x1 ) ? cFalse : cTrue;
+         return ( ( map->spriteData[i] >> 13 ) & 0x1 ) ? False : True;
       }
    }
 
-   return cFalse;
+   return False;
 }

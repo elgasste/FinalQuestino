@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-typedef struct cBattleStats_t
+typedef struct BattleStats_t
 {
    uint8_t HitPoints;
    uint8_t MaxHitPoints;
@@ -13,6 +13,6 @@ typedef struct cBattleStats_t
    uint8_t DefensePower;
    uint8_t Agility;
 }
-cBattleStats_t;
+BattleStats_t;
 
 #endif // BATTLE_STATS_H

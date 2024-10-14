@@ -3,51 +3,51 @@
 
 #include "common.h"
 
-typedef enum cDirection_t
+typedef enum Direction_t
 {
-   cDirection_Left = 0,
-   cDirection_Up,
-   cDirection_Right,
-   cDirection_Down
+   Direction_Left = 0,
+   Direction_Up,
+   Direction_Right,
+   Direction_Down
 }
-cDirection_t;
+Direction_t;
 
-typedef enum cGameState_t
+typedef enum GameState_t
 {
-   cGameState_Init = 0,
-   cGameState_Map,
-   cGameState_MapMenu,
-   cGameState_MapMessage,
-   cGameState_MapStatus,
-   cGameState_Battle
+   GameState_Init = 0,
+   GameState_Map,
+   GameState_MapMenu,
+   GameState_MapMessage,
+   GameState_MapStatus,
+   GameState_Battle
 }
-cGameState_t;
+GameState_t;
 
-typedef enum cButton_t
+typedef enum Button_t
 {
-   cButton_Left = 0,
-   cButton_Up,
-   cButton_Right,
-   cButton_Down,
+   Button_Left = 0,
+   Button_Up,
+   Button_Right,
+   Button_Down,
 
-   cButton_A,
-   cButton_B,
+   Button_A,
+   Button_B,
 
-   cButton_Count
+   Button_Count
 }
-cButton_t;
+Button_t;
 
-typedef enum cMenuIndex_t
+typedef enum MenuIndex_t
 {
-   cMenuIndex_Map = 0
+   MenuIndex_Map = 0
 }
-cMenuIndex_t;
+MenuIndex_t;
 
-typedef enum cIndefiniteArticle_t
+typedef enum IndefiniteArticle_t
 {
-   cIndefiniteArticle_A = 0,
-   cIndefiniteArticle_An
+   IndefiniteArticle_A = 0,
+   IndefiniteArticle_An
 }
-cIndefiniteArticle_t;
+IndefiniteArticle_t;
 
 #endif // ENUMS_H

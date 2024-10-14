@@ -5,11 +5,11 @@
 #include "tile_texture.h"
 #include "vector.h"
 
-typedef struct cGame_t cGame_t;
+typedef struct Game_t Game_t;
 
-typedef struct cTileMap_t
+typedef struct TileMap_t
 {
-   cTileTexture_t tileTextures[MAP_TILE_TEXTURE_COUNT];
+   TileTexture_t tileTextures[MAP_TILE_TEXTURE_COUNT];
    uint8_t stride;
 
    // high 3 bits are flags, low 5 bits are tile texture index
@@ -39,19 +39,19 @@ typedef struct cTileMap_t
    uint8_t enemyIndexes[MAP_TILE_ENEMY_INDEX_COUNT];
    uint8_t enemySpecialIndexes[MAP_TILE_ENEMY_INDEX_COUNT];
 }
-cTileMap_t;
+TileMap_t;
 
 #if defined( __cplusplus )
 extern "C" {
 #endif
 
-void cTileMap_Init( cTileMap_t* tileMap );
-uint16_t cTileMap_GetTileIndexFromPos( cTileMap_t* tileMap, cVector2f_t* pos );
+void TileMap_Init( TileMap_t* tileMap );
+uint16_t TileMap_GetTileIndexFromPos( TileMap_t* tileMap, cVector2f_t* pos );
 
 // data_loader.c
-void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index );
-void cTileMap_LoadSprite( cTileMap_t* map, uint8_t index );
-uint32_t cTileMap_GetTreasureFlag( cGame_t* game, uint8_t tileMapIndex, uint16_t tileIndex );
+void TileMap_LoadTileMap( TileMap_t* map, uint8_t index );
+void TileMap_LoadSprite( TileMap_t* map, uint8_t index );
+uint32_t TileMap_GetTreasureFlag( Game_t* game, uint8_t tileMapIndex, uint16_t tileIndex );
 
 #if defined( __cplusplus )
 }

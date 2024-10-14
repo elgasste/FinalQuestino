@@ -3,12 +3,12 @@
 
 #include "common.h"
 
-typedef struct cButtonState_t
+typedef struct ButtonState_t
 {
-   cBool_t pressed;
-   cBool_t released;
-   cBool_t down;
+   Bool_t pressed;
+   Bool_t released;
+   Bool_t down;
 }
-cButtonState_t;
+ButtonState_t;
 
 #endif // BUTTON_STATE_H

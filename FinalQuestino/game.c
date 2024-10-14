@@ -2,140 +2,140 @@
 #include "random.h"
 #include "battle.h"
 
-static void cGame_DrawMapStatus( cGame_t* game );
-static void cGame_RollEncounter( cGame_t* game, uint8_t encounterRate );
-static cBool_t cGame_OnAnySpecialEnemyTile( cGame_t* game );
-static cBool_t cGame_CollectTreasure( cGame_t* game, uint32_t treasureFlag );
+static void Game_DrawMapStatus( Game_t* game );
+static void Game_RollEncounter( Game_t* game, uint8_t encounterRate );
+static Bool_t Game_OnAnySpecialEnemyTile( Game_t* game );
+static Bool_t Game_CollectTreasure( Game_t* game, uint32_t treasureFlag );
 
-void cGame_Init( cGame_t* game )
+void Game_Init( Game_t* game )
 {
    game->paletteIndex = 0;
    game->tileMapIndex = 77; // Tantegel throne room
    game->specialEnemyFlags = 0xFF;
    game->treasureFlags = 0xFFFF;
 
-   cScreen_Init( &( game->screen ) );
-   cScreen_LoadMapPalette( &( game->screen ), game->paletteIndex );
-   cScreen_Begin( &( game->screen ) );
+   Screen_Init( &( game->screen ) );
+   Screen_LoadMapPalette( &( game->screen ), game->paletteIndex );
+   Screen_Begin( &( game->screen ) );
 
-   cClock_Init( &( game->clock ) );
-   cInput_Init( &( game->input ) );
+   Clock_Init( &( game->clock ) );
+   Input_Init( &( game->input ) );
 
-   cTileMap_Init( &( game->tileMap ) );
-   cTileTexture_LoadTileTextures( &( game->tileMap ) );
+   TileMap_Init( &( game->tileMap ) );
+   TileTexture_LoadTileTextures( &( game->tileMap ) );
 
-   cPlayer_Init( &( game->player ) );
-   game->player.sprite.direction = cDirection_Up;
+   Player_Init( &( game->player ) );
+   game->player.sprite.direction = Direction_Up;
    game->player.sprite.frameSeconds = 0.2f;
    game->player.position.x = ( MAP_TILE_SIZE * 8 ) + 2;
    game->player.position.y = ( MAP_TILE_SIZE * 6 ) + 4;
 
-   game->state = cGameState_Init;
+   game->state = GameState_Init;
 }
 
-void cGame_Tic( cGame_t* game )
+void Game_Tic( Game_t* game )
 {
-   cInput_Read( &( game->input ) );
-   cInput_Handle( game );
+   Input_Read( &( game->input ) );
+   Input_Handle( game );
 
    switch( game->state )
    {
-      case cGameState_Init:
-         cGame_ChangeState( game, cGameState_Map );
+      case GameState_Init:
+         Game_ChangeState( game, GameState_Map );
          break;
-      case cGameState_Map:
-         cPhysics_Tic( game );
+      case GameState_Map:
+         Physics_Tic( game );
          break;
-      case cGameState_MapMenu:
-         cMenu_Tic( game );
+      case GameState_MapMenu:
+         Menu_Tic( game );
          break;
    }
 }
 
-void cGame_Refresh( cGame_t* game )
+void Game_Refresh( Game_t* game )
 {
-   if ( game->state == cGameState_Map )
+   if ( game->state == GameState_Map )
    {
-      cTileMap_LoadTileMap( &( game->tileMap ), game->tileMapIndex );
-      cScreen_DrawTileMap( game );
+      TileMap_LoadTileMap( &( game->tileMap ), game->tileMapIndex );
+      Screen_DrawTileMap( game );
 
       if ( game->tileMap.spriteCount > 0 )
       {
-         cScreen_DrawMapSprites( game );
+         Screen_DrawMapSprites( game );
       }
 
-      cScreen_DrawPlayer( game );
-      cPhysics_UpdateTileIndexCache( game );
+      Screen_DrawPlayer( game );
+      Physics_UpdateTileIndexCache( game );
    }
 }
 
-void cGame_ChangeState( cGame_t *game, cGameState_t newState )
+void Game_ChangeState( Game_t *game, GameState_t newState )
 {
    switch( game->state )
    {
-      case cGameState_Init:
-         if ( newState == cGameState_Map )
+      case GameState_Init:
+         if ( newState == GameState_Map )
          {
             game->state = newState;
-            cGame_Refresh( game );
+            Game_Refresh( game );
          }
          break;
-      case cGameState_Map:
+      case GameState_Map:
          switch( newState )
          {
-            case cGameState_MapMenu:
+            case GameState_MapMenu:
                game->state = newState;
-               cMenu_Load( &( game->menu ), cMenuIndex_Map );
-               cMenu_Draw( game );
+               Menu_Load( &( game->menu ), MenuIndex_Map );
+               Menu_Draw( game );
                break;
-            case cGameState_Battle:
+            case GameState_Battle:
                game->state = newState;
-               cScreen_WipePlayer( game );
-               cBattle_Start( game );
+               Screen_WipePlayer( game );
+               Battle_Start( game );
                break;
          }
          break;
-      case cGameState_MapMenu:
+      case GameState_MapMenu:
          switch( newState )
          {
-            case cGameState_Map:
-            case cGameState_MapMessage:
+            case GameState_Map:
+            case GameState_MapMessage:
                game->state = newState;
-               cMenu_Wipe( game );
+               Menu_Wipe( game );
                break;
-            case cGameState_MapStatus:
+            case GameState_MapStatus:
                game->state = newState;
-               cMenu_Wipe( game );
-               cGame_DrawMapStatus( game );
+               Menu_Wipe( game );
+               Game_DrawMapStatus( game );
                break;
          }
          break;
-      case cGameState_MapMessage:
-         if ( newState == cGameState_Map )
+      case GameState_MapMessage:
+         if ( newState == GameState_Map )
          {
             game->state = newState;
-            cGame_WipeMessage( game );
+            Game_WipeMessage( game );
          }
          break;
-      case cGameState_MapStatus:
-         if ( newState == cGameState_Map )
+      case GameState_MapStatus:
+         if ( newState == GameState_Map )
          {
             game->state = newState;
-            cScreen_WipeTileMapSection( game, 16, 16, 112, 96 );
+            Screen_WipeTileMapSection( game, 16, 16, 112, 96 );
          }
          break;
-      case cGameState_Battle:
-         if ( newState == cGameState_Map )
+      case GameState_Battle:
+         if ( newState == GameState_Map )
          {
             game->state = newState;
-            cBattle_Done( game );
-            cScreen_DrawPlayer( game );
+            Battle_Done( game );
+            Screen_DrawPlayer( game );
          }
          break;
    }
 }
 
-void cGame_SteppedOnTile( cGame_t* game, uint16_t tileIndex )
+void Game_SteppedOnTile( Game_t* game, uint16_t tileIndex )
 {
    uint8_t i, tileFlags, tileSpeed, encounterRate;
    uint8_t tile = game->tileMap.tiles[tileIndex];
@@ -154,8 +154,8 @@ void cGame_SteppedOnTile( cGame_t* game, uint16_t tileIndex )
          newTileX = newTileIndex - ( newTileY * MAP_TILES_X );
          game->player.position.x = ( newTileX * MAP_TILE_SIZE ) + ( ( MAP_TILE_SIZE - PLAYER_HITBOX_SIZE ) / 2 );
          game->player.position.y = ( newTileY * MAP_TILE_SIZE ) + ( MAP_TILE_SIZE - PLAYER_HITBOX_SIZE ) - COLLISION_PADDING;
-         cGame_Refresh( game );
-         cRandom_Seed();
+         Game_Refresh( game );
+         Random_Seed();
          return;
       }
    }
@@ -172,15 +172,15 @@ void cGame_SteppedOnTile( cGame_t* game, uint16_t tileIndex )
    }
 
 #if defined( DEBUG_NOENCOUNTERSONB )
-   if ( game->input.buttonStates[cButton_B].down )
+   if ( game->input.buttonStates[Button_B].down )
    {
       return;
    }
 #endif
 
-   if ( cGame_OnAnySpecialEnemyTile( game ) )
+   if ( Game_OnAnySpecialEnemyTile( game ) )
    {
-      cGame_ChangeState( game, cGameState_Battle );
+      Game_ChangeState( game, GameState_Battle );
    }
    else if ( tile & MAP_TILE_FLAG_ENCOUNTERABLE )
    {
@@ -188,56 +188,56 @@ void cGame_SteppedOnTile( cGame_t* game, uint16_t tileIndex )
 
       if ( encounterRate > 0 )
       {
-         cGame_RollEncounter( game, encounterRate );
+         Game_RollEncounter( game, encounterRate );
       }
    }
 }
 
-void cGame_ShowMessage( cGame_t* game, const char* message )
+void Game_ShowMessage( Game_t* game, const char* message )
 {
-   cScreen_DrawRect( &( game->screen ), 48, 160, 224, 64, DARKGRAY );
-   cScreen_DrawWrappedText( &( game->screen ), message, 56, 168, 26, 8, DARKGRAY, WHITE );
+   Screen_DrawRect( &( game->screen ), 48, 160, 224, 64, DARKGRAY );
+   Screen_DrawWrappedText( &( game->screen ), message, 56, 168, 26, 8, DARKGRAY, WHITE );
 }
 
-void cGame_WipeMessage( cGame_t* game )
+void Game_WipeMessage( Game_t* game )
 {
-   if ( game->state == cGameState_Map )
+   if ( game->state == GameState_Map )
    {
-      cScreen_WipeTileMapSection( game, 48, 160, 224, 64 );
-      cScreen_DrawMapSprites( game );
-      cScreen_DrawPlayer( game );
+      Screen_WipeTileMapSection( game, 48, 160, 224, 64 );
+      Screen_DrawMapSprites( game );
+      Screen_DrawPlayer( game );
    }
 }
 
-static void cGame_DrawMapStatus( cGame_t* game )
+static void Game_DrawMapStatus( Game_t* game )
 {
-   cPlayer_t* player = &( game->player );
+   Player_t* player = &( game->player );
    char str[14];
 
-   cScreen_DrawRect( &( game->screen ), 16, 16, 112, 96, DARKGRAY );
+   Screen_DrawRect( &( game->screen ), 16, 16, 112, 96, DARKGRAY );
 
-   snprintf( str, 14, "Lvl: %u", cPlayer_GetLevel( player ) );
-   cScreen_DrawText( &( game->screen ), str, 24, 24, DARKGRAY, WHITE );
+   snprintf( str, 14, "Lvl: %u", Player_GetLevel( player ) );
+   Screen_DrawText( &( game->screen ), str, 24, 24, DARKGRAY, WHITE );
    snprintf( str, 14, " HP: %u/%u", player->stats.HitPoints, player->stats.MaxHitPoints );
-   cScreen_DrawText( &( game->screen ), str, 24, 36, DARKGRAY, WHITE );
+   Screen_DrawText( &( game->screen ), str, 24, 36, DARKGRAY, WHITE );
    snprintf( str, 14, " MP: %u/%u", player->stats.MagicPoints, player->stats.MaxMagicPoints );
-   cScreen_DrawText( &( game->screen ), str, 24, 48, DARKGRAY, WHITE );
+   Screen_DrawText( &( game->screen ), str, 24, 48, DARKGRAY, WHITE );
    snprintf( str, 14, "Atk: %u", player->stats.AttackPower );
-   cScreen_DrawText( &( game->screen ), str, 24, 60, DARKGRAY, WHITE );
+   Screen_DrawText( &( game->screen ), str, 24, 60, DARKGRAY, WHITE );
    snprintf( str, 14, "Def: %u", player->stats.DefensePower );
-   cScreen_DrawText( &( game->screen ), str, 24, 72, DARKGRAY, WHITE );
+   Screen_DrawText( &( game->screen ), str, 24, 72, DARKGRAY, WHITE );
    snprintf( str, 14, "Agl: %u", player->stats.Agility );
-   cScreen_DrawText( &( game->screen ), str, 24, 84, DARKGRAY, WHITE );
+   Screen_DrawText( &( game->screen ), str, 24, 84, DARKGRAY, WHITE );
    snprintf( str, 14, "Exp: %u", player->experience );
-   cScreen_DrawText( &( game->screen ), str, 24, 96, DARKGRAY, WHITE );
+   Screen_DrawText( &( game->screen ), str, 24, 96, DARKGRAY, WHITE );
 }
 
-static void cGame_RollEncounter( cGame_t* game, uint8_t encounterRate )
+static void Game_RollEncounter( Game_t* game, uint8_t encounterRate )
 {
-   cBool_t spawnEncounter;
+   Bool_t spawnEncounter;
 
 #if defined( DEBUG_NOENCOUNTERSONB )
-   if ( game->input.buttonStates[cButton_B].down )
+   if ( game->input.buttonStates[Button_B].down )
    {
       return;
    }
@@ -245,19 +245,19 @@ static void cGame_RollEncounter( cGame_t* game, uint8_t encounterRate )
 
    switch( encounterRate )
    {
-      case 1: spawnEncounter = cRandom_Percent() <= ENCOUNTERRATE_LOW; break;
-      case 2: spawnEncounter = cRandom_Percent() <= ENCOUNTERRATE_MEDIUM; break;
-      case 3: spawnEncounter = cRandom_Percent() <= ENCOUNTERRATE_HIGH; break;
+      case 1: spawnEncounter = Random_Percent() <= ENCOUNTERRATE_LOW; break;
+      case 2: spawnEncounter = Random_Percent() <= ENCOUNTERRATE_MEDIUM; break;
+      case 3: spawnEncounter = Random_Percent() <= ENCOUNTERRATE_HIGH; break;
       default: return;
    }
 
    if ( spawnEncounter )
    {
-      cGame_ChangeState( game, cGameState_Battle );
+      Game_ChangeState( game, GameState_Battle );
    }
 }
 
-cBool_t cGame_OnSpecialEnemyTile( cGame_t* game, uint8_t specialEnemyId )
+Bool_t Game_OnSpecialEnemyTile( Game_t* game, uint8_t specialEnemyId )
 {
    switch( specialEnemyId )
    {
@@ -275,52 +275,52 @@ cBool_t cGame_OnSpecialEnemyTile( cGame_t* game, uint8_t specialEnemyId )
                 ( game->specialEnemyFlags & SPECIALENEMYFLAG_AXEKNIGHT ) != 0;
    }
 
-   return cFalse;
+   return False;
 }
 
-static cBool_t cGame_OnAnySpecialEnemyTile( cGame_t* game )
+static Bool_t Game_OnAnySpecialEnemyTile( Game_t* game )
 {
-   return cGame_OnSpecialEnemyTile( game, SPECIALENEMYID_GREENDRAGON ) ||
-          cGame_OnSpecialEnemyTile( game, SPECIALENEMYID_GOLEM ) ||
-          cGame_OnSpecialEnemyTile( game, SPECIALENEMYID_AXEKNIGHT );
+   return Game_OnSpecialEnemyTile( game, SPECIALENEMYID_GREENDRAGON ) ||
+          Game_OnSpecialEnemyTile( game, SPECIALENEMYID_GOLEM ) ||
+          Game_OnSpecialEnemyTile( game, SPECIALENEMYID_AXEKNIGHT );
 }
 
-void cGame_SearchMapTile( cGame_t* game )
+void Game_SearchMapTile( Game_t* game )
 {
    uint8_t x, y;
-   uint32_t treasureFlag = cTileMap_GetTreasureFlag( game, game->tileMapIndex, game->tileMap.tileIndexCache );
+   uint32_t treasureFlag = TileMap_GetTreasureFlag( game, game->tileMapIndex, game->tileMap.tileIndexCache );
 
    if ( treasureFlag && ( game->treasureFlags & treasureFlag ) )
    {
-      if ( cGame_CollectTreasure( game, treasureFlag ) )
+      if ( Game_CollectTreasure( game, treasureFlag ) )
       {
-         cGame_ShowMapMessage( game, "Time to quit your day job!" );
+         Game_ShowMapMessage( game, "Time to quit your day job!" );
 
          y = game->tileMap.tileIndexCache / MAP_TILES_X;
          x = game->tileMap.tileIndexCache - ( y * MAP_TILES_X );
-         cScreen_WipeTileMapSection( game, x * MAP_TILE_SIZE, y * MAP_TILE_SIZE, MAP_TILE_SIZE, MAP_TILE_SIZE );
-         cScreen_DrawPlayer( game );
+         Screen_WipeTileMapSection( game, x * MAP_TILE_SIZE, y * MAP_TILE_SIZE, MAP_TILE_SIZE, MAP_TILE_SIZE );
+         Screen_DrawPlayer( game );
       }
       else
       {
-         cGame_ShowMapMessage( game, "Can't carry any more of these." );
+         Game_ShowMapMessage( game, "Can't carry any more of these." );
       }
    }
    else
    {
-      cGame_ShowMapMessage( game, "You didn't find anything." );
+      Game_ShowMapMessage( game, "You didn't find anything." );
    }
 }
 
-static cBool_t cGame_CollectTreasure( cGame_t* game, uint32_t treasureFlag )
+static Bool_t Game_CollectTreasure( Game_t* game, uint32_t treasureFlag )
 {
    // TODO: check if we can carry any more of whatever this is
    game->treasureFlags ^= treasureFlag;
-   return cTrue;
+   return True;
 }
 
-void cGame_ShowMapMessage( cGame_t* game, const char* message )
+void Game_ShowMapMessage( Game_t* game, const char* message )
 {
-   cGame_ChangeState( game, cGameState_MapMessage );
-   cGame_ShowMessage( game, message );
+   Game_ChangeState( game, GameState_MapMessage );
+   Game_ShowMessage( game, message );
 }

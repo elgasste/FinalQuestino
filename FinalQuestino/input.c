@@ -4,92 +4,92 @@
 #define ANALOG_THRESHOLD_LOW 200
 #define ANALOG_THRESHOLD_HIGH 824
 
-static void cInput_UpdateButtonState( cButtonState_t* buttonState, cBool_t down );
-static void cInput_HandleMapStateInput( cGame_t* game );
-static void cInput_HandleMapMenuStateInput( cGame_t* game );
+static void Input_UpdateButtonState( ButtonState_t* buttonState, Bool_t down );
+static void Input_HandleMapStateInput( Game_t* game );
+static void Input_HandleMapMenuStateInput( Game_t* game );
 
-void cInput_Init( cInput_t* input )
+void Input_Init( Input_t* input )
 {
    uint8_t i;
 
-   for ( i = 0; i < (uint8_t)cButton_Count; i++ )
+   for ( i = 0; i < (uint8_t)Button_Count; i++ )
    {
-      input->buttonStates[i].pressed = cFalse;
-      input->buttonStates[i].released = cFalse;
-      input->buttonStates[i].down = cFalse;
+      input->buttonStates[i].pressed = False;
+      input->buttonStates[i].released = False;
+      input->buttonStates[i].down = False;
    }
 
    pinMode( PIN_A_BUTTON, INPUT_PULLUP );
    pinMode( PIN_B_BUTTON, INPUT_PULLUP );
 }
 
-void cInput_Read( cInput_t* input )
+void Input_Read( Input_t* input )
 {
    int16_t xValue = analogRead( PIN_ANALOG_X );
    int16_t yValue = analogRead( PIN_ANALOG_Y );
 
-   cInput_UpdateButtonState( &( input->buttonStates[cButton_Left ] ), xValue > ANALOG_THRESHOLD_HIGH );
-   cInput_UpdateButtonState( &( input->buttonStates[cButton_Up ] ), yValue < ANALOG_THRESHOLD_LOW );
-   cInput_UpdateButtonState( &( input->buttonStates[cButton_Right ] ), xValue < ANALOG_THRESHOLD_LOW );
-   cInput_UpdateButtonState( &( input->buttonStates[cButton_Down ] ), yValue > ANALOG_THRESHOLD_HIGH );
+   Input_UpdateButtonState( &( input->buttonStates[Button_Left ] ), xValue > ANALOG_THRESHOLD_HIGH );
+   Input_UpdateButtonState( &( input->buttonStates[Button_Up ] ), yValue < ANALOG_THRESHOLD_LOW );
+   Input_UpdateButtonState( &( input->buttonStates[Button_Right ] ), xValue < ANALOG_THRESHOLD_LOW );
+   Input_UpdateButtonState( &( input->buttonStates[Button_Down ] ), yValue > ANALOG_THRESHOLD_HIGH );
 
-   cInput_UpdateButtonState( &( input->buttonStates[cButton_A] ), digitalRead( PIN_A_BUTTON ) == LOW );
-   cInput_UpdateButtonState( &( input->buttonStates[cButton_B] ), digitalRead( PIN_B_BUTTON ) == LOW );
+   Input_UpdateButtonState( &( input->buttonStates[Button_A] ), digitalRead( PIN_A_BUTTON ) == LOW );
+   Input_UpdateButtonState( &( input->buttonStates[Button_B] ), digitalRead( PIN_B_BUTTON ) == LOW );
 }
 
-static void cInput_UpdateButtonState( cButtonState_t* buttonState, cBool_t down )
+static void Input_UpdateButtonState( ButtonState_t* buttonState, Bool_t down )
 {
    if ( down )
    {
-      buttonState->released = cFalse;
-      buttonState->pressed = buttonState->down ? cFalse : cTrue;
+      buttonState->released = False;
+      buttonState->pressed = buttonState->down ? False : True;
    }
    else
    {
-      buttonState->pressed = cFalse;
-      buttonState->released = buttonState->down ? cTrue : cFalse;
+      buttonState->pressed = False;
+      buttonState->released = buttonState->down ? True : False;
    }
 
    buttonState->down = down;
 }
 
-void cInput_Handle( cGame_t* game )
+void Input_Handle( Game_t* game )
 {
    switch( game->state )
    {
-      case cGameState_Map:
-         cInput_HandleMapStateInput( game );
+      case GameState_Map:
+         Input_HandleMapStateInput( game );
          break;
-      case cGameState_MapMenu:
-         cInput_HandleMapMenuStateInput( game );
+      case GameState_MapMenu:
+         Input_HandleMapMenuStateInput( game );
          break;
-      case cGameState_MapMessage:
-      case cGameState_MapStatus:
-      case cGameState_Battle:
-         if ( game->input.buttonStates[cButton_A].pressed || game->input.buttonStates[cButton_B].pressed )
+      case GameState_MapMessage:
+      case GameState_MapStatus:
+      case GameState_Battle:
+         if ( game->input.buttonStates[Button_A].pressed || game->input.buttonStates[Button_B].pressed )
          {
-            cGame_ChangeState( game, cGameState_Map );
+            Game_ChangeState( game, GameState_Map );
          }
          break;
    }
 }
 
-static void cInput_HandleMapStateInput( cGame_t* game )
+static void Input_HandleMapStateInput( Game_t* game )
 {
-   cPlayer_t* player = &( game->player );
-   cSprite_t* sprite = &( player->sprite );
-   cBool_t leftIsDown, upIsDown, rightIsDown, downIsDown;
+   Player_t* player = &( game->player );
+   Sprite_t* sprite = &( player->sprite );
+   Bool_t leftIsDown, upIsDown, rightIsDown, downIsDown;
 
-   if ( game->input.buttonStates[cButton_A].pressed )
+   if ( game->input.buttonStates[Button_A].pressed )
    {
-      cGame_ChangeState( game, cGameState_MapMenu );
+      Game_ChangeState( game, GameState_MapMenu );
    }
    else
    {
-      leftIsDown = game->input.buttonStates[cButton_Left].down;
-      upIsDown = game->input.buttonStates[cButton_Up].down;
-      rightIsDown = game->input.buttonStates[cButton_Right].down;
-      downIsDown = game->input.buttonStates[cButton_Down].down;
+      leftIsDown = game->input.buttonStates[Button_Left].down;
+      upIsDown = game->input.buttonStates[Button_Up].down;
+      rightIsDown = game->input.buttonStates[Button_Right].down;
+      downIsDown = game->input.buttonStates[Button_Down].down;
 
       if ( leftIsDown || upIsDown || rightIsDown || downIsDown )
       {
@@ -97,10 +97,10 @@ static void cInput_HandleMapStateInput( cGame_t* game )
          {
             player->velocity.x = -( player->maxVelocity );
 
-            if ( !( upIsDown && sprite->direction == cDirection_Up ) &&
-                 !( downIsDown && sprite->direction == cDirection_Down ) )
+            if ( !( upIsDown && sprite->direction == Direction_Up ) &&
+                 !( downIsDown && sprite->direction == Direction_Down ) )
             {
-               sprite->direction = cDirection_Left;
+               sprite->direction = Direction_Left;
             }
 
             if ( upIsDown || downIsDown )
@@ -112,10 +112,10 @@ static void cInput_HandleMapStateInput( cGame_t* game )
          {
             player->velocity.x = player->maxVelocity;
 
-            if ( !( upIsDown && sprite->direction == cDirection_Up ) &&
-                 !( downIsDown && sprite->direction == cDirection_Down ) )
+            if ( !( upIsDown && sprite->direction == Direction_Up ) &&
+                 !( downIsDown && sprite->direction == Direction_Down ) )
             {
-               sprite->direction = cDirection_Right;
+               sprite->direction = Direction_Right;
             }
 
             if ( upIsDown || downIsDown )
@@ -128,10 +128,10 @@ static void cInput_HandleMapStateInput( cGame_t* game )
          {
             player->velocity.y = -( player->maxVelocity );
 
-            if ( !( leftIsDown && sprite->direction == cDirection_Left ) &&
-                 !( rightIsDown && sprite->direction == cDirection_Right ) )
+            if ( !( leftIsDown && sprite->direction == Direction_Left ) &&
+                 !( rightIsDown && sprite->direction == Direction_Right ) )
             {
-               sprite->direction = cDirection_Up;
+               sprite->direction = Direction_Up;
             }
 
             if ( leftIsDown || rightIsDown )
@@ -143,10 +143,10 @@ static void cInput_HandleMapStateInput( cGame_t* game )
          {
             player->velocity.y = player->maxVelocity;
 
-            if ( !( leftIsDown && sprite->direction == cDirection_Left ) &&
-                 !( rightIsDown && sprite->direction == cDirection_Right ) )
+            if ( !( leftIsDown && sprite->direction == Direction_Left ) &&
+                 !( rightIsDown && sprite->direction == Direction_Right ) )
             {
-               sprite->direction = cDirection_Down;
+               sprite->direction = Direction_Down;
             }
 
             if ( leftIsDown || rightIsDown )
@@ -155,35 +155,35 @@ static void cInput_HandleMapStateInput( cGame_t* game )
             }
          }
 
-         cSprite_Tic( &( player->sprite ), &( game->clock ) );
+         Sprite_Tic( &( player->sprite ), &( game->clock ) );
       }
    }
 }
 
-static void cInput_HandleMapMenuStateInput( cGame_t* game )
+static void Input_HandleMapMenuStateInput( Game_t* game )
 {
-   cBool_t upIsDown, downIsDown;
+   Bool_t upIsDown, downIsDown;
 
-   if ( game->input.buttonStates[cButton_A].pressed )
+   if ( game->input.buttonStates[Button_A].pressed )
    {
-      cMenu_Select( game );
+      Menu_Select( game );
    }
-   else if ( game->input.buttonStates[cButton_B].pressed )
+   else if ( game->input.buttonStates[Button_B].pressed )
    {
-      cGame_ChangeState( game, cGameState_Map );
+      Game_ChangeState( game, GameState_Map );
    }
    else
    {
-      upIsDown = game->input.buttonStates[cButton_Up].pressed;
-      downIsDown = game->input.buttonStates[cButton_Down].pressed;
+      upIsDown = game->input.buttonStates[Button_Up].pressed;
+      downIsDown = game->input.buttonStates[Button_Down].pressed;
 
       if ( upIsDown && !downIsDown )
       {
-         cMenu_ScrollUp( game );
+         Menu_ScrollUp( game );
       }
       else if ( downIsDown && !upIsDown )
       {
-         cMenu_ScrollDown( game );
+         Menu_ScrollDown( game );
       }
    }
 }

@@ -4,20 +4,20 @@
 #include "common.h"
 #include "enemy.h"
 
-typedef struct cGame_t cGame_t;
+typedef struct Game_t Game_t;
 
-typedef struct cBattle_t
+typedef struct Battle_t
 {
-   cEnemy_t enemy;
+   Enemy_t enemy;
 }
-cBattle_t;
+Battle_t;
 
 #if defined( __cplusplus )
 extern "C" {
 #endif 
 
-void cBattle_Start( cGame_t* game );
-void cBattle_Done( cGame_t* game );
+void Battle_Start( Game_t* game );
+void Battle_Done( Game_t* game );
 
 #if defined( __cplusplus )
 }

@@ -4,23 +4,23 @@
 #include "common.h"
 #include "battle_stats.h"
 
-typedef struct cEnemy_t
+typedef struct Enemy_t
 {
    char name[16];
-   cIndefiniteArticle_t indefiniteArticle;
-   cBattleStats_t stats;
+   IndefiniteArticle_t indefiniteArticle;
+   BattleStats_t stats;
 
    uint8_t tileTextures[ENEMY_TILE_TEXTURE_COUNT][ENEMY_TILE_TEXTURE_SIZE_BYTES];
    int8_t tileTextureIndexes[ENEMY_TILE_COUNT];
    uint16_t palette[16];
 }
-cEnemy_t;
+Enemy_t;
 
 #if defined( __cplusplus )
 extern "C" {
 #endif
 
-void cEnemy_Load( cEnemy_t* enemy, uint8_t index );
+void Enemy_Load( Enemy_t* enemy, uint8_t index );
 
 #if defined( __cplusplus )
 }

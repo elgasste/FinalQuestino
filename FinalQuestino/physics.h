@@ -3,22 +3,22 @@
 
 #include "common.h"
 
-typedef struct cGame_t cGame_t;
+typedef struct Game_t Game_t;
 
-typedef struct cPhysics_t
+typedef struct Physics_t
 {
    uint8_t spriteFrameCache;
    uint16_t tileIndexCache;
 }
-cPhysics_t;
+Physics_t;
 
 #if defined( __cplusplus )
 extern "C" {
 #endif
 
-void cPhysics_Init( cPhysics_t* physics );
-void cPhysics_Tic( cGame_t* game );
-void cPhysics_UpdateTileIndexCache( cGame_t* game );
+void Physics_Init( Physics_t* physics );
+void Physics_Tic( Game_t* game );
+void Physics_UpdateTileIndexCache( Game_t* game );
 
 #if defined( __cplusplus )
 }
