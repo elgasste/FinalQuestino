@@ -8,6 +8,20 @@ static void Input_UpdateButtonState( ButtonState_t* buttonState, Bool_t down );
 static void Input_HandleMapStateInput( Game_t* game );
 static void Input_HandleMapMenuStateInput( Game_t* game );
 
+#if defined VISUAL_STUDIO_DEV
+
+void Input_Init( Input_t* input )
+{
+   // MUFFINS
+}
+
+void Input_Read( Input_t* input )
+{
+   // MUFFINS
+}
+
+#else
+
 void Input_Init( Input_t* input )
 {
    uint8_t i;
@@ -36,6 +50,8 @@ void Input_Read( Input_t* input )
    Input_UpdateButtonState( &( input->buttonStates[Button_A] ), digitalRead( PIN_A_BUTTON ) == LOW );
    Input_UpdateButtonState( &( input->buttonStates[Button_B] ), digitalRead( PIN_B_BUTTON ) == LOW );
 }
+
+#endif
 
 static void Input_UpdateButtonState( ButtonState_t* buttonState, Bool_t down )
 {
@@ -105,7 +121,7 @@ static void Input_HandleMapStateInput( Game_t* game )
 
             if ( upIsDown || downIsDown )
             {
-               player->velocity.x *= 0.707;
+               player->velocity.x *= 0.707f;
             }
          }
          else if ( rightIsDown && !leftIsDown )
@@ -120,7 +136,7 @@ static void Input_HandleMapStateInput( Game_t* game )
 
             if ( upIsDown || downIsDown )
             {
-               player->velocity.x *= 0.707;
+               player->velocity.x *= 0.707f;
             }
          }
 
@@ -136,7 +152,7 @@ static void Input_HandleMapStateInput( Game_t* game )
 
             if ( leftIsDown || rightIsDown )
             {
-               player->velocity.y *= 0.707;
+               player->velocity.y *= 0.707f;
             }
          }
          else if ( downIsDown && !upIsDown )
@@ -151,7 +167,7 @@ static void Input_HandleMapStateInput( Game_t* game )
 
             if ( leftIsDown || rightIsDown )
             {
-               player->velocity.y *= 0.707;
+               player->velocity.y *= 0.707f;
             }
          }
 

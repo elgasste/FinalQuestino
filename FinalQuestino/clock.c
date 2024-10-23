@@ -7,12 +7,14 @@ void Clock_Init( Clock_t* clock )
 
 void Clock_StartFrame( Clock_t* clock )
 {
-   clock->frameStartMicro = micros();
+   // MUFFINS
+   clock->frameStartMicro = MICROS();
 }
 
 void Clock_EndFrame( Clock_t* clock )
 {
-   uint32_t frameEndMicro = micros();
+   // MUFFINS
+   uint32_t frameEndMicro = MICROS();
    uint32_t elapsedMicro;
 
    if ( frameEndMicro < clock->frameStartMicro )
@@ -29,6 +31,6 @@ void Clock_EndFrame( Clock_t* clock )
    {
       // I'd like to use delayMicroseconds here, but there are some serious
       // issues with precision. regular "delay" works much better, strangely.
-      delay( ( FRAME_MICROSECONDS - elapsedMicro ) / 1000 );
+      DELAY_MS( ( FRAME_MICROSECONDS - elapsedMicro ) / 1000 );
    }
 }

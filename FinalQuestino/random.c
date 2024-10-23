@@ -2,7 +2,8 @@
 
 void Random_Seed()
 {
-   srand( micros() & (uint16_t)0xFFFF );
+   // MUFFINS: what is this?
+   srand( DELAY_MS() & (uint16_t)0xFFFF );
 }
 
 uint8_t Random_Percent()

@@ -1,7 +1,7 @@
 #include "sprite.h"
 #include "clock.h"
 
-Sprite_Init( Sprite_t* sprite )
+void Sprite_Init( Sprite_t* sprite )
 {
    Sprite_LoadTextures( sprite );
    sprite->direction = (Direction_t)0;
@@ -10,7 +10,7 @@ Sprite_Init( Sprite_t* sprite )
    sprite->frameSeconds = 1;
 }
 
-Sprite_Tic( Sprite_t* sprite, Clock_t* clock )
+void Sprite_Tic( Sprite_t* sprite, Clock_t* clock )
 {
    sprite->elapsedSeconds += FRAME_SECONDS;
 

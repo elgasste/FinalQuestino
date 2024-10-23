@@ -1,7 +1,11 @@
 #if !defined( COMMON_H )
 #define COMMON_H
 
+#if !defined( VISUAL_STUDIO_DEV )
 #include <Arduino.h>
+#endif
+
+#include <stdio.h>
 #include <stdint.h>
 #include <limits.h>
 #include <string.h>
@@ -12,6 +16,12 @@
 //#define DEBUG_NOENCOUNTERSONB
 // un-comment to turn on fast walk mode
 //#define DEBUG_FASTWALK
+
+#if defined( VISUAL_STUDIO_DEV )
+#define DELAY_MS( x )                     Sleep( x )
+#else
+#define DELAY_MS( x )                     delay( x )
+#endif
 
 #define GAME_FPS                          30
 #define FRAME_MICROSECONDS                33333
