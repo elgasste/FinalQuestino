@@ -2,7 +2,7 @@
 
 #include "game.h"
 
-void cScreen_LoadMapPalette( cScreen_t* screen, uint8_t index )
+void Screen_LoadMapPalette( Screen_t* screen, uint8_t index )
 {
    if ( index == 0 )
    {
@@ -25,7 +25,7 @@ void cScreen_LoadMapPalette( cScreen_t* screen, uint8_t index )
    }
 }
 
-void cTileTexture_LoadTileTextures( cTileMap_t* map )
+void TileTexture_LoadTileTextures( TileMap_t* map )
 {
    uint8_t i, j;
 
@@ -1671,7 +1671,7 @@ void cTileTexture_LoadTileTextures( cTileMap_t* map )
    map->tileTextures[15].flags = 0x00;
 }
 
-void cTileMap_LoadSprite( cTileMap_t* map, uint8_t index )
+void TileMap_LoadSprite( TileMap_t* map, uint8_t index )
 {
    if ( index == 0 )
    {
@@ -3509,7 +3509,7 @@ void cTileMap_LoadSprite( cTileMap_t* map, uint8_t index )
    }
 }
 
-void cScreen_LoadTextBitFields( cScreen_t* screen )
+void Screen_LoadTextBitFields( Screen_t* screen )
 {
    screen->textBitFields[0][0] = 0x00;
    screen->textBitFields[0][1] = 0x78;
@@ -4097,7 +4097,7 @@ void cScreen_LoadTextBitFields( cScreen_t* screen )
    screen->textBitFields[72][7] = 0x00;
 }
 
-void cPlayer_LoadSprite( cPlayer_t* player )
+void Player_LoadSprite( Player_t* player )
 {
    player->sprite.frameTextures[0] = 0xAA;
    player->sprite.frameTextures[1] = 0xAA;
@@ -5125,7 +5125,7 @@ void cPlayer_LoadSprite( cPlayer_t* player )
    player->sprite.frameTextures[1023] = 0xAA;
 }
 
-void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
+void TileMap_LoadTileMap( TileMap_t* map, uint8_t index )
 {
    uint16_t i;
 
@@ -5212,6 +5212,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 1;
       map->enemyIndexes[1] = 3;
       map->enemyIndexes[2] = 6;
@@ -5369,6 +5371,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 1;
       map->enemyIndexes[1] = 3;
       map->enemyIndexes[2] = 6;
@@ -5489,6 +5493,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 1;
       map->enemyIndexes[2] = 3;
@@ -5573,6 +5579,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 1;
       map->enemyIndexes[2] = 3;
@@ -5689,6 +5697,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 1;
       map->enemyIndexes[1] = 3;
       map->enemyIndexes[2] = 6;
@@ -5859,6 +5869,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 4;
       map->enemyIndexes[1] = 9;
       map->enemyIndexes[2] = 12;
@@ -5917,6 +5929,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 4;
       map->enemyIndexes[1] = 9;
       map->enemyIndexes[2] = 12;
@@ -6057,6 +6071,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 1;
       map->enemyIndexes[1] = 3;
       map->enemyIndexes[2] = 6;
@@ -6238,6 +6254,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 0;
       map->enemyIndexes[2] = 1;
@@ -6382,6 +6400,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 1;
       map->enemyIndexes[2] = 3;
@@ -6639,6 +6659,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 1;
       map->enemyIndexes[2] = 3;
@@ -6844,6 +6866,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 1;
       map->enemyIndexes[1] = 3;
       map->enemyIndexes[2] = 6;
@@ -7034,6 +7058,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 4;
       map->enemyIndexes[1] = 9;
       map->enemyIndexes[2] = 12;
@@ -7166,6 +7192,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 4;
       map->enemyIndexes[1] = 9;
       map->enemyIndexes[2] = 12;
@@ -7303,6 +7331,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 1;
       map->enemyIndexes[1] = 3;
       map->enemyIndexes[2] = 6;
@@ -7557,6 +7587,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 1;
       map->enemyIndexes[1] = 3;
       map->enemyIndexes[2] = 6;
@@ -7753,6 +7785,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 0;
       map->enemyIndexes[2] = 1;
@@ -8013,6 +8047,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 1;
       map->enemyIndexes[2] = 3;
@@ -8207,6 +8243,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 1;
       map->enemyIndexes[1] = 3;
       map->enemyIndexes[2] = 6;
@@ -8398,6 +8436,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 4;
       map->enemyIndexes[1] = 6;
       map->enemyIndexes[2] = 9;
@@ -8542,6 +8582,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 4;
       map->enemyIndexes[1] = 9;
       map->enemyIndexes[2] = 12;
@@ -8682,6 +8724,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 4;
       map->enemyIndexes[1] = 6;
       map->enemyIndexes[2] = 9;
@@ -8941,6 +8985,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 4;
       map->enemyIndexes[1] = 6;
       map->enemyIndexes[2] = 9;
@@ -9202,6 +9248,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x9A28817;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 0;
       map->enemyIndexes[2] = 1;
@@ -9361,6 +9409,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 1;
       map->enemyIndexes[2] = 3;
@@ -9558,6 +9608,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 1;
       map->enemyIndexes[1] = 3;
       map->enemyIndexes[2] = 6;
@@ -9824,6 +9876,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x1D4208E2;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 1;
       map->enemyIndexes[1] = 3;
       map->enemyIndexes[2] = 6;
@@ -9929,6 +9983,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 4;
       map->enemyIndexes[1] = 9;
       map->enemyIndexes[2] = 12;
@@ -10071,6 +10127,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 4;
       map->enemyIndexes[1] = 9;
       map->enemyIndexes[2] = 12;
@@ -10296,6 +10354,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 4;
       map->enemyIndexes[1] = 9;
       map->enemyIndexes[2] = 12;
@@ -10459,6 +10519,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 1;
       map->enemyIndexes[1] = 3;
       map->enemyIndexes[2] = 6;
@@ -10627,6 +10689,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 21;
       map->enemyIndexes[1] = 31;
       map->enemyIndexes[2] = 32;
@@ -10890,6 +10954,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 10;
       map->enemyIndexes[1] = 12;
       map->enemyIndexes[2] = 19;
@@ -11127,6 +11193,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 10;
       map->enemyIndexes[1] = 12;
       map->enemyIndexes[2] = 19;
@@ -11273,6 +11341,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 10;
       map->enemyIndexes[1] = 12;
       map->enemyIndexes[2] = 19;
@@ -11378,6 +11448,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 14;
       map->enemyIndexes[1] = 21;
       map->enemyIndexes[2] = 22;
@@ -11611,6 +11683,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 4;
       map->enemyIndexes[1] = 9;
       map->enemyIndexes[2] = 12;
@@ -11797,6 +11871,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 4;
       map->enemyIndexes[1] = 6;
       map->enemyIndexes[2] = 9;
@@ -11886,6 +11962,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 22;
       map->enemyIndexes[1] = 25;
       map->enemyIndexes[2] = 30;
@@ -12050,6 +12128,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 22;
       map->enemyIndexes[1] = 25;
       map->enemyIndexes[2] = 30;
@@ -12205,6 +12285,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 10;
       map->enemyIndexes[1] = 13;
       map->enemyIndexes[2] = 19;
@@ -12367,6 +12449,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 10;
       map->enemyIndexes[1] = 13;
       map->enemyIndexes[2] = 19;
@@ -12499,6 +12583,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 14;
       map->enemyIndexes[1] = 21;
       map->enemyIndexes[2] = 22;
@@ -12758,6 +12844,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 14;
       map->enemyIndexes[1] = 21;
       map->enemyIndexes[2] = 22;
@@ -13045,6 +13133,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 13;
       map->enemyIndexes[1] = 20;
       map->enemyIndexes[2] = 24;
@@ -13298,6 +13388,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 22;
       map->enemyIndexes[1] = 25;
       map->enemyIndexes[2] = 30;
@@ -13520,6 +13612,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 22;
       map->enemyIndexes[1] = 25;
       map->enemyIndexes[2] = 30;
@@ -13718,6 +13812,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 13;
       map->enemyIndexes[1] = 20;
       map->enemyIndexes[2] = 24;
@@ -13838,6 +13934,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 13;
       map->enemyIndexes[1] = 20;
       map->enemyIndexes[2] = 24;
@@ -13982,6 +14080,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 14;
       map->enemyIndexes[1] = 21;
       map->enemyIndexes[2] = 22;
@@ -14204,6 +14304,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 14;
       map->enemyIndexes[1] = 21;
       map->enemyIndexes[2] = 22;
@@ -14395,6 +14497,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 21;
       map->enemyIndexes[1] = 22;
       map->enemyIndexes[2] = 30;
@@ -14648,6 +14752,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 11;
       map->enemyIndexes[1] = 25;
       map->enemyIndexes[2] = 31;
@@ -14884,6 +14990,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 11;
       map->enemyIndexes[1] = 25;
       map->enemyIndexes[2] = 31;
@@ -15082,6 +15190,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 13;
       map->enemyIndexes[1] = 20;
       map->enemyIndexes[2] = 24;
@@ -15178,6 +15288,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 13;
       map->enemyIndexes[1] = 20;
       map->enemyIndexes[2] = 24;
@@ -15219,6 +15331,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 21;
       map->enemyIndexes[1] = 22;
       map->enemyIndexes[2] = 30;
@@ -15466,6 +15580,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 21;
       map->enemyIndexes[1] = 22;
       map->enemyIndexes[2] = 30;
@@ -15743,6 +15859,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 22;
       map->enemyIndexes[1] = 25;
       map->enemyIndexes[2] = 30;
@@ -16010,6 +16128,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 11;
       map->enemyIndexes[1] = 25;
       map->enemyIndexes[2] = 31;
@@ -16267,6 +16387,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 11;
       map->enemyIndexes[1] = 25;
       map->enemyIndexes[2] = 31;
@@ -16331,6 +16453,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 22;
       map->enemyIndexes[1] = 25;
       map->enemyIndexes[2] = 30;
@@ -16370,6 +16494,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 20;
       map->enemyIndexes[1] = 24;
       map->enemyIndexes[2] = 26;
@@ -16548,6 +16674,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 12;
       map->enemyIndexes[1] = 6;
       map->enemyIndexes[2] = 9;
@@ -16751,6 +16879,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 12;
       map->enemyIndexes[1] = 6;
       map->enemyIndexes[2] = 9;
@@ -16930,6 +17060,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 12;
       map->enemyIndexes[1] = 6;
       map->enemyIndexes[2] = 9;
@@ -17051,6 +17183,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 12;
       map->enemyIndexes[1] = 6;
       map->enemyIndexes[2] = 9;
@@ -17154,6 +17288,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0xBA158AF;
       map->portals[2] = 0x17A158AF;
       map->portals[3] = 0x242158AF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 10;
       map->enemyIndexes[1] = 13;
       map->enemyIndexes[2] = 19;
@@ -17264,6 +17400,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0xAC158AF;
       map->portals[2] = 0xB0158AF;
       map->portals[3] = 0x154158AF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 10;
       map->enemyIndexes[1] = 13;
       map->enemyIndexes[2] = 19;
@@ -17371,6 +17509,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x102158AF;
       map->portals[2] = 0x1A8158AF;
       map->portals[3] = 0x1B6158AF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 10;
       map->enemyIndexes[1] = 13;
       map->enemyIndexes[2] = 19;
@@ -17473,6 +17613,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x154158AF;
       map->portals[2] = 0x190158AF;
       map->portals[3] = 0x19C158AF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 10;
       map->enemyIndexes[1] = 13;
       map->enemyIndexes[2] = 19;
@@ -17686,6 +17828,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 0;
       map->enemyIndexes[2] = 0;
@@ -17859,6 +18003,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x100B885;
       map->portals[2] = 0x120B885;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 0;
       map->enemyIndexes[2] = 0;
@@ -18024,6 +18170,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x2440B885;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 0;
       map->enemyIndexes[2] = 0;
@@ -18196,6 +18344,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 0;
       map->enemyIndexes[2] = 0;
@@ -18218,6 +18368,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 0;
       map->enemyIndexes[2] = 0;
@@ -18290,6 +18442,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x8827092;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 0;
       map->enemyIndexes[2] = 0;
@@ -18423,6 +18577,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 0;
       map->enemyIndexes[2] = 0;
@@ -18583,6 +18739,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 0;
       map->enemyIndexes[2] = 0;
@@ -18777,6 +18935,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x2340B861;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 0;
       map->enemyIndexes[2] = 0;
@@ -18979,6 +19139,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x2520B861;
       map->portals[2] = 0xD8298A7;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 0;
       map->enemyIndexes[2] = 0;
@@ -19176,6 +19338,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x2C0B861;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 0;
       map->enemyIndexes[2] = 0;
@@ -19455,6 +19619,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x4A0B861;
       map->portals[2] = 0x720B861;
       map->portals[3] = 0x1522A080;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 0;
       map->enemyIndexes[2] = 0;
@@ -19517,6 +19683,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 0;
       map->enemyIndexes[2] = 0;
@@ -19569,6 +19737,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 0;
       map->enemyIndexes[2] = 0;
@@ -19678,6 +19848,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x1C22B055;
       map->portals[2] = 0x1C82B058;
       map->portals[3] = 0x1D02B05C;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 0;
       map->enemyIndexes[2] = 0;
@@ -19788,6 +19960,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x882A8D0;
       map->portals[2] = 0x902A8D4;
       map->portals[3] = 0x1322C09A;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 0;
       map->enemyIndexes[2] = 0;
@@ -19898,6 +20072,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x1CE2C05B;
       map->portals[2] = 0x1D42C05E;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 0;
       map->enemyIndexes[2] = 0;
@@ -20011,6 +20187,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x8E2B8D3;
       map->portals[2] = 0x942B8D6;
       map->portals[3] = 0x1322B09A;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 0;
       map->enemyIndexes[2] = 0;
@@ -20270,6 +20448,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0xC6000D4;
       map->portals[2] = 0xEE000D4;
       map->portals[3] = 0x9A2D0D9;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 0;
       map->enemyIndexes[2] = 0;
@@ -20438,6 +20618,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7E2D8A3;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 0;
       map->enemyIndexes[2] = 0;
@@ -20458,6 +20640,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->tiles[11] = 0x21;
       map->tiles[12] = 0x21;
       map->tiles[13] = 0x21;
+      map->tiles[14] = 0x06;
       map->tiles[15] = 0x21;
       map->tiles[26] = 0x21;
       map->tiles[27] = 0x21;
@@ -20689,6 +20872,8 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
       map->portals[1] = 0x7FFFFFFF;
       map->portals[2] = 0x7FFFFFFF;
       map->portals[3] = 0x7FFFFFFF;
+      map->portals[4] = 0x7FFFFFFF;
+      map->portals[5] = 0x7FFFFFFF;
       map->enemyIndexes[0] = 0;
       map->enemyIndexes[1] = 0;
       map->enemyIndexes[2] = 0;
@@ -20706,7 +20891,7 @@ void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )
    }
 }
 
-uint32_t cTileMap_GetTreasureFlag( cGame_t* game, uint8_t tileMapIndex, uint16_t tileIndex )
+uint32_t TileMap_GetTreasureFlag( Game_t* game, uint8_t tileMapIndex, uint16_t tileIndex )
 {
    switch ( tileMapIndex )
    {
@@ -20723,7 +20908,7 @@ uint32_t cTileMap_GetTreasureFlag( cGame_t* game, uint8_t tileMapIndex, uint16_t
    return 0;
 }
 
-void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
+void Enemy_Load( Enemy_t* enemy, uint8_t index )
 {
    uint8_t i, j;
 
@@ -20731,7 +20916,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    if ( index == 0 )
    {
       snprintf( enemy->name, 16, "slime" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -20831,7 +21016,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 1 )
    {
       snprintf( enemy->name, 16, "red slime" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -20926,7 +21111,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 2 )
    {
       snprintf( enemy->name, 16, "metal slime" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -21021,7 +21206,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 3 )
    {
       snprintf( enemy->name, 16, "drakee" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -21176,7 +21361,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 4 )
    {
       snprintf( enemy->name, 16, "magidrakee" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -21326,7 +21511,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 5 )
    {
       snprintf( enemy->name, 16, "drakeema" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -21476,7 +21661,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 6 )
    {
       snprintf( enemy->name, 16, "ghost" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -21747,7 +21932,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 7 )
    {
       snprintf( enemy->name, 16, "poltergeist" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -22018,7 +22203,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 8 )
    {
       snprintf( enemy->name, 16, "specter" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -22290,7 +22475,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 9 )
    {
       snprintf( enemy->name, 16, "magician" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -22618,7 +22803,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 10 )
    {
       snprintf( enemy->name, 16, "warlock" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -22988,7 +23173,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 11 )
    {
       snprintf( enemy->name, 16, "wizard" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -23361,7 +23546,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 12 )
    {
       snprintf( enemy->name, 16, "scorpion" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -23631,7 +23816,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 13 )
    {
       snprintf( enemy->name, 16, "metal scorpion" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -23901,7 +24086,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 14 )
    {
       snprintf( enemy->name, 16, "rogue scorpion" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -24171,7 +24356,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 15 )
    {
       snprintf( enemy->name, 16, "druin" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -24498,7 +24683,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 16 )
    {
       snprintf( enemy->name, 16, "druinlord" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -24825,7 +25010,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 17 )
    {
       snprintf( enemy->name, 16, "droll" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -25254,7 +25439,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 18 )
    {
       snprintf( enemy->name, 16, "drollmagi" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -25682,7 +25867,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 19 )
    {
       snprintf( enemy->name, 16, "skeleton" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -26068,7 +26253,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 20 )
    {
       snprintf( enemy->name, 16, "wraith" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -26452,7 +26637,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 21 )
    {
       snprintf( enemy->name, 16, "wraith knight" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -26850,7 +27035,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 22 )
    {
       snprintf( enemy->name, 16, "demon knight" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -27236,7 +27421,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 23 )
    {
       snprintf( enemy->name, 16, "wolf" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -27701,7 +27886,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 24 )
    {
       snprintf( enemy->name, 16, "wolflord" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -28173,7 +28358,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 25 )
    {
       snprintf( enemy->name, 16, "werewolf" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -28644,7 +28829,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 26 )
    {
       snprintf( enemy->name, 16, "goldman" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -29285,7 +29470,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 27 )
    {
       snprintf( enemy->name, 16, "golem" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -29926,7 +30111,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 28 )
    {
       snprintf( enemy->name, 16, "stoneman" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -30566,7 +30751,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 29 )
    {
       snprintf( enemy->name, 16, "wyvern" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -30957,7 +31142,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 30 )
    {
       snprintf( enemy->name, 16, "magiwyvern" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -31348,7 +31533,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 31 )
    {
       snprintf( enemy->name, 16, "starwyvern" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -31730,7 +31915,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 32 )
    {
       snprintf( enemy->name, 16, "knight" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -32263,7 +32448,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 33 )
    {
       snprintf( enemy->name, 16, "axe knight" );
-      enemy->indefiniteArticle = cIndefiniteArticle_An;
+      enemy->indefiniteArticle = IndefiniteArticle_An;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -32873,7 +33058,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 34 )
    {
       snprintf( enemy->name, 16, "armored knight" );
-      enemy->indefiniteArticle = cIndefiniteArticle_An;
+      enemy->indefiniteArticle = IndefiniteArticle_An;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -33557,7 +33742,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 35 )
    {
       snprintf( enemy->name, 16, "green dragon" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -34098,7 +34283,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 36 )
    {
       snprintf( enemy->name, 16, "blue dragon" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -34638,7 +34823,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 37 )
    {
       snprintf( enemy->name, 16, "red dragon" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -35178,7 +35363,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 38 )
    {
       snprintf( enemy->name, 16, "dragonlord wizard" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -35617,7 +35802,7 @@ void cEnemy_Load( cEnemy_t* enemy, uint8_t index )
    else if ( index == 39 )
    {
       snprintf( enemy->name, 16, "dragonlord dragon" );
-      enemy->indefiniteArticle = cIndefiniteArticle_A;
+      enemy->indefiniteArticle = IndefiniteArticle_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;

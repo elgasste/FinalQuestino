@@ -39,110 +39,110 @@ namespace DataGenerator
       public static List<List<PortalData>> MapPortals = new()
       {
          // overworld
-         new() { new( 192, 89, 141 ), new(), new(), new() },  // 0 (garinham)
-         new() { new(), new(), new(), new() },  // 1
-         new() { new(), new(), new(), new() },  // 2
-         new() { new(), new(), new(), new() },  // 3
-         new() { new(), new(), new(), new() },  // 4
-         new() { new(), new(), new(), new() },  // 5
-         new() { new(), new(), new(), new() },  // 6
-         new() { new(), new(), new(), new() },  // 7
-         new() { new( 98, 85, 106 ), new(), new(), new() },  // 8 (erdrick's cave)
-         new() { new(), new(), new(), new() },  // 9
-         new() { new(), new(), new(), new() },  // 10
-         new() { new(), new(), new(), new() },  // 11
-         new() { new(), new(), new(), new() },  // 12
-         new() { new(), new(), new(), new() },  // 13
-         new() { new(), new(), new(), new() },  // 14
-         new() { new(), new(), new(), new() },  // 15
-         new() { new(), new(), new(), new() },  // 16
-         new() { new(), new(), new(), new() },  // 17
-         new() { new(), new(), new(), new() },  // 18
-         new() { new(), new(), new(), new() },  // 19
-         new() { new(), new(), new(), new() },  // 20
-         new() { new(), new(), new(), new() },  // 21
-         new() { new(), new(), new(), new() },  // 22
-         new() { new( 113, 73, 269 ), new( 77, 81, 23 ), new(), new() },  // 23 (tantegel, brecconary, and dragonlord castle)
-         new() { new(), new(), new(), new() },  // 24
-         new() { new(), new(), new(), new() },  // 25
-         new() { new( 134, 63, 66 ), new( 234, 65, 226 ), new(), new() },  // 26 (swamp cave entrance and exit)
-         new() { new(), new(), new(), new() },  // 27
-         new() { new(), new(), new(), new() },  // 28
-         new() { new(), new(), new(), new() },  // 29
-         new() { new(), new(), new(), new() },  // 30
-         new() { new(), new(), new(), new() },  // 31
-         new() { new(), new(), new(), new() },  // 32
-         new() { new(), new(), new(), new() },  // 33
-         new() { new(), new(), new(), new() },  // 34
-         new() { new(), new(), new(), new() },  // 35
-         new() { new(), new(), new(), new() },  // 36
-         new() { new(), new(), new(), new() },  // 37
-         new() { new(), new(), new(), new() },  // 38
-         new() { new(), new(), new(), new() },  // 39
-         new() { new(), new(), new(), new() },  // 40
-         new() { new(), new(), new(), new() },  // 41
-         new() { new(), new(), new(), new() },  // 42
-         new() { new( 155, 67, 112 ), new(), new(), new() },  // 43 (hauksness entrance)
-         new() { new(), new(), new(), new() },  // 44
-         new() { new(), new(), new(), new() },  // 45
-         new() { new(), new(), new(), new() },  // 46
-         new() { new(), new(), new(), new() },  // 47
-         new() { new(), new(), new(), new() },  // 48
-         new() { new(), new(), new(), new() },  // 49
-         new() { new(), new(), new(), new() },  // 50
-         new() { new(), new(), new(), new() },  // 51
-         new() { new(), new(), new(), new() },  // 52
-         new() { new(), new(), new(), new() },  // 53
-         new() { new(), new(), new(), new() },  // 54
-         new() { new(), new(), new(), new() },  // 55
-         new() { new(), new(), new(), new() },  // 56
-         new() { new(), new(), new(), new() },  // 57
-         new() { new(), new(), new(), new() },  // 58
-         new() { new(), new(), new(), new() },  // 59
-         new() { new(), new(), new(), new() },  // 60
-         new() { new(), new(), new(), new() },  // 61
-         new() { new(), new(), new(), new() },  // 62
+         new() { new( 192, 89, 141 ), new(), new(), new(), new(), new() },  // 0 (garinham)
+         new() { new(), new(), new(), new(), new(), new() },  // 1
+         new() { new(), new(), new(), new(), new(), new() },  // 2
+         new() { new(), new(), new(), new(), new(), new() },  // 3
+         new() { new(), new(), new(), new(), new(), new() },  // 4
+         new() { new(), new(), new(), new(), new(), new() },  // 5
+         new() { new(), new(), new(), new(), new(), new() },  // 6
+         new() { new(), new(), new(), new(), new(), new() },  // 7
+         new() { new( 98, 85, 106 ), new(), new(), new(), new(), new() },  // 8 (erdrick's cave)
+         new() { new(), new(), new(), new(), new(), new() },  // 9
+         new() { new(), new(), new(), new(), new(), new() },  // 10
+         new() { new(), new(), new(), new(), new(), new() },  // 11
+         new() { new(), new(), new(), new(), new(), new() },  // 12
+         new() { new(), new(), new(), new(), new(), new() },  // 13
+         new() { new(), new(), new(), new(), new(), new() },  // 14
+         new() { new(), new(), new(), new(), new(), new() },  // 15
+         new() { new(), new(), new(), new(), new(), new() },  // 16
+         new() { new(), new(), new(), new(), new(), new() },  // 17
+         new() { new(), new(), new(), new(), new(), new() },  // 18
+         new() { new(), new(), new(), new(), new(), new() },  // 19
+         new() { new(), new(), new(), new(), new(), new() },  // 20
+         new() { new(), new(), new(), new(), new(), new() },  // 21
+         new() { new(), new(), new(), new(), new(), new() },  // 22
+         new() { new( 113, 73, 269 ), new( 77, 81, 23 ), new(), new(), new(), new() },  // 23 (tantegel, brecconary, and dragonlord castle)
+         new() { new(), new(), new(), new(), new(), new() },  // 24
+         new() { new(), new(), new(), new(), new(), new() },  // 25
+         new() { new( 134, 63, 66 ), new( 234, 65, 226 ), new(), new(), new(), new() },  // 26 (swamp cave entrance and exit)
+         new() { new(), new(), new(), new(), new(), new() },  // 27
+         new() { new(), new(), new(), new(), new(), new() },  // 28
+         new() { new(), new(), new(), new(), new(), new() },  // 29
+         new() { new(), new(), new(), new(), new(), new() },  // 30
+         new() { new(), new(), new(), new(), new(), new() },  // 31
+         new() { new(), new(), new(), new(), new(), new() },  // 32
+         new() { new(), new(), new(), new(), new(), new() },  // 33
+         new() { new(), new(), new(), new(), new(), new() },  // 34
+         new() { new(), new(), new(), new(), new(), new() },  // 35
+         new() { new(), new(), new(), new(), new(), new() },  // 36
+         new() { new(), new(), new(), new(), new(), new() },  // 37
+         new() { new(), new(), new(), new(), new(), new() },  // 38
+         new() { new(), new(), new(), new(), new(), new() },  // 39
+         new() { new(), new(), new(), new(), new(), new() },  // 40
+         new() { new(), new(), new(), new(), new(), new() },  // 41
+         new() { new(), new(), new(), new(), new(), new() },  // 42
+         new() { new( 155, 67, 112 ), new(), new(), new(), new(), new() },  // 43 (hauksness entrance)
+         new() { new(), new(), new(), new(), new(), new() },  // 44
+         new() { new(), new(), new(), new(), new(), new() },  // 45
+         new() { new(), new(), new(), new(), new(), new() },  // 46
+         new() { new(), new(), new(), new(), new(), new() },  // 47
+         new() { new(), new(), new(), new(), new(), new() },  // 48
+         new() { new(), new(), new(), new(), new(), new() },  // 49
+         new() { new(), new(), new(), new(), new(), new() },  // 50
+         new() { new(), new(), new(), new(), new(), new() },  // 51
+         new() { new(), new(), new(), new(), new(), new() },  // 52
+         new() { new(), new(), new(), new(), new(), new() },  // 53
+         new() { new(), new(), new(), new(), new(), new() },  // 54
+         new() { new(), new(), new(), new(), new(), new() },  // 55
+         new() { new(), new(), new(), new(), new(), new() },  // 56
+         new() { new(), new(), new(), new(), new(), new() },  // 57
+         new() { new(), new(), new(), new(), new(), new() },  // 58
+         new() { new(), new(), new(), new(), new(), new() },  // 59
+         new() { new(), new(), new(), new(), new(), new() },  // 60
+         new() { new(), new(), new(), new(), new(), new() },  // 61
+         new() { new(), new(), new(), new(), new(), new() },  // 62
 
          // swamp cave
-         new() { new( 65, 26, 114 ), new(), new(), new() },    // 63 (entrance from the north)
-         new() { new( 213, 66, 146 ), new(), new(), new() },   // 64 (stairs to basement 2)
-         new() { new( 225, 26, 254 ), new(), new(), new() },   // 65 (entrance from the south)
-         new() { new( 145, 64, 212 ), new(), new(), new() },   // 66 (stairs to basement 1)
+         new() { new( 65, 26, 114 ), new(), new(), new(), new(), new() },    // 63 (entrance from the north)
+         new() { new( 213, 66, 146 ), new(), new(), new(), new(), new() },   // 64 (stairs to basement 2)
+         new() { new( 225, 26, 254 ), new(), new(), new(), new(), new() },   // 65 (entrance from the south)
+         new() { new( 145, 64, 212 ), new(), new(), new(), new(), new() },   // 66 (stairs to basement 1)
 
          // hauksness
-         new() { new( 92, 43, 175 ), new( 93, 43, 175 ), new( 189, 43, 175 ), new( 289, 43, 175 ) },   // 67 (upper-left)
-         new() { new( 85, 43, 175 ), new( 86, 43, 175 ), new( 88, 43, 175 ), new( 170, 43, 175 ) },    // 68 (upper-right)
-         new() { new( 9, 43, 175 ), new( 129, 43, 175 ), new( 212, 43, 175 ), new( 219, 43, 175 ) },   // 69 (lower-left)
-         new() { new( 130, 43, 175 ), new( 170, 43, 175 ), new( 200, 43, 175 ), new( 206, 43, 175 ) }, // 70 (lower-right)
+         new() { new( 92, 43, 175 ), new( 93, 43, 175 ), new( 189, 43, 175 ), new( 289, 43, 175 ), new(), new() },   // 67 (upper-left)
+         new() { new( 85, 43, 175 ), new( 86, 43, 175 ), new( 88, 43, 175 ), new( 170, 43, 175 ), new(), new() },    // 68 (upper-right)
+         new() { new( 9, 43, 175 ), new( 129, 43, 175 ), new( 212, 43, 175 ), new( 219, 43, 175 ), new(), new() },   // 69 (lower-left)
+         new() { new( 130, 43, 175 ), new( 170, 43, 175 ), new( 200, 43, 175 ), new( 206, 43, 175 ), new(), new() }, // 70 (lower-right)
 
          // tantegel
-         new() { new( 146, 77, 232 ), new(), new(), new() },                        // 71 (ground floor upper-left)
-         new() { new( 7, 23, 133 ), new( 8, 23, 133 ), new( 9, 23, 133 ), new() },  // 72 (ground floor upper-right)
-         new() { new( 289, 23, 133 ), new( 290, 23, 133 ), new(), new() },          // 73 (ground floor middle-left)
-         new() { new(), new(), new(), new() },                                      // 74 (ground floor middle-right)
-         new() { new(), new(), new(), new() },                                      // 75 (ground floor lower-left)
-         new() { new( 89, 23, 133 ), new( 68, 78, 146 ), new(), new() },            // 76 (ground floor lower-right)
-         new() { new( 233, 71, 147 ), new(), new(), new() },                        // 77 (upstairs)
-         new() { new( 145, 76, 69 ), new(), new(), new() },                         // 78 (downstairs)
+         new() { new( 146, 77, 232 ), new(), new(), new(), new(), new() },                        // 71 (ground floor upper-left)
+         new() { new( 7, 23, 133 ), new( 8, 23, 133 ), new( 9, 23, 133 ), new(), new(), new() },  // 72 (ground floor upper-right)
+         new() { new( 289, 23, 133 ), new( 290, 23, 133 ), new(), new(), new(), new() },          // 73 (ground floor middle-left)
+         new() { new(), new(), new(), new(), new(), new() },                                      // 74 (ground floor middle-right)
+         new() { new(), new(), new(), new(), new(), new() },                                      // 75 (ground floor lower-left)
+         new() { new( 89, 23, 133 ), new( 68, 78, 146 ), new(), new(), new(), new() },            // 76 (ground floor lower-right)
+         new() { new( 233, 71, 147 ), new(), new(), new(), new(), new() },                        // 77 (upstairs)
+         new() { new( 145, 76, 69 ), new(), new(), new(), new(), new() },                         // 78 (downstairs)
 
          // brecconary
-         new() { new( 262, 23, 97 ), new( 282, 23, 97 ), new(), new() },                        // 79 (outside upper-left)
-         new() { new( 277, 23, 97 ), new( 297, 23, 97 ), new( 108, 83, 167 ), new() },          // 80 (outside upper-right)
-         new() { new( 2, 23, 97 ), new( 22, 23, 97 ), new(), new() },                           // 81 (outside lower-left)
-         new() { new( 17, 23, 97 ), new( 37, 23, 97 ), new( 57, 23, 97 ), new( 169, 84, 128) }, // 82 (outside lower-right)
-         new() { new( 187, 80, 128 ), new(), new(), new() },                                    // 83 (indoors 1)
-         new() { new( 108, 82, 149 ), new(), new(), new() },                                    // 84 (indoors 2)
+         new() { new( 262, 23, 97 ), new( 282, 23, 97 ), new(), new(), new(), new() },                        // 79 (outside upper-left)
+         new() { new( 277, 23, 97 ), new( 297, 23, 97 ), new( 108, 83, 167 ), new(), new(), new() },          // 80 (outside upper-right)
+         new() { new( 2, 23, 97 ), new( 22, 23, 97 ), new(), new(), new(), new() },                           // 81 (outside lower-left)
+         new() { new( 17, 23, 97 ), new( 37, 23, 97 ), new( 57, 23, 97 ), new( 169, 84, 128), new(), new() }, // 82 (outside lower-right)
+         new() { new( 187, 80, 128 ), new(), new(), new(), new(), new() },                                    // 83 (indoors 1)
+         new() { new( 108, 82, 149 ), new(), new(), new(), new(), new() },                                    // 84 (indoors 2)
 
          // erdrick's cave
-         new() { new( 105, 8, 118 ), new( 225, 86, 85 ), new( 228, 86, 88 ), new( 232, 86, 92 ) },  // 85 (basement 1 north)
-         new() { new( 65, 85, 205 ), new( 68, 85, 208 ), new( 72, 85, 212 ), new( 153, 88, 154 ) }, // 86 (basement 1 south)
-         new() { new( 225, 88, 85 ), new( 231, 88, 91 ), new( 234, 88, 94 ), new() },               // 87 (basement 2 north)
-         new() { new( 65, 87, 205 ), new( 71, 87, 211 ), new( 74, 87, 214 ), new( 153, 86, 154) },  // 88 (basement 2 south)
+         new() { new( 105, 8, 118 ), new( 225, 86, 85 ), new( 228, 86, 88 ), new( 232, 86, 92 ), new(), new() },  // 85 (basement 1 north)
+         new() { new( 65, 85, 205 ), new( 68, 85, 208 ), new( 72, 85, 212 ), new( 153, 88, 154 ), new(), new() }, // 86 (basement 1 south)
+         new() { new( 225, 88, 85 ), new( 231, 88, 91 ), new( 234, 88, 94 ), new(), new(), new() },               // 87 (basement 2 north)
+         new() { new( 65, 87, 205 ), new( 71, 87, 211 ), new( 74, 87, 214 ), new( 153, 86, 154), new(), new() },  // 88 (basement 2 south)
 
          // garinham
-         new() { new( 140, 0, 212 ), new( 99, 0, 212 ), new( 119, 0, 212 ), new( 77, 90, 217 ) },  // 89 (downtown)
-         new() { new( 237, 89, 97 ), new( 63, 91, 163 ), new(), new() },                           // 90 (indoors)
-         new() { new( 183, 90, 83 ), new(), new(), new() }                                          // 91 (secret area)
+         new() { new( 140, 0, 212 ), new( 99, 0, 212 ), new( 119, 0, 212 ), new( 77, 90, 217 ), new(), new() },  // 89 (downtown)
+         new() { new( 237, 89, 97 ), new( 63, 91, 163 ), new(), new(), new(), new() },                           // 90 (indoors)
+         new() { new( 183, 90, 83 ), new(), new(), new(), new(), new() }                                          // 91 (secret area)
       };
 
       public static List<Rectangle> MapEnemySpecialRegions = new()

@@ -10,21 +10,21 @@
 #define PIN_A_BUTTON    50
 #define PIN_B_BUTTON    52
 
-typedef struct cGame_t cGame_t;
+typedef struct Game_t Game_t;
 
-typedef struct cInput_t
+typedef struct Input_t
 {
-   cButtonState_t buttonStates[cButton_Count];
+   ButtonState_t buttonStates[Button_Count];
 }
-cInput_t;
+Input_t;
 
 #if defined( __cplusplus )
 extern "C" {
 #endif
 
-void cInput_Init( cInput_t* input );
-void cInput_Read( cInput_t* input );
-void cInput_Handle( cGame_t* game );
+void Input_Init( Input_t* input );
+void Input_Read( Input_t* input );
+void Input_Handle( Game_t* game );
 
 #if defined( __cplusplus )
 }

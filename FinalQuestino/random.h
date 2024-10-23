@@ -7,9 +7,9 @@
 extern "C" {
 #endif
 
-void cRandom_Seed();
-uint8_t cRandom_Percent();
-uint8_t cRandom_Uint8( uint8_t min, uint8_t max );
+void Random_Seed();
+uint8_t Random_Percent();
+uint8_t Random_Uint8( uint8_t min, uint8_t max );
 
 #if defined( __cplusplus )
 }

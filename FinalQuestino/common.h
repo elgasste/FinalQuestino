@@ -6,7 +6,7 @@
 #include <limits.h>
 #include <string.h>
 
-// un-comment to use cSerial_PrintLn
+// un-comment to use Serial_PrintLn
 //#define DEBUG_SERIAL
 // un-comment to turn off encounters when the B button is pressed
 //#define DEBUG_NOENCOUNTERSONB
@@ -24,7 +24,7 @@
 #define MAP_TILE_COUNT                    300
 #define MAP_TILE_TEXTURE_COUNT            16
 #define MAP_TILE_TEXTURE_SIZE_BYTES       128 // 16x16 bit-packed, so 16/2 * 16
-#define MAP_PORTAL_COUNT                  4
+#define MAP_PORTAL_COUNT                  6
 #define MAP_TILE_ENEMY_INDEX_COUNT        4
 #define MAP_SPRITE_COUNT                  16
 
@@ -84,10 +84,10 @@
 #define ENCOUNTERRATE_MEDIUM             6
 #define ENCOUNTERRATE_HIGH               8
 
-typedef uint8_t cBool_t;
-#define cTrue 1
-#define cFalse 0
-#define TOGGLE_BOOL( b ) b = b ? cFalse : cTrue
+typedef uint8_t Bool_t;
+#define True 1
+#define False 0
+#define TOGGLE_BOOL( b ) b = b ? False : True
 
 #if defined( DEBUG_SERIAL )
 
@@ -95,7 +95,7 @@ typedef uint8_t cBool_t;
 extern "C" {
 #endif
 
-void cSerial_PrintLn( const char* msg );
+void Serial_PrintLn( const char* msg );
 
 #if defined( __cplusplus )
 }

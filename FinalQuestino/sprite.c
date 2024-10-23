@@ -1,16 +1,16 @@
 #include "sprite.h"
 #include "clock.h"
 
-cSprite_Init( cSprite_t* sprite )
+Sprite_Init( Sprite_t* sprite )
 {
-   cSprite_LoadTextures( sprite );
-   sprite->direction = (cDirection_t)0;
+   Sprite_LoadTextures( sprite );
+   sprite->direction = (Direction_t)0;
    sprite->currentFrame = 0;
    sprite->elapsedSeconds = 0;
    sprite->frameSeconds = 1;
 }
 
-cSprite_Tic( cSprite_t* sprite, cClock_t* clock )
+Sprite_Tic( Sprite_t* sprite, Clock_t* clock )
 {
    sprite->elapsedSeconds += FRAME_SECONDS;
 

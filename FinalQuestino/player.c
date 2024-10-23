@@ -1,8 +1,8 @@
 #include "player.h"
 
-void cPlayer_Init( cPlayer_t* player )
+void Player_Init( Player_t* player )
 {
-   cPlayer_LoadSprite( player );
+   Player_LoadSprite( player );
 
    player->position.x = 0;
    player->position.y = 0;
@@ -26,7 +26,7 @@ void cPlayer_Init( cPlayer_t* player )
    player->gold = 0;
 }
 
-uint8_t cPlayer_GetLevel( cPlayer_t* player )
+uint8_t Player_GetLevel( Player_t* player )
 {
    if ( player->experience < 7 ) { return 1; }
    else if ( player->experience < 23 ) { return 2; }

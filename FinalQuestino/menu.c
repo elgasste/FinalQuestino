@@ -1,72 +1,72 @@
 #include "game.h"
 
-static void cMenu_DrawCarat( cGame_t* game );
-static void cMenu_WipeCarat( cGame_t* game );
-static void cMenu_MapMenuSelect( cGame_t* game );
+static void Menu_DrawCarat( Game_t* game );
+static void Menu_WipeCarat( Game_t* game );
+static void Menu_MapMenuSelect( Game_t* game );
 
-void cMenu_Load( cMenu_t* menu, cMenuIndex_t index )
+void Menu_Load( Menu_t* menu, MenuIndex_t index )
 {
    menu->index = index;
    menu->optionIndex = 0;
    menu->caratSeconds = 0;
-   menu->showCarat = cTrue;
+   menu->showCarat = True;
 
    switch( index )
    {
-      case cMenuIndex_Map:
+      case MenuIndex_Map:
          menu->optionCount = 5;
          break;
    }
 }
 
-void cMenu_Draw( cGame_t* game )
+void Menu_Draw( Game_t* game )
 {
    char str[10];
 
    switch( game->menu.index )
    {
-      case cMenuIndex_Map:
+      case MenuIndex_Map:
          // quick stats
-         cScreen_DrawRect( &( game->screen ), 16, 16, 76, 60, DARKGRAY );
+         Screen_DrawRect( &( game->screen ), 16, 16, 76, 60, DARKGRAY );
          snprintf( str, 10, "HP:%u", game->player.stats.HitPoints );
-         cScreen_DrawText( &( game->screen ), str, 24, 24, DARKGRAY, WHITE );
+         Screen_DrawText( &( game->screen ), str, 24, 24, DARKGRAY, WHITE );
          snprintf( str, 10, "MP:%u", game->player.stats.MagicPoints );
-         cScreen_DrawText( &( game->screen ), str, 24, 36, DARKGRAY, WHITE );
+         Screen_DrawText( &( game->screen ), str, 24, 36, DARKGRAY, WHITE );
          snprintf( str, 10, " G:%u", game->player.gold );
-         cScreen_DrawText( &( game->screen ), str, 24, 48, DARKGRAY, WHITE );
+         Screen_DrawText( &( game->screen ), str, 24, 48, DARKGRAY, WHITE );
          snprintf( str, 10, "EX:%u", game->player.experience );
-         cScreen_DrawText( &( game->screen ), str, 24, 60, DARKGRAY, WHITE );
+         Screen_DrawText( &( game->screen ), str, 24, 60, DARKGRAY, WHITE );
          // menu items
-         cScreen_DrawRect( &( game->screen ), 16, 88, 76, 88, DARKGRAY );
-         cScreen_DrawText( &( game->screen ), "TALK", 32, 96, DARKGRAY, WHITE );
-         cScreen_DrawText( &( game->screen ), "STATUS", 32, 112, DARKGRAY, WHITE );
-         cScreen_DrawText( &( game->screen ), "SEARCH", 32, 128, DARKGRAY, WHITE );
-         cScreen_DrawText( &( game->screen ), "SPELL", 32, 144, DARKGRAY, WHITE );
-         cScreen_DrawText( &( game->screen ), "ITEM", 32, 160, DARKGRAY, WHITE );
+         Screen_DrawRect( &( game->screen ), 16, 88, 76, 88, DARKGRAY );
+         Screen_DrawText( &( game->screen ), "TALK", 32, 96, DARKGRAY, WHITE );
+         Screen_DrawText( &( game->screen ), "STATUS", 32, 112, DARKGRAY, WHITE );
+         Screen_DrawText( &( game->screen ), "SEARCH", 32, 128, DARKGRAY, WHITE );
+         Screen_DrawText( &( game->screen ), "SPELL", 32, 144, DARKGRAY, WHITE );
+         Screen_DrawText( &( game->screen ), "ITEM", 32, 160, DARKGRAY, WHITE );
          break;
    }
 
-   cMenu_DrawCarat( game );
+   Menu_DrawCarat( game );
 }
 
-void cMenu_Wipe( cGame_t* game )
+void Menu_Wipe( Game_t* game )
 {
    switch( game->menu.index )
    {
-      case cMenuIndex_Map:
-         cScreen_WipeTileMapSection( game, 16, 16, 76, 60 );
-         cScreen_WipeTileMapSection( game, 16, 88, 76, 88 );
+      case MenuIndex_Map:
+         Screen_WipeTileMapSection( game, 16, 16, 76, 60 );
+         Screen_WipeTileMapSection( game, 16, 88, 76, 88 );
          break;
    }
    
-   cScreen_DrawMapSprites( game );
-   cScreen_DrawPlayer( game );
+   Screen_DrawMapSprites( game );
+   Screen_DrawPlayer( game );
 }
 
-void cMenu_Tic( cGame_t* game )
+void Menu_Tic( Game_t* game )
 {
-   cMenu_t* menu = &( game->menu );
-   cBool_t showCaratCache = menu->showCarat;
+   Menu_t* menu = &( game->menu );
+   Bool_t showCaratCache = menu->showCarat;
 
    menu->caratSeconds += FRAME_SECONDS;
 
@@ -80,39 +80,39 @@ void cMenu_Tic( cGame_t* game )
    {
       if ( menu->showCarat )
       {
-         cMenu_DrawCarat( game );
+         Menu_DrawCarat( game );
       }
       else
       {
-         cMenu_WipeCarat( game );
+         Menu_WipeCarat( game );
       }
    }
 }
 
-static void cMenu_DrawCarat( cGame_t* game )
+static void Menu_DrawCarat( Game_t* game )
 {
    switch( game->menu.index )
    {
-      case cMenuIndex_Map:
-         cScreen_DrawText( &( game->screen ), ">", 20, 96 + ( 16 * game->menu.optionIndex ), DARKGRAY, WHITE );
+      case MenuIndex_Map:
+         Screen_DrawText( &( game->screen ), ">", 20, 96 + ( 16 * game->menu.optionIndex ), DARKGRAY, WHITE );
          break;
    }
 }
 
-static void cMenu_WipeCarat( cGame_t* game )
+static void Menu_WipeCarat( Game_t* game )
 {
    switch( game->menu.index )
    {
-      case cMenuIndex_Map:
-         cScreen_DrawText( &( game->screen ), " ", 20, 96 + ( 16 * game->menu.optionIndex ), DARKGRAY, WHITE );
+      case MenuIndex_Map:
+         Screen_DrawText( &( game->screen ), " ", 20, 96 + ( 16 * game->menu.optionIndex ), DARKGRAY, WHITE );
          break;
    }
 }
 
-void cMenu_ScrollDown( cGame_t* game )
+void Menu_ScrollDown( Game_t* game )
 {
-   cMenu_WipeCarat( game );
-   game->menu.showCarat = cTrue;
+   Menu_WipeCarat( game );
+   game->menu.showCarat = True;
    game->menu.caratSeconds = 0;
    game->menu.optionIndex++;
 
@@ -121,13 +121,13 @@ void cMenu_ScrollDown( cGame_t* game )
       game->menu.optionIndex = 0;
    }
 
-   cMenu_DrawCarat( game );
+   Menu_DrawCarat( game );
 }
 
-void cMenu_ScrollUp( cGame_t* game )
+void Menu_ScrollUp( Game_t* game )
 {
-   cMenu_WipeCarat( game );
-   game->menu.showCarat = cTrue;
+   Menu_WipeCarat( game );
+   game->menu.showCarat = True;
    game->menu.caratSeconds = 0;
 
    if ( game->menu.optionIndex == 0 )
@@ -139,37 +139,37 @@ void cMenu_ScrollUp( cGame_t* game )
       game->menu.optionIndex--;
    }
 
-   cMenu_DrawCarat( game );
+   Menu_DrawCarat( game );
 }
 
-void cMenu_Select( cGame_t* game )
+void Menu_Select( Game_t* game )
 {
    switch( game->menu.index )
    {
-      case cMenuIndex_Map:
-         cMenu_MapMenuSelect( game );
+      case MenuIndex_Map:
+         Menu_MapMenuSelect( game );
          break;
    }
 }
 
-static void cMenu_MapMenuSelect( cGame_t* game )
+static void Menu_MapMenuSelect( Game_t* game )
 {
    switch( game->menu.optionIndex )
    {
       case 0: // talk
-         cGame_ShowMapMessage( game, "Nobody's there." );
+         Game_ShowMapMessage( game, "Nobody's there." );
          break;
       case 1: // status
-         cGame_ChangeState( game, cGameState_MapStatus );
+         Game_ChangeState( game, GameState_MapStatus );
          break;
       case 2: // search
-         cGame_SearchMapTile( game );
+         Game_SearchMapTile( game );
          break;
       case 3: // spell
-         cGame_ShowMapMessage( game, "You don't know any spells." );
+         Game_ShowMapMessage( game, "You don't know any spells." );
          break;
       case 4: // item
-         cGame_ShowMapMessage( game, "You don't have any items." );
+         Game_ShowMapMessage( game, "You don't have any items." );
          break;
    }
 }

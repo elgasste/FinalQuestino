@@ -11,43 +11,43 @@
 #include "player.h"
 #include "battle.h"
 
-typedef struct cGame_t
+typedef struct Game_t
 {
-   cScreen_t screen;
-   cTileMap_t tileMap;
+   Screen_t screen;
+   TileMap_t tileMap;
    uint8_t paletteIndex;
    uint8_t tileMapIndex;
 
-   cMenu_t menu;
+   Menu_t menu;
 
-   cClock_t clock;
-   cInput_t input;
-   cPhysics_t physics;
+   Clock_t clock;
+   Input_t input;
+   Physics_t physics;
 
-   cGameState_t state;
-   cPlayer_t player;
+   GameState_t state;
+   Player_t player;
 
-   cBattle_t battle;
+   Battle_t battle;
 
    uint8_t specialEnemyFlags;
    uint32_t treasureFlags;
 }
-cGame_t;
+Game_t;
 
 #if defined( __cplusplus )
 extern "C" {
 #endif
 
-void cGame_Init( cGame_t* game );
-void cGame_Tic( cGame_t* game );
-void cGame_Refresh( cGame_t* game );
-void cGame_ChangeState( cGame_t *game, cGameState_t newState );
-void cGame_SteppedOnTile( cGame_t* game, uint16_t tileIndex );
-void cGame_ShowMessage( cGame_t* game, const char* message );
-void cGame_WipeMessage( cGame_t* game );
-cBool_t cGame_OnSpecialEnemyTile( cGame_t* game, uint8_t specialEnemyId );
-void cGame_SearchMapTile( cGame_t* game );
-void cGame_ShowMapMessage( cGame_t* game, const char* message );
+void Game_Init( Game_t* game );
+void Game_Tic( Game_t* game );
+void Game_Refresh( Game_t* game );
+void Game_ChangeState( Game_t *game, GameState_t newState );
+void Game_SteppedOnTile( Game_t* game, uint16_t tileIndex );
+void Game_ShowMessage( Game_t* game, const char* message );
+void Game_WipeMessage( Game_t* game );
+Bool_t Game_OnSpecialEnemyTile( Game_t* game, uint8_t specialEnemyId );
+void Game_SearchMapTile( Game_t* game );
+void Game_ShowMapMessage( Game_t* game, const char* message );
 
 #if defined( __cplusplus )
 }

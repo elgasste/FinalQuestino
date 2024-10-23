@@ -1,10 +1,10 @@
 #include "tile_map.h"
 
-void cTileMap_Init( cTileMap_t* tileMap )
+void TileMap_Init( TileMap_t* tileMap )
 {
    uint16_t i;
    uint8_t j;
-   cTileTexture_t* tileTexture;
+   TileTexture_t* tileTexture;
 
    for ( i = 0; i < 16; i++ )
    {
@@ -53,7 +53,7 @@ void cTileMap_Init( cTileMap_t* tileMap )
    tileMap->enemySpecialRegion.h = 0;
 }
 
-uint16_t cTileMap_GetTileIndexFromPos( cTileMap_t* tileMap, cVector2f_t* pos )
+uint16_t TileMap_GetTileIndexFromPos( TileMap_t* tileMap, cVector2f_t* pos )
 {
    return ( ( pos->y / MAP_TILE_SIZE ) * MAP_TILES_X ) + ( pos->x / MAP_TILE_SIZE );
 }

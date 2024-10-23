@@ -255,7 +255,7 @@ string BuildMapPaletteOutputString()
       throw new Exception( "Somehow the map palette is null, I have no idea what could have happened." );
    }
 
-   string outputString = "void cScreen_LoadMapPalette( cScreen_t* screen, uint8_t index )\n";
+   string outputString = "void Screen_LoadMapPalette( Screen_t* screen, uint8_t index )\n";
    outputString += "{\n";
    outputString += "   if ( index == 0 )\n";
    outputString += "   {\n";
@@ -289,7 +289,7 @@ string BuildMapTileTexturesOutputString()
       throw new Exception( "Somehow the tile texture map is null, I have no idea what went wrong." );
    }
 
-   string outputString = "void cTileTexture_LoadTileTextures( cTileMap_t* map )\n";
+   string outputString = "void TileTexture_LoadTileTextures( TileMap_t* map )\n";
    outputString += "{\n";
 
    int tileTextureCount = _tileTextureMapBytes.Count / 16 / 16;
@@ -387,7 +387,7 @@ string BuildMapSpriteTexturesOutputString()
       throw new Exception( "Somehow the map sprites set is null, I have no idea what went wrong." );
    }
 
-   string outputString = "void cTileMap_LoadSprite( cTileMap_t* map, uint8_t index )\n";
+   string outputString = "void TileMap_LoadSprite( TileMap_t* map, uint8_t index )\n";
    outputString += "{\n";
 
    int spriteCount = _mapSpritesBytes.Count / 16 / 16;
@@ -432,7 +432,7 @@ string BuildTextBitFieldsOutputString()
       throw new Exception( "Somehow the text texture map is null, I have no idea what went wrong." );
    }
 
-   string outputString = "void cScreen_LoadTextBitFields( cScreen_t* screen )\n";
+   string outputString = "void Screen_LoadTextBitFields( Screen_t* screen )\n";
    outputString += "{\n";
 
    int charCount = _textTextureMap.Count / 8;
@@ -458,7 +458,7 @@ string BuildPlayerSpriteTexturesOutputString()
       throw new Exception( "Somehow the player sprite texture map is null, I have no idea what went wrong." );
    }
 
-   string outputString = "void cPlayer_LoadSprite( cPlayer_t* player )\n";
+   string outputString = "void Player_LoadSprite( Player_t* player )\n";
    outputString += "{\n";
 
    int frameCount = _playerSpriteTextureMapBytes.Count / ( 4 * 16 ) / 16;
@@ -492,7 +492,7 @@ string BuildPlayerSpriteTexturesOutputString()
 
 string BuildMapTilesOutputString()
 {
-   string outputString = "void cTileMap_LoadTileMap( cTileMap_t* map, uint8_t index )\n";
+   string outputString = "void TileMap_LoadTileMap( TileMap_t* map, uint8_t index )\n";
    outputString += "{\n";
    outputString += "   uint16_t i;\n\n";
 
@@ -546,7 +546,7 @@ string BuildMapTilesOutputString()
 
       outputString += string.Format( "      map->stride = {0};\n", MapData.MapStrides[i] );
 
-      for ( int j = 0; j < 4; j++ )
+      for ( int j = 0; j < 6; j++ )
       {
          outputString += string.Format( "      map->portals[{0}] = 0x{1};\n", j, MapData.MapPortals[i][j].CompiledData.ToString( "X2" ) );
       }
@@ -581,7 +581,7 @@ string BuildMapTilesOutputString()
 
 string BuildMapTreasuresOutputString()
 {
-   string outputString = "uint32_t cTileMap_GetTreasureFlag( cGame_t* game, uint8_t tileMapIndex, uint16_t tileIndex )\n";
+   string outputString = "uint32_t TileMap_GetTreasureFlag( Game_t* game, uint8_t tileMapIndex, uint16_t tileIndex )\n";
    outputString += "{\n";
    outputString += "   switch ( tileMapIndex )\n";
    outputString += "   {\n";
@@ -607,7 +607,7 @@ string BuildEnemyOutputString()
 {
    var sortedEnemies = EnemyRepo.enemies.OrderBy( e => e.Index ).ToList();
 
-   string outputString = "\nvoid cEnemy_Load( cEnemy_t* enemy, uint8_t index )\n";
+   string outputString = "\nvoid Enemy_Load( Enemy_t* enemy, uint8_t index )\n";
    outputString += "{\n";
    outputString += "   uint8_t i, j;\n\n";
    bool first = true;
@@ -628,7 +628,7 @@ string BuildEnemyOutputString()
 
       outputString += "   {\n";
       outputString += string.Format( "      snprintf( enemy->name, 16, \"{0}\" );\n", enemy.Name );
-      outputString += string.Format( "      enemy->indefiniteArticle = cIndefiniteArticle_{0};\n", enemy.IndefiniteArticle );
+      outputString += string.Format( "      enemy->indefiniteArticle = IndefiniteArticle_{0};\n", enemy.IndefiniteArticle );
       outputString += string.Format( "      enemy->stats.HitPoints = {0};\n", enemy.HitPoints );
       outputString += string.Format( "      enemy->stats.MaxHitPoints = {0};\n", enemy.HitPoints );
       outputString += string.Format( "      enemy->stats.MagicPoints = {0};\n", 255 );
