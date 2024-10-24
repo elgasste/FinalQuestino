@@ -5,7 +5,7 @@ void WinPixelBuffer_Init( WinPixelBuffer_t* buffer, uint32_t w, uint32_t h )
 {
    buffer->w = w;
    buffer->h = h;
-   buffer->memory = (uint32_t*)malloc( sizeof( uint32_t ) * w * h );
+   buffer->memory = (uint32_t*)calloc( w * h, sizeof( uint32_t ) );
 }
 
 void WinPixelBuffer_CleanUp( WinPixelBuffer_t* buffer )

@@ -20,7 +20,8 @@
 #define global static
 #define local_persist static
 
-#define STRING_SIZE_DEFAULT 1024
+#define STRING_SIZE_DEFAULT   1024
+#define GRAPHICS_SCALE        2.0f
 
 typedef struct GlobalObjects_t
 {
@@ -30,6 +31,7 @@ typedef struct GlobalObjects_t
    Game_t game;
    Bool_t shutdown;
    WinPixelBuffer_t screenBuffer;
+   GLuint screenBufferTexture;
 }
 GlobalObjects_t;
 

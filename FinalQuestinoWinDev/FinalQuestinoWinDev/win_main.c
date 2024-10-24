@@ -3,12 +3,14 @@
 #include "win_common.h"
 #include "game.h"
 #include "win_pixel_buffer.h"
+#include "win_blit.h"
 
 internal void FatalError( const char* message );
 internal LRESULT CALLBACK MainWindowProc( _In_ HWND hWnd, _In_ UINT uMsg, _In_ WPARAM wParam, _In_ LPARAM lParam );
 internal void InitButtonMap();
 internal void InitOpenGL( HWND hWnd );
 internal void HandleKeyboardInput( uint32_t keyCode, LPARAM flags );
+internal void RenderScreen();
 
 int CALLBACK WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow )
 {
@@ -60,8 +62,8 @@ int CALLBACK WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
                                          windowStyle,
                                          CW_USEDEFAULT,
                                          CW_USEDEFAULT,
-                                         SCREEN_WIDTH + clientPaddingRight,
-                                         SCREEN_HEIGHT + clientPaddingTop,
+                                         ( SCREEN_WIDTH * GRAPHICS_SCALE ) + clientPaddingRight,
+                                         ( SCREEN_HEIGHT * GRAPHICS_SCALE ) + clientPaddingTop,
                                          0,
                                          0,
                                          hInstance,
@@ -77,6 +79,7 @@ int CALLBACK WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
    InitButtonMap();
    InitOpenGL( g_globals.hWndMain );
    WinPixelBuffer_Init( &( g_globals.screenBuffer ), SCREEN_WIDTH, SCREEN_HEIGHT );
+   glGenTextures( 1, &( g_globals.screenBufferTexture ) );
    Game_Init( &( g_globals.game ) );
    g_globals.shutdown = False;
 
@@ -92,6 +95,8 @@ int CALLBACK WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
       }
 
       Game_Tic( &( g_globals.game ) );
+      Blit_Texture( g_globals.screenBufferTexture, &( g_globals.screenBuffer ), 0, 0, GRAPHICS_SCALE );
+      RenderScreen();
       Clock_EndFrame( &( g_globals.game.clock ) );
 
       if ( g_globals.shutdown )
@@ -230,4 +235,11 @@ internal void HandleKeyboardInput( uint32_t keyCode, LPARAM flags )
          }
       }
    }
+}
+
+internal void RenderScreen()
+{
+   HDC dc = GetDC( g_globals.hWndMain );
+   SwapBuffers( dc );
+   ReleaseDC( g_globals.hWndMain, dc );
 }
