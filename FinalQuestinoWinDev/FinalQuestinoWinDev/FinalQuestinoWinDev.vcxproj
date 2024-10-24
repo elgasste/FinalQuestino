@@ -111,7 +111,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies)winmm.lib;opengl32.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies)winmm.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -129,7 +129,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies)winmm.lib;opengl32.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies)winmm.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -150,7 +150,6 @@
     <ClInclude Include="..\..\FinalQuestino\tile_map.h" />
     <ClInclude Include="..\..\FinalQuestino\tile_texture.h" />
     <ClInclude Include="..\..\FinalQuestino\vector.h" />
-    <ClInclude Include="win_blit.h" />
     <ClInclude Include="win_common.h" />
     <ClInclude Include="win_pixel_buffer.h" />
   </ItemGroup>
@@ -164,7 +163,6 @@
     <ClCompile Include="..\..\FinalQuestino\player.c" />
     <ClCompile Include="..\..\FinalQuestino\sprite.c" />
     <ClCompile Include="..\..\FinalQuestino\tile_map.c" />
-    <ClCompile Include="win_blit.c" />
     <ClCompile Include="win_clock.c" />
     <ClCompile Include="win_main.c" />
     <ClCompile Include="win_pixel_buffer.c" />

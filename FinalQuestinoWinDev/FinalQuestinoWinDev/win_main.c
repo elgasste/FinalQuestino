@@ -3,12 +3,10 @@
 #include "win_common.h"
 #include "game.h"
 #include "win_pixel_buffer.h"
-#include "win_blit.h"
 
 internal void FatalError( const char* message );
 internal LRESULT CALLBACK MainWindowProc( _In_ HWND hWnd, _In_ UINT uMsg, _In_ WPARAM wParam, _In_ LPARAM lParam );
 internal void InitButtonMap();
-internal void InitOpenGL( HWND hWnd );
 internal void HandleKeyboardInput( uint32_t keyCode, LPARAM flags );
 internal void RenderScreen();
 
@@ -62,8 +60,8 @@ int CALLBACK WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
                                          windowStyle,
                                          CW_USEDEFAULT,
                                          CW_USEDEFAULT,
-                                         ( SCREEN_WIDTH * GRAPHICS_SCALE ) + clientPaddingRight,
-                                         ( SCREEN_HEIGHT * GRAPHICS_SCALE ) + clientPaddingTop,
+                                         (int)( SCREEN_WIDTH * GRAPHICS_SCALE ) + clientPaddingRight,
+                                         (int)( SCREEN_HEIGHT * GRAPHICS_SCALE ) + clientPaddingTop,
                                          0,
                                          0,
                                          hInstance,
@@ -76,10 +74,15 @@ int CALLBACK WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 
    SetCursor( LoadCursor( 0, IDC_ARROW ) );
 
-   InitButtonMap();
-   InitOpenGL( g_globals.hWndMain );
    WinPixelBuffer_Init( &( g_globals.screenBuffer ), SCREEN_WIDTH, SCREEN_HEIGHT );
-   glGenTextures( 1, &( g_globals.screenBufferTexture ) );
+   g_globals.bmpInfo.bmiHeader.biSize = sizeof( BITMAPINFOHEADER );
+   g_globals.bmpInfo.bmiHeader.biWidth = g_globals.screenBuffer.w;
+   g_globals.bmpInfo.bmiHeader.biHeight = -(LONG)( g_globals.screenBuffer.h );
+   g_globals.bmpInfo.bmiHeader.biPlanes = 1;
+   g_globals.bmpInfo.bmiHeader.biBitCount = 32;
+   g_globals.bmpInfo.bmiHeader.biCompression = BI_RGB;
+
+   InitButtonMap();
    Game_Init( &( g_globals.game ) );
    g_globals.shutdown = False;
 
@@ -95,8 +98,6 @@ int CALLBACK WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
       }
 
       Game_Tic( &( g_globals.game ) );
-      Blit_Texture( g_globals.screenBufferTexture, &( g_globals.screenBuffer ), 0, 0, GRAPHICS_SCALE );
-      RenderScreen();
       Clock_EndFrame( &( g_globals.game.clock ) );
 
       if ( g_globals.shutdown )
@@ -138,6 +139,9 @@ internal LRESULT CALLBACK MainWindowProc( _In_ HWND hWnd, _In_ UINT uMsg, _In_ W
       case WM_SYSKEYUP:
          HandleKeyboardInput( (uint32_t)wParam, lParam );
          break;
+      case WM_PAINT:
+         RenderScreen();
+         break;
       default:
          result = DefWindowProcA( hWnd, uMsg, wParam, lParam );
    }
@@ -153,47 +157,6 @@ internal void InitButtonMap()
    g_globals.buttonMap[(int)Button_Down] = VK_DOWN;
    g_globals.buttonMap[(int)Button_A] = VK_SPACE;
    g_globals.buttonMap[(int)Button_B] = VK_ESCAPE;
-}
-
-internal void InitOpenGL( HWND hWnd )
-{
-   PIXELFORMATDESCRIPTOR desiredPixelFormat = { 0 };
-   PIXELFORMATDESCRIPTOR suggestedPixelFormat;
-   int suggestedPixelFormatIndex;
-   HGLRC glRC;
-   HDC dc = GetDC( hWnd );
-
-   desiredPixelFormat.nSize = sizeof( desiredPixelFormat );
-   desiredPixelFormat.nVersion = 1;
-   desiredPixelFormat.iPixelType = PFD_TYPE_RGBA;
-   desiredPixelFormat.dwFlags = PFD_SUPPORT_OPENGL | PFD_DRAW_TO_WINDOW | PFD_DOUBLEBUFFER;
-   desiredPixelFormat.cColorBits = 32;
-   desiredPixelFormat.cAlphaBits = 8;
-   desiredPixelFormat.iLayerType = PFD_MAIN_PLANE;
-
-   suggestedPixelFormatIndex = ChoosePixelFormat( dc, &desiredPixelFormat );
-
-   if ( !suggestedPixelFormatIndex )
-   {
-      FatalError( "No OpenGL pixel formats available." );
-   }
-
-   DescribePixelFormat( dc, suggestedPixelFormatIndex, sizeof( suggestedPixelFormat ), &suggestedPixelFormat );
-
-   if ( suggestedPixelFormat.cColorBits != 32 || suggestedPixelFormat.cAlphaBits != 8 )
-   {
-      FatalError( "No suitable OpenGL pixel format found." );
-   }
-
-   SetPixelFormat( dc, suggestedPixelFormatIndex, &suggestedPixelFormat );
-   glRC = wglCreateContext( dc );
-
-   if ( !wglMakeCurrent( dc, glRC ) )
-   {
-      FatalError( "Failed to make OpenGL rendering context current." );
-   }
-
-   ReleaseDC( hWnd, dc );
 }
 
 internal void HandleKeyboardInput( uint32_t keyCode, LPARAM flags )
@@ -239,7 +202,17 @@ internal void HandleKeyboardInput( uint32_t keyCode, LPARAM flags )
 
 internal void RenderScreen()
 {
-   HDC dc = GetDC( g_globals.hWndMain );
-   SwapBuffers( dc );
-   ReleaseDC( g_globals.hWndMain, dc );
+   PAINTSTRUCT pc;
+   HDC dc = BeginPaint( g_globals.hWndMain, &pc );
+
+   StretchDIBits(
+      dc,
+      0, 0, (int)( SCREEN_WIDTH * GRAPHICS_SCALE ), (int)( SCREEN_HEIGHT * GRAPHICS_SCALE ), // dest
+      0, 0, g_globals.screenBuffer.w, g_globals.screenBuffer.h, // src
+      g_globals.screenBuffer.memory,
+      &( g_globals.bmpInfo ),
+      DIB_RGB_COLORS, SRCCOPY
+   );
+
+   EndPaint( g_globals.hWndMain, &pc );
 }

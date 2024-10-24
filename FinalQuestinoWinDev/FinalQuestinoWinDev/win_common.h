@@ -9,7 +9,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <malloc.h>
-#include <gl/GL.h>
 
 #include "enums.h"
 #include "game.h"
@@ -31,10 +30,10 @@ typedef struct GlobalObjects_t
    Game_t game;
    Bool_t shutdown;
    WinPixelBuffer_t screenBuffer;
-   GLuint screenBufferTexture;
+   BITMAPINFO bmpInfo;
 }
 GlobalObjects_t;
 
-global GlobalObjects_t g_globals;
+GlobalObjects_t g_globals;
 
 #endif

@@ -72,9 +72,6 @@
     <ClInclude Include="win_pixel_buffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="win_blit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="win_main.c">
@@ -117,9 +114,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="win_pixel_buffer.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="win_blit.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
