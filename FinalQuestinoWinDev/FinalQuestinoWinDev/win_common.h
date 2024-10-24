@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( WIN_COMMON_H )
+#define WIN_COMMON_H
 
 #define VC_EXTRALEAN
 #define WIN32_LEAN_AND_MEAN
@@ -7,11 +8,12 @@
 #include <mmsystem.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <malloc.h>
 #include <gl/GL.h>
 
-#include "common.h"
 #include "enums.h"
 #include "game.h"
+#include "win_pixel_buffer.h"
 
 // not really necessary, but makes things easier to distinguish
 #define internal static
@@ -27,7 +29,10 @@ typedef struct GlobalObjects_t
    uint32_t buttonMap[(int)Button_Count];
    Game_t game;
    Bool_t shutdown;
+   WinPixelBuffer_t screenBuffer;
 }
 GlobalObjects_t;
 
 global GlobalObjects_t g_globals;
+
+#endif

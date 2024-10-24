@@ -151,6 +151,7 @@
     <ClInclude Include="..\..\FinalQuestino\tile_texture.h" />
     <ClInclude Include="..\..\FinalQuestino\vector.h" />
     <ClInclude Include="win_common.h" />
+    <ClInclude Include="win_pixel_buffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\FinalQuestino\battle.c" />
@@ -164,6 +165,7 @@
     <ClCompile Include="..\..\FinalQuestino\tile_map.c" />
     <ClCompile Include="win_clock.c" />
     <ClCompile Include="win_main.c" />
+    <ClCompile Include="win_pixel_buffer.c" />
     <ClCompile Include="win_random.c" />
     <ClCompile Include="win_screen.c" />
   </ItemGroup>

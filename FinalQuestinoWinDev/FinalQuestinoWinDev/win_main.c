@@ -2,6 +2,7 @@
 
 #include "win_common.h"
 #include "game.h"
+#include "win_pixel_buffer.h"
 
 internal void FatalError( const char* message );
 internal LRESULT CALLBACK MainWindowProc( _In_ HWND hWnd, _In_ UINT uMsg, _In_ WPARAM wParam, _In_ LPARAM lParam );
@@ -75,6 +76,7 @@ int CALLBACK WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 
    InitButtonMap();
    InitOpenGL( g_globals.hWndMain );
+   WinPixelBuffer_Init( &( g_globals.screenBuffer ), SCREEN_WIDTH, SCREEN_HEIGHT );
    Game_Init( &( g_globals.game ) );
    g_globals.shutdown = False;
 
@@ -98,6 +100,7 @@ int CALLBACK WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
       }
    }
 
+   WinPixelBuffer_CleanUp( &( g_globals.screenBuffer ) );
    return 0;
 }
 
