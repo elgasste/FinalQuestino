@@ -21,6 +21,7 @@
 #define DELAY_MS( x )                     Sleep( x )
 #else
 #define DELAY_MS( x )                     delay( x )
+#define MICROS( x )                       micros( x )
 #endif
 
 #define GAME_FPS                          30

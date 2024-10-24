@@ -1,19 +1,7 @@
 #include <stdio.h>
 
-#include "main.h"
+#include "win_common.h"
 #include "game.h"
-
-typedef struct
-{
-   HWND hWndMain;
-   LARGE_INTEGER performanceFrequency;
-   uint32_t buttonMap[(int)Button_Count];
-   Game_t game;
-   Bool_t shutdown;
-}
-GlobalObjects_t;
-
-global GlobalObjects_t g_globals;
 
 internal void FatalError( const char* message );
 internal LRESULT CALLBACK MainWindowProc( _In_ HWND hWnd, _In_ UINT uMsg, _In_ WPARAM wParam, _In_ LPARAM lParam );
@@ -29,6 +17,7 @@ int CALLBACK WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
    DWORD windowStyle = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_VISIBLE;
    RECT expectedWindowRect = { 0 };
    LONG clientPaddingRight, clientPaddingTop;
+   MSG msg;
 
    if ( !QueryPerformanceFrequency( &( g_globals.performanceFrequency ) ) )
    {
@@ -92,6 +81,14 @@ int CALLBACK WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
    while ( 1 )
    {
       Clock_StartFrame( &( g_globals.game.clock ) );
+      Input_ResetState( &( g_globals.game.input ) );
+      
+      while ( PeekMessageA( &msg, g_globals.hWndMain, 0, 0, PM_REMOVE ) )
+      {
+         TranslateMessage( &msg );
+         DispatchMessageA( &msg );
+      }
+
       Game_Tic( &( g_globals.game ) );
       Clock_EndFrame( &( g_globals.game.clock ) );
 
@@ -106,7 +103,7 @@ int CALLBACK WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 
 void Serial_PrintLn( const char* msg )
 {
-   // MUFFINS: maybe message box it? or log it? I don't know...
+   OutputDebugStringA( msg );
 }
 
 internal void FatalError( const char* message )
@@ -213,8 +210,7 @@ internal void HandleKeyboardInput( uint32_t keyCode, LPARAM flags )
          {
             if ( g_globals.buttonMap[i] == keyCode )
             {
-               // MUFFINS: translate this to input.c
-               //Input_PressButton( &( g_globals.gameData.inputState ), (Button_t)i );
+               Input_ButtonPressed( &( g_globals.game.input ), (Button_t)i );
                break;
             }
          }
@@ -225,8 +221,7 @@ internal void HandleKeyboardInput( uint32_t keyCode, LPARAM flags )
          {
             if ( g_globals.buttonMap[i] == keyCode )
             {
-               // MUFFINS: translate this to input.c
-               //Input_ReleaseButton( &( g_globals.gameData.inputState ), (Button_t)i );
+               Input_ButtonReleased( &( g_globals.game.input ), (Button_t)i );
                break;
             }
          }

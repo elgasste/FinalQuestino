@@ -28,6 +28,12 @@ void Input_Init( Input_t* input );
 void Input_Read( Input_t* input );
 void Input_Handle( Game_t* game );
 
+#if defined( VISUAL_STUDIO_DEV )
+void Input_ResetState( Input_t* input );
+void Input_ButtonPressed( Input_t* input, Button_t button );
+void Input_ButtonReleased( Input_t* input, Button_t button );
+#endif
+
 #if defined( __cplusplus )
 }
 #endif

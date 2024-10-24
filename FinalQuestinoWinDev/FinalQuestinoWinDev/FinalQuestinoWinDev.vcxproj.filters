@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="main.h">
+    <ClInclude Include="win_common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\FinalQuestino\battle.h">
@@ -71,13 +71,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="win_main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\FinalQuestino\battle.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\FinalQuestino\clock.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\FinalQuestino\data_loader.c">
@@ -98,16 +95,19 @@
     <ClCompile Include="..\..\FinalQuestino\player.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\FinalQuestino\random.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\FinalQuestino\sprite.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\FinalQuestino\tile_map.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="screen.cpp">
+    <ClCompile Include="win_screen.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="win_clock.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="win_random.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

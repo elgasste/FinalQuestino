@@ -20,11 +20,7 @@ Sprite_t;
 extern "C" {
 #endif
 
-void Sprite_Init( Sprite_t* sprite );
 void Sprite_Tic( Sprite_t* sprite, Clock_t* clock );
-
-// data_loader.c
-void Sprite_LoadTextures( Sprite_t* sprite );
 
 #if defined( __cplusplus )
 }
