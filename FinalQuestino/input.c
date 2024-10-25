@@ -7,6 +7,7 @@
 static void Input_UpdateButtonState( ButtonState_t* buttonState, Bool_t down );
 static void Input_HandleMapStateInput( Game_t* game );
 static void Input_HandleMapMenuStateInput( Game_t* game );
+static Bool_t Input_AnyButtonPressed( Input_t* input );
 
 void Input_Init( Input_t* input )
 {
@@ -111,7 +112,7 @@ void Input_Handle( Game_t* game )
       case GameState_MapMessage:
       case GameState_MapStatus:
       case GameState_Battle:
-         if ( game->input.buttonStates[Button_A].pressed || game->input.buttonStates[Button_B].pressed )
+         if ( Input_AnyButtonPressed( &( game->input ) ) )
          {
             Game_ChangeState( game, GameState_Map );
          }
@@ -231,4 +232,19 @@ static void Input_HandleMapMenuStateInput( Game_t* game )
          Menu_ScrollDown( game );
       }
    }
+}
+
+static Bool_t Input_AnyButtonPressed( Input_t* input )
+{
+   uint8_t i;
+
+   for ( i = 0; i < (uint8_t)Button_Count; i++ )
+   {
+      if ( input->buttonStates[i].pressed )
+      {
+         return True;
+      }
+   }
+
+   return False;
 }
