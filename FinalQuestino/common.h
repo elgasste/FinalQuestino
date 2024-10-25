@@ -17,6 +17,11 @@
 // un-comment to turn on fast walk mode
 //#define DEBUG_FASTWALK
 
+// not really necessary, but makes things easier to distinguish
+#define internal static
+#define global static
+#define local_persist static
+
 #if defined( VISUAL_STUDIO_DEV )
 #define DELAY_MS( x )                     Sleep( x )
 #define UNUSED_PARAM( x )                 (void)x
@@ -28,9 +33,15 @@
 #define MAX_I( a, b ) ( ( ( a ) > ( b ) ) ? ( a ) : ( b ) )
 #define MIN_I( a, b ) ( ( ( a ) < ( b ) ) ? ( a ) : ( b ) )
 
+#if defined( VISUAL_STUDIO_DEV )
+#define GAME_FPS                          60
+#define FRAME_MICROSECONDS                16666
+#define FRAME_SECONDS                     0.01666666f
+#else
 #define GAME_FPS                          30
 #define FRAME_MICROSECONDS                33333
 #define FRAME_SECONDS                     0.03333333f
+#endif
 
 #define MAP_TILE_SIZE                     16
 #define MAP_PACKED_TILE_SIZE              8

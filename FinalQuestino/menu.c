@@ -1,8 +1,8 @@
 #include "game.h"
 
-static void Menu_DrawCarat( Game_t* game );
-static void Menu_WipeCarat( Game_t* game );
-static void Menu_MapMenuSelect( Game_t* game );
+internal void Menu_DrawCarat( Game_t* game );
+internal void Menu_WipeCarat( Game_t* game );
+internal void Menu_MapMenuSelect( Game_t* game );
 
 void Menu_Load( Menu_t* menu, MenuIndex_t index )
 {
@@ -89,7 +89,7 @@ void Menu_Tic( Game_t* game )
    }
 }
 
-static void Menu_DrawCarat( Game_t* game )
+internal void Menu_DrawCarat( Game_t* game )
 {
    switch( game->menu.index )
    {
@@ -99,7 +99,7 @@ static void Menu_DrawCarat( Game_t* game )
    }
 }
 
-static void Menu_WipeCarat( Game_t* game )
+internal void Menu_WipeCarat( Game_t* game )
 {
    switch( game->menu.index )
    {
@@ -152,7 +152,7 @@ void Menu_Select( Game_t* game )
    }
 }
 
-static void Menu_MapMenuSelect( Game_t* game )
+internal void Menu_MapMenuSelect( Game_t* game )
 {
    switch( game->menu.optionIndex )
    {

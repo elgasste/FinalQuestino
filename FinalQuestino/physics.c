@@ -1,7 +1,7 @@
 #include "game.h"
 
-static void Physics_RefreshFromScreenSwap( Game_t* game );
-static Bool_t Physics_TileHasImpassableSprite( TileMap_t* map, uint16_t tileIndex );
+internal void Physics_RefreshFromScreenSwap( Game_t* game );
+internal Bool_t Physics_TileHasImpassableSprite( TileMap_t* map, uint16_t tileIndex );
 
 void Physics_Init( Physics_t* physics )
 {
@@ -169,7 +169,7 @@ void Physics_UpdateTileIndexCache( Game_t* game )
    }
 }
 
-static Bool_t Physics_TileHasImpassableSprite( TileMap_t* map, uint16_t tileIndex )
+internal Bool_t Physics_TileHasImpassableSprite( TileMap_t* map, uint16_t tileIndex )
 {
    uint8_t i;
 

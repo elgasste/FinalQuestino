@@ -37,7 +37,7 @@ void TileMap_Init( TileMap_t* tileMap )
 
    for ( i = 0; i < MAP_SPRITE_COUNT; i++ )
    {
-      tileMap->spriteData[MAP_SPRITE_COUNT] = 0;
+      tileMap->spriteData[i] = 0;
    }
 
    for ( i = 0; i < MAP_TILE_ENEMY_INDEX_COUNT; i++ )
