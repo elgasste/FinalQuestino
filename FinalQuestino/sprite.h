@@ -4,8 +4,6 @@
 #include "common.h"
 #include "enums.h"
 
-typedef struct Clock_t Clock_t;
-
 typedef struct Sprite_t
 {
    uint8_t frameTextures[( SPRITE_SIZE / 2 ) * SPRITE_SIZE * SPRITE_FRAMES * 4];
@@ -20,7 +18,7 @@ Sprite_t;
 extern "C" {
 #endif
 
-void Sprite_Tic( Sprite_t* sprite, Clock_t* clock );
+void Sprite_Tic( Sprite_t* sprite );
 
 #if defined( __cplusplus )
 }

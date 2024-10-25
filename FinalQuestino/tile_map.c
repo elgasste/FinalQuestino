@@ -52,8 +52,3 @@ void TileMap_Init( TileMap_t* tileMap )
    tileMap->enemySpecialRegion.w = 0;
    tileMap->enemySpecialRegion.h = 0;
 }
-
-uint16_t TileMap_GetTileIndexFromPos( TileMap_t* tileMap, cVector2f_t* pos )
-{
-   return ( ( pos->y / MAP_TILE_SIZE ) * MAP_TILES_X ) + ( pos->x / MAP_TILE_SIZE );
-}

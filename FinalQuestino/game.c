@@ -137,7 +137,7 @@ void Game_ChangeState( Game_t *game, GameState_t newState )
 
 void Game_SteppedOnTile( Game_t* game, uint16_t tileIndex )
 {
-   uint8_t i, tileFlags, tileSpeed, encounterRate;
+   uint8_t i, tileFlagIndex, tileFlags, tileSpeed, tileTextureIndex, encounterRate;
    uint8_t tile = game->tileMap.tiles[tileIndex];
    uint16_t newTileIndex, newTileX, newTileY;
 
@@ -147,20 +147,21 @@ void Game_SteppedOnTile( Game_t* game, uint16_t tileIndex )
    {
       if ( ( game->tileMap.portals[i] >> 21 ) == tileIndex )
       {
-         game->tileMapIndex = ( game->tileMap.portals[i] >> 11 ) & 0x3FF;
+         game->tileMapIndex = (uint8_t)( ( game->tileMap.portals[i] >> 11 ) & 0x3FF );
          newTileIndex = game->tileMap.portals[i] & 0x7FF;
          game->tileMap.tileIndexCache = newTileIndex;
          newTileY = newTileIndex / MAP_TILES_X;
          newTileX = newTileIndex - ( newTileY * MAP_TILES_X );
-         game->player.position.x = ( newTileX * MAP_TILE_SIZE ) + ( ( MAP_TILE_SIZE - PLAYER_HITBOX_SIZE ) / 2 );
-         game->player.position.y = ( newTileY * MAP_TILE_SIZE ) + ( MAP_TILE_SIZE - PLAYER_HITBOX_SIZE ) - COLLISION_PADDING;
+         game->player.position.x = (float)( ( newTileX * MAP_TILE_SIZE ) + ( ( MAP_TILE_SIZE - PLAYER_HITBOX_SIZE ) / 2 ) );
+         game->player.position.y = (float)( ( newTileY * MAP_TILE_SIZE ) + ( MAP_TILE_SIZE - PLAYER_HITBOX_SIZE ) - COLLISION_PADDING );
          Game_Refresh( game );
          Random_Seed();
          return;
       }
    }
 
-   tileFlags = game->tileMap.tileTextures[tile & 0x1F].flags;
+   tileFlagIndex = tile & 0xF1;
+   tileFlags = game->tileMap.tileTextures[MIN_I( tileFlagIndex, 15 )].flags;
    tileSpeed = ( tileFlags & 0xC ) >> 2;
 
    switch( tileSpeed )
@@ -184,7 +185,9 @@ void Game_SteppedOnTile( Game_t* game, uint16_t tileIndex )
    }
    else if ( tile & MAP_TILE_FLAG_ENCOUNTERABLE )
    {
-      encounterRate = game->tileMap.tileTextures[tile & 0x1F].flags & 0x3;
+      tileTextureIndex = tile & 0x1F;
+      tileFlags = game->tileMap.tileTextures[MIN_I( tileTextureIndex, 15 )].flags;
+      encounterRate = tileFlags & 0x3;
 
       if ( encounterRate > 0 )
       {
@@ -288,7 +291,7 @@ static Bool_t Game_OnAnySpecialEnemyTile( Game_t* game )
 void Game_SearchMapTile( Game_t* game )
 {
    uint8_t x, y;
-   uint32_t treasureFlag = TileMap_GetTreasureFlag( game, game->tileMapIndex, game->tileMap.tileIndexCache );
+   uint32_t treasureFlag = TileMap_GetTreasureFlag( game->tileMapIndex, game->tileMap.tileIndexCache );
 
    if ( treasureFlag && ( game->treasureFlags & treasureFlag ) )
    {
@@ -296,9 +299,9 @@ void Game_SearchMapTile( Game_t* game )
       {
          Game_ShowMapMessage( game, "Time to quit your day job!" );
 
-         y = game->tileMap.tileIndexCache / MAP_TILES_X;
-         x = game->tileMap.tileIndexCache - ( y * MAP_TILES_X );
-         Screen_WipeTileMapSection( game, x * MAP_TILE_SIZE, y * MAP_TILE_SIZE, MAP_TILE_SIZE, MAP_TILE_SIZE );
+         y = ( uint8_t )( game->tileMap.tileIndexCache / MAP_TILES_X );
+         x = ( uint8_t )( game->tileMap.tileIndexCache - ( y * MAP_TILES_X ) );
+         Screen_WipeTileMapSection( game, (float)x * MAP_TILE_SIZE, (float)y * MAP_TILE_SIZE, MAP_TILE_SIZE, MAP_TILE_SIZE );
          Screen_DrawPlayer( game );
       }
       else

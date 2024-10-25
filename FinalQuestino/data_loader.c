@@ -20891,7 +20891,7 @@ void TileMap_LoadTileMap( TileMap_t* map, uint8_t index )
    }
 }
 
-uint32_t TileMap_GetTreasureFlag( Game_t* game, uint8_t tileMapIndex, uint16_t tileIndex )
+uint32_t TileMap_GetTreasureFlag( uint8_t tileMapIndex, uint16_t tileIndex )
 {
    switch ( tileMapIndex )
    {

@@ -19,10 +19,14 @@
 
 #if defined( VISUAL_STUDIO_DEV )
 #define DELAY_MS( x )                     Sleep( x )
+#define UNUSED_PARAM( x )                 (void)x
 #else
 #define DELAY_MS( x )                     delay( x )
 #define MICROS( x )                       micros( x )
 #endif
+
+#define MAX_I( a, b ) ( ( ( a ) > ( b ) ) ? ( a ) : ( b ) )
+#define MIN_I( a, b ) ( ( ( a ) < ( b ) ) ? ( a ) : ( b ) )
 
 #define GAME_FPS                          30
 #define FRAME_MICROSECONDS                33333

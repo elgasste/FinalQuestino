@@ -581,7 +581,7 @@ string BuildMapTilesOutputString()
 
 string BuildMapTreasuresOutputString()
 {
-   string outputString = "uint32_t TileMap_GetTreasureFlag( Game_t* game, uint8_t tileMapIndex, uint16_t tileIndex )\n";
+   string outputString = "uint32_t TileMap_GetTreasureFlag( uint8_t tileMapIndex, uint16_t tileIndex )\n";
    outputString += "{\n";
    outputString += "   switch ( tileMapIndex )\n";
    outputString += "   {\n";

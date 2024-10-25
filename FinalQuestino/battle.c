@@ -1,7 +1,7 @@
 #include "game.h"
 #include "random.h"
 
-static Battle_AnimateStart( Game_t* game );
+static void Battle_AnimateStart( Game_t* game );
 
 void Battle_Start( Game_t* game )
 {
@@ -69,7 +69,7 @@ void Battle_Done( Game_t* game )
    Game_WipeMessage( game );
 }
 
-static Battle_AnimateStart( Game_t* game )
+static void Battle_AnimateStart( Game_t* game )
 {
 #if defined( VISUAL_STUDIO_DEV )
    Screen_DrawRect( &( game->screen ), 128, 48, 112, 96, BLACK );

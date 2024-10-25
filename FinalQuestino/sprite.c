@@ -1,7 +1,6 @@
 #include "sprite.h"
-#include "clock.h"
 
-void Sprite_Tic( Sprite_t* sprite, Clock_t* clock )
+void Sprite_Tic( Sprite_t* sprite )
 {
    sprite->elapsedSeconds += FRAME_SECONDS;
 

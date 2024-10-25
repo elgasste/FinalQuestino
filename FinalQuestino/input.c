@@ -27,7 +27,9 @@ void Input_Init( Input_t* input )
 
 void Input_Read( Input_t* input )
 {
-#if !defined( VISUAL_STUDIO_DEV )
+#if defined( VISUAL_STUDIO_DEV )
+   UNUSED_PARAM( input );
+#else
    int16_t xValue = analogRead( PIN_ANALOG_X );
    int16_t yValue = analogRead( PIN_ANALOG_Y );
 
@@ -198,7 +200,7 @@ static void Input_HandleMapStateInput( Game_t* game )
             }
          }
 
-         Sprite_Tic( &( player->sprite ), &( game->clock ) );
+         Sprite_Tic( &( player->sprite ) );
       }
    }
 }

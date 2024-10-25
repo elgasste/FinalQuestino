@@ -20,6 +20,10 @@ int CALLBACK WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
    LONG clientPaddingRight, clientPaddingTop;
    MSG msg;
 
+   UNUSED_PARAM( hPrevInstance );
+   UNUSED_PARAM( lpCmdLine );
+   UNUSED_PARAM( nCmdShow );
+
    if ( !QueryPerformanceFrequency( &( g_globals.performanceFrequency ) ) )
    {
       FatalError( "failed to query performance frequency." );
