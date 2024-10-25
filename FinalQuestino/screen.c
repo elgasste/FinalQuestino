@@ -1,9 +1,9 @@
 #include "game.h"
 
-static void Screen_Reset( Screen_t* screen );
-static void Screen_SetAddrWindow( Screen_t* screen, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2 );
-static int8_t Screen_GetCharIndexFromChar( const char ch );
-static uint16_t Screen_GetTilePixelColor( Game_t* game, uint16_t x, uint16_t y );
+internal void Screen_Reset( Screen_t* screen );
+internal void Screen_SetAddrWindow( Screen_t* screen, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2 );
+internal int8_t Screen_GetCharIndexFromChar( const char ch );
+internal uint16_t Screen_GetTilePixelColor( Game_t* game, uint16_t x, uint16_t y );
 
 void Screen_Init( Screen_t* screen )
 {
@@ -50,7 +50,7 @@ void Screen_Init( Screen_t* screen )
    screen->mapSpriteIndexCache = 0xFF;
 }
 
-static void Screen_Reset( Screen_t* screen )
+internal void Screen_Reset( Screen_t* screen )
 {
    CS_IDLE;
    WR_IDLE;
@@ -115,7 +115,7 @@ void Screen_Begin( Screen_t* screen )
    CS_IDLE;
 }
 
-static void Screen_SetAddrWindow( Screen_t* screen, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2 )
+internal void Screen_SetAddrWindow( Screen_t* screen, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2 )
 {
    CD_COMMAND;
    write8( ILI9341_COLADDRSET );
@@ -214,7 +214,7 @@ void Screen_DrawTileMap( Game_t* game )
    CS_IDLE;
 }
 
-static int8_t Screen_GetCharIndexFromChar( const char ch )
+internal int8_t Screen_GetCharIndexFromChar( const char ch )
 {
    if ( ch >= 97 && ch <= 122 )
    {
@@ -366,7 +366,7 @@ void Screen_DrawWrappedText( Screen_t* screen, const char* text, uint16_t x, uin
    }
 }
 
-static uint16_t Screen_GetTilePixelColor( Game_t* game, uint16_t x, uint16_t y )
+internal uint16_t Screen_GetTilePixelColor( Game_t* game, uint16_t x, uint16_t y )
 {
    uint8_t i, tileTextureIndex, spriteIndex;
    uint16_t color;

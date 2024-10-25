@@ -4,10 +4,10 @@
 #define ANALOG_THRESHOLD_LOW 200
 #define ANALOG_THRESHOLD_HIGH 824
 
-static void Input_UpdateButtonState( ButtonState_t* buttonState, Bool_t down );
-static void Input_HandleMapStateInput( Game_t* game );
-static void Input_HandleMapMenuStateInput( Game_t* game );
-static Bool_t Input_AnyButtonPressed( Input_t* input );
+internal void Input_UpdateButtonState( ButtonState_t* buttonState, Bool_t down );
+internal void Input_HandleMapStateInput( Game_t* game );
+internal void Input_HandleMapMenuStateInput( Game_t* game );
+internal Bool_t Input_AnyButtonPressed( Input_t* input );
 
 void Input_Init( Input_t* input )
 {
@@ -83,7 +83,7 @@ void Input_ButtonReleased( Input_t* input, Button_t button )
 
 #endif // VISUAL_STUDIO_DEV
 
-static void Input_UpdateButtonState( ButtonState_t* buttonState, Bool_t down )
+internal void Input_UpdateButtonState( ButtonState_t* buttonState, Bool_t down )
 {
    if ( down )
    {
@@ -120,7 +120,7 @@ void Input_Handle( Game_t* game )
    }
 }
 
-static void Input_HandleMapStateInput( Game_t* game )
+internal void Input_HandleMapStateInput( Game_t* game )
 {
    Player_t* player = &( game->player );
    Sprite_t* sprite = &( player->sprite );
@@ -206,7 +206,7 @@ static void Input_HandleMapStateInput( Game_t* game )
    }
 }
 
-static void Input_HandleMapMenuStateInput( Game_t* game )
+internal void Input_HandleMapMenuStateInput( Game_t* game )
 {
    Bool_t upIsDown, downIsDown;
 
@@ -234,7 +234,7 @@ static void Input_HandleMapMenuStateInput( Game_t* game )
    }
 }
 
-static Bool_t Input_AnyButtonPressed( Input_t* input )
+internal Bool_t Input_AnyButtonPressed( Input_t* input )
 {
    uint8_t i;
 

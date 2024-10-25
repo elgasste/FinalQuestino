@@ -14,11 +14,6 @@
 #include "game.h"
 #include "win_pixel_buffer.h"
 
-// not really necessary, but makes things easier to distinguish
-#define internal static
-#define global static
-#define local_persist static
-
 #define STRING_SIZE_DEFAULT   1024
 #define GRAPHICS_SCALE        2.0f
 

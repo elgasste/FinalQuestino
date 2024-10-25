@@ -2,10 +2,10 @@
 #include "random.h"
 #include "battle.h"
 
-static void Game_DrawMapStatus( Game_t* game );
-static void Game_RollEncounter( Game_t* game, uint8_t encounterRate );
-static Bool_t Game_OnAnySpecialEnemyTile( Game_t* game );
-static Bool_t Game_CollectTreasure( Game_t* game, uint32_t treasureFlag );
+internal void Game_DrawMapStatus( Game_t* game );
+internal void Game_RollEncounter( Game_t* game, uint8_t encounterRate );
+internal Bool_t Game_OnAnySpecialEnemyTile( Game_t* game );
+internal Bool_t Game_CollectTreasure( Game_t* game, uint32_t treasureFlag );
 
 void Game_Init( Game_t* game )
 {
@@ -212,7 +212,7 @@ void Game_WipeMessage( Game_t* game )
    }
 }
 
-static void Game_DrawMapStatus( Game_t* game )
+internal void Game_DrawMapStatus( Game_t* game )
 {
    Player_t* player = &( game->player );
    char str[14];
@@ -235,7 +235,7 @@ static void Game_DrawMapStatus( Game_t* game )
    Screen_DrawText( &( game->screen ), str, 24, 96, DARKGRAY, WHITE );
 }
 
-static void Game_RollEncounter( Game_t* game, uint8_t encounterRate )
+internal void Game_RollEncounter( Game_t* game, uint8_t encounterRate )
 {
    Bool_t spawnEncounter;
 
@@ -281,7 +281,7 @@ Bool_t Game_OnSpecialEnemyTile( Game_t* game, uint8_t specialEnemyId )
    return False;
 }
 
-static Bool_t Game_OnAnySpecialEnemyTile( Game_t* game )
+internal Bool_t Game_OnAnySpecialEnemyTile( Game_t* game )
 {
    return Game_OnSpecialEnemyTile( game, SPECIALENEMYID_GREENDRAGON ) ||
           Game_OnSpecialEnemyTile( game, SPECIALENEMYID_GOLEM ) ||
@@ -315,7 +315,7 @@ void Game_SearchMapTile( Game_t* game )
    }
 }
 
-static Bool_t Game_CollectTreasure( Game_t* game, uint32_t treasureFlag )
+internal Bool_t Game_CollectTreasure( Game_t* game, uint32_t treasureFlag )
 {
    // TODO: check if we can carry any more of whatever this is
    game->treasureFlags ^= treasureFlag;
