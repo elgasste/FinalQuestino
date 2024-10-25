@@ -88,6 +88,8 @@
 
 #endif // VISUAL_STUDIO_DEV
 
+#define NEGATIVE_CLAMP_THETA 0.9999f
+
 #define SCREEN_WIDTH  320
 #define SCREEN_HEIGHT 240
 

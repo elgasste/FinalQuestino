@@ -25,8 +25,8 @@ void Battle_Start( Game_t* game )
    else
    {
       enemyIndex = Random_Uint8( 0, MAP_TILE_ENEMY_INDEX_COUNT - 1 );
-      playerTileX = ( game->player.position.x + ( PLAYER_HITBOX_SIZE / 2 ) ) / MAP_TILE_SIZE;
-      playerTileY = ( game->player.position.y + ( PLAYER_HITBOX_SIZE / 2 ) ) / MAP_TILE_SIZE;
+      playerTileX = ( uint8_t )( ( game->player.position.x + ( PLAYER_HITBOX_SIZE / 2 ) ) / MAP_TILE_SIZE );
+      playerTileY = ( uint8_t )( ( game->player.position.y + ( PLAYER_HITBOX_SIZE / 2 ) ) / MAP_TILE_SIZE );
 
       if ( playerTileX >= specialRegion->x && playerTileX <= ( specialRegion->x + specialRegion->w ) &&
            playerTileY >= specialRegion->y && playerTileY <= ( specialRegion->y + specialRegion->h ) )
@@ -71,6 +71,9 @@ void Battle_Done( Game_t* game )
 
 static Battle_AnimateStart( Game_t* game )
 {
+#if defined( VISUAL_STUDIO_DEV )
+   Screen_DrawRect( &( game->screen ), 128, 48, 112, 96, BLACK );
+#else
    Screen_DrawRect( &( game->screen ), 176, 80, 16, 16, BLACK ); DELAY_MS( 10 );
    Screen_DrawRect( &( game->screen ), 176, 96, 16, 16, BLACK ); DELAY_MS( 10 );
    Screen_DrawRect( &( game->screen ), 160, 96, 16, 16, BLACK ); DELAY_MS( 10 );
@@ -120,4 +123,5 @@ static Battle_AnimateStart( Game_t* game )
    Screen_DrawRect( &( game->screen ), 224, 96, 16, 16, BLACK ); DELAY_MS( 10 );
    Screen_DrawRect( &( game->screen ), 224, 112, 16, 16, BLACK ); DELAY_MS( 10 );
    Screen_DrawRect( &( game->screen ), 224, 128, 16, 16, BLACK ); DELAY_MS( 10 );
+#endif
 }

@@ -98,6 +98,7 @@ int CALLBACK WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
       }
 
       Game_Tic( &( g_globals.game ) );
+      InvalidateRect( g_globals.hWndMain, 0, 0 );
       Clock_EndFrame( &( g_globals.game.clock ) );
 
       if ( g_globals.shutdown )

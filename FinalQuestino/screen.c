@@ -1,7 +1,5 @@
 #include "game.h"
 
-#define NEGATIVE_CLAMP_THETA 0.9999f
-
 static void Screen_Reset( Screen_t* screen );
 static void Screen_SetAddrWindow( Screen_t* screen, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2 );
 static int8_t Screen_GetCharIndexFromChar( const char ch );
@@ -176,7 +174,7 @@ void Screen_DrawRect( Screen_t* screen, uint16_t x, uint16_t y, uint16_t w, uint
 
 void Screen_DrawTileMap( Game_t* game )
 {
-   uint16_t tileRow, tileCol, color, colorCache;
+   uint16_t tileRow, tileCol, color;
    uint8_t pixelRow, pixelCol, pixelPair, paletteIndex;
    uint8_t tile;
    Screen_t* screen = &( game->screen );
@@ -634,9 +632,7 @@ void Screen_DrawEnemy( Game_t* game, uint16_t x, uint16_t y )
 
 void Screen_WipeTileMapSection( Game_t* game, float x, float y, uint16_t w, uint16_t h )
 {
-   uint8_t pixelPair, paletteIndex, curX, curY;
-   uint16_t color;
-   uint16_t ux, uy, row, col;
+   uint16_t color, ux, uy, row, col;
    Screen_t* screen = &( game->screen );
    TileMap_t* map = &( game->tileMap );
 
