@@ -5,10 +5,12 @@
 #include "button_state.h"
 #include "enums.h"
 
+#if !defined VISUAL_STUDIO_DEV
 #define PIN_ANALOG_X    A15
 #define PIN_ANALOG_Y    A14
 #define PIN_A_BUTTON    50
 #define PIN_B_BUTTON    52
+#endif
 
 typedef struct Game_t Game_t;
 
@@ -25,6 +27,12 @@ extern "C" {
 void Input_Init( Input_t* input );
 void Input_Read( Input_t* input );
 void Input_Handle( Game_t* game );
+
+#if defined( VISUAL_STUDIO_DEV )
+void Input_ResetState( Input_t* input );
+void Input_ButtonPressed( Input_t* input, Button_t button );
+void Input_ButtonReleased( Input_t* input, Button_t button );
+#endif
 
 #if defined( __cplusplus )
 }

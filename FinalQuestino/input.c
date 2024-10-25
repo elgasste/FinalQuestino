@@ -7,6 +7,7 @@
 static void Input_UpdateButtonState( ButtonState_t* buttonState, Bool_t down );
 static void Input_HandleMapStateInput( Game_t* game );
 static void Input_HandleMapMenuStateInput( Game_t* game );
+static Bool_t Input_AnyButtonPressed( Input_t* input );
 
 void Input_Init( Input_t* input )
 {
@@ -19,12 +20,17 @@ void Input_Init( Input_t* input )
       input->buttonStates[i].down = False;
    }
 
+#if !defined( VISUAL_STUDIO_DEV )
    pinMode( PIN_A_BUTTON, INPUT_PULLUP );
    pinMode( PIN_B_BUTTON, INPUT_PULLUP );
+#endif
 }
 
 void Input_Read( Input_t* input )
 {
+#if defined( VISUAL_STUDIO_DEV )
+   UNUSED_PARAM( input );
+#else
    int16_t xValue = analogRead( PIN_ANALOG_X );
    int16_t yValue = analogRead( PIN_ANALOG_Y );
 
@@ -35,7 +41,47 @@ void Input_Read( Input_t* input )
 
    Input_UpdateButtonState( &( input->buttonStates[Button_A] ), digitalRead( PIN_A_BUTTON ) == LOW );
    Input_UpdateButtonState( &( input->buttonStates[Button_B] ), digitalRead( PIN_B_BUTTON ) == LOW );
+#endif
 }
+
+#if defined VISUAL_STUDIO_DEV
+
+void Input_ResetState( Input_t* input )
+{
+   uint32_t i;
+   ButtonState_t* state = input->buttonStates;
+
+   for ( i = 0; i < (uint32_t)Button_Count; i++ )
+   {
+      state->pressed = False;
+      state->released = False;
+      state++;
+   }
+}
+
+void Input_ButtonPressed( Input_t* input, Button_t button )
+{
+   ButtonState_t* state = &( input->buttonStates[button] );
+
+   if ( !state->down )
+   {
+      state->down = True;
+      state->pressed = True;
+   }
+}
+
+void Input_ButtonReleased( Input_t* input, Button_t button )
+{
+   ButtonState_t* state = &( input->buttonStates[button] );
+
+   if ( state->down )
+   {
+      state->down = False;
+      state->released = True;
+   }
+}
+
+#endif // VISUAL_STUDIO_DEV
 
 static void Input_UpdateButtonState( ButtonState_t* buttonState, Bool_t down )
 {
@@ -66,7 +112,7 @@ void Input_Handle( Game_t* game )
       case GameState_MapMessage:
       case GameState_MapStatus:
       case GameState_Battle:
-         if ( game->input.buttonStates[Button_A].pressed || game->input.buttonStates[Button_B].pressed )
+         if ( Input_AnyButtonPressed( &( game->input ) ) )
          {
             Game_ChangeState( game, GameState_Map );
          }
@@ -105,7 +151,7 @@ static void Input_HandleMapStateInput( Game_t* game )
 
             if ( upIsDown || downIsDown )
             {
-               player->velocity.x *= 0.707;
+               player->velocity.x *= 0.707f;
             }
          }
          else if ( rightIsDown && !leftIsDown )
@@ -120,7 +166,7 @@ static void Input_HandleMapStateInput( Game_t* game )
 
             if ( upIsDown || downIsDown )
             {
-               player->velocity.x *= 0.707;
+               player->velocity.x *= 0.707f;
             }
          }
 
@@ -136,7 +182,7 @@ static void Input_HandleMapStateInput( Game_t* game )
 
             if ( leftIsDown || rightIsDown )
             {
-               player->velocity.y *= 0.707;
+               player->velocity.y *= 0.707f;
             }
          }
          else if ( downIsDown && !upIsDown )
@@ -151,11 +197,11 @@ static void Input_HandleMapStateInput( Game_t* game )
 
             if ( leftIsDown || rightIsDown )
             {
-               player->velocity.y *= 0.707;
+               player->velocity.y *= 0.707f;
             }
          }
 
-         Sprite_Tic( &( player->sprite ), &( game->clock ) );
+         Sprite_Tic( &( player->sprite ) );
       }
    }
 }
@@ -186,4 +232,19 @@ static void Input_HandleMapMenuStateInput( Game_t* game )
          Menu_ScrollDown( game );
       }
    }
+}
+
+static Bool_t Input_AnyButtonPressed( Input_t* input )
+{
+   uint8_t i;
+
+   for ( i = 0; i < (uint8_t)Button_Count; i++ )
+   {
+      if ( input->buttonStates[i].pressed )
+      {
+         return True;
+      }
+   }
+
+   return False;
 }

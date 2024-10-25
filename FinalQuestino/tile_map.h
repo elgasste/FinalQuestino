@@ -46,12 +46,11 @@ extern "C" {
 #endif
 
 void TileMap_Init( TileMap_t* tileMap );
-uint16_t TileMap_GetTileIndexFromPos( TileMap_t* tileMap, cVector2f_t* pos );
 
 // data_loader.c
 void TileMap_LoadTileMap( TileMap_t* map, uint8_t index );
 void TileMap_LoadSprite( TileMap_t* map, uint8_t index );
-uint32_t TileMap_GetTreasureFlag( Game_t* game, uint8_t tileMapIndex, uint16_t tileIndex );
+uint32_t TileMap_GetTreasureFlag( uint8_t tileMapIndex, uint16_t tileIndex );
 
 #if defined( __cplusplus )
 }

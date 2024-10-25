@@ -1,7 +1,5 @@
 #include "game.h"
 
-#define NEGATIVE_CLAMP_THETA 0.9999f
-
 static void Screen_Reset( Screen_t* screen );
 static void Screen_SetAddrWindow( Screen_t* screen, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2 );
 static int8_t Screen_GetCharIndexFromChar( const char ch );
@@ -176,8 +174,8 @@ void Screen_DrawRect( Screen_t* screen, uint16_t x, uint16_t y, uint16_t w, uint
 
 void Screen_DrawTileMap( Game_t* game )
 {
-   uint16_t tileRow, tileCol, color, colorCache;
-   uint8_t pixelRow, pixelCol, pixelPair, paletteIndex;
+   uint16_t tileRow, tileCol, color;
+   uint8_t pixelRow, pixelCol, tileTextureIndex, pixelPair, paletteIndex;
    uint8_t tile;
    Screen_t* screen = &( game->screen );
    TileMap_t* map = &( game->tileMap );
@@ -198,7 +196,8 @@ void Screen_DrawTileMap( Game_t* game )
 
             for ( pixelCol = 0; pixelCol < MAP_PACKED_TILE_SIZE; pixelCol++ )
             {
-               pixelPair = map->tileTextures[tile & 0x1F].pixels[pixelCol + ( pixelRow * MAP_PACKED_TILE_SIZE )];
+               tileTextureIndex = tile & 0x1F;
+               pixelPair = map->tileTextures[MIN_I( tileTextureIndex, 15 )].pixels[pixelCol + ( pixelRow * MAP_PACKED_TILE_SIZE )];
 
                paletteIndex = pixelPair >> 4;
                color = screen->mapPalette[paletteIndex];
@@ -258,8 +257,8 @@ void Screen_DrawText( Screen_t* screen, const char* text, uint16_t x, uint16_t y
 {
    uint16_t ch;
    int8_t charIndex, i;
-   uint8_t row;
-   uint8_t* bitField;
+   uint8_t row, fieldValue;
+   uint8_t *bitField;
 
    CS_ACTIVE;
 
@@ -369,16 +368,19 @@ void Screen_DrawWrappedText( Screen_t* screen, const char* text, uint16_t x, uin
 
 static uint16_t Screen_GetTilePixelColor( Game_t* game, uint16_t x, uint16_t y )
 {
-   uint8_t i, spriteIndex;
+   uint8_t i, tileTextureIndex, spriteIndex;
    uint16_t color;
    uint16_t tileIndex = ( ( y / MAP_TILE_SIZE ) * MAP_TILES_X ) + ( x / MAP_TILE_SIZE );
    TileMap_t* map = &( game->tileMap );
    uint8_t tile = map->tiles[tileIndex];
-   uint8_t* tileTexture = &( map->tileTextures[tile & 0x1F].pixels );
+   uint8_t *tileTexture;
    uint8_t pixelOffsetX = x % MAP_TILE_SIZE;
    uint8_t pixelOffsetY = y % MAP_TILE_SIZE;
-   uint32_t treasureFlag = TileMap_GetTreasureFlag( game, game->tileMapIndex, tileIndex );
+   uint32_t treasureFlag = TileMap_GetTreasureFlag( game->tileMapIndex, tileIndex );
    Screen_t* screen = &( game->screen );
+
+   tileTextureIndex = tile & 0x1F;
+   tileTexture = &( map->tileTextures[MIN_I( tileTextureIndex, 15 )].pixels );
 
    // check if this pixel is on a treasure that has already been collected
    if ( !( treasureFlag && !( game->treasureFlags & treasureFlag ) ) )
@@ -431,7 +433,7 @@ void Screen_DrawMapSprites( Game_t* game )
    for ( i = 0; i < map->spriteCount; i++ )
    {
       tileIndex = map->spriteData[i] & 0x1FF;
-      treasureFlag = TileMap_GetTreasureFlag( game, game->tileMapIndex, tileIndex );
+      treasureFlag = TileMap_GetTreasureFlag( game->tileMapIndex, tileIndex );
 
       if ( treasureFlag )
       {
@@ -446,8 +448,8 @@ void Screen_DrawMapSprites( Game_t* game )
       TileMap_LoadSprite( map, spriteIndex );
       game->screen.mapSpriteIndexCache = spriteIndex;
 
-      tileY = ( tileIndex / MAP_TILES_X );
-      tileX = ( tileIndex - ( tileY * MAP_TILES_X ) );
+      tileY = (uint8_t)( ( tileIndex / MAP_TILES_X ) );
+      tileX = (uint8_t)( ( tileIndex - ( tileY * MAP_TILES_X ) ) );
       x = tileX * MAP_TILE_SIZE;
       y = tileY * MAP_TILE_SIZE;
 
@@ -491,7 +493,6 @@ void Screen_DrawPlayer( Game_t* game )
    uint16_t startByte = ( (uint8_t)( game->player.sprite.direction ) * SPRITE_FRAMES * SPRITE_TEXTURE_SIZE_BYTES ) + ( game->player.sprite.currentFrame * SPRITE_TEXTURE_SIZE_BYTES );
    uint16_t color, i, pixel, ux, uy;
    Screen_t* screen = &( game->screen );
-   TileMap_t* map = &( game->tileMap );
    float x = game->player.position.x + PLAYER_SPRITEOFFSET_X;
    float y = game->player.position.y + PLAYER_SPRITEOFFSET_Y;
 
@@ -510,7 +511,7 @@ void Screen_DrawPlayer( Game_t* game )
    {
       ux = (uint16_t)x;
       skipLeft = 0;
-      skipRight = ( ux + SPRITE_SIZE ) >= ( MAP_TILE_SIZE * MAP_TILES_X ) ? MAP_TILE_SIZE - ( ( MAP_TILE_SIZE * MAP_TILES_X ) - ux ) : 0;
+      skipRight = ( ux + SPRITE_SIZE ) >= ( MAP_TILE_SIZE * MAP_TILES_X ) ? (uint8_t)( MAP_TILE_SIZE - ( ( MAP_TILE_SIZE * MAP_TILES_X ) - ux ) ) : 0;
    }
 
    if ( y < 0 )
@@ -523,7 +524,7 @@ void Screen_DrawPlayer( Game_t* game )
    {
       uy = (uint16_t)y;
       skipTop = 0;
-      skipBottom = ( uy + SPRITE_SIZE ) >= ( MAP_TILE_SIZE * MAP_TILES_Y ) ? MAP_TILE_SIZE - ( ( MAP_TILE_SIZE * MAP_TILES_Y ) - uy ) : 0;
+      skipBottom = ( uy + SPRITE_SIZE ) >= ( MAP_TILE_SIZE * MAP_TILES_Y ) ? (uint8_t)( MAP_TILE_SIZE - ( ( MAP_TILE_SIZE * MAP_TILES_Y ) - uy ) ) : 0;
    }
 
    CS_ACTIVE;
@@ -634,11 +635,8 @@ void Screen_DrawEnemy( Game_t* game, uint16_t x, uint16_t y )
 
 void Screen_WipeTileMapSection( Game_t* game, float x, float y, uint16_t w, uint16_t h )
 {
-   uint8_t pixelPair, paletteIndex, curX, curY;
-   uint16_t color;
-   uint16_t ux, uy, row, col;
+   uint16_t color, ux, uy, row, col;
    Screen_t* screen = &( game->screen );
-   TileMap_t* map = &( game->tileMap );
 
    if ( x >= ( MAP_TILE_SIZE * MAP_TILES_X ) || y >= ( MAP_TILE_SIZE * MAP_TILES_Y ) ||
         x + w < 0 || y + h < 0 )

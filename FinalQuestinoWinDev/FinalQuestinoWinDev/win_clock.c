@@ -1,4 +1,7 @@
 #include "clock.h"
+#include "win_common.h"
+
+internal uint32_t Clock_GetMicros();
 
 void Clock_Init( Clock_t* clock )
 {
@@ -7,12 +10,12 @@ void Clock_Init( Clock_t* clock )
 
 void Clock_StartFrame( Clock_t* clock )
 {
-   clock->frameStartMicro = MICROS();
+   clock->frameStartMicro = Clock_GetMicros();
 }
 
 void Clock_EndFrame( Clock_t* clock )
 {
-   uint32_t frameEndMicro = MICROS();
+   uint32_t frameEndMicro = Clock_GetMicros();
    uint32_t elapsedMicro;
 
    if ( frameEndMicro < clock->frameStartMicro )
@@ -27,8 +30,13 @@ void Clock_EndFrame( Clock_t* clock )
 
    if ( elapsedMicro <= FRAME_MICROSECONDS )
    {
-      // I'd like to use delayMicroseconds here, but there are some serious
-      // issues with precision. regular "delay" works much better, strangely.
       DELAY_MS( ( FRAME_MICROSECONDS - elapsedMicro ) / 1000 );
    }
+}
+
+internal uint32_t Clock_GetMicros()
+{
+   LARGE_INTEGER ticks;
+   QueryPerformanceCounter( &ticks );
+   return (uint32_t)( ( (double)( ticks.QuadPart ) / (double)( g_globals.performanceFrequency.QuadPart ) ) * (uint64_t)1000000 );
 }

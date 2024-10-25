@@ -54,13 +54,13 @@ void Physics_Tic( Game_t* game )
    // clip to unpassable horizontal tiles
    if ( newPos.x != player->position.x )
    {
-      tileRowStartIndex = player->position.y / MAP_TILE_SIZE;
-      tileRowEndIndex = ( player->position.y + PLAYER_HITBOX_SIZE ) / MAP_TILE_SIZE;
+      tileRowStartIndex = ( uint8_t )( player->position.y / MAP_TILE_SIZE );
+      tileRowEndIndex = ( uint8_t )( ( player->position.y + PLAYER_HITBOX_SIZE ) / MAP_TILE_SIZE );
 
       if ( newPos.x < player->position.x )
       {
          // moving left, check leftward tiles
-         col = newPos.x / MAP_TILE_SIZE;
+         col = (uint8_t)( newPos.x / MAP_TILE_SIZE );
 
          for ( row = tileRowStartIndex; row <= tileRowEndIndex; row++ )
          {
@@ -69,7 +69,7 @@ void Physics_Tic( Game_t* game )
 
             if ( !( tile & MAP_TILE_FLAG_PASSABLE ) || Physics_TileHasImpassableSprite( &( game->tileMap ), tileIndex ) )
             {
-               newPos.x = ( ( col + 1 ) * MAP_TILE_SIZE );
+               newPos.x = (float)( ( ( col + 1 ) * MAP_TILE_SIZE ) );
                break;
             }
          }
@@ -77,7 +77,7 @@ void Physics_Tic( Game_t* game )
       else
       {
          // moving right, check rightward tiles
-         col = ( newPos.x + PLAYER_HITBOX_SIZE ) / MAP_TILE_SIZE;
+         col = (uint8_t )( ( newPos.x + PLAYER_HITBOX_SIZE ) / MAP_TILE_SIZE );
 
          for ( row = tileRowStartIndex; row <= tileRowEndIndex; row++ )
          {
@@ -96,13 +96,13 @@ void Physics_Tic( Game_t* game )
    // clip to unpassable vertical tiles
    if ( newPos.y != player->position.y )
    {
-      tileColStartIndex = player->position.x / MAP_TILE_SIZE;
-      tileColEndIndex = ( player->position.x + PLAYER_HITBOX_SIZE ) / MAP_TILE_SIZE;
+      tileColStartIndex = ( uint8_t )( player->position.x / MAP_TILE_SIZE );
+      tileColEndIndex = (uint8_t)( ( player->position.x + PLAYER_HITBOX_SIZE ) / MAP_TILE_SIZE );
 
       if ( newPos.y < player->position.y )
       {
          // moving up, check upward tiles
-         row = newPos.y / MAP_TILE_SIZE;
+         row = (uint8_t)( newPos.y / MAP_TILE_SIZE );
 
          for ( col = tileColStartIndex; col <= tileColEndIndex; col++ )
          {
@@ -111,7 +111,7 @@ void Physics_Tic( Game_t* game )
 
             if ( !( tile & MAP_TILE_FLAG_PASSABLE ) || Physics_TileHasImpassableSprite( &( game->tileMap ), tileIndex ) )
             {
-               newPos.y = ( ( row + 1 ) * MAP_TILE_SIZE );
+               newPos.y = (float)( ( ( row + 1 ) * MAP_TILE_SIZE ) );
                break;
             }
          }
@@ -119,7 +119,7 @@ void Physics_Tic( Game_t* game )
       else
       {
          // moving down, check downward tiles
-         row = ( newPos.y + PLAYER_HITBOX_SIZE ) / MAP_TILE_SIZE;
+         row = (uint8_t)( ( newPos.y + PLAYER_HITBOX_SIZE ) / MAP_TILE_SIZE );
 
          for ( col = tileColStartIndex; col <= tileColEndIndex; col++ )
          {
@@ -158,8 +158,8 @@ void Physics_Tic( Game_t* game )
 
 void Physics_UpdateTileIndexCache( Game_t* game )
 {
-   uint16_t centerX = game->player.position.x + ( PLAYER_HITBOX_SIZE / 2 );
-   uint16_t centerY = game->player.position.y + ( PLAYER_HITBOX_SIZE / 2 );
+   uint16_t centerX = (uint16_t)( game->player.position.x + ( PLAYER_HITBOX_SIZE / 2 ) );
+   uint16_t centerY = (uint16_t)( game->player.position.y + ( PLAYER_HITBOX_SIZE / 2 ) );
    uint16_t newTileIndex = ( centerX / MAP_TILE_SIZE ) + ( ( centerY / MAP_TILE_SIZE ) * MAP_TILES_X );
 
    if ( newTileIndex != game->physics.tileIndexCache )

@@ -20,6 +20,8 @@
 
 #define TRANSPARENT_COLOR MAGENTA
 
+#if !defined( VISUAL_STUDIO_DEV )
+
 // registers
 #define HX8347G_COLADDREND_HI   0x04
 #define HX8347G_COLADDREND_LO   0x05
@@ -83,6 +85,10 @@
 #define writeRegister16( a, d ) { \
   hi = ( a ) >> 8; lo = ( a ); CD_COMMAND; write8( hi ); write8( lo ); \
   hi = ( d ) >> 8; lo = ( d ); CD_DATA   ; write8( hi ); write8( lo ); }
+
+#endif // VISUAL_STUDIO_DEV
+
+#define NEGATIVE_CLAMP_THETA 0.9999f
 
 #define SCREEN_WIDTH  320
 #define SCREEN_HEIGHT 240
