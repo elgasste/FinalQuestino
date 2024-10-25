@@ -160,7 +160,7 @@ internal void InitButtonMap()
    g_globals.buttonMap[(int)Button_Up] = VK_UP;
    g_globals.buttonMap[(int)Button_Right] = VK_RIGHT;
    g_globals.buttonMap[(int)Button_Down] = VK_DOWN;
-   g_globals.buttonMap[(int)Button_A] = VK_SPACE;
+   g_globals.buttonMap[(int)Button_A] = 0x41; // A
    g_globals.buttonMap[(int)Button_B] = VK_ESCAPE;
 }
 
