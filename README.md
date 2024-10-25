@@ -2,11 +2,15 @@
 
 Basically a version of Dragon Warrior (Dragon Quest) ported to Arduino.
 
-## Building
+## Building With Arduino IDE
 
 The FinalQuestino project can be built and uploaded using the [standard Arduino IDE](https://www.arduino.cc/en/software).
 
 Almost all of the game data is generated from the "DataGenerator" project, which is a Visual Studio 2022 solution built on the .NET 6.0 platform. This project generates the `data_loader.c` file and automatically copies it to the FinalQuestino directory. If you don't plan on changing any of the game data, you can disregard this project entirely.
+
+## Building With Visual Studio
+
+Since it's extremely difficult (impossible?) to debug in any kind of useful way on an actual Arduino board, I've set up a Visual Studio 2022 project to make better tools available for development in Windows. This project is located in the `FinalQuestinoWinDev` folder.
 
 ## Hardware
 
