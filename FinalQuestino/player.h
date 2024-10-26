@@ -8,13 +8,13 @@
 
 typedef struct Player_t
 {
-   cVector2f_t position;
-   cVector2f_t velocity;
+   Vector2f_t position;
+   Vector2f_t velocity;
    float maxVelocity;
-   cVector2f_t hitBoxSize;
+   Vector2f_t hitBoxSize;
 
    Sprite_t sprite;
-   cVector2f_t spriteOffset;
+   Vector2f_t spriteOffset;
 
    BattleStats_t stats;
    uint16_t experience;

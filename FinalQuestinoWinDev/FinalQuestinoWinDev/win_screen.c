@@ -98,7 +98,7 @@ void Screen_DrawTileMap( Game_t* game )
 
             for ( pixelCol = 0; pixelCol < MAP_PACKED_TILE_SIZE; pixelCol++ )
             {
-               tileTextureIndex = tile & 0x1F;
+               tileTextureIndex = GET_TILE_TEXTURE_INDEX( tile );
                pixelPair = map->tileTextures[MIN_I( tileTextureIndex, 15 )].pixels[pixelCol + ( pixelRow * MAP_PACKED_TILE_SIZE )];
 
                paletteIndex = pixelPair >> 4;
@@ -253,7 +253,7 @@ void Screen_DrawMapSprites( Game_t* game )
 
    for ( i = 0; i < map->spriteCount; i++ )
    {
-      tileIndex = map->spriteData[i] & 0x1FF;
+      tileIndex = GET_SPRITE_TILE_INDEX( map->spriteData[i] );
       treasureFlag = TileMap_GetTreasureFlag( game->tileMapIndex, tileIndex );
 
       if ( treasureFlag )
@@ -265,7 +265,7 @@ void Screen_DrawMapSprites( Game_t* game )
          }
       }
 
-      spriteIndex = ( map->spriteData[i] >> 9 ) & 0xF;
+      spriteIndex = GET_SPRITE_INDEX( map->spriteData[i] );
       TileMap_LoadSprite( map, spriteIndex );
       game->screen.mapSpriteIndexCache = spriteIndex;
 
@@ -522,7 +522,7 @@ internal uint16_t Screen_GetTilePixelColor( Game_t* game, uint16_t x, uint16_t y
    uint32_t treasureFlag = TileMap_GetTreasureFlag( game->tileMapIndex, tileIndex );
    Screen_t* screen = &( game->screen );
 
-   tileTextureIndex = tile & 0x1F;
+   tileTextureIndex = GET_TILE_TEXTURE_INDEX( tile );
 #pragma warning( disable: 4047 )
    tileTexture = &( map->tileTextures[MIN_I( tileTextureIndex, 15 )].pixels );
 #pragma warning( default: 4047 )
@@ -533,9 +533,9 @@ internal uint16_t Screen_GetTilePixelColor( Game_t* game, uint16_t x, uint16_t y
       // if there's a sprite on this tile, check that first
       for ( i = 0; i < map->spriteCount; i++ )
       {
-         if ( ( map->spriteData[i] & 0x1FF ) == tileIndex )
+         if ( ( GET_SPRITE_TILE_INDEX( map->spriteData[i] ) ) == tileIndex )
          {
-            spriteIndex = ( map->spriteData[i] >> 9 ) & 0xF;
+            spriteIndex = GET_SPRITE_INDEX( map->spriteData[i] );
 
             if ( spriteIndex != screen->mapSpriteIndexCache )
             {

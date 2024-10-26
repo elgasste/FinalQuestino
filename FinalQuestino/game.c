@@ -137,7 +137,7 @@ void Game_ChangeState( Game_t *game, GameState_t newState )
 
 void Game_SteppedOnTile( Game_t* game, uint16_t tileIndex )
 {
-   uint8_t i, tileFlagIndex, tileFlags, tileSpeed, tileTextureIndex, encounterRate;
+   uint8_t i, tileTextureIndex, tileFlags, tileSpeed, encounterRate;
    uint8_t tile = game->tileMap.tiles[tileIndex];
    uint16_t newTileIndex, newTileX, newTileY;
 
@@ -145,10 +145,10 @@ void Game_SteppedOnTile( Game_t* game, uint16_t tileIndex )
 
    for ( i = 0; i < MAP_PORTAL_COUNT; i++ )
    {
-      if ( ( game->tileMap.portals[i] >> 21 ) == tileIndex )
+      if ( GET_PORTAL_ORIGIN( game->tileMap.portals[i] ) == tileIndex )
       {
-         game->tileMapIndex = (uint8_t)( ( game->tileMap.portals[i] >> 11 ) & 0x3FF );
-         newTileIndex = game->tileMap.portals[i] & 0x7FF;
+         game->tileMapIndex = (uint8_t)( GET_PORTAL_DEST_TILE_MAP_INDEX( game->tileMap.portals[i] ) );
+         newTileIndex = GET_PORTAL_DEST_TILE_INDEX( game->tileMap.portals[i] );
          game->tileMap.tileIndexCache = newTileIndex;
          newTileY = newTileIndex / MAP_TILES_X;
          newTileX = newTileIndex - ( newTileY * MAP_TILES_X );
@@ -160,9 +160,9 @@ void Game_SteppedOnTile( Game_t* game, uint16_t tileIndex )
       }
    }
 
-   tileFlagIndex = tile & 0xF1;
-   tileFlags = game->tileMap.tileTextures[MIN_I( tileFlagIndex, 15 )].flags;
-   tileSpeed = ( tileFlags & 0xC ) >> 2;
+   tileTextureIndex = GET_TILE_TEXTURE_INDEX( tile );
+   tileFlags = game->tileMap.tileTextures[MIN_I( tileTextureIndex, 15 )].flags;
+   tileSpeed = GET_TILE_SPEED( tileFlags );
 
    switch( tileSpeed )
    {
@@ -183,11 +183,11 @@ void Game_SteppedOnTile( Game_t* game, uint16_t tileIndex )
    {
       Game_ChangeState( game, GameState_Battle );
    }
-   else if ( tile & MAP_TILE_FLAG_ENCOUNTERABLE )
+   else if ( GET_TILE_ENCOUNTERABLE( tile ) )
    {
-      tileTextureIndex = tile & 0x1F;
+      tileTextureIndex = GET_TILE_TEXTURE_INDEX( tile );
       tileFlags = game->tileMap.tileTextures[MIN_I( tileTextureIndex, 15 )].flags;
-      encounterRate = tileFlags & 0x3;
+      encounterRate = GET_ENCOUNTER_RATE( tileFlags );
 
       if ( encounterRate > 0 )
       {

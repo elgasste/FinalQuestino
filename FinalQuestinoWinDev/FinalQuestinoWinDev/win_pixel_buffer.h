@@ -14,4 +14,4 @@ WinPixelBuffer_t;
 void WinPixelBuffer_Init( WinPixelBuffer_t* buffer, uint32_t w, uint32_t h );
 void WinPixelBuffer_CleanUp( WinPixelBuffer_t* buffer );
 
-#endif
+#endif // WIN_PIXEL_BUFFER_H
