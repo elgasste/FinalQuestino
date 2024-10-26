@@ -7,7 +7,7 @@ void Battle_Start( Game_t* game )
 {
    uint8_t enemyIndex;
    uint8_t playerTileX, playerTileY;
-   cVector4u8_t* specialRegion = &( game->tileMap.enemySpecialRegion );
+   Vector4u8_t* specialRegion = &( game->tileMap.enemySpecialRegion );
    char str[32];
 
    if ( Game_OnSpecialEnemyTile( game, SPECIALENEMYID_GREENDRAGON ) )

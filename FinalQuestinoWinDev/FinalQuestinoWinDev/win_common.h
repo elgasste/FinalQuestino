@@ -31,4 +31,4 @@ GlobalObjects_t;
 
 GlobalObjects_t g_globals;
 
-#endif
+#endif // WIN_COMMON_H
