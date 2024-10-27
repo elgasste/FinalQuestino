@@ -3,12 +3,15 @@
 #include "win_common.h"
 #include "game.h"
 #include "win_pixel_buffer.h"
+#include "screen.h"
 
 internal void FatalError( const char* message );
 internal LRESULT CALLBACK MainWindowProc( _In_ HWND hWnd, _In_ UINT uMsg, _In_ WPARAM wParam, _In_ LPARAM lParam );
 internal void InitButtonMap();
+internal void InitBattleStartRects();
 internal void HandleKeyboardInput( uint32_t keyCode, LPARAM flags );
 internal void RenderScreen();
+internal void BattleStartAnimationTic();
 
 int CALLBACK WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow )
 {
@@ -87,8 +90,12 @@ int CALLBACK WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
    g_globals.bmpInfo.bmiHeader.biCompression = BI_RGB;
 
    InitButtonMap();
+   InitBattleStartRects();
    Game_Init( &( g_globals.game ) );
    g_globals.shutdown = False;
+   g_globals.isAnimatingBattleStart = False;
+   g_globals.animationSecondsElapsed = 0.0f;
+   g_globals.animationFrame = 0;
 
    while ( 1 )
    {
@@ -101,7 +108,15 @@ int CALLBACK WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
          DispatchMessageA( &msg );
       }
 
-      Game_Tic( &( g_globals.game ) );
+      if ( g_globals.isAnimatingBattleStart )
+      {
+         BattleStartAnimationTic();
+      }
+      else
+      {
+         Game_Tic( &( g_globals.game ) );
+      }
+
       InvalidateRect( g_globals.hWndMain, 0, 0 );
       Clock_EndFrame( &( g_globals.game.clock ) );
 
@@ -118,6 +133,13 @@ int CALLBACK WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 void Serial_PrintLn( const char* msg )
 {
    OutputDebugStringA( msg );
+}
+
+void Battle_WinAnimateStart()
+{
+   g_globals.isAnimatingBattleStart = True;
+   g_globals.animationFrame = 0;
+   g_globals.animationSecondsElapsed = 0.0f;
 }
 
 internal void FatalError( const char* message )
@@ -162,6 +184,59 @@ internal void InitButtonMap()
    g_globals.buttonMap[(int)Button_Down] = VK_DOWN;
    g_globals.buttonMap[(int)Button_A] = 0x41; // A
    g_globals.buttonMap[(int)Button_B] = VK_ESCAPE;
+}
+
+internal void InitBattleStartRects()
+{
+   g_globals.battleStartRects[0] = (Vector4u16_t) { 176, 80, 16, 16 };
+   g_globals.battleStartRects[1] = (Vector4u16_t) { 176, 96, 16, 16 };
+   g_globals.battleStartRects[2] = (Vector4u16_t) { 160, 96, 16, 16 };
+   g_globals.battleStartRects[3] = (Vector4u16_t) { 160, 80, 16, 16 };
+   g_globals.battleStartRects[4] = (Vector4u16_t) { 160, 64, 16, 16 };
+   g_globals.battleStartRects[5] = (Vector4u16_t) { 176, 64, 16, 16 };
+   g_globals.battleStartRects[6] = (Vector4u16_t) { 192, 64, 16, 16 };
+   g_globals.battleStartRects[7] = (Vector4u16_t) { 192, 80, 16, 16 };
+   g_globals.battleStartRects[8] = (Vector4u16_t) { 192, 96, 16, 16 };
+   g_globals.battleStartRects[9] = (Vector4u16_t) { 192, 112, 16, 16 };
+   g_globals.battleStartRects[10] = (Vector4u16_t) { 176, 112, 16, 16 };
+   g_globals.battleStartRects[11] = (Vector4u16_t) { 160, 112, 16, 16 };
+   g_globals.battleStartRects[12] = (Vector4u16_t) { 144, 112, 16, 16 };
+   g_globals.battleStartRects[13] = (Vector4u16_t) { 144, 96, 16, 16 };
+   g_globals.battleStartRects[14] = (Vector4u16_t) { 144, 80, 16, 16 };
+   g_globals.battleStartRects[15] = (Vector4u16_t) { 144, 64, 16, 16 };
+   g_globals.battleStartRects[16] = (Vector4u16_t) { 144, 48, 16, 16 };
+   g_globals.battleStartRects[17] = (Vector4u16_t) { 160, 48, 16, 16 };
+   g_globals.battleStartRects[18] = (Vector4u16_t) { 176, 48, 16, 16 };
+   g_globals.battleStartRects[19] = (Vector4u16_t) { 192, 48, 16, 16 };
+   g_globals.battleStartRects[20] = (Vector4u16_t) { 208, 48, 16, 16 };
+   g_globals.battleStartRects[21] = (Vector4u16_t) { 208, 64, 16, 16 };
+   g_globals.battleStartRects[22] = (Vector4u16_t) { 208, 80, 16, 16 };
+   g_globals.battleStartRects[23] = (Vector4u16_t) { 208, 96, 16, 16 };
+   g_globals.battleStartRects[24] = (Vector4u16_t) { 208, 112, 16, 16 };
+   g_globals.battleStartRects[25] = (Vector4u16_t) { 208, 128, 16, 16 };
+   g_globals.battleStartRects[26] = (Vector4u16_t) { 192, 128, 16, 16 };
+   g_globals.battleStartRects[27] = (Vector4u16_t) { 176, 128, 16, 16 };
+   g_globals.battleStartRects[28] = (Vector4u16_t) { 160, 128, 16, 16 };
+   g_globals.battleStartRects[29] = (Vector4u16_t) { 144, 128, 16, 16 };
+   g_globals.battleStartRects[30] = (Vector4u16_t) { 128, 128, 16, 16 };
+   g_globals.battleStartRects[31] = (Vector4u16_t) { 128, 112, 16, 16 };
+   g_globals.battleStartRects[32] = (Vector4u16_t) { 128, 96, 16, 16 };
+   g_globals.battleStartRects[33] = (Vector4u16_t) { 128, 80, 16, 16 };
+   g_globals.battleStartRects[34] = (Vector4u16_t) { 128, 64, 16, 16 };
+   g_globals.battleStartRects[35] = (Vector4u16_t) { 128, 48, 16, 16 };
+   g_globals.battleStartRects[36] = (Vector4u16_t) { 128, 32, 16, 16 };
+   g_globals.battleStartRects[37] = (Vector4u16_t) { 144, 32, 16, 16 };
+   g_globals.battleStartRects[38] = (Vector4u16_t) { 160, 32, 16, 16 };
+   g_globals.battleStartRects[39] = (Vector4u16_t) { 176, 32, 16, 16 };
+   g_globals.battleStartRects[40] = (Vector4u16_t) { 192, 32, 16, 16 };
+   g_globals.battleStartRects[41] = (Vector4u16_t) { 208, 32, 16, 16 };
+   g_globals.battleStartRects[42] = (Vector4u16_t) { 224, 32, 16, 16 };
+   g_globals.battleStartRects[43] = (Vector4u16_t) { 224, 48, 16, 16 };
+   g_globals.battleStartRects[44] = (Vector4u16_t) { 224, 64, 16, 16 };
+   g_globals.battleStartRects[45] = (Vector4u16_t) { 224, 80, 16, 16 };
+   g_globals.battleStartRects[46] = (Vector4u16_t) { 224, 96, 16, 16 };
+   g_globals.battleStartRects[47] = (Vector4u16_t) { 224, 112, 16, 16 };
+   g_globals.battleStartRects[48] = (Vector4u16_t) { 224, 128, 16, 16 };
 }
 
 internal void HandleKeyboardInput( uint32_t keyCode, LPARAM flags )
@@ -220,4 +295,28 @@ internal void RenderScreen()
    );
 
    EndPaint( g_globals.hWndMain, &pc );
+}
+
+internal void BattleStartAnimationTic()
+{
+   Vector4u16_t rect;
+   float animationFrameSeconds = 0.01f;
+
+   g_globals.animationSecondsElapsed += FRAME_SECONDS;
+
+   while ( g_globals.animationSecondsElapsed > animationFrameSeconds )
+   {
+      g_globals.animationSecondsElapsed -= animationFrameSeconds;
+      rect = g_globals.battleStartRects[g_globals.animationFrame];
+      Screen_DrawRect( &( g_globals.game.screen ), rect.x, rect.y, rect.w, rect.h, BLACK );
+      g_globals.animationFrame++;
+
+      if ( g_globals.animationFrame >= 49 )
+      {
+         g_globals.isAnimatingBattleStart = False;
+         Screen_DrawEnemy( &( g_globals.game ), 144, 40 );
+         Battle_StartHUD( &( g_globals.game ) );
+         break;
+      }
+   }
 }
