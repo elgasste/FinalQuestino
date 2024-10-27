@@ -8,7 +8,6 @@ void Battle_Start( Game_t* game )
    uint8_t enemyIndex;
    uint8_t playerTileX, playerTileY;
    Vector4u8_t* specialRegion = &( game->tileMap.enemySpecialRegion );
-   char str[32];
 
    if ( Game_OnSpecialEnemyTile( game, SPECIALENEMYID_GREENDRAGON ) )
    {
@@ -40,6 +39,11 @@ void Battle_Start( Game_t* game )
    }
 
    Battle_AnimateStart( game );
+}
+
+void Battle_StartHUD( Game_t* game )
+{
+   char str[32];
 
    // quick stats
    Screen_DrawRect( &( game->screen ), 16, 16, 76, 36, DARKGRAY );
@@ -56,10 +60,8 @@ void Battle_Start( Game_t* game )
    {
       snprintf( str, 32, "An %s approaches!", game->battle.enemy.name );
    }
-   
-   Game_ShowMessage( game, str );
 
-   Screen_DrawEnemy( game, 144, 40 );
+   Game_ShowMessage( game, str );
 }
 
 void Battle_Done( Game_t* game )
@@ -72,7 +74,8 @@ void Battle_Done( Game_t* game )
 internal void Battle_AnimateStart( Game_t* game )
 {
 #if defined( VISUAL_STUDIO_DEV )
-   Screen_DrawRect( &( game->screen ), 128, 48, 112, 96, BLACK );
+   UNUSED_PARAM( game );
+   Battle_WinAnimateStart();
 #else
    Screen_DrawRect( &( game->screen ), 176, 80, 16, 16, BLACK ); DELAY_MS( 10 );
    Screen_DrawRect( &( game->screen ), 176, 96, 16, 16, BLACK ); DELAY_MS( 10 );
@@ -123,5 +126,8 @@ internal void Battle_AnimateStart( Game_t* game )
    Screen_DrawRect( &( game->screen ), 224, 96, 16, 16, BLACK ); DELAY_MS( 10 );
    Screen_DrawRect( &( game->screen ), 224, 112, 16, 16, BLACK ); DELAY_MS( 10 );
    Screen_DrawRect( &( game->screen ), 224, 128, 16, 16, BLACK ); DELAY_MS( 10 );
+
+   Screen_DrawEnemy( game, 144, 40 );
+   Battle_StartHUD( game );
 #endif
 }

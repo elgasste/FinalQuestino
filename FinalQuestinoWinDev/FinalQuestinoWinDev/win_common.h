@@ -13,6 +13,7 @@
 #include "enums.h"
 #include "game.h"
 #include "win_pixel_buffer.h"
+#include "vector.h"
 
 #define STRING_SIZE_DEFAULT   1024
 #define GRAPHICS_SCALE        2.0f
@@ -26,6 +27,11 @@ typedef struct GlobalObjects_t
    Bool_t shutdown;
    WinPixelBuffer_t screenBuffer;
    BITMAPINFO bmpInfo;
+
+   Bool_t isAnimatingBattleStart;
+   float animationSecondsElapsed;
+   uint32_t animationFrame;
+   Vector4u16_t battleStartRects[49];
 }
 GlobalObjects_t;
 

@@ -19,4 +19,13 @@ typedef struct Vector4u8_t
 }
 Vector4u8_t;
 
+typedef struct Vector4u16_t
+{
+   uint16_t x;
+   uint16_t y;
+   uint16_t w;
+   uint16_t h;
+}
+Vector4u16_t;
+
 #endif // VECTOR_H
