@@ -10,7 +10,6 @@ typedef struct Sprite_t
    Direction_t direction;
    uint8_t currentFrame;
    float elapsedSeconds;
-   float frameSeconds;
 }
 Sprite_t;
 

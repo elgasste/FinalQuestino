@@ -4,7 +4,7 @@ void Sprite_Tic( Sprite_t* sprite )
 {
    sprite->elapsedSeconds += FRAME_SECONDS;
 
-   while ( sprite->elapsedSeconds >= sprite->frameSeconds )
+   while ( sprite->elapsedSeconds >= SPRITE_FRAME_SECONDS )
    {
       sprite->currentFrame++;
 
@@ -13,6 +13,6 @@ void Sprite_Tic( Sprite_t* sprite )
          sprite->currentFrame = 0;
       }
 
-      sprite->elapsedSeconds -= sprite->frameSeconds;
+      sprite->elapsedSeconds -= SPRITE_FRAME_SECONDS;
    }
 }

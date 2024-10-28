@@ -404,6 +404,12 @@ void Screen_DrawPlayer( Game_t* game )
    }
 }
 
+void Screen_DrawActors( Game_t* game )
+{
+   Screen_DrawMapSprites( game );
+   Screen_DrawPlayer( game );
+}
+
 void Screen_WipePlayer( Game_t* game )
 {
    Screen_WipeTileMapSection( game,
@@ -456,6 +462,25 @@ void Screen_DrawEnemy( Game_t* game, uint16_t x, uint16_t y )
             }
          }
       }
+   }
+}
+
+void Screen_WipeEnemy( Game_t* game, uint16_t x, uint16_t y )
+{
+   uint8_t i, j;
+   uint32_t* bufferPos = g_globals.screenBuffer.memory + ( y * g_globals.screenBuffer.w ) + x;
+
+   UNUSED_PARAM( game );
+
+   for ( i = 0; i < ENEMY_TILE_SIZE * ENEMY_TILES_Y; i++ )
+   {
+      for ( j = 0; j < ENEMY_TILE_SIZE * ENEMY_TILES_X; j++ )
+      {
+         *bufferPos = 0xFF000000;
+         bufferPos++;
+      }
+
+      bufferPos += ( g_globals.screenBuffer.w - ( ENEMY_TILE_SIZE * ENEMY_TILES_X ) );
    }
 }
 

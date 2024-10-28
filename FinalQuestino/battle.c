@@ -1,7 +1,10 @@
 #include "game.h"
 #include "random.h"
+#include "menu.h"
 
 internal void Battle_AnimateStart( Game_t* game );
+internal void Battle_ShowMessage( Game_t* game, const char* message );
+internal void Battle_WipeMessage( Game_t* game );
 
 void Battle_Start( Game_t* game )
 {
@@ -38,6 +41,7 @@ void Battle_Start( Game_t* game )
       }
    }
 
+   Screen_WipePlayer( game );
    Battle_AnimateStart( game );
 }
 
@@ -61,14 +65,52 @@ void Battle_StartHUD( Game_t* game )
       snprintf( str, 32, "An %s approaches!", game->battle.enemy.name );
    }
 
-   Game_ShowMessage( game, str );
+   Battle_ShowMessage( game, str );
+   Menu_Load( &( game->menu ), MenuIndex_BattleMain );
+   Menu_Draw( game );
+   game->state = GameState_BattleMenuMain;
+}
+
+void Battle_Attack( Game_t* game )
+{
+   Menu_Wipe( game );
+   Screen_WipeEnemy( game, 160, 40 );
+   Battle_ShowMessage( game, "Sliced him up real good, you win!" );
+   game->state = GameState_BattleResult;
+}
+
+void Battle_Spell( Game_t* game )
+{
+   Menu_Wipe( game );
+   Screen_WipeEnemy( game, 160, 40 );
+   Battle_ShowMessage( game, "You yell 'ABRA CADABRA!!', which is a death spell. You win!" );
+   game->state = GameState_BattleResult;
+}
+
+void Battle_Item( Game_t* game )
+{
+   Menu_Wipe( game );
+   Screen_WipeEnemy( game, 160, 40 );
+   Battle_ShowMessage( game, "Your spare change hit him in the eye and killed him, you win!" );
+   game->state = GameState_BattleResult;
+}
+
+void Battle_Flee( Game_t* game )
+{
+   Menu_Wipe( game );
+   Screen_WipeEnemy( game, 160, 40 );
+   Battle_ShowMessage( game, "You dodged and weaved your way out, nice work!" );
+   game->state = GameState_BattleResult;
 }
 
 void Battle_Done( Game_t* game )
 {
-   Screen_WipeTileMapSection( game, 16, 16, 76, 36 );
-   Screen_WipeTileMapSection( game, 128, 32, 112, 112 );
-   Game_WipeMessage( game );
+   Screen_WipeTileMapSection( game, 16, 16, 76, 36 );       // quick stats
+   Screen_WipeTileMapSection( game, 144, 32, 112, 112 );    // enemy
+   Menu_Wipe( game );
+   Battle_WipeMessage( game );
+   Screen_DrawActors( game );
+   game->state = GameState_Map;
 }
 
 internal void Battle_AnimateStart( Game_t* game )
@@ -77,57 +119,68 @@ internal void Battle_AnimateStart( Game_t* game )
    UNUSED_PARAM( game );
    Battle_WinAnimateStart();
 #else
-   Screen_DrawRect( &( game->screen ), 176, 80, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 176, 96, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 160, 96, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 160, 80, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 160, 64, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 176, 64, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 192, 64, 16, 16, BLACK ); DELAY_MS( 10 );
    Screen_DrawRect( &( game->screen ), 192, 80, 16, 16, BLACK ); DELAY_MS( 10 );
    Screen_DrawRect( &( game->screen ), 192, 96, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 192, 112, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 176, 112, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 160, 112, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 144, 112, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 144, 96, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 144, 80, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 144, 64, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 144, 48, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 160, 48, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 176, 48, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 192, 48, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 208, 48, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 176, 96, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 176, 80, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 176, 64, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 192, 64, 16, 16, BLACK ); DELAY_MS( 10 );
    Screen_DrawRect( &( game->screen ), 208, 64, 16, 16, BLACK ); DELAY_MS( 10 );
    Screen_DrawRect( &( game->screen ), 208, 80, 16, 16, BLACK ); DELAY_MS( 10 );
    Screen_DrawRect( &( game->screen ), 208, 96, 16, 16, BLACK ); DELAY_MS( 10 );
    Screen_DrawRect( &( game->screen ), 208, 112, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 208, 128, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 192, 128, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 176, 128, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 160, 128, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 144, 128, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 128, 128, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 128, 112, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 128, 96, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 128, 80, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 128, 64, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 128, 48, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 128, 32, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 144, 32, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 160, 32, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 176, 32, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 192, 32, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 208, 32, 16, 16, BLACK ); DELAY_MS( 10 );
-   Screen_DrawRect( &( game->screen ), 224, 32, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 192, 112, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 176, 112, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 160, 112, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 160, 96, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 160, 80, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 160, 64, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 160, 48, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 176, 48, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 192, 48, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 208, 48, 16, 16, BLACK ); DELAY_MS( 10 );
    Screen_DrawRect( &( game->screen ), 224, 48, 16, 16, BLACK ); DELAY_MS( 10 );
    Screen_DrawRect( &( game->screen ), 224, 64, 16, 16, BLACK ); DELAY_MS( 10 );
    Screen_DrawRect( &( game->screen ), 224, 80, 16, 16, BLACK ); DELAY_MS( 10 );
    Screen_DrawRect( &( game->screen ), 224, 96, 16, 16, BLACK ); DELAY_MS( 10 );
    Screen_DrawRect( &( game->screen ), 224, 112, 16, 16, BLACK ); DELAY_MS( 10 );
    Screen_DrawRect( &( game->screen ), 224, 128, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 208, 128, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 192, 128, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 176, 128, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 160, 128, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 144, 128, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 144, 112, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 144, 96, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 144, 80, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 144, 64, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 144, 48, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 144, 32, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 160, 32, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 176, 32, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 192, 32, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 208, 32, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 224, 32, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 240, 32, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 240, 48, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 240, 64, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 240, 80, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 240, 96, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 240, 112, 16, 16, BLACK ); DELAY_MS( 10 );
+   Screen_DrawRect( &( game->screen ), 240, 128, 16, 16, BLACK ); DELAY_MS( 10 );
 
-   Screen_DrawEnemy( game, 144, 40 );
+   Screen_DrawEnemy( game, 160, 40 );
    Battle_StartHUD( game );
 #endif
+}
+
+internal void Battle_ShowMessage( Game_t* game, const char* message )
+{
+   Screen_DrawRect( &( game->screen ), 96, 152, 208, 72, DARKGRAY );
+   Screen_DrawWrappedText( &( game->screen ), message, 104, 160, 24, 8, DARKGRAY, WHITE );
+}
+
+internal void Battle_WipeMessage( Game_t* game )
+{
+   Screen_WipeTileMapSection( game, 96, 152, 208, 72 );
 }

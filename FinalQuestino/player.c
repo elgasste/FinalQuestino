@@ -9,10 +9,6 @@ void Player_Init( Player_t* player )
    player->velocity.x = 0;
    player->velocity.y = 0;
    player->maxVelocity = PLAYERVELOCITY_NORMAL;
-   player->hitBoxSize.x = 0;
-   player->hitBoxSize.y = 0;
-   player->spriteOffset.x = 0;
-   player->spriteOffset.y = 0;
 
    player->stats.HitPoints = 12;
    player->stats.MaxHitPoints = 12;

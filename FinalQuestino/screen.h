@@ -97,9 +97,6 @@ typedef struct Game_t Game_t;
 
 typedef struct Screen_t
 {
-   uint16_t rotatedWidth;
-   uint16_t rotatedHeight;
-
    volatile uint8_t* csPort;
    volatile uint8_t* cdPort;
    volatile uint8_t* wrPort;
@@ -137,8 +134,10 @@ void Screen_DrawWrappedText( Screen_t* screen, const char* text, uint16_t x, uin
                              uint16_t backgroundColor, uint16_t foregroundColor );
 void Screen_DrawMapSprites( Game_t* game );
 void Screen_DrawPlayer( Game_t* game );
+void Screen_DrawActors( Game_t* game );
 void Screen_WipePlayer( Game_t* game );
 void Screen_DrawEnemy( Game_t* game, uint16_t x, uint16_t y );
+void Screen_WipeEnemy( Game_t* game, uint16_t x, uint16_t y );
 void Screen_WipeTileMapSection( Game_t* game, float x, float y, uint16_t w, uint16_t h );
 
 // data_loader.c

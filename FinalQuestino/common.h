@@ -15,16 +15,17 @@
 // un-comment to turn off encounters when the B button is pressed
 //#define DEBUG_NOENCOUNTERSONB
 // un-comment to turn on fast walk mode
-//#define DEBUG_FASTWALK
+#define DEBUG_FASTWALK
 
 // not really necessary, but makes things easier to distinguish
 #define internal static
 #define global static
 #define local_persist static
 
+#define UNUSED_PARAM( x )                    (void)x
+
 #if defined( VISUAL_STUDIO_DEV )
 #define DELAY_MS( x )                        Sleep( x )
-#define UNUSED_PARAM( x )                    (void)x
 #else
 #define DELAY_MS( x )                        delay( x )
 #define MICROS( x )                          micros( x )
@@ -72,6 +73,7 @@
 #define SPRITE_PACKED_SIZE                   8
 #define SPRITE_FRAMES                        2
 #define SPRITE_TEXTURE_SIZE_BYTES            128 // 16x16 bit-packed, so 16/2 * 16
+#define SPRITE_FRAME_SECONDS                 0.2f
 
 #define ENEMY_TILE_TEXTURE_COUNT             78
 #define ENEMY_TILE_TEXTURE_SIZE_BYTES        32 // 8x8 bit-packed, so 8/2 * 8

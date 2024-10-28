@@ -108,10 +108,8 @@ void Screen_Begin( Screen_t* screen )
 
    // rotate the screen clockwise by 90 degrees
    CS_ACTIVE;
-   screen->rotatedWidth = SCREEN_WIDTH;
-   screen->rotatedHeight = SCREEN_HEIGHT;
    writeRegister8( ILI9341_MEMCONTROL, ILI9341_MADCTL_MX | ILI9341_MADCTL_MY | ILI9341_MADCTL_MV | ILI9341_MADCTL_BGR );
-   Screen_SetAddrWindow( screen, 0, 0, screen->rotatedWidth - 1, screen->rotatedHeight - 1 );
+   Screen_SetAddrWindow( screen, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1 );
    CS_IDLE;
 }
 
@@ -584,6 +582,12 @@ void Screen_DrawPlayer( Game_t* game )
    CS_IDLE;
 }
 
+void Screen_DrawActors( Game_t* game )
+{
+   Screen_DrawMapSprites( game );
+   Screen_DrawPlayer( game );
+}
+
 void Screen_WipePlayer( Game_t* game )
 {
    Screen_WipeTileMapSection( game,
@@ -626,6 +630,40 @@ void Screen_DrawEnemy( Game_t* game, uint16_t x, uint16_t y )
             paletteIndex = pixelPair & 0x0F;
             color = enemy->palette[paletteIndex];
             write16( color >> 8, color );
+         }
+      }
+   }
+
+   CS_IDLE;
+}
+
+void Screen_WipeEnemy( Game_t* game, uint16_t x, uint16_t y )
+{
+   uint8_t i, j;
+   uint16_t tileOffsetX, tileOffsetY, tileX, tileY;
+   Screen_t* screen = &( game->screen );
+   Enemy_t* enemy = &( game->battle.enemy );
+
+   CS_ACTIVE;
+
+   for ( i = 0; i < ENEMY_TILE_COUNT; i++ )
+   {
+      if ( enemy->tileTextureIndexes[i] >= 0 )
+      {
+         tileOffsetX = ( i % ENEMY_TILES_X ) * ENEMY_TILE_SIZE;
+         tileOffsetY = ( i / ENEMY_TILES_X ) * ENEMY_TILE_SIZE;
+         tileX = x + tileOffsetX;
+         tileY = y + tileOffsetY;
+
+         Screen_SetAddrWindow( screen, tileX, tileY, tileX + ENEMY_TILE_SIZE - 1, tileY + ENEMY_TILE_SIZE - 1 );
+         CD_COMMAND;
+         write8( 0x2C );
+         CD_DATA;
+
+         for ( j = 0; j < ENEMY_TILE_TEXTURE_SIZE_BYTES; j++ )
+         {
+            write16( BLACK >> 8, BLACK );
+            write16( BLACK >> 8, BLACK );
          }
       }
    }
