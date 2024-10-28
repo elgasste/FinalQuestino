@@ -25,7 +25,6 @@ void Game_Init( Game_t* game )
 
    Player_Init( &( game->player ) );
    game->player.sprite.direction = Direction_Up;
-   game->player.sprite.frameSeconds = 0.2f;
    game->player.position.x = ( MAP_TILE_SIZE * 8 ) + 2;
    game->player.position.y = ( MAP_TILE_SIZE * 6 ) + 4;
 

@@ -97,9 +97,6 @@ typedef struct Game_t Game_t;
 
 typedef struct Screen_t
 {
-   uint16_t rotatedWidth;
-   uint16_t rotatedHeight;
-
    volatile uint8_t* csPort;
    volatile uint8_t* cdPort;
    volatile uint8_t* wrPort;

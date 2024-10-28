@@ -108,10 +108,8 @@ void Screen_Begin( Screen_t* screen )
 
    // rotate the screen clockwise by 90 degrees
    CS_ACTIVE;
-   screen->rotatedWidth = SCREEN_WIDTH;
-   screen->rotatedHeight = SCREEN_HEIGHT;
    writeRegister8( ILI9341_MEMCONTROL, ILI9341_MADCTL_MX | ILI9341_MADCTL_MY | ILI9341_MADCTL_MV | ILI9341_MADCTL_BGR );
-   Screen_SetAddrWindow( screen, 0, 0, screen->rotatedWidth - 1, screen->rotatedHeight - 1 );
+   Screen_SetAddrWindow( screen, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1 );
    CS_IDLE;
 }
 
