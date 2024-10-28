@@ -22,9 +22,10 @@
 #define global static
 #define local_persist static
 
+#define UNUSED_PARAM( x )                    (void)x
+
 #if defined( VISUAL_STUDIO_DEV )
 #define DELAY_MS( x )                        Sleep( x )
-#define UNUSED_PARAM( x )                    (void)x
 #else
 #define DELAY_MS( x )                        delay( x )
 #define MICROS( x )                          micros( x )

@@ -19,7 +19,8 @@ typedef enum GameState_t
    GameState_MapMenu,
    GameState_MapMessage,
    GameState_MapStatus,
-   GameState_Battle
+   GameState_BattleStart,
+   GameState_BattleMenuMain
 }
 GameState_t;
 
@@ -39,7 +40,8 @@ Button_t;
 
 typedef enum MenuIndex_t
 {
-   MenuIndex_Map = 0
+   MenuIndex_Map = 0,
+   MenuIndex_BattleMain
 }
 MenuIndex_t;
 

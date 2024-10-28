@@ -47,6 +47,7 @@ void Game_Tic( Game_t* game )
          Physics_Tic( game );
          break;
       case GameState_MapMenu:
+      case GameState_BattleMenuMain:
          Menu_Tic( game );
          break;
    }
@@ -88,7 +89,7 @@ void Game_ChangeState( Game_t *game, GameState_t newState )
                Menu_Load( &( game->menu ), MenuIndex_Map );
                Menu_Draw( game );
                break;
-            case GameState_Battle:
+            case GameState_BattleStart:
                game->state = newState;
                Screen_WipePlayer( game );
                Battle_Start( game );
@@ -124,7 +125,16 @@ void Game_ChangeState( Game_t *game, GameState_t newState )
             Screen_WipeTileMapSection( game, 16, 16, 112, 96 );
          }
          break;
-      case GameState_Battle:
+      case GameState_BattleStart:
+         if ( newState == GameState_BattleMenuMain )
+         {
+            Game_WipeMessage( game );
+            game->state = newState;
+            Menu_Load( &( game->menu ), MenuIndex_BattleMain );
+            Menu_Draw( game );
+            break;
+         }
+      case GameState_BattleMenuMain:
          if ( newState == GameState_Map )
          {
             game->state = newState;
@@ -181,7 +191,7 @@ void Game_SteppedOnTile( Game_t* game, uint16_t tileIndex )
 
    if ( Game_OnAnySpecialEnemyTile( game ) )
    {
-      Game_ChangeState( game, GameState_Battle );
+      Game_ChangeState( game, GameState_BattleStart );
    }
    else if ( GET_TILE_ENCOUNTERABLE( tile ) )
    {
@@ -204,11 +214,16 @@ void Game_ShowMessage( Game_t* game, const char* message )
 
 void Game_WipeMessage( Game_t* game )
 {
-   if ( game->state == GameState_Map )
+   switch( game->state )
    {
-      Screen_WipeTileMapSection( game, 48, 160, 224, 64 );
-      Screen_DrawMapSprites( game );
-      Screen_DrawPlayer( game );
+      case GameState_Map:
+         Screen_WipeTileMapSection( game, 48, 160, 224, 64 );
+         Screen_DrawMapSprites( game );
+         Screen_DrawPlayer( game );
+         break;
+      case GameState_BattleStart:
+         Screen_WipeTileMapSection( game, 48, 160, 224, 64 );
+         break;
    }
 }
 
@@ -256,7 +271,7 @@ internal void Game_RollEncounter( Game_t* game, uint8_t encounterRate )
 
    if ( spawnEncounter )
    {
-      Game_ChangeState( game, GameState_Battle );
+      Game_ChangeState( game, GameState_BattleStart );
    }
 }
 

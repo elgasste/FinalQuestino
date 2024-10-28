@@ -6,7 +6,7 @@
 
 internal void Input_UpdateButtonState( ButtonState_t* buttonState, Bool_t down );
 internal void Input_HandleMapStateInput( Game_t* game );
-internal void Input_HandleMapMenuStateInput( Game_t* game );
+internal void Input_HandleMenuStateInput( Game_t* game );
 internal Bool_t Input_AnyButtonPressed( Input_t* input );
 
 void Input_Init( Input_t* input )
@@ -107,11 +107,17 @@ void Input_Handle( Game_t* game )
          Input_HandleMapStateInput( game );
          break;
       case GameState_MapMenu:
-         Input_HandleMapMenuStateInput( game );
+      case GameState_BattleMenuMain:
+         Input_HandleMenuStateInput( game );
+         break;
+      case GameState_BattleStart:
+         if ( Input_AnyButtonPressed( &( game->input ) ) )
+         {
+            Game_ChangeState( game, GameState_BattleMenuMain );
+         }
          break;
       case GameState_MapMessage:
       case GameState_MapStatus:
-      case GameState_Battle:
          if ( Input_AnyButtonPressed( &( game->input ) ) )
          {
             Game_ChangeState( game, GameState_Map );
@@ -206,7 +212,7 @@ internal void Input_HandleMapStateInput( Game_t* game )
    }
 }
 
-internal void Input_HandleMapMenuStateInput( Game_t* game )
+internal void Input_HandleMenuStateInput( Game_t* game )
 {
    Bool_t upIsDown, downIsDown;
 
@@ -216,7 +222,10 @@ internal void Input_HandleMapMenuStateInput( Game_t* game )
    }
    else if ( game->input.buttonStates[Button_B].pressed )
    {
-      Game_ChangeState( game, GameState_Map );
+      if ( game->state == GameState_MapMenu )
+      {
+         Game_ChangeState( game, GameState_Map );
+      }
    }
    else
    {

@@ -3,6 +3,7 @@
 internal void Menu_DrawCarat( Game_t* game );
 internal void Menu_WipeCarat( Game_t* game );
 internal void Menu_MapMenuSelect( Game_t* game );
+internal void Menu_BattleMainSelect( Game_t* game );
 
 void Menu_Load( Menu_t* menu, MenuIndex_t index )
 {
@@ -15,6 +16,9 @@ void Menu_Load( Menu_t* menu, MenuIndex_t index )
    {
       case MenuIndex_Map:
          menu->optionCount = 5;
+         break;
+      case MenuIndex_BattleMain:
+         menu->optionCount = 4;
          break;
    }
 }
@@ -44,6 +48,12 @@ void Menu_Draw( Game_t* game )
          Screen_DrawText( &( game->screen ), "SPELL", 32, 144, DARKGRAY, WHITE );
          Screen_DrawText( &( game->screen ), "ITEM", 32, 160, DARKGRAY, WHITE );
          break;
+      case MenuIndex_BattleMain:
+         Screen_DrawRect( &( game->screen ), 16, 152, 76, 72, DARKGRAY );
+         Screen_DrawText( &( game->screen ), "ATTACK", 32, 160, DARKGRAY, WHITE );
+         Screen_DrawText( &( game->screen ), "SPELL", 32, 176, DARKGRAY, WHITE );
+         Screen_DrawText( &( game->screen ), "ITEM", 32, 192, DARKGRAY, WHITE );
+         Screen_DrawText( &( game->screen ), "FLEE", 32, 208, DARKGRAY, WHITE );
    }
 
    Menu_DrawCarat( game );
@@ -54,8 +64,11 @@ void Menu_Wipe( Game_t* game )
    switch( game->menu.index )
    {
       case MenuIndex_Map:
-         Screen_WipeTileMapSection( game, 16, 16, 76, 60 );
-         Screen_WipeTileMapSection( game, 16, 88, 76, 88 );
+         Screen_WipeTileMapSection( game, 16, 16, 76, 60 );    // quick stats
+         Screen_WipeTileMapSection( game, 16, 88, 76, 88 );    // menu
+         break;
+      case MenuIndex_BattleMain:
+         Screen_WipeTileMapSection( game, 16, 152, 76, 72 );    // menu
          break;
    }
    
@@ -91,22 +104,40 @@ void Menu_Tic( Game_t* game )
 
 internal void Menu_DrawCarat( Game_t* game )
 {
+   uint16_t x = 0, y = 0;
+
    switch( game->menu.index )
    {
       case MenuIndex_Map:
-         Screen_DrawText( &( game->screen ), ">", 20, 96 + ( 16 * game->menu.optionIndex ), DARKGRAY, WHITE );
+         x = 20;
+         y = 96;
+         break;
+      case MenuIndex_BattleMain:
+         x = 20;
+         y = 160;
          break;
    }
+
+   Screen_DrawText( &( game->screen ), ">", x, y + ( 16 * game->menu.optionIndex ), DARKGRAY, WHITE );
 }
 
 internal void Menu_WipeCarat( Game_t* game )
 {
+   uint16_t x = 0, y = 0;
+
    switch( game->menu.index )
    {
       case MenuIndex_Map:
-         Screen_DrawText( &( game->screen ), " ", 20, 96 + ( 16 * game->menu.optionIndex ), DARKGRAY, WHITE );
+         x = 20;
+         y = 96;
+         break;
+      case MenuIndex_BattleMain:
+         x = 20;
+         y = 160;
          break;
    }
+
+   Screen_DrawText( &( game->screen ), " ", x, y + ( 16 * game->menu.optionIndex ), DARKGRAY, WHITE );
 }
 
 void Menu_ScrollDown( Game_t* game )
@@ -149,6 +180,9 @@ void Menu_Select( Game_t* game )
       case MenuIndex_Map:
          Menu_MapMenuSelect( game );
          break;
+      case MenuIndex_BattleMain:
+         Menu_BattleMainSelect( game );
+         break;
    }
 }
 
@@ -172,4 +206,10 @@ internal void Menu_MapMenuSelect( Game_t* game )
          Game_ShowMapMessage( game, "You don't have any items." );
          break;
    }
+}
+
+internal void Menu_BattleMainSelect( Game_t* game )
+{
+   // TODO: add a "battle results" state and go there before switching states
+   Game_ChangeState( game, GameState_Map );
 }

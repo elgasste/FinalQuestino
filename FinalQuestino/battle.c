@@ -68,7 +68,7 @@ void Battle_Done( Game_t* game )
 {
    Screen_WipeTileMapSection( game, 16, 16, 76, 36 );
    Screen_WipeTileMapSection( game, 128, 32, 112, 112 );
-   Game_WipeMessage( game );
+   Menu_Wipe( game );
 }
 
 internal void Battle_AnimateStart( Game_t* game )
