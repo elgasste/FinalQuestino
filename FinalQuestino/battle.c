@@ -1,7 +1,10 @@
 #include "game.h"
 #include "random.h"
+#include "menu.h"
 
 internal void Battle_AnimateStart( Game_t* game );
+internal void Battle_ShowMessage( Game_t* game, const char* message );
+internal void Battle_WipeMessage( Game_t* game );
 
 void Battle_Start( Game_t* game )
 {
@@ -38,6 +41,7 @@ void Battle_Start( Game_t* game )
       }
    }
 
+   Screen_WipePlayer( game );
    Battle_AnimateStart( game );
 }
 
@@ -61,7 +65,34 @@ void Battle_StartHUD( Game_t* game )
       snprintf( str, 32, "An %s approaches!", game->battle.enemy.name );
    }
 
-   Game_ShowMessage( game, str );
+   Battle_ShowMessage( game, str );
+   Menu_Load( &( game->menu ), MenuIndex_BattleMain );
+   Menu_Draw( game );
+   game->state = GameState_BattleMenuMain;
+}
+
+void Battle_Attack( Game_t* game )
+{
+   Battle_ShowMessage( game, "Sliced him up real good, you win!" );
+   game->state = GameState_BattleResult;
+}
+
+void Battle_Spell( Game_t* game )
+{
+   Battle_ShowMessage( game, "Abra cadabra, you win!" );
+   game->state = GameState_BattleResult;
+}
+
+void Battle_Item( Game_t* game )
+{
+   Battle_ShowMessage( game, "Your spare change hit him in the eye, you win!" );
+   game->state = GameState_BattleResult;
+}
+
+void Battle_Flee( Game_t* game )
+{
+   Battle_ShowMessage( game, "You dodged and weaved your way out, nice work!" );
+   game->state = GameState_BattleResult;
 }
 
 void Battle_Done( Game_t* game )
@@ -69,6 +100,9 @@ void Battle_Done( Game_t* game )
    Screen_WipeTileMapSection( game, 16, 16, 76, 36 );
    Screen_WipeTileMapSection( game, 128, 32, 112, 112 );
    Menu_Wipe( game );
+   Battle_WipeMessage( game );
+   Screen_DrawActors( game );
+   game->state = GameState_Map;
 }
 
 internal void Battle_AnimateStart( Game_t* game )
@@ -130,4 +164,15 @@ internal void Battle_AnimateStart( Game_t* game )
    Screen_DrawEnemy( game, 144, 40 );
    Battle_StartHUD( game );
 #endif
+}
+
+internal void Battle_ShowMessage( Game_t* game, const char* message )
+{
+   Screen_DrawRect( &( game->screen ), 104, 152, 200, 72, DARKGRAY );
+   Screen_DrawWrappedText( &( game->screen ), message, 112, 160, 23, 8, DARKGRAY, WHITE );
+}
+
+internal void Battle_WipeMessage( Game_t* game )
+{
+   Screen_WipeTileMapSection( game, 104, 152, 200, 72 );
 }

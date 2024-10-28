@@ -14,13 +14,13 @@ Direction_t;
 
 typedef enum GameState_t
 {
-   GameState_Init = 0,
+   GameState_Ready = 0,
    GameState_Map,
    GameState_MapMenu,
    GameState_MapMessage,
    GameState_MapStatus,
-   GameState_BattleStart,
-   GameState_BattleMenuMain
+   GameState_BattleMenuMain,
+   GameState_BattleResult
 }
 GameState_t;
 

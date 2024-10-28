@@ -24,14 +24,14 @@ void Physics_Tic( Game_t* game )
    {
       game->tileMapIndex--;
       player->position.x = ( MAP_TILES_X * MAP_TILE_SIZE ) - PLAYER_HITBOX_SIZE - COLLISION_PADDING;
-      Game_Refresh( game );
+      Game_RefreshMap( game );
       return;
    }
    else if ( ( newPos.x + PLAYER_HITBOX_SIZE ) >= ( MAP_TILES_X * MAP_TILE_SIZE ) )
    {
       game->tileMapIndex++;
       player->position.x = COLLISION_PADDING;
-      Game_Refresh( game );
+      Game_RefreshMap( game );
       return;
    }
 
@@ -39,14 +39,14 @@ void Physics_Tic( Game_t* game )
    {
       game->tileMapIndex -= game->tileMap.stride;
       player->position.y = ( MAP_TILES_Y * MAP_TILE_SIZE ) - PLAYER_HITBOX_SIZE - COLLISION_PADDING;
-      Game_Refresh( game );
+      Game_RefreshMap( game );
       return;
    }
    else if ( ( newPos.y + PLAYER_HITBOX_SIZE ) >= ( MAP_TILES_Y * MAP_TILE_SIZE ) )
    {
       game->tileMapIndex += game->tileMap.stride;
       player->position.y = COLLISION_PADDING;
-      Game_Refresh( game );
+      Game_RefreshMap( game );
       return;
    }
 
@@ -144,7 +144,7 @@ void Physics_Tic( Game_t* game )
 
    player->position.x = newPos.x;
    player->position.y = newPos.y;
-   Screen_DrawPlayer( game );
+   Screen_DrawActors( game );
 
    if ( posChanged )
    {

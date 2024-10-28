@@ -110,17 +110,24 @@ void Input_Handle( Game_t* game )
       case GameState_BattleMenuMain:
          Input_HandleMenuStateInput( game );
          break;
-      case GameState_BattleStart:
-         if ( Input_AnyButtonPressed( &( game->input ) ) )
-         {
-            Game_ChangeState( game, GameState_BattleMenuMain );
-         }
-         break;
       case GameState_MapMessage:
+         if ( Input_AnyButtonPressed( &game->input ) )
+         {
+            Game_WipeMessage( game );
+            Screen_DrawActors( game );
+            game->state = GameState_Map;
+         }
       case GameState_MapStatus:
+         if ( Input_AnyButtonPressed( &game->input ) )
+         {
+            Game_WipeMapStatus( game );
+            Screen_DrawActors( game );
+            game->state = GameState_Map;
+         }
+      case GameState_BattleResult:
          if ( Input_AnyButtonPressed( &( game->input ) ) )
          {
-            Game_ChangeState( game, GameState_Map );
+            Battle_Done( game );
          }
          break;
    }
@@ -134,7 +141,10 @@ internal void Input_HandleMapStateInput( Game_t* game )
 
    if ( game->input.buttonStates[Button_A].pressed )
    {
-      Game_ChangeState( game, GameState_MapMenu );
+      game->state = GameState_MapMenu;
+      Game_ShowMapQuickStats( game );
+      Menu_Load( &( game->menu ), MenuIndex_Map );
+      Menu_Draw( game );
    }
    else
    {
@@ -224,7 +234,10 @@ internal void Input_HandleMenuStateInput( Game_t* game )
    {
       if ( game->state == GameState_MapMenu )
       {
-         Game_ChangeState( game, GameState_Map );
+         Game_WipeMapQuickStats( game );
+         Menu_Wipe( game );
+         Screen_DrawActors( game );
+         game->state = GameState_Map;
       }
    }
    else

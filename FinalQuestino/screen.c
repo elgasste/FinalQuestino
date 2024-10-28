@@ -584,6 +584,12 @@ void Screen_DrawPlayer( Game_t* game )
    CS_IDLE;
 }
 
+void Screen_DrawActors( Game_t* game )
+{
+   Screen_DrawMapSprites( game );
+   Screen_DrawPlayer( game );
+}
+
 void Screen_WipePlayer( Game_t* game )
 {
    Screen_WipeTileMapSection( game,

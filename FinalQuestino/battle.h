@@ -18,6 +18,10 @@ extern "C" {
 
 void Battle_Start( Game_t* game );
 void Battle_StartHUD( Game_t* game );
+void Battle_Attack( Game_t* game );
+void Battle_Spell( Game_t* game );
+void Battle_Item( Game_t* game );
+void Battle_Flee( Game_t* game );
 void Battle_Done( Game_t* game );
 
 #if defined( VISUAL_STUDIO_DEV )

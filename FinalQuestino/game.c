@@ -2,7 +2,6 @@
 #include "random.h"
 #include "battle.h"
 
-internal void Game_DrawMapStatus( Game_t* game );
 internal void Game_RollEncounter( Game_t* game, uint8_t encounterRate );
 internal Bool_t Game_OnAnySpecialEnemyTile( Game_t* game );
 internal Bool_t Game_CollectTreasure( Game_t* game, uint32_t treasureFlag );
@@ -30,7 +29,7 @@ void Game_Init( Game_t* game )
    game->player.position.x = ( MAP_TILE_SIZE * 8 ) + 2;
    game->player.position.y = ( MAP_TILE_SIZE * 6 ) + 4;
 
-   game->state = GameState_Init;
+   game->state = GameState_Ready;
 }
 
 void Game_Tic( Game_t* game )
@@ -40,8 +39,9 @@ void Game_Tic( Game_t* game )
 
    switch( game->state )
    {
-      case GameState_Init:
-         Game_ChangeState( game, GameState_Map );
+      case GameState_Ready:
+         Game_RefreshMap( game );
+         game->state = GameState_Map;
          break;
       case GameState_Map:
          Physics_Tic( game );
@@ -53,96 +53,12 @@ void Game_Tic( Game_t* game )
    }
 }
 
-void Game_Refresh( Game_t* game )
+void Game_RefreshMap( Game_t* game )
 {
-   if ( game->state == GameState_Map )
-   {
-      TileMap_LoadTileMap( &( game->tileMap ), game->tileMapIndex );
-      Screen_DrawTileMap( game );
-
-      if ( game->tileMap.spriteCount > 0 )
-      {
-         Screen_DrawMapSprites( game );
-      }
-
-      Screen_DrawPlayer( game );
-      Physics_UpdateTileIndexCache( game );
-   }
-}
-
-void Game_ChangeState( Game_t *game, GameState_t newState )
-{
-   switch( game->state )
-   {
-      case GameState_Init:
-         if ( newState == GameState_Map )
-         {
-            game->state = newState;
-            Game_Refresh( game );
-         }
-         break;
-      case GameState_Map:
-         switch( newState )
-         {
-            case GameState_MapMenu:
-               game->state = newState;
-               Menu_Load( &( game->menu ), MenuIndex_Map );
-               Menu_Draw( game );
-               break;
-            case GameState_BattleStart:
-               game->state = newState;
-               Screen_WipePlayer( game );
-               Battle_Start( game );
-               break;
-         }
-         break;
-      case GameState_MapMenu:
-         switch( newState )
-         {
-            case GameState_Map:
-            case GameState_MapMessage:
-               game->state = newState;
-               Menu_Wipe( game );
-               break;
-            case GameState_MapStatus:
-               game->state = newState;
-               Menu_Wipe( game );
-               Game_DrawMapStatus( game );
-               break;
-         }
-         break;
-      case GameState_MapMessage:
-         if ( newState == GameState_Map )
-         {
-            game->state = newState;
-            Game_WipeMessage( game );
-         }
-         break;
-      case GameState_MapStatus:
-         if ( newState == GameState_Map )
-         {
-            game->state = newState;
-            Screen_WipeTileMapSection( game, 16, 16, 112, 96 );
-         }
-         break;
-      case GameState_BattleStart:
-         if ( newState == GameState_BattleMenuMain )
-         {
-            Game_WipeMessage( game );
-            game->state = newState;
-            Menu_Load( &( game->menu ), MenuIndex_BattleMain );
-            Menu_Draw( game );
-            break;
-         }
-      case GameState_BattleMenuMain:
-         if ( newState == GameState_Map )
-         {
-            game->state = newState;
-            Battle_Done( game );
-            Screen_DrawPlayer( game );
-         }
-         break;
-   }
+   TileMap_LoadTileMap( &( game->tileMap ), game->tileMapIndex );
+   Screen_DrawTileMap( game );
+   Screen_DrawActors( game );
+   Physics_UpdateTileIndexCache( game );
 }
 
 void Game_SteppedOnTile( Game_t* game, uint16_t tileIndex )
@@ -164,7 +80,7 @@ void Game_SteppedOnTile( Game_t* game, uint16_t tileIndex )
          newTileX = newTileIndex - ( newTileY * MAP_TILES_X );
          game->player.position.x = (float)( ( newTileX * MAP_TILE_SIZE ) + ( ( MAP_TILE_SIZE - PLAYER_HITBOX_SIZE ) / 2 ) );
          game->player.position.y = (float)( ( newTileY * MAP_TILE_SIZE ) + ( MAP_TILE_SIZE - PLAYER_HITBOX_SIZE ) - COLLISION_PADDING );
-         Game_Refresh( game );
+         Game_RefreshMap( game );
          Random_Seed();
          return;
       }
@@ -191,7 +107,7 @@ void Game_SteppedOnTile( Game_t* game, uint16_t tileIndex )
 
    if ( Game_OnAnySpecialEnemyTile( game ) )
    {
-      Game_ChangeState( game, GameState_BattleStart );
+      Battle_Start( game );
    }
    else if ( GET_TILE_ENCOUNTERABLE( tile ) )
    {
@@ -214,20 +130,30 @@ void Game_ShowMessage( Game_t* game, const char* message )
 
 void Game_WipeMessage( Game_t* game )
 {
-   switch( game->state )
-   {
-      case GameState_Map:
-         Screen_WipeTileMapSection( game, 48, 160, 224, 64 );
-         Screen_DrawMapSprites( game );
-         Screen_DrawPlayer( game );
-         break;
-      case GameState_BattleStart:
-         Screen_WipeTileMapSection( game, 48, 160, 224, 64 );
-         break;
-   }
+   Screen_WipeTileMapSection( game, 48, 160, 224, 64 );
 }
 
-internal void Game_DrawMapStatus( Game_t* game )
+void Game_ShowMapQuickStats( Game_t* game )
+{
+   char str[10];
+
+   Screen_DrawRect( &( game->screen ), 16, 16, 76, 60, DARKGRAY );
+   snprintf( str, 10, "HP:%u", game->player.stats.HitPoints );
+   Screen_DrawText( &( game->screen ), str, 24, 24, DARKGRAY, WHITE );
+   snprintf( str, 10, "MP:%u", game->player.stats.MagicPoints );
+   Screen_DrawText( &( game->screen ), str, 24, 36, DARKGRAY, WHITE );
+   snprintf( str, 10, " G:%u", game->player.gold );
+   Screen_DrawText( &( game->screen ), str, 24, 48, DARKGRAY, WHITE );
+   snprintf( str, 10, "EX:%u", game->player.experience );
+   Screen_DrawText( &( game->screen ), str, 24, 60, DARKGRAY, WHITE );
+}
+
+void Game_WipeMapQuickStats( Game_t* game )
+{
+   Screen_WipeTileMapSection( game, 16, 16, 76, 60 );
+}
+
+void Game_ShowMapStatus( Game_t* game )
 {
    Player_t* player = &( game->player );
    char str[14];
@@ -248,6 +174,11 @@ internal void Game_DrawMapStatus( Game_t* game )
    Screen_DrawText( &( game->screen ), str, 24, 84, DARKGRAY, WHITE );
    snprintf( str, 14, "Exp: %u", player->experience );
    Screen_DrawText( &( game->screen ), str, 24, 96, DARKGRAY, WHITE );
+}
+
+void Game_WipeMapStatus( Game_t* game )
+{
+   Screen_WipeTileMapSection( game, 16, 16, 112, 96 );
 }
 
 internal void Game_RollEncounter( Game_t* game, uint8_t encounterRate )
@@ -271,7 +202,7 @@ internal void Game_RollEncounter( Game_t* game, uint8_t encounterRate )
 
    if ( spawnEncounter )
    {
-      Game_ChangeState( game, GameState_BattleStart );
+      Battle_Start( game );
    }
 }
 
@@ -308,11 +239,13 @@ void Game_SearchMapTile( Game_t* game )
    uint8_t x, y;
    uint32_t treasureFlag = TileMap_GetTreasureFlag( game->tileMapIndex, game->tileMap.tileIndexCache );
 
+   Menu_Wipe( game );
+
    if ( treasureFlag && ( game->treasureFlags & treasureFlag ) )
    {
       if ( Game_CollectTreasure( game, treasureFlag ) )
       {
-         Game_ShowMapMessage( game, "Time to quit your day job!" );
+         Game_ShowMessage( game, "Time to quit your day job!" );
 
          y = ( uint8_t )( game->tileMap.tileIndexCache / MAP_TILES_X );
          x = ( uint8_t )( game->tileMap.tileIndexCache - ( y * MAP_TILES_X ) );
@@ -321,13 +254,15 @@ void Game_SearchMapTile( Game_t* game )
       }
       else
       {
-         Game_ShowMapMessage( game, "Can't carry any more of these." );
+         Game_ShowMessage( game, "Can't carry any more of these." );
       }
    }
    else
    {
-      Game_ShowMapMessage( game, "You didn't find anything." );
+      Game_ShowMessage( game, "You didn't find anything." );
    }
+
+   game->state = GameState_MapMessage;
 }
 
 internal Bool_t Game_CollectTreasure( Game_t* game, uint32_t treasureFlag )
@@ -335,10 +270,4 @@ internal Bool_t Game_CollectTreasure( Game_t* game, uint32_t treasureFlag )
    // TODO: check if we can carry any more of whatever this is
    game->treasureFlags ^= treasureFlag;
    return True;
-}
-
-void Game_ShowMapMessage( Game_t* game, const char* message )
-{
-   Game_ChangeState( game, GameState_MapMessage );
-   Game_ShowMessage( game, message );
 }
