@@ -74,6 +74,7 @@ void Battle_StartHUD( Game_t* game )
 void Battle_Attack( Game_t* game )
 {
    Menu_Wipe( game );
+   Screen_WipeEnemy( game, 160, 40 );
    Battle_ShowMessage( game, "Sliced him up real good, you win!" );
    game->state = GameState_BattleResult;
 }
@@ -81,20 +82,23 @@ void Battle_Attack( Game_t* game )
 void Battle_Spell( Game_t* game )
 {
    Menu_Wipe( game );
-   Battle_ShowMessage( game, "Abra cadabra, you win!" );
+   Screen_WipeEnemy( game, 160, 40 );
+   Battle_ShowMessage( game, "You yell 'ABRA CADABRA!!', which is a death spell. You win!" );
    game->state = GameState_BattleResult;
 }
 
 void Battle_Item( Game_t* game )
 {
    Menu_Wipe( game );
-   Battle_ShowMessage( game, "Your spare change hit him in the eye, you win!" );
+   Screen_WipeEnemy( game, 160, 40 );
+   Battle_ShowMessage( game, "Your spare change hit him in the eye and killed him, you win!" );
    game->state = GameState_BattleResult;
 }
 
 void Battle_Flee( Game_t* game )
 {
    Menu_Wipe( game );
+   Screen_WipeEnemy( game, 160, 40 );
    Battle_ShowMessage( game, "You dodged and weaved your way out, nice work!" );
    game->state = GameState_BattleResult;
 }

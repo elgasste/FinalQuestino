@@ -465,6 +465,25 @@ void Screen_DrawEnemy( Game_t* game, uint16_t x, uint16_t y )
    }
 }
 
+void Screen_WipeEnemy( Game_t* game, uint16_t x, uint16_t y )
+{
+   uint8_t i, j;
+   uint32_t* bufferPos = g_globals.screenBuffer.memory + ( y * g_globals.screenBuffer.w ) + x;
+
+   UNUSED_PARAM( game );
+
+   for ( i = 0; i < ENEMY_TILE_SIZE * ENEMY_TILES_Y; i++ )
+   {
+      for ( j = 0; j < ENEMY_TILE_SIZE * ENEMY_TILES_X; j++ )
+      {
+         *bufferPos = 0xFF000000;
+         bufferPos++;
+      }
+
+      bufferPos += ( g_globals.screenBuffer.w - ( ENEMY_TILE_SIZE * ENEMY_TILES_X ) );
+   }
+}
+
 void Screen_WipeTileMapSection( Game_t* game, float x, float y, uint16_t w, uint16_t h )
 {
    uint16_t color16, ux, uy, row, col;

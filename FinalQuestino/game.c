@@ -252,6 +252,7 @@ void Game_Search( Game_t* game )
    uint8_t x, y;
    uint32_t treasureFlag = TileMap_GetTreasureFlag( game->tileMapIndex, game->tileMap.tileIndexCache );
 
+   Game_WipeMapQuickStats( game );
    Menu_Wipe( game );
 
    if ( treasureFlag && ( game->treasureFlags & treasureFlag ) )

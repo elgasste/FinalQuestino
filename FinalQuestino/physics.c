@@ -144,7 +144,7 @@ void Physics_Tic( Game_t* game )
 
    player->position.x = newPos.x;
    player->position.y = newPos.y;
-   Screen_DrawActors( game );
+   Screen_DrawPlayer( game );
 
    if ( posChanged )
    {

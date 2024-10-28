@@ -117,6 +117,7 @@ void Input_Handle( Game_t* game )
             Screen_DrawActors( game );
             game->state = GameState_Map;
          }
+         break;
       case GameState_MapStatus:
          if ( Input_AnyButtonPressed( &game->input ) )
          {
@@ -124,6 +125,7 @@ void Input_Handle( Game_t* game )
             Screen_DrawActors( game );
             game->state = GameState_Map;
          }
+         break;
       case GameState_BattleResult:
          if ( Input_AnyButtonPressed( &( game->input ) ) )
          {
