@@ -153,29 +153,6 @@ void Game_WipeMapQuickStats( Game_t* game )
    Screen_WipeTileMapSection( game, 16, 16, 76, 60 );
 }
 
-void Game_ShowMapStatus( Game_t* game )
-{
-   Player_t* player = &( game->player );
-   char str[14];
-
-   Screen_DrawRect( &( game->screen ), 16, 16, 112, 96, DARKGRAY );
-
-   snprintf( str, 14, "Lvl: %u", Player_GetLevel( player ) );
-   Screen_DrawText( &( game->screen ), str, 24, 24, DARKGRAY, WHITE );
-   snprintf( str, 14, " HP: %u/%u", player->stats.HitPoints, player->stats.MaxHitPoints );
-   Screen_DrawText( &( game->screen ), str, 24, 36, DARKGRAY, WHITE );
-   snprintf( str, 14, " MP: %u/%u", player->stats.MagicPoints, player->stats.MaxMagicPoints );
-   Screen_DrawText( &( game->screen ), str, 24, 48, DARKGRAY, WHITE );
-   snprintf( str, 14, "Atk: %u", player->stats.AttackPower );
-   Screen_DrawText( &( game->screen ), str, 24, 60, DARKGRAY, WHITE );
-   snprintf( str, 14, "Def: %u", player->stats.DefensePower );
-   Screen_DrawText( &( game->screen ), str, 24, 72, DARKGRAY, WHITE );
-   snprintf( str, 14, "Agl: %u", player->stats.Agility );
-   Screen_DrawText( &( game->screen ), str, 24, 84, DARKGRAY, WHITE );
-   snprintf( str, 14, "Exp: %u", player->experience );
-   Screen_DrawText( &( game->screen ), str, 24, 96, DARKGRAY, WHITE );
-}
-
 void Game_WipeMapStatus( Game_t* game )
 {
    Screen_WipeTileMapSection( game, 16, 16, 112, 96 );
@@ -234,7 +211,43 @@ internal Bool_t Game_OnAnySpecialEnemyTile( Game_t* game )
           Game_OnSpecialEnemyTile( game, SPECIALENEMYID_AXEKNIGHT );
 }
 
-void Game_SearchMapTile( Game_t* game )
+void Game_Talk( Game_t* game )
+{
+   Game_WipeMapQuickStats( game );
+   Menu_Wipe( game );
+   Game_ShowMessage( game, "Nobody's there." );
+   game->state = GameState_MapMessage;
+}
+
+void Game_Status( Game_t* game )
+{
+   Player_t* player = &( game->player );
+   char str[14];
+
+   Game_WipeMapQuickStats( game );
+   Menu_Wipe( game );
+   
+   Screen_DrawRect( &( game->screen ), 16, 16, 112, 96, DARKGRAY );
+
+   snprintf( str, 14, "Lvl: %u", Player_GetLevel( player ) );
+   Screen_DrawText( &( game->screen ), str, 24, 24, DARKGRAY, WHITE );
+   snprintf( str, 14, " HP: %u/%u", player->stats.HitPoints, player->stats.MaxHitPoints );
+   Screen_DrawText( &( game->screen ), str, 24, 36, DARKGRAY, WHITE );
+   snprintf( str, 14, " MP: %u/%u", player->stats.MagicPoints, player->stats.MaxMagicPoints );
+   Screen_DrawText( &( game->screen ), str, 24, 48, DARKGRAY, WHITE );
+   snprintf( str, 14, "Atk: %u", player->stats.AttackPower );
+   Screen_DrawText( &( game->screen ), str, 24, 60, DARKGRAY, WHITE );
+   snprintf( str, 14, "Def: %u", player->stats.DefensePower );
+   Screen_DrawText( &( game->screen ), str, 24, 72, DARKGRAY, WHITE );
+   snprintf( str, 14, "Agl: %u", player->stats.Agility );
+   Screen_DrawText( &( game->screen ), str, 24, 84, DARKGRAY, WHITE );
+   snprintf( str, 14, "Exp: %u", player->experience );
+   Screen_DrawText( &( game->screen ), str, 24, 96, DARKGRAY, WHITE );
+
+   game->state = GameState_MapStatus;
+}
+
+void Game_Search( Game_t* game )
 {
    uint8_t x, y;
    uint32_t treasureFlag = TileMap_GetTreasureFlag( game->tileMapIndex, game->tileMap.tileIndexCache );
@@ -270,4 +283,20 @@ internal Bool_t Game_CollectTreasure( Game_t* game, uint32_t treasureFlag )
    // TODO: check if we can carry any more of whatever this is
    game->treasureFlags ^= treasureFlag;
    return True;
+}
+
+void Game_MapSpell( Game_t* game )
+{
+   Game_WipeMapQuickStats( game );
+   Menu_Wipe( game );
+   Game_ShowMessage( game, "You don't know any spells." );
+   game->state = GameState_MapMessage;
+}
+
+void Game_MapItem( Game_t* game )
+{
+   Game_WipeMapQuickStats( game );
+   Menu_Wipe( game );
+   Game_ShowMessage( game, "You don't have any items." );
+   game->state = GameState_MapMessage;
 }

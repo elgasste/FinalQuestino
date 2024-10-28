@@ -174,31 +174,19 @@ internal void Menu_MapMenuSelect( Game_t* game )
    switch( game->menu.optionIndex )
    {
       case 0: // talk
-         Game_WipeMapQuickStats( game );
-         Menu_Wipe( game );
-         Game_ShowMessage( game, "Nobody's there." );
-         game->state = GameState_MapMessage;
+         Game_Talk( game );
          break;
       case 1: // status
-         Game_WipeMapQuickStats( game );
-         Menu_Wipe( game );
-         Game_ShowMapStatus( game );
-         game->state = GameState_MapStatus;
+         Game_Status( game );
          break;
       case 2: // search
-         Game_SearchMapTile( game );
+         Game_Search( game );
          break;
       case 3: // spell
-         Game_WipeMapQuickStats( game );
-         Menu_Wipe( game );
-         Game_ShowMessage( game, "You don't know any spells." );
-         game->state = GameState_MapMessage;
+         Game_MapSpell( game );
          break;
       case 4: // item
-         Game_WipeMapQuickStats( game );
-         Menu_Wipe( game );
-         Game_ShowMessage( game, "You don't have any items." );
-         game->state = GameState_MapMessage;
+         Game_MapItem( game );
          break;
    }
 }

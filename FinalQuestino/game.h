@@ -46,10 +46,13 @@ void Game_ShowMessage( Game_t* game, const char* message );
 void Game_WipeMessage( Game_t* game );
 void Game_ShowMapQuickStats( Game_t* game );
 void Game_WipeMapQuickStats( Game_t* game );
-void Game_ShowMapStatus( Game_t* game );
 void Game_WipeMapStatus( Game_t* game );
 Bool_t Game_OnSpecialEnemyTile( Game_t* game, uint8_t specialEnemyId );
-void Game_SearchMapTile( Game_t* game );
+void Game_Talk( Game_t* game );
+void Game_Status( Game_t* game );
+void Game_Search( Game_t* game );
+void Game_MapSpell( Game_t* game );
+void Game_MapItem( Game_t* game );
 
 #if defined( __cplusplus )
 }

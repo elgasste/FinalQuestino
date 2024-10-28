@@ -141,10 +141,10 @@ internal void Input_HandleMapStateInput( Game_t* game )
 
    if ( game->input.buttonStates[Button_A].pressed )
    {
-      game->state = GameState_MapMenu;
       Game_ShowMapQuickStats( game );
       Menu_Load( &( game->menu ), MenuIndex_Map );
       Menu_Draw( game );
+      game->state = GameState_MapMenu;
    }
    else
    {
