@@ -98,7 +98,7 @@ void Game_SteppedOnTile( Game_t* game, uint16_t tileIndex )
    }
 
 #if defined( DEBUG_NOENCOUNTERSONB )
-   if ( game->input.buttonStates[Button_B].down )
+   if ( game->input.buttonStates[BUTTON_B].down )
    {
       return;
    }
@@ -162,7 +162,7 @@ internal void Game_RollEncounter( Game_t* game, uint8_t encounterRate )
    Bool_t spawnEncounter;
 
 #if defined( DEBUG_NOENCOUNTERSONB )
-   if ( game->input.buttonStates[Button_B].down )
+   if ( game->input.buttonStates[BUTTON_B].down )
    {
       return;
    }
