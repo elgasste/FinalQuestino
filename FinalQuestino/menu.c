@@ -1,7 +1,6 @@
 #include "game.h"
 
 internal void Menu_DrawCarat( Game_t* game );
-internal void Menu_WipeCarat( Game_t* game );
 internal void Menu_MapMenuSelect( Game_t* game );
 internal void Menu_BattleMainSelect( Game_t* game );
 
@@ -104,7 +103,7 @@ internal void Menu_DrawCarat( Game_t* game )
    Screen_DrawText( &( game->screen ), ">", x, y + ( 16 * game->menu.optionIndex ), DARKGRAY, WHITE );
 }
 
-internal void Menu_WipeCarat( Game_t* game )
+void Menu_WipeCarat( Game_t* game )
 {
    uint16_t x = 0, y = 0;
 

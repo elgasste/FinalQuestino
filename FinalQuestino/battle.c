@@ -5,6 +5,7 @@
 internal void Battle_AnimateStart( Game_t* game );
 internal void Battle_ShowMessage( Game_t* game, const char* message );
 internal void Battle_WipeMessage( Game_t* game );
+internal void Battle_AnimateAttack( Game_t* game );
 
 void Battle_Start( Game_t* game )
 {
@@ -58,11 +59,11 @@ void Battle_StartHUD( Game_t* game )
 
    if ( game->battle.enemy.indefiniteArticle == INDEFINITEARTICLE_A )
    {
-      snprintf( str, 32, PSTR( "A %s approaches!" ), game->battle.enemy.name );
+      snprintf( str, 32, PSTR( "A %s approaches! Command?" ), game->battle.enemy.name );
    }
    else
    {
-      snprintf( str, 32, PSTR( "An %s approaches!" ), game->battle.enemy.name );
+      snprintf( str, 32, PSTR( "An %s approaches! Command?" ), game->battle.enemy.name );
    }
 
    Battle_ShowMessage( game, str );
@@ -73,10 +74,10 @@ void Battle_StartHUD( Game_t* game )
 
 void Battle_Attack( Game_t* game )
 {
-   Menu_Wipe( game );
-   Screen_WipeEnemy( game, 160, 40 );
-   Battle_ShowMessage( game, PSTR( "Sliced him up real good, you win!" ) );
-   game->state = GAMESTATE_BATTLERESULT;
+   Menu_WipeCarat( game );
+   Battle_ShowMessage( game, PSTR( "You Attack!" ) );
+   game->state = GAMESTATE_BATTLEATTACKANIMATION;
+   Battle_AnimateAttack( game );
 }
 
 void Battle_Spell( Game_t* game )
@@ -183,4 +184,30 @@ internal void Battle_ShowMessage( Game_t* game, const char* message )
 internal void Battle_WipeMessage( Game_t* game )
 {
    Screen_WipeTileMapSection( game, 96, 152, 208, 72 );
+}
+
+internal void Battle_AnimateAttack( Game_t* game )
+{
+#if defined( VISUAL_STUDIO_DEV )
+   UNUSED_PARAM( game );
+   Battle_WinAnimateAttack();
+#else
+   DELAY_MS( 400 );
+   Screen_WipeEnemy( game, 160, 40 ); DELAY_MS( 80 );
+   Screen_DrawEnemy( game, 160, 40 ); DELAY_MS( 80 );
+   Screen_WipeEnemy( game, 160, 40 ); DELAY_MS( 80 );
+   Screen_DrawEnemy( game, 160, 40 ); DELAY_MS( 80 );
+   Screen_WipeEnemy( game, 160, 40 ); DELAY_MS( 80 );
+   Screen_DrawEnemy( game, 160, 40 );
+   DELAY_MS( 400 );
+
+   Battle_ExecuteAttack( game );
+#endif
+}
+
+void Battle_ExecuteAttack( Game_t* game )
+{
+   // TODO: actually cause damage and check if the enemy has been killed
+   Battle_ShowMessage( game, PSTR( "You caused damage, probably! Command?" ) );
+   game->state = GAMESTATE_BATTLEMENUMAIN;
 }

@@ -15,7 +15,7 @@
 // un-comment to turn off encounters when the B button is pressed
 //#define DEBUG_NOENCOUNTERSONB
 // un-comment to turn on fast walk mode
-//#define DEBUG_FASTWALK
+#define DEBUG_FASTWALK
 
 // not really necessary, but makes things easier to distinguish
 #define internal static
@@ -55,7 +55,9 @@
 #define GAMESTATE_MAPMESSAGE                 3
 #define GAMESTATE_MAPSTATUS                  4
 #define GAMESTATE_BATTLEMENUMAIN             5
-#define GAMESTATE_BATTLERESULT               6
+#define GAMESTATE_BATTLEATTACKANIMATION      6
+#define GAMESTATE_BATTLEATTACKRESULT         7
+#define GAMESTATE_BATTLERESULT               8
 
 #define BUTTON_LEFT                          0
 #define BUTTON_UP                            1

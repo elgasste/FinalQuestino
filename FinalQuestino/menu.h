@@ -22,6 +22,7 @@ extern "C" {
 void Menu_Load( Menu_t* menu, uint8_t index );
 void Menu_Draw( Game_t* game );
 void Menu_Wipe( Game_t* game );
+void Menu_WipeCarat( Game_t* game );
 void Menu_Tic( Game_t* game );
 void Menu_ScrollDown( Game_t* game );
 void Menu_ScrollUp( Game_t* game );
