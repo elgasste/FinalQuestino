@@ -2,12 +2,11 @@
 #define SPRITE_H
 
 #include "common.h"
-#include "enums.h"
 
 typedef struct Sprite_t
 {
    uint8_t frameTextures[( SPRITE_SIZE / 2 ) * SPRITE_SIZE * SPRITE_FRAMES * 4];
-   Direction_t direction;
+   uint8_t direction;
    uint8_t currentFrame;
    float elapsedSeconds;
 }

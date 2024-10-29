@@ -44,6 +44,33 @@
 #define FRAME_SECONDS                        0.03333333f
 #endif
 
+#define DIRECTION_LEFT                       0
+#define DIRECTION_UP                         1
+#define DIRECTION_RIGHT                      2
+#define DIRECTION_DOWN                       3
+
+#define GAMESTATE_READY                      0
+#define GAMESTATE_MAP                        1
+#define GAMESTATE_MAPMENU                    2
+#define GAMESTATE_MAPMESSAGE                 3
+#define GAMESTATE_MAPSTATUS                  4
+#define GAMESTATE_BATTLEMENUMAIN             5
+#define GAMESTATE_BATTLERESULT               6
+
+#define BUTTON_LEFT                          0
+#define BUTTON_UP                            1
+#define BUTTON_RIGHT                         2
+#define BUTTON_DOWN                          3
+#define BUTTON_A                             4
+#define BUTTON_B                             5
+#define BUTTON_COUNT                         6
+
+#define MENUINDEX_MAP                        0
+#define MENUINDEX_BATTLEMAIN                 1
+
+#define INDEFINITEARTICLE_A                  0
+#define INDEFINITEARTICLE_AN                 1
+
 #define MAP_TILE_SIZE                        16
 #define MAP_PACKED_TILE_SIZE                 8
 #define MAP_TILES_X                          20

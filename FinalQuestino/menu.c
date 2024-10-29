@@ -5,7 +5,7 @@ internal void Menu_WipeCarat( Game_t* game );
 internal void Menu_MapMenuSelect( Game_t* game );
 internal void Menu_BattleMainSelect( Game_t* game );
 
-void Menu_Load( Menu_t* menu, MenuIndex_t index )
+void Menu_Load( Menu_t* menu, uint8_t index )
 {
    menu->index = index;
    menu->optionIndex = 0;
@@ -14,10 +14,10 @@ void Menu_Load( Menu_t* menu, MenuIndex_t index )
 
    switch( index )
    {
-      case MenuIndex_Map:
+      case MENUINDEX_MAP:
          menu->optionCount = 5;
          break;
-      case MenuIndex_BattleMain:
+      case MENUINDEX_BATTLEMAIN:
          menu->optionCount = 4;
          break;
    }
@@ -27,7 +27,7 @@ void Menu_Draw( Game_t* game )
 {
    switch( game->menu.index )
    {
-      case MenuIndex_Map:
+      case MENUINDEX_MAP:
          Screen_DrawRect( &( game->screen ), 16, 88, 76, 88, DARKGRAY );
          Screen_DrawText( &( game->screen ), "TALK", 32, 96, DARKGRAY, WHITE );
          Screen_DrawText( &( game->screen ), "STATUS", 32, 112, DARKGRAY, WHITE );
@@ -35,7 +35,7 @@ void Menu_Draw( Game_t* game )
          Screen_DrawText( &( game->screen ), "SPELL", 32, 144, DARKGRAY, WHITE );
          Screen_DrawText( &( game->screen ), "ITEM", 32, 160, DARKGRAY, WHITE );
          break;
-      case MenuIndex_BattleMain:
+      case MENUINDEX_BATTLEMAIN:
          Screen_DrawRect( &( game->screen ), 16, 152, 76, 72, DARKGRAY );
          Screen_DrawText( &( game->screen ), "ATTACK", 32, 160, DARKGRAY, WHITE );
          Screen_DrawText( &( game->screen ), "SPELL", 32, 176, DARKGRAY, WHITE );
@@ -50,10 +50,10 @@ void Menu_Wipe( Game_t* game )
 {
    switch( game->menu.index )
    {
-      case MenuIndex_Map:
+      case MENUINDEX_MAP:
          Screen_WipeTileMapSection( game, 16, 88, 76, 88 );
          break;
-      case MenuIndex_BattleMain:
+      case MENUINDEX_BATTLEMAIN:
          Screen_WipeTileMapSection( game, 16, 152, 76, 72 );
          break;
    }
@@ -91,11 +91,11 @@ internal void Menu_DrawCarat( Game_t* game )
 
    switch( game->menu.index )
    {
-      case MenuIndex_Map:
+      case MENUINDEX_MAP:
          x = 20;
          y = 96;
          break;
-      case MenuIndex_BattleMain:
+      case MENUINDEX_BATTLEMAIN:
          x = 20;
          y = 160;
          break;
@@ -110,11 +110,11 @@ internal void Menu_WipeCarat( Game_t* game )
 
    switch( game->menu.index )
    {
-      case MenuIndex_Map:
+      case MENUINDEX_MAP:
          x = 20;
          y = 96;
          break;
-      case MenuIndex_BattleMain:
+      case MENUINDEX_BATTLEMAIN:
          x = 20;
          y = 160;
          break;
@@ -160,10 +160,10 @@ void Menu_Select( Game_t* game )
 {
    switch( game->menu.index )
    {
-      case MenuIndex_Map:
+      case MENUINDEX_MAP:
          Menu_MapMenuSelect( game );
          break;
-      case MenuIndex_BattleMain:
+      case MENUINDEX_BATTLEMAIN:
          Menu_BattleMainSelect( game );
          break;
    }

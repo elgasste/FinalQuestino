@@ -33,9 +33,6 @@
     <ClInclude Include="..\..\FinalQuestino\common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\FinalQuestino\enums.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\FinalQuestino\game.h">
       <Filter>Header Files</Filter>
     </ClInclude>

@@ -24,7 +24,7 @@ typedef struct Game_t
    Input_t input;
    Physics_t physics;
 
-   GameState_t state;
+   uint8_t state;
    Player_t player;
 
    Battle_t battle;
