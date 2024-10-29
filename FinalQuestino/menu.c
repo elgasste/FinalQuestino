@@ -29,18 +29,18 @@ void Menu_Draw( Game_t* game )
    {
       case MENUINDEX_MAP:
          Screen_DrawRect( &( game->screen ), 16, 88, 76, 88, DARKGRAY );
-         Screen_DrawText( &( game->screen ), "TALK", 32, 96, DARKGRAY, WHITE );
-         Screen_DrawText( &( game->screen ), "STATUS", 32, 112, DARKGRAY, WHITE );
-         Screen_DrawText( &( game->screen ), "SEARCH", 32, 128, DARKGRAY, WHITE );
-         Screen_DrawText( &( game->screen ), "SPELL", 32, 144, DARKGRAY, WHITE );
-         Screen_DrawText( &( game->screen ), "ITEM", 32, 160, DARKGRAY, WHITE );
+         Screen_DrawText( &( game->screen ), PSTR( "TALK" ), 32, 96, DARKGRAY, WHITE );
+         Screen_DrawText( &( game->screen ), PSTR( "STATUS" ), 32, 112, DARKGRAY, WHITE );
+         Screen_DrawText( &( game->screen ), PSTR( "SEARCH" ), 32, 128, DARKGRAY, WHITE );
+         Screen_DrawText( &( game->screen ), PSTR( "SPELL" ), 32, 144, DARKGRAY, WHITE );
+         Screen_DrawText( &( game->screen ), PSTR( "ITEM" ), 32, 160, DARKGRAY, WHITE );
          break;
       case MENUINDEX_BATTLEMAIN:
          Screen_DrawRect( &( game->screen ), 16, 152, 76, 72, DARKGRAY );
-         Screen_DrawText( &( game->screen ), "ATTACK", 32, 160, DARKGRAY, WHITE );
-         Screen_DrawText( &( game->screen ), "SPELL", 32, 176, DARKGRAY, WHITE );
-         Screen_DrawText( &( game->screen ), "ITEM", 32, 192, DARKGRAY, WHITE );
-         Screen_DrawText( &( game->screen ), "FLEE", 32, 208, DARKGRAY, WHITE );
+         Screen_DrawText( &( game->screen ), PSTR( "ATTACK" ), 32, 160, DARKGRAY, WHITE );
+         Screen_DrawText( &( game->screen ), PSTR( "SPELL" ), 32, 176, DARKGRAY, WHITE );
+         Screen_DrawText( &( game->screen ), PSTR( "ITEM" ), 32, 192, DARKGRAY, WHITE );
+         Screen_DrawText( &( game->screen ), PSTR( "FLEE" ), 32, 208, DARKGRAY, WHITE );
    }
 
    Menu_DrawCarat( game );

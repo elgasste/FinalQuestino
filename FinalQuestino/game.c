@@ -137,13 +137,13 @@ void Game_ShowMapQuickStats( Game_t* game )
    char str[10];
 
    Screen_DrawRect( &( game->screen ), 16, 16, 76, 60, DARKGRAY );
-   snprintf( str, 10, "HP:%u", game->player.stats.HitPoints );
+   snprintf( str, 10, PSTR( "HP:%u" ), game->player.stats.HitPoints );
    Screen_DrawText( &( game->screen ), str, 24, 24, DARKGRAY, WHITE );
-   snprintf( str, 10, "MP:%u", game->player.stats.MagicPoints );
+   snprintf( str, 10, PSTR( "MP:%u" ), game->player.stats.MagicPoints );
    Screen_DrawText( &( game->screen ), str, 24, 36, DARKGRAY, WHITE );
-   snprintf( str, 10, " G:%u", game->player.gold );
+   snprintf( str, 10, PSTR( " G:%u" ), game->player.gold );
    Screen_DrawText( &( game->screen ), str, 24, 48, DARKGRAY, WHITE );
-   snprintf( str, 10, "EX:%u", game->player.experience );
+   snprintf( str, 10, PSTR( "EX:%u" ), game->player.experience );
    Screen_DrawText( &( game->screen ), str, 24, 60, DARKGRAY, WHITE );
 }
 
@@ -214,7 +214,7 @@ void Game_Talk( Game_t* game )
 {
    Game_WipeMapQuickStats( game );
    Menu_Wipe( game );
-   Game_ShowMessage( game, "Nobody's there." );
+   Game_ShowMessage( game, PSTR( "Nobody's there." ) );
    game->state = GAMESTATE_MAPMESSAGE;
 }
 
@@ -228,19 +228,19 @@ void Game_Status( Game_t* game )
    
    Screen_DrawRect( &( game->screen ), 16, 16, 112, 96, DARKGRAY );
 
-   snprintf( str, 14, "Lvl: %u", Player_GetLevel( player ) );
+   snprintf( str, 14, PSTR( "Lvl: %u" ), Player_GetLevel( player ) );
    Screen_DrawText( &( game->screen ), str, 24, 24, DARKGRAY, WHITE );
-   snprintf( str, 14, " HP: %u/%u", player->stats.HitPoints, player->stats.MaxHitPoints );
+   snprintf( str, 14, PSTR( " HP: %u/%u" ), player->stats.HitPoints, player->stats.MaxHitPoints );
    Screen_DrawText( &( game->screen ), str, 24, 36, DARKGRAY, WHITE );
-   snprintf( str, 14, " MP: %u/%u", player->stats.MagicPoints, player->stats.MaxMagicPoints );
+   snprintf( str, 14, PSTR( " MP: %u/%u" ), player->stats.MagicPoints, player->stats.MaxMagicPoints );
    Screen_DrawText( &( game->screen ), str, 24, 48, DARKGRAY, WHITE );
-   snprintf( str, 14, "Atk: %u", player->stats.AttackPower );
+   snprintf( str, 14, PSTR( "Atk: %u" ), player->stats.AttackPower );
    Screen_DrawText( &( game->screen ), str, 24, 60, DARKGRAY, WHITE );
-   snprintf( str, 14, "Def: %u", player->stats.DefensePower );
+   snprintf( str, 14, PSTR( "Def: %u" ), player->stats.DefensePower );
    Screen_DrawText( &( game->screen ), str, 24, 72, DARKGRAY, WHITE );
-   snprintf( str, 14, "Agl: %u", player->stats.Agility );
+   snprintf( str, 14, PSTR( "Agl: %u" ), player->stats.Agility );
    Screen_DrawText( &( game->screen ), str, 24, 84, DARKGRAY, WHITE );
-   snprintf( str, 14, "Exp: %u", player->experience );
+   snprintf( str, 14, PSTR( "Exp: %u" ), player->experience );
    Screen_DrawText( &( game->screen ), str, 24, 96, DARKGRAY, WHITE );
 
    game->state = GAMESTATE_MAPSTATUS;
@@ -258,7 +258,7 @@ void Game_Search( Game_t* game )
    {
       if ( Game_CollectTreasure( game, treasureFlag ) )
       {
-         Game_ShowMessage( game, "Time to quit your day job!" );
+         Game_ShowMessage( game, PSTR( "Time to quit your day job!" ) );
 
          y = ( uint8_t )( game->tileMap.tileIndexCache / MAP_TILES_X );
          x = ( uint8_t )( game->tileMap.tileIndexCache - ( y * MAP_TILES_X ) );
@@ -267,12 +267,12 @@ void Game_Search( Game_t* game )
       }
       else
       {
-         Game_ShowMessage( game, "Can't carry any more of these." );
+         Game_ShowMessage( game, PSTR( "Can't carry any more of these." ) );
       }
    }
    else
    {
-      Game_ShowMessage( game, "You didn't find anything." );
+      Game_ShowMessage( game, PSTR( "You didn't find anything." ) );
    }
 
    game->state = GAMESTATE_MAPMESSAGE;
@@ -289,7 +289,7 @@ void Game_MapSpell( Game_t* game )
 {
    Game_WipeMapQuickStats( game );
    Menu_Wipe( game );
-   Game_ShowMessage( game, "You don't know any spells." );
+   Game_ShowMessage( game, PSTR( "You don't know any spells." ) );
    game->state = GAMESTATE_MAPMESSAGE;
 }
 
@@ -297,6 +297,6 @@ void Game_MapItem( Game_t* game )
 {
    Game_WipeMapQuickStats( game );
    Menu_Wipe( game );
-   Game_ShowMessage( game, "You don't have any items." );
+   Game_ShowMessage( game, PSTR( "You don't have any items." ) );
    game->state = GAMESTATE_MAPMESSAGE;
 }
