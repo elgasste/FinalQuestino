@@ -28,9 +28,16 @@ typedef struct GlobalObjects_t
    BITMAPINFO bmpInfo;
 
    Bool_t isAnimatingBattleStart;
-   float animationSecondsElapsed;
-   uint32_t animationFrame;
+   uint32_t battleStartAnimationFrame;
    Vector4u16_t battleStartRects[49];
+
+   Bool_t isAnimatingBattleAttack;
+   uint32_t battleAttackFlashCounter;
+   Bool_t hasPaddedBattleAttackStart;
+   Bool_t hasBattleAttackFlashed;
+   Bool_t hasPaddedBattleAttackEnd;
+
+   float animationSecondsElapsed;
 }
 GlobalObjects_t;
 

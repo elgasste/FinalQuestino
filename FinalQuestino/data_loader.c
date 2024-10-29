@@ -20915,15 +20915,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    for ( i = 0; i < 78; i++ ) { for ( j = 0; j < 32; j++ ) { enemy->tileTextures[i][j] = 0; } };
    if ( index == 0 )
    {
-      snprintf( enemy->name, 16, PSTR( "slime" ) );
+      SPRINTF_P( enemy->name, PSTR( "slime" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 3;
+      enemy->stats.MaxHitPoints = 3;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 5;
+      enemy->stats.DefensePower = 3;
+      enemy->stats.Agility = 15;
+      enemy->experience = 1;
+      enemy->gold = 1;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x3C77;
       enemy->palette[2] = 0xFFFF;
@@ -21015,15 +21017,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 1 )
    {
-      snprintf( enemy->name, 16, PSTR( "red slime" ) );
+      SPRINTF_P( enemy->name, PSTR( "red slime" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 4;
+      enemy->stats.MaxHitPoints = 4;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 7;
+      enemy->stats.DefensePower = 3;
+      enemy->stats.Agility = 15;
+      enemy->experience = 1;
+      enemy->gold = 2;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xDA60;
       enemy->palette[2] = 0xFFFF;
@@ -21110,15 +21114,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 2 )
    {
-      snprintf( enemy->name, 16, PSTR( "metal slime" ) );
+      SPRINTF_P( enemy->name, PSTR( "metal slime" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 4;
+      enemy->stats.MaxHitPoints = 4;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 10;
+      enemy->stats.DefensePower = 225;
+      enemy->stats.Agility = 255;
+      enemy->experience = 115;
+      enemy->gold = 6;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x7BEF;
       enemy->palette[2] = 0xFFFF;
@@ -21205,15 +21211,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 3 )
    {
-      snprintf( enemy->name, 16, PSTR( "drakee" ) );
+      SPRINTF_P( enemy->name, PSTR( "drakee" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 6;
+      enemy->stats.MaxHitPoints = 6;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 9;
+      enemy->stats.DefensePower = 6;
+      enemy->stats.Agility = 15;
+      enemy->experience = 2;
+      enemy->gold = 2;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x1815;
       enemy->palette[2] = 0xFFFF;
@@ -21360,15 +21368,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 4 )
    {
-      snprintf( enemy->name, 16, PSTR( "magidrakee" ) );
+      SPRINTF_P( enemy->name, PSTR( "magidrakee" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 15;
+      enemy->stats.MaxHitPoints = 15;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
+      enemy->stats.AttackPower = 14;
+      enemy->stats.DefensePower = 14;
       enemy->stats.Agility = 0;
+      enemy->experience = 5;
+      enemy->gold = 12;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xD1EB;
       enemy->palette[2] = 0xFFFF;
@@ -21510,15 +21520,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 5 )
    {
-      snprintf( enemy->name, 16, PSTR( "drakeema" ) );
+      SPRINTF_P( enemy->name, PSTR( "drakeema" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 20;
+      enemy->stats.MaxHitPoints = 20;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 22;
+      enemy->stats.DefensePower = 26;
+      enemy->stats.Agility = 32;
+      enemy->experience = 11;
+      enemy->gold = 20;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFE36;
       enemy->palette[2] = 0xFAF5;
@@ -21660,15 +21672,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 6 )
    {
-      snprintf( enemy->name, 16, PSTR( "ghost" ) );
+      SPRINTF_P( enemy->name, PSTR( "ghost" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 7;
+      enemy->stats.MaxHitPoints = 7;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 11;
+      enemy->stats.DefensePower = 8;
+      enemy->stats.Agility = 15;
+      enemy->experience = 3;
+      enemy->gold = 4;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x89FD;
       enemy->palette[2] = 0x2A6F;
@@ -21931,15 +21945,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 7 )
    {
-      snprintf( enemy->name, 16, PSTR( "poltergeist" ) );
+      SPRINTF_P( enemy->name, PSTR( "poltergeist" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 23;
+      enemy->stats.MaxHitPoints = 23;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
+      enemy->stats.AttackPower = 18;
+      enemy->stats.DefensePower = 20;
       enemy->stats.Agility = 0;
+      enemy->experience = 7;
+      enemy->gold = 18;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x6EF1;
       enemy->palette[2] = 0x44EC;
@@ -22202,15 +22218,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 8 )
    {
-      snprintf( enemy->name, 16, PSTR( "specter" ) );
+      SPRINTF_P( enemy->name, PSTR( "specter" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 36;
+      enemy->stats.MaxHitPoints = 36;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 40;
+      enemy->stats.DefensePower = 38;
+      enemy->stats.Agility = 49;
+      enemy->experience = 18;
+      enemy->gold = 70;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFCE0;
       enemy->palette[2] = 0x71E0;
@@ -22474,15 +22492,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 9 )
    {
-      snprintf( enemy->name, 16, PSTR( "magician" ) );
+      SPRINTF_P( enemy->name, PSTR( "magician" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 12;
+      enemy->stats.MaxHitPoints = 12;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
+      enemy->stats.AttackPower = 11;
+      enemy->stats.DefensePower = 12;
       enemy->stats.Agility = 0;
+      enemy->experience = 4;
+      enemy->gold = 11;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x7BEF;
       enemy->palette[2] = 0xFE36;
@@ -22802,15 +22822,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 10 )
    {
-      snprintf( enemy->name, 16, PSTR( "warlock" ) );
+      SPRINTF_P( enemy->name, PSTR( "warlock" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 30;
+      enemy->stats.MaxHitPoints = 30;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 28;
+      enemy->stats.DefensePower = 22;
+      enemy->stats.Agility = 49;
+      enemy->experience = 14;
+      enemy->gold = 35;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xD1EB;
       enemy->palette[2] = 0x5CFF;
@@ -23172,15 +23194,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 11 )
    {
-      snprintf( enemy->name, 16, PSTR( "wizard" ) );
+      SPRINTF_P( enemy->name, PSTR( "wizard" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 65;
+      enemy->stats.MaxHitPoints = 65;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 80;
+      enemy->stats.DefensePower = 70;
+      enemy->stats.Agility = 247;
+      enemy->experience = 50;
+      enemy->gold = 65;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFBA5;
       enemy->palette[2] = 0x3C77;
@@ -23545,15 +23569,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 12 )
    {
-      snprintf( enemy->name, 16, PSTR( "scorpion" ) );
+      SPRINTF_P( enemy->name, PSTR( "scorpion" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 20;
+      enemy->stats.MaxHitPoints = 20;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 18;
+      enemy->stats.DefensePower = 16;
+      enemy->stats.Agility = 15;
+      enemy->experience = 6;
+      enemy->gold = 16;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFBA5;
       enemy->palette[2] = 0x89FD;
@@ -23815,15 +23841,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 13 )
    {
-      snprintf( enemy->name, 16, PSTR( "metal scorpion" ) );
+      SPRINTF_P( enemy->name, PSTR( "metal scorpion" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 22;
+      enemy->stats.MaxHitPoints = 22;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 36;
+      enemy->stats.DefensePower = 42;
+      enemy->stats.Agility = 15;
+      enemy->experience = 14;
+      enemy->gold = 40;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xB5D6;
       enemy->palette[2] = 0xD1EB;
@@ -24085,15 +24113,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 14 )
    {
-      snprintf( enemy->name, 16, PSTR( "rogue scorpion" ) );
+      SPRINTF_P( enemy->name, PSTR( "rogue scorpion" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 35;
+      enemy->stats.MaxHitPoints = 35;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 60;
+      enemy->stats.DefensePower = 90;
+      enemy->stats.Agility = 127;
+      enemy->experience = 26;
+      enemy->gold = 110;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x3C77;
       enemy->palette[2] = 0x9960;
@@ -24355,15 +24385,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 15 )
    {
-      snprintf( enemy->name, 16, PSTR( "druin" ) );
+      SPRINTF_P( enemy->name, PSTR( "druin" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 22;
+      enemy->stats.MaxHitPoints = 22;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 22;
+      enemy->stats.DefensePower = 18;
+      enemy->stats.Agility = 15;
+      enemy->experience = 7;
+      enemy->gold = 16;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFBA5;
       enemy->palette[2] = 0x5873;
@@ -24682,15 +24714,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 16 )
    {
-      snprintf( enemy->name, 16, PSTR( "druinlord" ) );
+      SPRINTF_P( enemy->name, PSTR( "druinlord" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 35;
+      enemy->stats.MaxHitPoints = 35;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 47;
+      enemy->stats.DefensePower = 40;
+      enemy->stats.Agility = 240;
+      enemy->experience = 20;
+      enemy->gold = 85;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x89FD;
       enemy->palette[2] = 0xA865;
@@ -25009,15 +25043,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 17 )
    {
-      snprintf( enemy->name, 16, PSTR( "droll" ) );
+      SPRINTF_P( enemy->name, PSTR( "droll" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 25;
+      enemy->stats.MaxHitPoints = 25;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 24;
+      enemy->stats.DefensePower = 24;
+      enemy->stats.Agility = 14;
+      enemy->experience = 10;
+      enemy->gold = 25;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x71E0;
       enemy->palette[2] = 0xFFFF;
@@ -25438,15 +25474,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 18 )
    {
-      snprintf( enemy->name, 16, PSTR( "drollmagi" ) );
+      SPRINTF_P( enemy->name, PSTR( "drollmagi" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 38;
+      enemy->stats.MaxHitPoints = 38;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 52;
+      enemy->stats.DefensePower = 50;
+      enemy->stats.Agility = 34;
+      enemy->experience = 22;
+      enemy->gold = 90;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xB5D6;
       enemy->palette[2] = 0xFFFF;
@@ -25866,15 +25904,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 19 )
    {
-      snprintf( enemy->name, 16, PSTR( "skeleton" ) );
+      SPRINTF_P( enemy->name, PSTR( "skeleton" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 30;
+      enemy->stats.MaxHitPoints = 30;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 28;
+      enemy->stats.DefensePower = 22;
+      enemy->stats.Agility = 15;
+      enemy->experience = 11;
+      enemy->gold = 30;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFFFF;
       enemy->palette[2] = 0x7BEF;
@@ -26252,15 +26292,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 20 )
    {
-      snprintf( enemy->name, 16, PSTR( "wraith" ) );
+      SPRINTF_P( enemy->name, PSTR( "wraith" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 36;
+      enemy->stats.MaxHitPoints = 36;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 44;
+      enemy->stats.DefensePower = 34;
+      enemy->stats.Agility = 112;
+      enemy->experience = 17;
+      enemy->gold = 60;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFFFF;
       enemy->palette[2] = 0x7BEF;
@@ -26636,15 +26678,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 21 )
    {
-      snprintf( enemy->name, 16, PSTR( "wraith knight" ) );
+      SPRINTF_P( enemy->name, PSTR( "wraith knight" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 46;
+      enemy->stats.MaxHitPoints = 46;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 68;
+      enemy->stats.DefensePower = 56;
+      enemy->stats.Agility = 80;
+      enemy->experience = 28;
+      enemy->gold = 120;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFFFF;
       enemy->palette[2] = 0x7BEF;
@@ -27034,15 +27078,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 22 )
    {
-      snprintf( enemy->name, 16, PSTR( "demon knight" ) );
+      SPRINTF_P( enemy->name, PSTR( "demon knight" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 50;
+      enemy->stats.MaxHitPoints = 50;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 79;
+      enemy->stats.DefensePower = 64;
+      enemy->stats.Agility = 255;
+      enemy->experience = 37;
+      enemy->gold = 150;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x2965;
       for ( i = 0; i < 120; i++ ) { enemy->tileTextureIndexes[i] = -1; }
@@ -27420,15 +27466,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 23 )
    {
-      snprintf( enemy->name, 16, PSTR( "wolf" ) );
+      SPRINTF_P( enemy->name, PSTR( "wolf" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 34;
+      enemy->stats.MaxHitPoints = 34;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 40;
+      enemy->stats.DefensePower = 30;
+      enemy->stats.Agility = 31;
+      enemy->experience = 16;
+      enemy->gold = 45;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x5E7B;
       enemy->palette[2] = 0xFFFF;
@@ -27885,15 +27933,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 24 )
    {
-      snprintf( enemy->name, 16, PSTR( "wolflord" ) );
+      SPRINTF_P( enemy->name, PSTR( "wolflord" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 38;
+      enemy->stats.MaxHitPoints = 38;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 50;
+      enemy->stats.DefensePower = 36;
+      enemy->stats.Agility = 71;
+      enemy->experience = 20;
+      enemy->gold = 80;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x9960;
       enemy->palette[2] = 0xFFFF;
@@ -28357,15 +28407,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 25 )
    {
-      snprintf( enemy->name, 16, PSTR( "werewolf" ) );
+      SPRINTF_P( enemy->name, PSTR( "werewolf" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 60;
+      enemy->stats.MaxHitPoints = 60;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 86;
+      enemy->stats.DefensePower = 70;
+      enemy->stats.Agility = 127;
+      enemy->experience = 40;
+      enemy->gold = 155;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFCE0;
       enemy->palette[2] = 0xFFFF;
@@ -28828,15 +28880,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 26 )
    {
-      snprintf( enemy->name, 16, PSTR( "goldman" ) );
+      SPRINTF_P( enemy->name, PSTR( "goldman" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 50;
+      enemy->stats.MaxHitPoints = 50;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 48;
+      enemy->stats.DefensePower = 40;
+      enemy->stats.Agility = 223;
+      enemy->experience = 6;
+      enemy->gold = 200;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFEB3;
       enemy->palette[2] = 0xFCE0;
@@ -29469,15 +29523,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 27 )
    {
-      snprintf( enemy->name, 16, PSTR( "golem" ) );
+      SPRINTF_P( enemy->name, PSTR( "golem" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 70;
+      enemy->stats.MaxHitPoints = 70;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 120;
+      enemy->stats.DefensePower = 60;
+      enemy->stats.Agility = 255;
+      enemy->experience = 5;
+      enemy->gold = 10;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFBA5;
       enemy->palette[2] = 0xDA60;
@@ -30110,15 +30166,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 28 )
    {
-      snprintf( enemy->name, 16, PSTR( "stoneman" ) );
+      SPRINTF_P( enemy->name, PSTR( "stoneman" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 160;
+      enemy->stats.MaxHitPoints = 160;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 100;
+      enemy->stats.DefensePower = 40;
+      enemy->stats.Agility = 47;
+      enemy->experience = 65;
+      enemy->gold = 140;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xB5D6;
       enemy->palette[2] = 0x7BEF;
@@ -30750,15 +30808,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 29 )
    {
-      snprintf( enemy->name, 16, PSTR( "wyvern" ) );
+      SPRINTF_P( enemy->name, PSTR( "wyvern" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 42;
+      enemy->stats.MaxHitPoints = 42;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 56;
+      enemy->stats.DefensePower = 48;
+      enemy->stats.Agility = 79;
+      enemy->experience = 24;
+      enemy->gold = 100;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x2A6F;
       enemy->palette[2] = 0xFFFF;
@@ -31141,15 +31201,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 30 )
    {
-      snprintf( enemy->name, 16, PSTR( "magiwyvern" ) );
+      SPRINTF_P( enemy->name, PSTR( "magiwyvern" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 58;
+      enemy->stats.MaxHitPoints = 58;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 78;
+      enemy->stats.DefensePower = 68;
+      enemy->stats.Agility = 32;
+      enemy->experience = 34;
+      enemy->gold = 140;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x9960;
       enemy->palette[2] = 0xFFFF;
@@ -31532,15 +31594,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 31 )
    {
-      snprintf( enemy->name, 16, PSTR( "starwyvern" ) );
+      SPRINTF_P( enemy->name, PSTR( "starwyvern" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 65;
+      enemy->stats.MaxHitPoints = 65;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 86;
+      enemy->stats.DefensePower = 80;
+      enemy->stats.Agility = 128;
+      enemy->experience = 43;
+      enemy->gold = 160;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xD1EB;
       enemy->palette[2] = 0x8E7F;
@@ -31914,15 +31978,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 32 )
    {
-      snprintf( enemy->name, 16, PSTR( "knight" ) );
+      SPRINTF_P( enemy->name, PSTR( "knight" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 55;
+      enemy->stats.MaxHitPoints = 55;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 76;
+      enemy->stats.DefensePower = 78;
+      enemy->stats.Agility = 103;
+      enemy->experience = 33;
+      enemy->gold = 150;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xD1EB;
       enemy->palette[2] = 0x5CFF;
@@ -32447,15 +32513,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 33 )
    {
-      snprintf( enemy->name, 16, PSTR( "axe knight" ) );
+      SPRINTF_P( enemy->name, PSTR( "axe knight" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_AN;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 70;
+      enemy->stats.MaxHitPoints = 70;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 94;
+      enemy->stats.DefensePower = 82;
+      enemy->stats.Agility = 243;
+      enemy->experience = 54;
+      enemy->gold = 165;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFFFF;
       enemy->palette[2] = 0x2A6F;
@@ -33057,15 +33125,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 34 )
    {
-      snprintf( enemy->name, 16, PSTR( "armored knight" ) );
+      SPRINTF_P( enemy->name, PSTR( "armored knight" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_AN;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 90;
+      enemy->stats.MaxHitPoints = 90;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 105;
+      enemy->stats.DefensePower = 86;
+      enemy->stats.Agility = 147;
+      enemy->experience = 70;
+      enemy->gold = 140;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xFCE0;
       enemy->palette[2] = 0xFEB3;
@@ -33741,15 +33811,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 35 )
    {
-      snprintf( enemy->name, 16, PSTR( "green dragon" ) );
+      SPRINTF_P( enemy->name, PSTR( "green dragon" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 65;
+      enemy->stats.MaxHitPoints = 65;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 88;
+      enemy->stats.DefensePower = 74;
+      enemy->stats.Agility = 127;
+      enemy->experience = 45;
+      enemy->gold = 110;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xB5D6;
       enemy->palette[2] = 0x4521;
@@ -34282,15 +34354,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 36 )
    {
-      snprintf( enemy->name, 16, PSTR( "blue dragon" ) );
+      SPRINTF_P( enemy->name, PSTR( "blue dragon" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 70;
+      enemy->stats.MaxHitPoints = 70;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 98;
+      enemy->stats.DefensePower = 84;
+      enemy->stats.Agility = 255;
+      enemy->experience = 60;
+      enemy->gold = 150;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xBB60;
       enemy->palette[2] = 0x3C77;
@@ -34822,15 +34896,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 37 )
    {
-      snprintf( enemy->name, 16, PSTR( "red dragon" ) );
+      SPRINTF_P( enemy->name, PSTR( "red dragon" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 100;
+      enemy->stats.MaxHitPoints = 100;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 120;
+      enemy->stats.DefensePower = 90;
+      enemy->stats.Agility = 247;
+      enemy->experience = 100;
+      enemy->gold = 140;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x4BFF;
       enemy->palette[2] = 0xBB60;
@@ -35362,15 +35438,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 38 )
    {
-      snprintf( enemy->name, 16, PSTR( "dragonlord wizard" ) );
+      SPRINTF_P( enemy->name, PSTR( "dragonlord wizard" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 100;
+      enemy->stats.MaxHitPoints = 100;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 60;
+      enemy->stats.DefensePower = 50;
+      enemy->stats.Agility = 60;
+      enemy->experience = 0;
+      enemy->gold = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0x2A6F;
       enemy->palette[2] = 0xFBA5;
@@ -35801,15 +35879,17 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 39 )
    {
-      snprintf( enemy->name, 16, PSTR( "dragonlord dragon" ) );
+      SPRINTF_P( enemy->name, PSTR( "dragonlord dragon" ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
-      enemy->stats.HitPoints = 0;
-      enemy->stats.MaxHitPoints = 0;
+      enemy->stats.HitPoints = 200;
+      enemy->stats.MaxHitPoints = 200;
       enemy->stats.MagicPoints = 255;
       enemy->stats.MaxMagicPoints = 0;
-      enemy->stats.AttackPower = 0;
-      enemy->stats.DefensePower = 0;
-      enemy->stats.Agility = 0;
+      enemy->stats.AttackPower = 180;
+      enemy->stats.DefensePower = 200;
+      enemy->stats.Agility = 100;
+      enemy->experience = 0;
+      enemy->gold = 0;
       enemy->palette[0] = 0x0000;
       enemy->palette[1] = 0xD1EB;
       enemy->palette[2] = 0x4BFF;

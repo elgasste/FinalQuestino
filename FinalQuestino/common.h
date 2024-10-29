@@ -27,8 +27,12 @@
 #if defined( VISUAL_STUDIO_DEV )
 #define DELAY_MS( x )                        Sleep( x )
 #define PSTR( x )                            ( x )
+#define SPRINTF_P                            sprintf
+// this will try to make us use sprintf_s
+#pragma warning( disable: 4996 )
 #else
 #define DELAY_MS( x )                        delay( x )
+#define SPRINTF_P                            sprintf_P
 #endif
 
 #define MAX_I( a, b ) ( ( ( a ) > ( b ) ) ? ( a ) : ( b ) )
@@ -55,7 +59,10 @@
 #define GAMESTATE_MAPMESSAGE                 3
 #define GAMESTATE_MAPSTATUS                  4
 #define GAMESTATE_BATTLEMENUMAIN             5
-#define GAMESTATE_BATTLERESULT               6
+#define GAMESTATE_BATTLEATTACKANIMATION      6
+#define GAMESTATE_BATTLEATTACKRESULT         7
+#define GAMESTATE_BATTLERESULT               8
+#define GAMESTATE_BATTLECOLLECT              9
 
 #define BUTTON_LEFT                          0
 #define BUTTON_UP                            1

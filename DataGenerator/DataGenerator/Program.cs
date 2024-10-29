@@ -240,7 +240,7 @@ void LoadEnemies()
 
    foreach ( var enemy in EnemyRepo.enemies )
    {
-      var enemyFileStream = new FileStream( "Enemies/" + enemy.Name + ".png", FileMode.Open, FileAccess.Read, FileShare.Read );
+      var enemyFileStream = new FileStream( "Enemies/" + enemy.name + ".png", FileMode.Open, FileAccess.Read, FileShare.Read );
       var enemyDecoder = new PngBitmapDecoder( enemyFileStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default );
       BitmapSource enemyBitmap = enemyDecoder.Frames[0];
       BitmapSanityCheck( enemyBitmap );
@@ -605,7 +605,7 @@ string BuildMapTreasuresOutputString()
 
 string BuildEnemyOutputString()
 {
-   var sortedEnemies = EnemyRepo.enemies.OrderBy( e => e.Index ).ToList();
+   var sortedEnemies = EnemyRepo.enemies.OrderBy( e => e.index ).ToList();
 
    string outputString = "\nvoid Enemy_Load( Enemy_t* enemy, uint8_t index )\n";
    outputString += "{\n";
@@ -618,24 +618,26 @@ string BuildEnemyOutputString()
    {
       if ( first )
       {
-         outputString += string.Format( "   if ( index == {0} )\n", enemy.Index );
+         outputString += string.Format( "   if ( index == {0} )\n", enemy.index );
          first = false;
       }
       else
       {
-         outputString += string.Format( "   else if ( index == {0} )\n", enemy.Index );
+         outputString += string.Format( "   else if ( index == {0} )\n", enemy.index );
       }
 
       outputString += "   {\n";
-      outputString += string.Format( "      snprintf( enemy->name, 16, PSTR( \"{0}\" ) );\n", enemy.Name );
-      outputString += string.Format( "      enemy->indefiniteArticle = INDEFINITEARTICLE_{0};\n", enemy.IndefiniteArticle == "A" ? "A" : "AN" );
-      outputString += string.Format( "      enemy->stats.HitPoints = {0};\n", enemy.HitPoints );
-      outputString += string.Format( "      enemy->stats.MaxHitPoints = {0};\n", enemy.HitPoints );
+      outputString += string.Format( "      SPRINTF_P( enemy->name, PSTR( \"{0}\" ) );\n", enemy.name );
+      outputString += string.Format( "      enemy->indefiniteArticle = INDEFINITEARTICLE_{0};\n", enemy.indefinitearticle == "A" ? "A" : "AN" );
+      outputString += string.Format( "      enemy->stats.HitPoints = {0};\n", enemy.hp );
+      outputString += string.Format( "      enemy->stats.MaxHitPoints = {0};\n", enemy.hp );
       outputString += string.Format( "      enemy->stats.MagicPoints = {0};\n", 255 );
-      outputString += string.Format( "      enemy->stats.MaxMagicPoints = {0};\n", enemy.MagicPoints );
-      outputString += string.Format( "      enemy->stats.AttackPower = {0};\n", enemy.AttackPower );
-      outputString += string.Format( "      enemy->stats.DefensePower = {0};\n", enemy.DefensePower );
-      outputString += string.Format( "      enemy->stats.Agility = {0};\n", enemy.Agility );
+      outputString += string.Format( "      enemy->stats.MaxMagicPoints = {0};\n", enemy.mp );
+      outputString += string.Format( "      enemy->stats.AttackPower = {0};\n", enemy.atk );
+      outputString += string.Format( "      enemy->stats.DefensePower = {0};\n", enemy.def );
+      outputString += string.Format( "      enemy->stats.Agility = {0};\n", enemy.agl );
+      outputString += string.Format( "      enemy->experience = {0};\n", enemy.exp );
+      outputString += string.Format( "      enemy->gold = {0};\n", enemy.gold );
 
       for ( int i = 0; i < enemy.Palette.Count; i++ )
       {

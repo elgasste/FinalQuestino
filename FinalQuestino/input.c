@@ -129,6 +129,12 @@ void Input_Handle( Game_t* game )
       case GAMESTATE_BATTLERESULT:
          if ( Input_AnyButtonPressed( &( game->input ) ) )
          {
+            Battle_Collect( game );
+         }
+         break;
+      case GAMESTATE_BATTLECOLLECT:
+         if ( Input_AnyButtonPressed( &( game->input ) ) )
+         {
             Battle_Done( game );
          }
          break;

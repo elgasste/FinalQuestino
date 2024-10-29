@@ -5,6 +5,7 @@
 internal void Battle_AnimateStart( Game_t* game );
 internal void Battle_ShowMessage( Game_t* game, const char* message );
 internal void Battle_WipeMessage( Game_t* game );
+internal void Battle_AnimateAttack( Game_t* game );
 
 void Battle_Start( Game_t* game )
 {
@@ -39,6 +40,8 @@ void Battle_Start( Game_t* game )
       {
          Enemy_Load( &( game->battle.enemy ), game->tileMap.enemyIndexes[enemyIndex] );
       }
+
+      // TODO: try slightly randomizing the battle stats
    }
 
    Screen_WipePlayer( game );
@@ -47,22 +50,22 @@ void Battle_Start( Game_t* game )
 
 void Battle_StartHUD( Game_t* game )
 {
-   char str[32];
+   char str[64];
 
    // quick stats
    Screen_DrawRect( &( game->screen ), 16, 16, 76, 36, DARKGRAY );
-   snprintf( str, 32, PSTR( "HP:%u" ), game->player.stats.HitPoints );
+   SPRINTF_P( str, PSTR( "HP:%u" ), game->player.stats.HitPoints );
    Screen_DrawText( &( game->screen ), str, 24, 24, DARKGRAY, WHITE );
-   snprintf( str, 32, PSTR( "MP:%u" ), game->player.stats.MagicPoints );
+   SPRINTF_P( str, PSTR( "MP:%u" ), game->player.stats.MagicPoints );
    Screen_DrawText( &( game->screen ), str, 24, 36, DARKGRAY, WHITE );
 
    if ( game->battle.enemy.indefiniteArticle == INDEFINITEARTICLE_A )
    {
-      snprintf( str, 32, PSTR( "A %s approaches!" ), game->battle.enemy.name );
+      SPRINTF_P( str, PSTR( "A %s approaches! Command?" ), game->battle.enemy.name );
    }
    else
    {
-      snprintf( str, 32, PSTR( "An %s approaches!" ), game->battle.enemy.name );
+      SPRINTF_P( str, PSTR( "An %s approaches! Command?" ), game->battle.enemy.name );
    }
 
    Battle_ShowMessage( game, str );
@@ -73,41 +76,110 @@ void Battle_StartHUD( Game_t* game )
 
 void Battle_Attack( Game_t* game )
 {
-   Menu_Wipe( game );
-   Screen_WipeEnemy( game, 160, 40 );
-   Battle_ShowMessage( game, PSTR( "Sliced him up real good, you win!" ) );
-   game->state = GAMESTATE_BATTLERESULT;
+   char msg[64];
+
+   Menu_WipeCarat( game );
+   SPRINTF_P( msg, PSTR( "You attack!" ) );
+   Battle_ShowMessage( game, msg );
+   game->state = GAMESTATE_BATTLEATTACKANIMATION;
+   Battle_AnimateAttack( game );
 }
 
 void Battle_Spell( Game_t* game )
 {
+   char msg[64];
+
    Menu_Wipe( game );
    Screen_WipeEnemy( game, 160, 40 );
-   Battle_ShowMessage( game, PSTR( "You yell 'ABRA CADABRA!!', which is a death spell. You win!" ) );
+   SPRINTF_P( msg, PSTR( "You scream 'ABRA KEDAVRA!!', which somehow kills him." ) );
+   Battle_ShowMessage( game, msg );
    game->state = GAMESTATE_BATTLERESULT;
 }
 
 void Battle_Item( Game_t* game )
 {
+   char msg[64];
+
    Menu_Wipe( game );
    Screen_WipeEnemy( game, 160, 40 );
-   Battle_ShowMessage( game, PSTR( "Your spare change hit him in the eye and killed him, you win!" ) );
+   SPRINTF_P( msg, PSTR( "You throw spare change from your pocket, and he dies." ) );
+   Battle_ShowMessage( game, msg );
    game->state = GAMESTATE_BATTLERESULT;
 }
 
 void Battle_Flee( Game_t* game )
 {
+   char msg[64];
+
    Menu_Wipe( game );
    Screen_WipeEnemy( game, 160, 40 );
-   Battle_ShowMessage( game, PSTR( "You dodged and weaved your way out, nice work!" ) );
+   SPRINTF_P( msg, PSTR( "You sneak out without him noticing. How brave!" ) );
+   Battle_ShowMessage( game, msg );
    game->state = GAMESTATE_BATTLERESULT;
+}
+
+void Battle_Collect( Game_t* game )
+{
+   uint16_t experience, gold;
+   Enemy_t* enemy = &( game->battle.enemy );
+   Player_t* player = &( game->player );
+   char msg[64];
+
+   Menu_Wipe( game );
+
+   if ( enemy->experience < ( INT16_MAX - player->experience ) )
+   {
+      experience = enemy->experience;
+   }
+   else
+   {
+      experience = INT16_MAX - player->experience;
+   }
+
+   if ( enemy->gold < ( INT16_MAX - player->gold ) )
+   {
+      gold = enemy->gold;
+   }
+   else
+   {
+      gold = INT16_MAX - player->gold;
+   }
+
+   player->experience += experience;
+   player->gold += gold;
+
+   if ( experience == 0 && gold == 0 )
+   {
+      Battle_Done( game );
+   }
+   else if ( experience == 0 && gold > 0 )
+   {
+      SPRINTF_P( msg, PSTR( "You have gained %u gold." ), gold );
+      Battle_ShowMessage( game, msg );
+      game->state = GAMESTATE_BATTLECOLLECT;
+   }
+   else
+   {
+      if ( gold > 0 )
+      {
+         SPRINTF_P( msg, PSTR( "You have gained %u experience and %u gold." ), experience, gold );
+         Battle_ShowMessage( game, msg );
+      }
+      else
+      {
+         SPRINTF_P( msg, PSTR( "You have gained %u experience." ), experience );
+         Battle_ShowMessage( game, msg );
+      }
+
+      // TODO: check for a level-up
+      game->state = GAMESTATE_BATTLECOLLECT;
+   }
 }
 
 void Battle_Done( Game_t* game )
 {
    Screen_WipeTileMapSection( game, 16, 16, 76, 36 );       // quick stats
    Screen_WipeTileMapSection( game, 144, 32, 112, 112 );    // enemy
-   Menu_Wipe( game );
    Battle_WipeMessage( game );
    Screen_DrawActors( game );
    game->state = GAMESTATE_MAP;
@@ -183,4 +255,59 @@ internal void Battle_ShowMessage( Game_t* game, const char* message )
 internal void Battle_WipeMessage( Game_t* game )
 {
    Screen_WipeTileMapSection( game, 96, 152, 208, 72 );
+}
+
+internal void Battle_AnimateAttack( Game_t* game )
+{
+#if defined( VISUAL_STUDIO_DEV )
+   UNUSED_PARAM( game );
+   Battle_WinAnimateAttack();
+#else
+   DELAY_MS( 400 );
+   Screen_WipeEnemy( game, 160, 40 ); DELAY_MS( 80 );
+   Screen_DrawEnemy( game, 160, 40 ); DELAY_MS( 80 );
+   Screen_WipeEnemy( game, 160, 40 ); DELAY_MS( 80 );
+   Screen_DrawEnemy( game, 160, 40 ); DELAY_MS( 80 );
+   Screen_WipeEnemy( game, 160, 40 ); DELAY_MS( 80 );
+   Screen_DrawEnemy( game, 160, 40 );
+   DELAY_MS( 400 );
+
+   Battle_ExecuteAttack( game );
+#endif
+}
+
+void Battle_ExecuteAttack( Game_t* game )
+{
+   uint8_t payload;
+   Enemy_t* enemy = &( game->battle.enemy );
+   Player_t* player = &( game->player );
+   char msg[128];
+
+   // TODO: try slightly randomizing the payload, and also take the enemy's stats into account
+   payload = player->stats.AttackPower;
+   if ( payload > enemy->stats.HitPoints )
+   {
+      payload = enemy->stats.HitPoints;
+   }
+
+   enemy->stats.HitPoints -= payload;
+
+   if ( enemy->stats.HitPoints == 0 )
+   {
+      // TODO: if this was a special enemy, mark it as defeated so we don't encounter it again
+      Screen_WipeEnemy( game, 160, 40 );
+      SPRINTF_P( msg,
+                 PSTR( "The %s's hit points have been reduced by %u. You have defeated the %s!" ),
+                 enemy->name,
+                 payload,
+                 enemy->name );
+      Battle_ShowMessage( game, msg );
+      game->state = GAMESTATE_BATTLERESULT;
+   }
+   else
+   {
+      SPRINTF_P( msg, PSTR( "The %s's hit points have been reduced by %u. Command?" ), enemy->name, payload );
+      Battle_ShowMessage( game, msg );
+      game->state = GAMESTATE_BATTLEMENUMAIN;
+   }
 }

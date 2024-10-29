@@ -1,7 +1,6 @@
 #include "game.h"
 
 internal void Menu_DrawCarat( Game_t* game );
-internal void Menu_WipeCarat( Game_t* game );
 internal void Menu_MapMenuSelect( Game_t* game );
 internal void Menu_BattleMainSelect( Game_t* game );
 
@@ -25,22 +24,33 @@ void Menu_Load( Menu_t* menu, uint8_t index )
 
 void Menu_Draw( Game_t* game )
 {
+   char str[8];
+
    switch( game->menu.index )
    {
       case MENUINDEX_MAP:
          Screen_DrawRect( &( game->screen ), 16, 88, 76, 88, DARKGRAY );
-         Screen_DrawText( &( game->screen ), PSTR( "TALK" ), 32, 96, DARKGRAY, WHITE );
-         Screen_DrawText( &( game->screen ), PSTR( "STATUS" ), 32, 112, DARKGRAY, WHITE );
-         Screen_DrawText( &( game->screen ), PSTR( "SEARCH" ), 32, 128, DARKGRAY, WHITE );
-         Screen_DrawText( &( game->screen ), PSTR( "SPELL" ), 32, 144, DARKGRAY, WHITE );
-         Screen_DrawText( &( game->screen ), PSTR( "ITEM" ), 32, 160, DARKGRAY, WHITE );
+         SPRINTF_P( str, PSTR( "TALK" ) );
+         Screen_DrawText( &( game->screen ), str, 32, 96, DARKGRAY, WHITE );
+         SPRINTF_P( str, PSTR( "STATUS" ) );
+         Screen_DrawText( &( game->screen ), str, 32, 112, DARKGRAY, WHITE );
+         SPRINTF_P( str, PSTR( "SEARCH" ) );
+         Screen_DrawText( &( game->screen ), str, 32, 128, DARKGRAY, WHITE );
+         SPRINTF_P( str, PSTR( "SPELL" ) );
+         Screen_DrawText( &( game->screen ), str, 32, 144, DARKGRAY, WHITE );
+         SPRINTF_P( str, PSTR( "ITEM" ) );
+         Screen_DrawText( &( game->screen ), str, 32, 160, DARKGRAY, WHITE );
          break;
       case MENUINDEX_BATTLEMAIN:
          Screen_DrawRect( &( game->screen ), 16, 152, 76, 72, DARKGRAY );
-         Screen_DrawText( &( game->screen ), PSTR( "ATTACK" ), 32, 160, DARKGRAY, WHITE );
-         Screen_DrawText( &( game->screen ), PSTR( "SPELL" ), 32, 176, DARKGRAY, WHITE );
-         Screen_DrawText( &( game->screen ), PSTR( "ITEM" ), 32, 192, DARKGRAY, WHITE );
-         Screen_DrawText( &( game->screen ), PSTR( "FLEE" ), 32, 208, DARKGRAY, WHITE );
+         SPRINTF_P( str, PSTR( "ATTACK" ) );
+         Screen_DrawText( &( game->screen ), str, 32, 160, DARKGRAY, WHITE );
+         SPRINTF_P( str, PSTR( "SPELL" ) );
+         Screen_DrawText( &( game->screen ), str, 32, 176, DARKGRAY, WHITE );
+         SPRINTF_P( str, PSTR( "ITEM" ) );
+         Screen_DrawText( &( game->screen ), str, 32, 192, DARKGRAY, WHITE );
+         SPRINTF_P( str, PSTR( "FLEE" ) );
+         Screen_DrawText( &( game->screen ), str, 32, 208, DARKGRAY, WHITE );
    }
 
    Menu_DrawCarat( game );
@@ -104,7 +114,7 @@ internal void Menu_DrawCarat( Game_t* game )
    Screen_DrawText( &( game->screen ), ">", x, y + ( 16 * game->menu.optionIndex ), DARKGRAY, WHITE );
 }
 
-internal void Menu_WipeCarat( Game_t* game )
+void Menu_WipeCarat( Game_t* game )
 {
    uint16_t x = 0, y = 0;
 

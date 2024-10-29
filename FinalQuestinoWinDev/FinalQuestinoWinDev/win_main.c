@@ -12,6 +12,7 @@ internal void InitBattleStartRects();
 internal void HandleKeyboardInput( uint32_t keyCode, LPARAM flags );
 internal void RenderScreen();
 internal void BattleStartAnimationTic();
+internal void BattleAttackAnimationTic();
 
 int CALLBACK WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow )
 {
@@ -94,8 +95,7 @@ int CALLBACK WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
    Game_Init( &( g_globals.game ) );
    g_globals.shutdown = False;
    g_globals.isAnimatingBattleStart = False;
-   g_globals.animationSecondsElapsed = 0.0f;
-   g_globals.animationFrame = 0;
+   g_globals.isAnimatingBattleAttack = False;
 
    while ( 1 )
    {
@@ -111,6 +111,10 @@ int CALLBACK WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
       if ( g_globals.isAnimatingBattleStart )
       {
          BattleStartAnimationTic();
+      }
+      else if ( g_globals.isAnimatingBattleAttack )
+      {
+         BattleAttackAnimationTic();
       }
       else
       {
@@ -138,7 +142,17 @@ void Serial_PrintLn( const char* msg )
 void Battle_WinAnimateStart()
 {
    g_globals.isAnimatingBattleStart = True;
-   g_globals.animationFrame = 0;
+   g_globals.battleStartAnimationFrame = 0;
+   g_globals.animationSecondsElapsed = 0.0f;
+}
+
+void Battle_WinAnimateAttack()
+{
+   g_globals.isAnimatingBattleAttack = True;
+   g_globals.hasPaddedBattleAttackStart = False;
+   g_globals.hasBattleAttackFlashed = False;
+   g_globals.hasPaddedBattleAttackEnd = False;
+   g_globals.battleAttackFlashCounter = 0;
    g_globals.animationSecondsElapsed = 0.0f;
 }
 
@@ -307,16 +321,65 @@ internal void BattleStartAnimationTic()
    while ( g_globals.animationSecondsElapsed > animationFrameSeconds )
    {
       g_globals.animationSecondsElapsed -= animationFrameSeconds;
-      rect = g_globals.battleStartRects[g_globals.animationFrame];
+      rect = g_globals.battleStartRects[g_globals.battleStartAnimationFrame];
       Screen_DrawRect( &( g_globals.game.screen ), rect.x, rect.y, rect.w, rect.h, BLACK );
-      g_globals.animationFrame++;
+      g_globals.battleStartAnimationFrame++;
 
-      if ( g_globals.animationFrame >= 49 )
+      if ( g_globals.battleStartAnimationFrame >= 49 )
       {
          g_globals.isAnimatingBattleStart = False;
          Screen_DrawEnemy( &( g_globals.game ), 160, 40 );
          Battle_StartHUD( &( g_globals.game ) );
          break;
       }
+   }
+}
+
+internal void BattleAttackAnimationTic()
+{
+   uint32_t totalFlashes = 6;
+   float flashSeconds = 0.05f;
+   float paddingSeconds = 0.4f;
+
+   g_globals.animationSecondsElapsed += FRAME_SECONDS;
+
+   if ( !g_globals.hasPaddedBattleAttackStart && g_globals.animationSecondsElapsed > paddingSeconds )
+   {
+      g_globals.animationSecondsElapsed -= paddingSeconds;
+      g_globals.hasPaddedBattleAttackStart = True;
+   }
+
+   if ( g_globals.hasPaddedBattleAttackStart && !g_globals.hasBattleAttackFlashed )
+   {
+      while ( g_globals.animationSecondsElapsed > flashSeconds )
+      {
+         g_globals.animationSecondsElapsed -= flashSeconds;
+
+         if ( g_globals.battleAttackFlashCounter % 2 == 0 )
+         {
+            Screen_WipeEnemy( &( g_globals.game ), 160, 40 );
+         }
+         else
+         {
+            Screen_DrawEnemy( &( g_globals.game ), 160, 40 );
+         }
+
+         g_globals.battleAttackFlashCounter++;
+
+         if ( g_globals.battleAttackFlashCounter == totalFlashes )
+         {
+            g_globals.hasBattleAttackFlashed = True;
+            break;
+         }
+      }
+   }
+
+   if ( g_globals.hasPaddedBattleAttackStart &&
+        g_globals.hasBattleAttackFlashed &&
+        !g_globals.hasPaddedBattleAttackEnd &&
+        g_globals.animationSecondsElapsed > paddingSeconds )
+   {
+      g_globals.isAnimatingBattleAttack = False;
+      Battle_ExecuteAttack( &( g_globals.game ) );
    }
 }

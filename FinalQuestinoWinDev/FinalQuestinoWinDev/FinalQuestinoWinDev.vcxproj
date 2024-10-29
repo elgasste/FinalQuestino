@@ -140,6 +140,7 @@
     <ClInclude Include="..\..\FinalQuestino\button_state.h" />
     <ClInclude Include="..\..\FinalQuestino\clock.h" />
     <ClInclude Include="..\..\FinalQuestino\common.h" />
+    <ClInclude Include="..\..\FinalQuestino\enemy.h" />
     <ClInclude Include="..\..\FinalQuestino\game.h" />
     <ClInclude Include="..\..\FinalQuestino\input.h" />
     <ClInclude Include="..\..\FinalQuestino\menu.h" />

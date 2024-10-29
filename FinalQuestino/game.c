@@ -137,13 +137,13 @@ void Game_ShowMapQuickStats( Game_t* game )
    char str[10];
 
    Screen_DrawRect( &( game->screen ), 16, 16, 76, 60, DARKGRAY );
-   snprintf( str, 10, PSTR( "HP:%u" ), game->player.stats.HitPoints );
+   SPRINTF_P( str, PSTR( "HP:%u" ), game->player.stats.HitPoints );
    Screen_DrawText( &( game->screen ), str, 24, 24, DARKGRAY, WHITE );
-   snprintf( str, 10, PSTR( "MP:%u" ), game->player.stats.MagicPoints );
+   SPRINTF_P( str, PSTR( "MP:%u" ), game->player.stats.MagicPoints );
    Screen_DrawText( &( game->screen ), str, 24, 36, DARKGRAY, WHITE );
-   snprintf( str, 10, PSTR( " G:%u" ), game->player.gold );
+   SPRINTF_P( str, PSTR( " G:%u" ), game->player.gold );
    Screen_DrawText( &( game->screen ), str, 24, 48, DARKGRAY, WHITE );
-   snprintf( str, 10, PSTR( "EX:%u" ), game->player.experience );
+   SPRINTF_P( str, PSTR( "EX:%u" ), game->player.experience );
    Screen_DrawText( &( game->screen ), str, 24, 60, DARKGRAY, WHITE );
 }
 
@@ -212,9 +212,12 @@ internal Bool_t Game_OnAnySpecialEnemyTile( Game_t* game )
 
 void Game_Talk( Game_t* game )
 {
+   char msg[64];
+
    Game_WipeMapQuickStats( game );
    Menu_Wipe( game );
-   Game_ShowMessage( game, PSTR( "Nobody's there." ) );
+   SPRINTF_P( msg, PSTR( "Nobody's there." ) );
+   Game_ShowMessage( game, msg );
    game->state = GAMESTATE_MAPMESSAGE;
 }
 
@@ -228,19 +231,19 @@ void Game_Status( Game_t* game )
    
    Screen_DrawRect( &( game->screen ), 16, 16, 112, 96, DARKGRAY );
 
-   snprintf( str, 14, PSTR( "Lvl: %u" ), Player_GetLevel( player ) );
+   SPRINTF_P( str, PSTR( "Lvl: %u" ), Player_GetLevel( player ) );
    Screen_DrawText( &( game->screen ), str, 24, 24, DARKGRAY, WHITE );
-   snprintf( str, 14, PSTR( " HP: %u/%u" ), player->stats.HitPoints, player->stats.MaxHitPoints );
+   SPRINTF_P( str, PSTR( " HP: %u/%u" ), player->stats.HitPoints, player->stats.MaxHitPoints );
    Screen_DrawText( &( game->screen ), str, 24, 36, DARKGRAY, WHITE );
-   snprintf( str, 14, PSTR( " MP: %u/%u" ), player->stats.MagicPoints, player->stats.MaxMagicPoints );
+   SPRINTF_P( str, PSTR( " MP: %u/%u" ), player->stats.MagicPoints, player->stats.MaxMagicPoints );
    Screen_DrawText( &( game->screen ), str, 24, 48, DARKGRAY, WHITE );
-   snprintf( str, 14, PSTR( "Atk: %u" ), player->stats.AttackPower );
+   SPRINTF_P( str, PSTR( "Atk: %u" ), player->stats.AttackPower );
    Screen_DrawText( &( game->screen ), str, 24, 60, DARKGRAY, WHITE );
-   snprintf( str, 14, PSTR( "Def: %u" ), player->stats.DefensePower );
+   SPRINTF_P( str, PSTR( "Def: %u" ), player->stats.DefensePower );
    Screen_DrawText( &( game->screen ), str, 24, 72, DARKGRAY, WHITE );
-   snprintf( str, 14, PSTR( "Agl: %u" ), player->stats.Agility );
+   SPRINTF_P( str, PSTR( "Agl: %u" ), player->stats.Agility );
    Screen_DrawText( &( game->screen ), str, 24, 84, DARKGRAY, WHITE );
-   snprintf( str, 14, PSTR( "Exp: %u" ), player->experience );
+   SPRINTF_P( str, PSTR( "Exp: %u" ), player->experience );
    Screen_DrawText( &( game->screen ), str, 24, 96, DARKGRAY, WHITE );
 
    game->state = GAMESTATE_MAPSTATUS;
@@ -250,6 +253,7 @@ void Game_Search( Game_t* game )
 {
    uint8_t x, y;
    uint32_t treasureFlag = TileMap_GetTreasureFlag( game->tileMapIndex, game->tileMap.tileIndexCache );
+   char msg[64];
 
    Game_WipeMapQuickStats( game );
    Menu_Wipe( game );
@@ -258,7 +262,8 @@ void Game_Search( Game_t* game )
    {
       if ( Game_CollectTreasure( game, treasureFlag ) )
       {
-         Game_ShowMessage( game, PSTR( "Time to quit your day job!" ) );
+         SPRINTF_P( msg, PSTR( "Time to quit your day job!" ) );
+         Game_ShowMessage( game, msg );
 
          y = ( uint8_t )( game->tileMap.tileIndexCache / MAP_TILES_X );
          x = ( uint8_t )( game->tileMap.tileIndexCache - ( y * MAP_TILES_X ) );
@@ -267,12 +272,14 @@ void Game_Search( Game_t* game )
       }
       else
       {
-         Game_ShowMessage( game, PSTR( "Can't carry any more of these." ) );
+         SPRINTF_P( msg, PSTR( "Can't carry any more of these." ) );
+         Game_ShowMessage( game, msg );
       }
    }
    else
    {
-      Game_ShowMessage( game, PSTR( "You didn't find anything." ) );
+      SPRINTF_P( msg, PSTR( "You didn't find anything." ) );
+      Game_ShowMessage( game, msg );
    }
 
    game->state = GAMESTATE_MAPMESSAGE;
@@ -287,16 +294,22 @@ internal Bool_t Game_CollectTreasure( Game_t* game, uint32_t treasureFlag )
 
 void Game_MapSpell( Game_t* game )
 {
+   char msg[64];
+
    Game_WipeMapQuickStats( game );
    Menu_Wipe( game );
-   Game_ShowMessage( game, PSTR( "You don't know any spells." ) );
+   SPRINTF_P( msg, PSTR( "You don't know any spells." ) );
+   Game_ShowMessage( game, msg );
    game->state = GAMESTATE_MAPMESSAGE;
 }
 
 void Game_MapItem( Game_t* game )
 {
+   char msg[64];
+
    Game_WipeMapQuickStats( game );
    Menu_Wipe( game );
-   Game_ShowMessage( game, PSTR( "You don't have any items." ) );
+   SPRINTF_P( msg, PSTR( "You don't have any items." ) );
+   Game_ShowMessage( game, msg );
    game->state = GAMESTATE_MAPMESSAGE;
 }
