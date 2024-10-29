@@ -40,6 +40,8 @@ void Battle_Start( Game_t* game )
       {
          Enemy_Load( &( game->battle.enemy ), game->tileMap.enemyIndexes[enemyIndex] );
       }
+
+      // TODO: try slightly randomizing the battle stats
    }
 
    Screen_WipePlayer( game );
@@ -116,11 +118,68 @@ void Battle_Flee( Game_t* game )
    game->state = GAMESTATE_BATTLERESULT;
 }
 
+void Battle_Collect( Game_t* game )
+{
+   uint16_t experience, gold;
+   Enemy_t* enemy = &( game->battle.enemy );
+   Player_t* player = &( game->player );
+   char msg[64];
+
+   Menu_Wipe( game );
+
+   if ( enemy->experience < ( INT16_MAX - player->experience ) )
+   {
+      experience = enemy->experience;
+   }
+   else
+   {
+      experience = INT16_MAX - player->experience;
+   }
+
+   if ( enemy->gold < ( INT16_MAX - player->gold ) )
+   {
+      gold = enemy->gold;
+   }
+   else
+   {
+      gold = INT16_MAX - player->gold;
+   }
+
+   player->experience += experience;
+   player->gold += gold;
+
+   if ( experience == 0 && gold == 0 )
+   {
+      Battle_Done( game );
+   }
+   else if ( experience == 0 && gold > 0 )
+   {
+      SPRINTF_P( msg, PSTR( "You have gained %u gold." ), gold );
+      Battle_ShowMessage( game, msg );
+      game->state = GAMESTATE_BATTLECOLLECT;
+   }
+   else
+   {
+      if ( gold > 0 )
+      {
+         SPRINTF_P( msg, PSTR( "You have gained %u experience and %u gold." ), experience, gold );
+         Battle_ShowMessage( game, msg );
+      }
+      else
+      {
+         SPRINTF_P( msg, PSTR( "You have gained %u experience." ), experience );
+         Battle_ShowMessage( game, msg );
+      }
+
+      // TODO: check for a level-up
+      game->state = GAMESTATE_BATTLECOLLECT;
+   }
+}
+
 void Battle_Done( Game_t* game )
 {
    Screen_WipeTileMapSection( game, 16, 16, 76, 36 );       // quick stats
    Screen_WipeTileMapSection( game, 144, 32, 112, 112 );    // enemy
-   Menu_Wipe( game );
    Battle_WipeMessage( game );
    Screen_DrawActors( game );
    game->state = GAMESTATE_MAP;
@@ -219,10 +278,36 @@ internal void Battle_AnimateAttack( Game_t* game )
 
 void Battle_ExecuteAttack( Game_t* game )
 {
-   char msg[64];
+   uint8_t payload;
+   Enemy_t* enemy = &( game->battle.enemy );
+   Player_t* player = &( game->player );
+   char msg[128];
 
-   // TODO: actually cause damage and check if the enemy has been killed
-   SPRINTF_P( msg, PSTR( "You caused damage, probably! Command?" ) );
-   Battle_ShowMessage( game, msg );
-   game->state = GAMESTATE_BATTLEMENUMAIN;
+   // TODO: try slightly randomizing the payload, and also take the enemy's stats into account
+   payload = player->stats.AttackPower;
+   if ( payload > enemy->stats.HitPoints )
+   {
+      payload = enemy->stats.HitPoints;
+   }
+
+   enemy->stats.HitPoints -= payload;
+
+   if ( enemy->stats.HitPoints == 0 )
+   {
+      // TODO: if this was a special enemy, mark it as defeated so we don't encounter it again
+      Screen_WipeEnemy( game, 160, 40 );
+      SPRINTF_P( msg,
+                 PSTR( "The %s's hit points have been reduced by %u. You have defeated the %s!" ),
+                 enemy->name,
+                 payload,
+                 enemy->name );
+      Battle_ShowMessage( game, msg );
+      game->state = GAMESTATE_BATTLERESULT;
+   }
+   else
+   {
+      SPRINTF_P( msg, PSTR( "The %s's hit points have been reduced by %u. Command?" ), enemy->name, payload );
+      Battle_ShowMessage( game, msg );
+      game->state = GAMESTATE_BATTLEMENUMAIN;
+   }
 }

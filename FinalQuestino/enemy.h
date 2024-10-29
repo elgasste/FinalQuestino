@@ -9,6 +9,8 @@ typedef struct Enemy_t
    char name[16];
    uint8_t indefiniteArticle;
    BattleStats_t stats;
+   uint16_t experience;
+   uint16_t gold;
 
    uint8_t tileTextures[ENEMY_TILE_TEXTURE_COUNT][ENEMY_TILE_TEXTURE_SIZE_BYTES];
    int8_t tileTextureIndexes[ENEMY_TILE_COUNT];
