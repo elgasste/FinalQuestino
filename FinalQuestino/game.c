@@ -24,11 +24,11 @@ void Game_Init( Game_t* game )
    TileTexture_LoadTileTextures( &( game->tileMap ) );
 
    Player_Init( &( game->player ) );
-   game->player.sprite.direction = Direction_Up;
+   game->player.sprite.direction = DIRECTION_UP;
    game->player.position.x = ( MAP_TILE_SIZE * 8 ) + 2;
    game->player.position.y = ( MAP_TILE_SIZE * 6 ) + 4;
 
-   game->state = GameState_Ready;
+   game->state = GAMESTATE_READY;
 }
 
 void Game_Tic( Game_t* game )
@@ -38,15 +38,15 @@ void Game_Tic( Game_t* game )
 
    switch( game->state )
    {
-      case GameState_Ready:
+      case GAMESTATE_READY:
          Game_RefreshMap( game );
-         game->state = GameState_Map;
+         game->state = GAMESTATE_MAP;
          break;
-      case GameState_Map:
+      case GAMESTATE_MAP:
          Physics_Tic( game );
          break;
-      case GameState_MapMenu:
-      case GameState_BattleMenuMain:
+      case GAMESTATE_MAPMENU:
+      case GAMESTATE_BATTLEMENUMAIN:
          Menu_Tic( game );
          break;
    }
@@ -215,7 +215,7 @@ void Game_Talk( Game_t* game )
    Game_WipeMapQuickStats( game );
    Menu_Wipe( game );
    Game_ShowMessage( game, "Nobody's there." );
-   game->state = GameState_MapMessage;
+   game->state = GAMESTATE_MAPMESSAGE;
 }
 
 void Game_Status( Game_t* game )
@@ -243,7 +243,7 @@ void Game_Status( Game_t* game )
    snprintf( str, 14, "Exp: %u", player->experience );
    Screen_DrawText( &( game->screen ), str, 24, 96, DARKGRAY, WHITE );
 
-   game->state = GameState_MapStatus;
+   game->state = GAMESTATE_MAPSTATUS;
 }
 
 void Game_Search( Game_t* game )
@@ -275,7 +275,7 @@ void Game_Search( Game_t* game )
       Game_ShowMessage( game, "You didn't find anything." );
    }
 
-   game->state = GameState_MapMessage;
+   game->state = GAMESTATE_MAPMESSAGE;
 }
 
 internal Bool_t Game_CollectTreasure( Game_t* game, uint32_t treasureFlag )
@@ -290,7 +290,7 @@ void Game_MapSpell( Game_t* game )
    Game_WipeMapQuickStats( game );
    Menu_Wipe( game );
    Game_ShowMessage( game, "You don't know any spells." );
-   game->state = GameState_MapMessage;
+   game->state = GAMESTATE_MAPMESSAGE;
 }
 
 void Game_MapItem( Game_t* game )
@@ -298,5 +298,5 @@ void Game_MapItem( Game_t* game )
    Game_WipeMapQuickStats( game );
    Menu_Wipe( game );
    Game_ShowMessage( game, "You don't have any items." );
-   game->state = GameState_MapMessage;
+   game->state = GAMESTATE_MAPMESSAGE;
 }

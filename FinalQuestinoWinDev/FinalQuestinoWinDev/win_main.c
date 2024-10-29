@@ -178,12 +178,12 @@ internal LRESULT CALLBACK MainWindowProc( _In_ HWND hWnd, _In_ UINT uMsg, _In_ W
 
 internal void InitButtonMap()
 {
-   g_globals.buttonMap[(int)Button_Left] = VK_LEFT;
-   g_globals.buttonMap[(int)Button_Up] = VK_UP;
-   g_globals.buttonMap[(int)Button_Right] = VK_RIGHT;
-   g_globals.buttonMap[(int)Button_Down] = VK_DOWN;
-   g_globals.buttonMap[(int)Button_A] = 0x41; // A
-   g_globals.buttonMap[(int)Button_B] = VK_ESCAPE;
+   g_globals.buttonMap[BUTTON_LEFT] = VK_LEFT;
+   g_globals.buttonMap[BUTTON_UP] = VK_UP;
+   g_globals.buttonMap[BUTTON_RIGHT] = VK_RIGHT;
+   g_globals.buttonMap[BUTTON_DOWN] = VK_DOWN;
+   g_globals.buttonMap[BUTTON_A] = 0x41; // A
+   g_globals.buttonMap[BUTTON_B] = VK_ESCAPE;
 }
 
 internal void InitBattleStartRects()
@@ -243,7 +243,7 @@ internal void HandleKeyboardInput( uint32_t keyCode, LPARAM flags )
 {
    Bool_t keyWasDown = ( flags & ( (LONG_PTR)1 << 30 ) ) != 0 ? True : False;
    Bool_t keyIsDown = ( flags & ( (LONG_PTR)1 << 31 ) ) == 0 ? True : False;
-   uint32_t i;
+   uint8_t i;
 
    // ignore repeat presses
    if ( keyWasDown != keyIsDown )
@@ -257,22 +257,22 @@ internal void HandleKeyboardInput( uint32_t keyCode, LPARAM flags )
             return;
          }
 
-         for ( i = 0; i < Button_Count; i++ )
+         for ( i = 0; i < BUTTON_COUNT; i++ )
          {
             if ( g_globals.buttonMap[i] == keyCode )
             {
-               Input_ButtonPressed( &( g_globals.game.input ), (Button_t)i );
+               Input_ButtonPressed( &( g_globals.game.input ), i );
                break;
             }
          }
       }
       else
       {
-         for ( i = 0; i < Button_Count; i++ )
+         for ( i = 0; i < BUTTON_COUNT; i++ )
          {
             if ( g_globals.buttonMap[i] == keyCode )
             {
-               Input_ButtonReleased( &( g_globals.game.input ), (Button_t)i );
+               Input_ButtonReleased( &( g_globals.game.input ), i );
                break;
             }
          }

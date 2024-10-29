@@ -10,7 +10,6 @@
 #include <stdio.h>
 #include <malloc.h>
 
-#include "enums.h"
 #include "game.h"
 #include "win_pixel_buffer.h"
 #include "vector.h"
@@ -22,7 +21,7 @@ typedef struct GlobalObjects_t
 {
    HWND hWndMain;
    LARGE_INTEGER performanceFrequency;
-   uint32_t buttonMap[(int)Button_Count];
+   uint32_t buttonMap[BUTTON_COUNT];
    Game_t game;
    Bool_t shutdown;
    WinPixelBuffer_t screenBuffer;

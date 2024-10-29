@@ -56,7 +56,7 @@ void Battle_StartHUD( Game_t* game )
    snprintf( str, 32, "MP:%u", game->player.stats.MagicPoints );
    Screen_DrawText( &( game->screen ), str, 24, 36, DARKGRAY, WHITE );
 
-   if ( game->battle.enemy.indefiniteArticle == IndefiniteArticle_A )
+   if ( game->battle.enemy.indefiniteArticle == INDEFINITEARTICLE_A )
    {
       snprintf( str, 32, "A %s approaches!", game->battle.enemy.name );
    }
@@ -66,9 +66,9 @@ void Battle_StartHUD( Game_t* game )
    }
 
    Battle_ShowMessage( game, str );
-   Menu_Load( &( game->menu ), MenuIndex_BattleMain );
+   Menu_Load( &( game->menu ), MENUINDEX_BATTLEMAIN );
    Menu_Draw( game );
-   game->state = GameState_BattleMenuMain;
+   game->state = GAMESTATE_BATTLEMENUMAIN;
 }
 
 void Battle_Attack( Game_t* game )
@@ -76,7 +76,7 @@ void Battle_Attack( Game_t* game )
    Menu_Wipe( game );
    Screen_WipeEnemy( game, 160, 40 );
    Battle_ShowMessage( game, "Sliced him up real good, you win!" );
-   game->state = GameState_BattleResult;
+   game->state = GAMESTATE_BATTLERESULT;
 }
 
 void Battle_Spell( Game_t* game )
@@ -84,7 +84,7 @@ void Battle_Spell( Game_t* game )
    Menu_Wipe( game );
    Screen_WipeEnemy( game, 160, 40 );
    Battle_ShowMessage( game, "You yell 'ABRA CADABRA!!', which is a death spell. You win!" );
-   game->state = GameState_BattleResult;
+   game->state = GAMESTATE_BATTLERESULT;
 }
 
 void Battle_Item( Game_t* game )
@@ -92,7 +92,7 @@ void Battle_Item( Game_t* game )
    Menu_Wipe( game );
    Screen_WipeEnemy( game, 160, 40 );
    Battle_ShowMessage( game, "Your spare change hit him in the eye and killed him, you win!" );
-   game->state = GameState_BattleResult;
+   game->state = GAMESTATE_BATTLERESULT;
 }
 
 void Battle_Flee( Game_t* game )
@@ -100,7 +100,7 @@ void Battle_Flee( Game_t* game )
    Menu_Wipe( game );
    Screen_WipeEnemy( game, 160, 40 );
    Battle_ShowMessage( game, "You dodged and weaved your way out, nice work!" );
-   game->state = GameState_BattleResult;
+   game->state = GAMESTATE_BATTLERESULT;
 }
 
 void Battle_Done( Game_t* game )
@@ -110,7 +110,7 @@ void Battle_Done( Game_t* game )
    Menu_Wipe( game );
    Battle_WipeMessage( game );
    Screen_DrawActors( game );
-   game->state = GameState_Map;
+   game->state = GAMESTATE_MAP;
 }
 
 internal void Battle_AnimateStart( Game_t* game )

@@ -20916,7 +20916,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    if ( index == 0 )
    {
       snprintf( enemy->name, 16, "slime" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -21016,7 +21016,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 1 )
    {
       snprintf( enemy->name, 16, "red slime" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -21111,7 +21111,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 2 )
    {
       snprintf( enemy->name, 16, "metal slime" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -21206,7 +21206,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 3 )
    {
       snprintf( enemy->name, 16, "drakee" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -21361,7 +21361,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 4 )
    {
       snprintf( enemy->name, 16, "magidrakee" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -21511,7 +21511,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 5 )
    {
       snprintf( enemy->name, 16, "drakeema" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -21661,7 +21661,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 6 )
    {
       snprintf( enemy->name, 16, "ghost" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -21932,7 +21932,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 7 )
    {
       snprintf( enemy->name, 16, "poltergeist" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -22203,7 +22203,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 8 )
    {
       snprintf( enemy->name, 16, "specter" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -22475,7 +22475,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 9 )
    {
       snprintf( enemy->name, 16, "magician" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -22803,7 +22803,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 10 )
    {
       snprintf( enemy->name, 16, "warlock" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -23173,7 +23173,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 11 )
    {
       snprintf( enemy->name, 16, "wizard" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -23546,7 +23546,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 12 )
    {
       snprintf( enemy->name, 16, "scorpion" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -23816,7 +23816,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 13 )
    {
       snprintf( enemy->name, 16, "metal scorpion" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -24086,7 +24086,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 14 )
    {
       snprintf( enemy->name, 16, "rogue scorpion" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -24356,7 +24356,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 15 )
    {
       snprintf( enemy->name, 16, "druin" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -24683,7 +24683,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 16 )
    {
       snprintf( enemy->name, 16, "druinlord" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -25010,7 +25010,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 17 )
    {
       snprintf( enemy->name, 16, "droll" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -25439,7 +25439,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 18 )
    {
       snprintf( enemy->name, 16, "drollmagi" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -25867,7 +25867,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 19 )
    {
       snprintf( enemy->name, 16, "skeleton" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -26253,7 +26253,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 20 )
    {
       snprintf( enemy->name, 16, "wraith" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -26637,7 +26637,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 21 )
    {
       snprintf( enemy->name, 16, "wraith knight" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -27035,7 +27035,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 22 )
    {
       snprintf( enemy->name, 16, "demon knight" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -27421,7 +27421,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 23 )
    {
       snprintf( enemy->name, 16, "wolf" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -27886,7 +27886,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 24 )
    {
       snprintf( enemy->name, 16, "wolflord" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -28358,7 +28358,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 25 )
    {
       snprintf( enemy->name, 16, "werewolf" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -28829,7 +28829,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 26 )
    {
       snprintf( enemy->name, 16, "goldman" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -29470,7 +29470,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 27 )
    {
       snprintf( enemy->name, 16, "golem" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -30111,7 +30111,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 28 )
    {
       snprintf( enemy->name, 16, "stoneman" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -30751,7 +30751,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 29 )
    {
       snprintf( enemy->name, 16, "wyvern" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -31142,7 +31142,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 30 )
    {
       snprintf( enemy->name, 16, "magiwyvern" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -31533,7 +31533,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 31 )
    {
       snprintf( enemy->name, 16, "starwyvern" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -31915,7 +31915,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 32 )
    {
       snprintf( enemy->name, 16, "knight" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -32448,7 +32448,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 33 )
    {
       snprintf( enemy->name, 16, "axe knight" );
-      enemy->indefiniteArticle = IndefiniteArticle_An;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_AN;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -33058,7 +33058,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 34 )
    {
       snprintf( enemy->name, 16, "armored knight" );
-      enemy->indefiniteArticle = IndefiniteArticle_An;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_AN;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -33742,7 +33742,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 35 )
    {
       snprintf( enemy->name, 16, "green dragon" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -34283,7 +34283,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 36 )
    {
       snprintf( enemy->name, 16, "blue dragon" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -34823,7 +34823,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 37 )
    {
       snprintf( enemy->name, 16, "red dragon" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -35363,7 +35363,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 38 )
    {
       snprintf( enemy->name, 16, "dragonlord wizard" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;
@@ -35802,7 +35802,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    else if ( index == 39 )
    {
       snprintf( enemy->name, 16, "dragonlord dragon" );
-      enemy->indefiniteArticle = IndefiniteArticle_A;
+      enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.HitPoints = 0;
       enemy->stats.MaxHitPoints = 0;
       enemy->stats.MagicPoints = 255;

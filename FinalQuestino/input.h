@@ -3,7 +3,6 @@
 
 #include "common.h"
 #include "button_state.h"
-#include "enums.h"
 
 #if !defined VISUAL_STUDIO_DEV
 #define PIN_ANALOG_X    A15
@@ -16,7 +15,7 @@ typedef struct Game_t Game_t;
 
 typedef struct Input_t
 {
-   ButtonState_t buttonStates[Button_Count];
+   ButtonState_t buttonStates[BUTTON_COUNT];
 }
 Input_t;
 
@@ -30,8 +29,8 @@ void Input_Handle( Game_t* game );
 
 #if defined( VISUAL_STUDIO_DEV )
 void Input_ResetState( Input_t* input );
-void Input_ButtonPressed( Input_t* input, Button_t button );
-void Input_ButtonReleased( Input_t* input, Button_t button );
+void Input_ButtonPressed( Input_t* input, uint8_t button );
+void Input_ButtonReleased( Input_t* input, uint8_t button );
 #endif
 
 #if defined( __cplusplus )
