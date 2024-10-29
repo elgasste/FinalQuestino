@@ -48,22 +48,22 @@ void Battle_Start( Game_t* game )
 
 void Battle_StartHUD( Game_t* game )
 {
-   char str[32];
+   char str[64];
 
    // quick stats
    Screen_DrawRect( &( game->screen ), 16, 16, 76, 36, DARKGRAY );
-   snprintf( str, 32, PSTR( "HP:%u" ), game->player.stats.HitPoints );
+   SPRINTF_P( str, PSTR( "HP:%u" ), game->player.stats.HitPoints );
    Screen_DrawText( &( game->screen ), str, 24, 24, DARKGRAY, WHITE );
-   snprintf( str, 32, PSTR( "MP:%u" ), game->player.stats.MagicPoints );
+   SPRINTF_P( str, PSTR( "MP:%u" ), game->player.stats.MagicPoints );
    Screen_DrawText( &( game->screen ), str, 24, 36, DARKGRAY, WHITE );
 
    if ( game->battle.enemy.indefiniteArticle == INDEFINITEARTICLE_A )
    {
-      snprintf( str, 32, PSTR( "A %s approaches! Command?" ), game->battle.enemy.name );
+      SPRINTF_P( str, PSTR( "A %s approaches! Command?" ), game->battle.enemy.name );
    }
    else
    {
-      snprintf( str, 32, PSTR( "An %s approaches! Command?" ), game->battle.enemy.name );
+      SPRINTF_P( str, PSTR( "An %s approaches! Command?" ), game->battle.enemy.name );
    }
 
    Battle_ShowMessage( game, str );
@@ -74,33 +74,45 @@ void Battle_StartHUD( Game_t* game )
 
 void Battle_Attack( Game_t* game )
 {
+   char msg[64];
+
    Menu_WipeCarat( game );
-   Battle_ShowMessage( game, PSTR( "You Attack!" ) );
+   SPRINTF_P( msg, PSTR( "You attack!" ) );
+   Battle_ShowMessage( game, msg );
    game->state = GAMESTATE_BATTLEATTACKANIMATION;
    Battle_AnimateAttack( game );
 }
 
 void Battle_Spell( Game_t* game )
 {
+   char msg[64];
+
    Menu_Wipe( game );
    Screen_WipeEnemy( game, 160, 40 );
-   Battle_ShowMessage( game, PSTR( "You yell 'ABRA CADABRA!!', which is a death spell. You win!" ) );
+   SPRINTF_P( msg, PSTR( "You scream 'ABRA KEDAVRA!!', which somehow kills him." ) );
+   Battle_ShowMessage( game, msg );
    game->state = GAMESTATE_BATTLERESULT;
 }
 
 void Battle_Item( Game_t* game )
 {
+   char msg[64];
+
    Menu_Wipe( game );
    Screen_WipeEnemy( game, 160, 40 );
-   Battle_ShowMessage( game, PSTR( "Your spare change hit him in the eye and killed him, you win!" ) );
+   SPRINTF_P( msg, PSTR( "You throw spare change from your pocket, and he dies." ) );
+   Battle_ShowMessage( game, msg );
    game->state = GAMESTATE_BATTLERESULT;
 }
 
 void Battle_Flee( Game_t* game )
 {
+   char msg[64];
+
    Menu_Wipe( game );
    Screen_WipeEnemy( game, 160, 40 );
-   Battle_ShowMessage( game, PSTR( "You dodged and weaved your way out, nice work!" ) );
+   SPRINTF_P( msg, PSTR( "You sneak out without him noticing. How brave!" ) );
+   Battle_ShowMessage( game, msg );
    game->state = GAMESTATE_BATTLERESULT;
 }
 
@@ -207,7 +219,10 @@ internal void Battle_AnimateAttack( Game_t* game )
 
 void Battle_ExecuteAttack( Game_t* game )
 {
+   char msg[64];
+
    // TODO: actually cause damage and check if the enemy has been killed
-   Battle_ShowMessage( game, PSTR( "You caused damage, probably! Command?" ) );
+   SPRINTF_P( msg, PSTR( "You caused damage, probably! Command?" ) );
+   Battle_ShowMessage( game, msg );
    game->state = GAMESTATE_BATTLEMENUMAIN;
 }

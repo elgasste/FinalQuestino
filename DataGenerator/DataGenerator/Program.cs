@@ -627,7 +627,7 @@ string BuildEnemyOutputString()
       }
 
       outputString += "   {\n";
-      outputString += string.Format( "      snprintf( enemy->name, 16, PSTR( \"{0}\" ) );\n", enemy.Name );
+      outputString += string.Format( "      SPRINTF_P( enemy->name, PSTR( \"{0}\" ) );\n", enemy.Name );
       outputString += string.Format( "      enemy->indefiniteArticle = INDEFINITEARTICLE_{0};\n", enemy.IndefiniteArticle == "A" ? "A" : "AN" );
       outputString += string.Format( "      enemy->stats.HitPoints = {0};\n", enemy.HitPoints );
       outputString += string.Format( "      enemy->stats.MaxHitPoints = {0};\n", enemy.HitPoints );

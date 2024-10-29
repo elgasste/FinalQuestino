@@ -27,8 +27,12 @@
 #if defined( VISUAL_STUDIO_DEV )
 #define DELAY_MS( x )                        Sleep( x )
 #define PSTR( x )                            ( x )
+#define SPRINTF_P                            sprintf
+// this will try to make us use sprintf_s
+#pragma warning( disable: 4996 )
 #else
 #define DELAY_MS( x )                        delay( x )
+#define SPRINTF_P                            sprintf_P
 #endif
 
 #define MAX_I( a, b ) ( ( ( a ) > ( b ) ) ? ( a ) : ( b ) )
