@@ -51,18 +51,18 @@ void Battle_StartHUD( Game_t* game )
 
    // quick stats
    Screen_DrawRect( &( game->screen ), 16, 16, 76, 36, DARKGRAY );
-   snprintf( str, 32, "HP:%u", game->player.stats.HitPoints );
+   snprintf( str, 32, PSTR( "HP:%u" ), game->player.stats.HitPoints );
    Screen_DrawText( &( game->screen ), str, 24, 24, DARKGRAY, WHITE );
-   snprintf( str, 32, "MP:%u", game->player.stats.MagicPoints );
+   snprintf( str, 32, PSTR( "MP:%u" ), game->player.stats.MagicPoints );
    Screen_DrawText( &( game->screen ), str, 24, 36, DARKGRAY, WHITE );
 
    if ( game->battle.enemy.indefiniteArticle == INDEFINITEARTICLE_A )
    {
-      snprintf( str, 32, "A %s approaches!", game->battle.enemy.name );
+      snprintf( str, 32, PSTR( "A %s approaches!" ), game->battle.enemy.name );
    }
    else
    {
-      snprintf( str, 32, "An %s approaches!", game->battle.enemy.name );
+      snprintf( str, 32, PSTR( "An %s approaches!" ), game->battle.enemy.name );
    }
 
    Battle_ShowMessage( game, str );
@@ -75,7 +75,7 @@ void Battle_Attack( Game_t* game )
 {
    Menu_Wipe( game );
    Screen_WipeEnemy( game, 160, 40 );
-   Battle_ShowMessage( game, "Sliced him up real good, you win!" );
+   Battle_ShowMessage( game, PSTR( "Sliced him up real good, you win!" ) );
    game->state = GAMESTATE_BATTLERESULT;
 }
 
@@ -83,7 +83,7 @@ void Battle_Spell( Game_t* game )
 {
    Menu_Wipe( game );
    Screen_WipeEnemy( game, 160, 40 );
-   Battle_ShowMessage( game, "You yell 'ABRA CADABRA!!', which is a death spell. You win!" );
+   Battle_ShowMessage( game, PSTR( "You yell 'ABRA CADABRA!!', which is a death spell. You win!" ) );
    game->state = GAMESTATE_BATTLERESULT;
 }
 
@@ -91,7 +91,7 @@ void Battle_Item( Game_t* game )
 {
    Menu_Wipe( game );
    Screen_WipeEnemy( game, 160, 40 );
-   Battle_ShowMessage( game, "Your spare change hit him in the eye and killed him, you win!" );
+   Battle_ShowMessage( game, PSTR( "Your spare change hit him in the eye and killed him, you win!" ) );
    game->state = GAMESTATE_BATTLERESULT;
 }
 
@@ -99,7 +99,7 @@ void Battle_Flee( Game_t* game )
 {
    Menu_Wipe( game );
    Screen_WipeEnemy( game, 160, 40 );
-   Battle_ShowMessage( game, "You dodged and weaved your way out, nice work!" );
+   Battle_ShowMessage( game, PSTR( "You dodged and weaved your way out, nice work!" ) );
    game->state = GAMESTATE_BATTLERESULT;
 }
 

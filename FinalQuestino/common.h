@@ -26,9 +26,9 @@
 
 #if defined( VISUAL_STUDIO_DEV )
 #define DELAY_MS( x )                        Sleep( x )
+#define PSTR( x )                            ( x )
 #else
 #define DELAY_MS( x )                        delay( x )
-#define MICROS( x )                          micros( x )
 #endif
 
 #define MAX_I( a, b ) ( ( ( a ) > ( b ) ) ? ( a ) : ( b ) )

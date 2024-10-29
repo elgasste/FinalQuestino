@@ -7,12 +7,12 @@ void Clock_Init( Clock_t* clock )
 
 void Clock_StartFrame( Clock_t* clock )
 {
-   clock->frameStartMicro = MICROS();
+   clock->frameStartMicro = micros();
 }
 
 void Clock_EndFrame( Clock_t* clock )
 {
-   uint32_t frameEndMicro = MICROS();
+   uint32_t frameEndMicro = micros();
    uint32_t elapsedMicro;
 
    if ( frameEndMicro < clock->frameStartMicro )
