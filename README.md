@@ -12,6 +12,18 @@ Almost all of the game data is generated from the "DataGenerator" project, which
 
 Since it's extremely difficult (impossible?) to debug in any kind of useful way on an actual Arduino board, I've set up a Visual Studio 2022 project to make better tools available for development in Windows. This project is located in the `FinalQuestinoWinDev` folder.
 
+## A Note About Coding Style
+
+Some of the decisions in this repo about how exactly to render the game, store/load data, lay out structs, and other things may seem odd or overly complicated. Bear in mind that the Arduino board that I'm targeting has a ridiculously low 8 Kb of dynamic memory, and only 256 Kb of "program space" (basically hard drive space), and it's very difficult not to blast through both of those barriers on a regular bases. As a result, I've been following these guidelines:
+
+- Only add a member to a struct if it's absolutely necessary.
+- If you need to add a member to a struct, don't use larger types than necessary (don't use an int32 when an int16 will do, etc).
+- When dealing with strings, use the `PSTR()` and `SPRINTF_P()` macros, it will use program storage instead of dynamic memory.
+- Everything in `data_loader.c` should be packed as tightly as possible to save program storage.
+- Use `#define`s where possible (instead of `enum`s, for example).
+- Avoid anything at all C++-related, this will cause the C++ runtime library to load and use more memory.
+- Basically anything possible to use less memory and/or program storage.
+
 ## Hardware
 
 ### Arduino Board
