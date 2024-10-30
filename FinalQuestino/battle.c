@@ -294,7 +294,6 @@ void Battle_ExecuteAttack( Game_t* game )
 
    if ( enemy->stats.HitPoints == 0 )
    {
-      // TODO: if this was a special enemy, mark it as defeated so we don't encounter it again
       Screen_WipeEnemy( game, 160, 40 );
       SPRINTF_P( msg,
                  PSTR( "The %s's hit points have been reduced by %u. You have defeated the %s!" ),
@@ -302,6 +301,20 @@ void Battle_ExecuteAttack( Game_t* game )
                  payload,
                  enemy->name );
       Battle_ShowMessage( game, msg );
+
+      if ( Game_OnSpecialEnemyTile( game, SPECIALENEMYID_GREENDRAGON ) )
+      {
+         game->specialEnemyFlags ^= SPECIALENEMYFLAG_GREENDRAGON;
+      }
+      else if ( Game_OnSpecialEnemyTile( game, SPECIALENEMYID_GOLEM ) )
+      {
+         game->specialEnemyFlags ^= SPECIALENEMYFLAG_GOLEM;
+      }
+      else if ( Game_OnSpecialEnemyTile( game, SPECIALENEMYID_AXEKNIGHT ) )
+      {
+         game->specialEnemyFlags ^= SPECIALENEMYFLAG_AXEKNIGHT;
+      }
+
       game->state = GAMESTATE_BATTLERESULT;
    }
    else
