@@ -18,6 +18,10 @@
 #define GRAPHICS_SCALE              2.0f
 
 #define VK_DEBUG_TILEPASSABILITY    0x31     // 1
+#define VK_DEBUG_ENCOUNTERRATE      0x32     // 2
+
+#define DEBUGMASK_TILEPASSABILITY   0x1
+#define DEBUGMASK_ENCOUNTERRATE     0x2
 
 typedef struct GlobalObjects_t
 {
@@ -41,7 +45,7 @@ typedef struct GlobalObjects_t
 
    float animationSecondsElapsed;
 
-   Bool_t debugShowTilePassability;
+   uint32_t debugFlags;
 }
 GlobalObjects_t;
 

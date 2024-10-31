@@ -3,8 +3,8 @@
 
 internal uint16_t Screen_GetTilePixelColor( Game_t* game, uint16_t x, uint16_t y );
 internal int8_t Screen_GetCharIndexFromChar( const char c );
-internal uint32_t Screen_GetBlendedPixelColor( uint8_t tile, uint16_t color16 );
-internal uint32_t Screen_LinearBlend( uint32_t source, uint32_t dest );
+internal uint32_t Screen_GetBlendedPixelColor( Game_t* game, uint8_t tile, uint16_t color16 );
+internal uint32_t Screen_LinearBlend( uint32_t source, uint32_t dest, float alpha );
 
 internal uint32_t Convert565To32( uint16_t color )
 {
@@ -104,12 +104,12 @@ void Screen_DrawTileMap( Game_t* game )
                pixelPair = map->tileTextures[MIN_I( tileTextureIndex, 15 )].pixels[pixelCol + ( pixelRow * MAP_PACKED_TILE_SIZE )];
 
                paletteIndex = pixelPair >> 4;
-               *bufferPos = Screen_GetBlendedPixelColor( tile, screen->mapPalette[paletteIndex] );
+               *bufferPos = Screen_GetBlendedPixelColor( game, tile, screen->mapPalette[paletteIndex] );
                bufferPos++;
 
                paletteIndex = pixelPair & 0x0F;
                color32 = Convert565To32( screen->mapPalette[paletteIndex] );
-               *bufferPos = Screen_GetBlendedPixelColor( tile, screen->mapPalette[paletteIndex] );
+               *bufferPos = Screen_GetBlendedPixelColor( game, tile, screen->mapPalette[paletteIndex] );
                bufferPos++;
             }
          }
@@ -246,7 +246,7 @@ void Screen_DrawMapSprites( Game_t* game )
 {
    uint8_t i, tileX, tileY, spriteIndex, pixelPair, paletteIndex;
    uint16_t tileIndex, color16, j, pixel, x, y;
-   uint32_t color32, ti;
+   uint32_t color32;
    Screen_t* screen = &( game->screen );
    TileMap_t* map = &( game->tileMap );
    uint32_t treasureFlag;
@@ -285,8 +285,7 @@ void Screen_DrawMapSprites( Game_t* game )
          {
             color16 = Screen_GetTilePixelColor( game, x + ( pixel % SPRITE_SIZE ), y + ( pixel / SPRITE_SIZE ) );
          }
-         ti = MIN_I( tileIndex, 299 );
-         color32 = Screen_GetBlendedPixelColor( game->tileMap.tiles[ti], color16 );
+         color32 = Screen_GetBlendedPixelColor( game, game->tileMap.tiles[MIN_I( tileIndex, 299 )], color16 );
 
          *bufferPos = color32;
          pixel++;
@@ -298,8 +297,7 @@ void Screen_DrawMapSprites( Game_t* game )
          {
             color16 = Screen_GetTilePixelColor( game, x + ( pixel % SPRITE_SIZE ), y + ( pixel / SPRITE_SIZE ) );
          }
-         ti = MIN_I( tileIndex, 299 );
-         color32 = Screen_GetBlendedPixelColor( game->tileMap.tiles[ti], color16 );
+         color32 = Screen_GetBlendedPixelColor( game, game->tileMap.tiles[MIN_I( tileIndex, 299 )], color16 );
 
          *bufferPos = color32;
          pixel++;
@@ -371,7 +369,7 @@ void Screen_DrawPlayer( Game_t* game )
             ty = uy + ( pixel / SPRITE_SIZE );
             color16 = Screen_GetTilePixelColor( game, tx, ty );
             uint16_t tileIndex = ( ( ty / MAP_TILE_SIZE ) * MAP_TILES_X ) + ( tx / MAP_TILE_SIZE );
-            color32 = Screen_GetBlendedPixelColor( game->tileMap.tiles[tileIndex], color16 );
+            color32 = Screen_GetBlendedPixelColor( game, game->tileMap.tiles[tileIndex], color16 );
          }
          else
          {
@@ -394,7 +392,7 @@ void Screen_DrawPlayer( Game_t* game )
             ty = uy + ( pixel / SPRITE_SIZE );
             color16 = Screen_GetTilePixelColor( game, tx, ty );
             uint16_t tileIndex = ( ( ty / MAP_TILE_SIZE ) * MAP_TILES_X ) + ( tx / MAP_TILE_SIZE );
-            color32 = Screen_GetBlendedPixelColor( game->tileMap.tiles[tileIndex], color16 );
+            color32 = Screen_GetBlendedPixelColor( game, game->tileMap.tiles[tileIndex], color16 );
          }
          else
          {
@@ -504,7 +502,7 @@ void Screen_WipeEnemy( Game_t* game, uint16_t x, uint16_t y )
 void Screen_WipeTileMapSection( Game_t* game, float x, float y, uint16_t w, uint16_t h )
 {
    uint16_t color16, ux, uy, row, col;
-   uint32_t color32, ti;
+   uint32_t color32;
    uint32_t* bufferPos;
 
    if ( x >= ( MAP_TILE_SIZE * MAP_TILES_X ) || y >= ( MAP_TILE_SIZE * MAP_TILES_Y ) ||
@@ -543,8 +541,7 @@ void Screen_WipeTileMapSection( Game_t* game, float x, float y, uint16_t w, uint
       {
          color16 = Screen_GetTilePixelColor( game, col, row );
          uint16_t tileIndex = ( ( row / MAP_TILE_SIZE ) * MAP_TILES_X ) + ( col / MAP_TILE_SIZE );
-         ti = MIN_I( tileIndex, 299 );
-         color32 = Screen_GetBlendedPixelColor( game->tileMap.tiles[ti], color16 );
+         color32 = Screen_GetBlendedPixelColor( game, game->tileMap.tiles[MIN_I( tileIndex, 299 )], color16 );
          *bufferPos = color32;
          bufferPos++;
       }
@@ -648,26 +645,44 @@ internal int8_t Screen_GetCharIndexFromChar( const char c )
    }
 }
 
-internal uint32_t Screen_GetBlendedPixelColor( uint8_t tile, uint16_t color16 )
+internal uint32_t Screen_GetBlendedPixelColor( Game_t* game, uint8_t tile, uint16_t color16 )
 {
+   uint32_t overlay;
+   uint8_t tileTextureIndex, tileFlags, encounterRate;
    Bool_t passable = GET_TILE_PASSABLE( tile );
-   uint32_t dest32 = Convert565To32( color16 );
+   uint32_t dest = Convert565To32( color16 );
 
-   if ( g_globals.debugShowTilePassability )
+   if ( g_globals.debugFlags & DEBUGMASK_TILEPASSABILITY )
    {
-      uint32_t overlay32 = passable ? 0xFF00FF00 : 0xFFFF0000;
-      dest32 = Screen_LinearBlend( overlay32, dest32 );
+      overlay = passable ? 0xFF00FF00 : 0xFFFF0000;
+      dest = Screen_LinearBlend( overlay, dest, 0.4f );
+   }
+   else if ( g_globals.debugFlags & DEBUGMASK_ENCOUNTERRATE )
+   {
+      tileTextureIndex = GET_TILE_TEXTURE_INDEX( tile );
+      tileFlags = game->tileMap.tileTextures[MIN_I( tileTextureIndex, 15 )].flags;
+      encounterRate = GET_ENCOUNTER_RATE( tileFlags );
+
+      switch ( encounterRate )
+      {
+         case 1: overlay = 0xFF00FF00; break;
+         case 2: overlay = 0xFF0000FF; break;
+         case 3: overlay = 0xFFFF0000; break;
+         default: overlay = 0xFF000000; break;
+      }
+
+      dest = Screen_LinearBlend( overlay, dest, 0.4f );
    }
    
-   return dest32;
+   return dest;
 }
 
-internal uint32_t Screen_LinearBlend( uint32_t source, uint32_t dest )
+internal uint32_t Screen_LinearBlend( uint32_t source, uint32_t dest, float alpha )
 {
    float A, R, G, B, sourceR, sourceG, sourceB, destR, destG, destB;
+   A = MAX_I( 0.0f, MIN_I( alpha, 1.0f ) );
 
    // dest = ( ( 1 - alpha ) * src ) + ( alpha * src )
-   A = 0.5f;
    sourceR = (float)( ( source >> 16 ) & 0xFF );
    sourceG = (float)( ( source >> 8 ) & 0xFF );
    sourceB = (float)( source & 0xFF );

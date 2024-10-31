@@ -90,7 +90,7 @@ int CALLBACK WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
    g_globals.bmpInfo.bmiHeader.biBitCount = 32;
    g_globals.bmpInfo.bmiHeader.biCompression = BI_RGB;
 
-   g_globals.debugShowTilePassability = False;
+   g_globals.debugFlags = 0;
 
    InitButtonMap();
    InitBattleStartRects();
@@ -282,10 +282,16 @@ internal void HandleKeyboardInput( uint32_t keyCode, LPARAM flags )
             }
          }
 
-         if ( keyCode == VK_DEBUG_TILEPASSABILITY && g_globals.game.state == GAMESTATE_MAP )
+         switch ( keyCode )
          {
-            TOGGLE_BOOL( g_globals.debugShowTilePassability );
-            Game_RefreshMap( &( g_globals.game ) );
+            case VK_DEBUG_TILEPASSABILITY:
+               g_globals.debugFlags = ( g_globals.debugFlags & DEBUGMASK_TILEPASSABILITY ) ? 0 : DEBUGMASK_TILEPASSABILITY;
+               Game_RefreshMap( &( g_globals.game ) );
+               break;
+            case VK_DEBUG_ENCOUNTERRATE:
+               g_globals.debugFlags = ( g_globals.debugFlags & DEBUGMASK_ENCOUNTERRATE ) ? 0 : DEBUGMASK_ENCOUNTERRATE;
+               Game_RefreshMap( &( g_globals.game ) );
+               break;
          }
       }
       else

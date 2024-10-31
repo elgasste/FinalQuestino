@@ -13,9 +13,9 @@
 // un-comment to use Serial_PrintLn
 //#define DEBUG_SERIAL
 // un-comment to turn off encounters when the B button is pressed
-//#define DEBUG_NOENCOUNTERSONB
+#define DEBUG_NOENCOUNTERSONB
 // un-comment to turn on fast walk mode
-//#define DEBUG_FASTWALK
+#define DEBUG_FASTWALK
 
 // not really necessary, but makes things easier to distinguish
 #define internal static
