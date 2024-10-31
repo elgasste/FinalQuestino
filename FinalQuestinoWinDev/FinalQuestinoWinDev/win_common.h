@@ -14,8 +14,10 @@
 #include "win_pixel_buffer.h"
 #include "vector.h"
 
-#define STRING_SIZE_DEFAULT   1024
-#define GRAPHICS_SCALE        2.0f
+#define STRING_SIZE_DEFAULT         1024
+#define GRAPHICS_SCALE              2.0f
+
+#define VK_DEBUG_TILEPASSABILITY    0x31     // 1
 
 typedef struct GlobalObjects_t
 {
@@ -38,6 +40,8 @@ typedef struct GlobalObjects_t
    Bool_t hasPaddedBattleAttackEnd;
 
    float animationSecondsElapsed;
+
+   Bool_t debugShowTilePassability;
 }
 GlobalObjects_t;
 
