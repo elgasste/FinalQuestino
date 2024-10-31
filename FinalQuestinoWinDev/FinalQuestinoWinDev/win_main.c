@@ -13,6 +13,8 @@ internal void HandleKeyboardInput( uint32_t keyCode, LPARAM flags );
 internal void RenderScreen();
 internal void BattleStartAnimationTic();
 internal void BattleAttackAnimationTic();
+internal BOOL WriteScreenBufferToFile( const char* filePath );
+internal void WriteAllTileMapsToBitmapFiles();
 
 int CALLBACK WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow )
 {
@@ -89,6 +91,12 @@ int CALLBACK WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
    g_globals.bmpInfo.bmiHeader.biPlanes = 1;
    g_globals.bmpInfo.bmiHeader.biBitCount = 32;
    g_globals.bmpInfo.bmiHeader.biCompression = BI_RGB;
+
+   g_debugFlags.passableTiles = False;
+   g_debugFlags.encounterRates = False;
+   g_debugFlags.fastWalk = False;
+   g_debugFlags.noEncounters = False;
+   g_debugFlags.noClip = False;
 
    InitButtonMap();
    InitBattleStartRects();
@@ -279,6 +287,46 @@ internal void HandleKeyboardInput( uint32_t keyCode, LPARAM flags )
                break;
             }
          }
+
+         switch ( keyCode )
+         {
+            case VK_DEBUG_PASSABLETILES:
+               if ( g_globals.game.state == GAMESTATE_MAP )
+               {
+                  g_debugFlags.encounterRates = False;
+                  TOGGLE_BOOL( g_debugFlags.passableTiles );
+                  Game_RefreshMap( &( g_globals.game ) );
+               }
+               break;
+            case VK_DEBUG_ENCOUNTERRATES:
+               if ( g_globals.game.state == GAMESTATE_MAP )
+               {
+                  g_debugFlags.passableTiles = False;
+                  TOGGLE_BOOL( g_debugFlags.encounterRates );
+                  Game_RefreshMap( &( g_globals.game ) );
+               }
+               break;
+            case VK_DEBUG_FASTWALK:
+               TOGGLE_BOOL( g_debugFlags.fastWalk );
+               break;
+            case VK_DEBUG_NOENCOUNTERS:
+               TOGGLE_BOOL( g_debugFlags.noEncounters );
+               break;
+            case VK_DEBUG_NOCLIP:
+               TOGGLE_BOOL( g_debugFlags.noClip );
+               break;
+            case VK_DEBUG_CLEARFLAGS:
+               if ( g_globals.game.state == GAMESTATE_MAP )
+               {
+                  g_debugFlags.passableTiles = False;
+                  g_debugFlags.encounterRates = False;
+                  Game_RefreshMap( &( g_globals.game ) );
+               }
+               g_debugFlags.fastWalk = False;
+               g_debugFlags.noEncounters = False;
+               g_debugFlags.noClip = False;
+               break;
+         }
       }
       else
       {
@@ -297,6 +345,7 @@ internal void HandleKeyboardInput( uint32_t keyCode, LPARAM flags )
 internal void RenderScreen()
 {
    PAINTSTRUCT pc;
+   RECT r = { 10, 10, 110, 110 };
    HDC dc = BeginPaint( g_globals.hWndMain, &pc );
 
    StretchDIBits(
@@ -307,6 +356,35 @@ internal void RenderScreen()
       &( g_globals.bmpInfo ),
       DIB_RGB_COLORS, SRCCOPY
    );
+
+   SetTextColor( dc, 0x00FFFFFF );
+   SetBkMode( dc, TRANSPARENT );
+
+   if ( g_debugFlags.passableTiles )
+   {
+      DrawTextA( dc, "passable tiles", -1, &r, DT_SINGLELINE | DT_NOCLIP );
+      r.top += 16;
+   }
+   if ( g_debugFlags.encounterRates )
+   {
+      DrawTextA( dc, "encounter rates", -1, &r, DT_SINGLELINE | DT_NOCLIP );
+      r.top += 16;
+   }
+   if ( g_debugFlags.fastWalk )
+   {
+      DrawTextA( dc, "fast walk", -1, &r, DT_SINGLELINE | DT_NOCLIP );
+      r.top += 16;
+   }
+   if ( g_debugFlags.noEncounters )
+   {
+      DrawTextA( dc, "no encounters", -1, &r, DT_SINGLELINE | DT_NOCLIP );
+      r.top += 16;
+   }
+   if ( g_debugFlags.noClip )
+   {
+      DrawTextA( dc, "no clip", -1, &r, DT_SINGLELINE | DT_NOCLIP );
+      r.top += 16;
+   }
 
    EndPaint( g_globals.hWndMain, &pc );
 }
@@ -381,5 +459,147 @@ internal void BattleAttackAnimationTic()
    {
       g_globals.isAnimatingBattleAttack = False;
       Battle_ExecuteAttack( &( g_globals.game ) );
+   }
+}
+
+// copied from Stack Overflow, of course
+internal BOOL WriteScreenBufferToFile( const char* filePath )
+{
+   HBITMAP hBitmap;
+   HDC hDC;
+   int iBits;
+   WORD wBitCount;
+   DWORD dwPaletteSize = 0, dwBmBitsSize = 0, dwDIBSize = 0, dwWritten = 0;
+   BITMAP Bitmap0;
+   BITMAPFILEHEADER bmfHdr;
+   BITMAPINFOHEADER bi;
+   LPBITMAPINFOHEADER lpbi;
+   HANDLE fh, hDib, hPal, hOldPal2 = NULL;
+
+   hBitmap = CreateBitmap( g_globals.screenBuffer.w, g_globals.screenBuffer.h, 1, 32, (LPVOID)( g_globals.screenBuffer.memory ) );
+
+   if ( !hBitmap )
+   {
+      return FALSE;
+   }
+
+   hDC = CreateDC( TEXT( "DISPLAY" ), NULL, NULL, NULL );
+   iBits = GetDeviceCaps( hDC, BITSPIXEL ) * GetDeviceCaps( hDC, PLANES );
+   DeleteDC( hDC );
+
+   if ( iBits <= 1 )
+   {
+      wBitCount = 1;
+   }
+   else if ( iBits <= 4 )
+   {
+      wBitCount = 4;
+   }
+   else if ( iBits <= 8 )
+   {
+      wBitCount = 8;
+   }
+   else
+   {
+      wBitCount = 24;
+   }
+
+   GetObject( hBitmap, sizeof( Bitmap0 ), (LPSTR)( &Bitmap0 ) );
+
+   bi.biSize = sizeof( BITMAPINFOHEADER );
+   bi.biWidth = Bitmap0.bmWidth;
+   bi.biHeight = -Bitmap0.bmHeight;
+   bi.biPlanes = 1;
+   bi.biBitCount = wBitCount;
+   bi.biCompression = BI_RGB;
+   bi.biSizeImage = 0;
+   bi.biXPelsPerMeter = 0;
+   bi.biYPelsPerMeter = 0;
+   bi.biClrImportant = 0;
+   bi.biClrUsed = 256;
+
+   dwBmBitsSize = ( ( ( Bitmap0.bmWidth * wBitCount ) + 31 ) & ~31 ) / 8 * Bitmap0.bmHeight;
+
+   hDib = GlobalAlloc( GHND, dwBmBitsSize + dwPaletteSize + sizeof( BITMAPINFOHEADER ) );
+
+   if ( !hDib )
+   {
+      return FALSE;
+   }
+
+   lpbi = (LPBITMAPINFOHEADER)GlobalLock( hDib );
+
+   if ( !lpbi )
+   {
+      return FALSE;
+   }
+
+   *lpbi = bi;
+   hPal = GetStockObject( DEFAULT_PALETTE );
+
+   if ( hPal )
+   {
+      hDC = GetDC( NULL );
+      hOldPal2 = SelectPalette( hDC, (HPALETTE)hPal, FALSE );
+      RealizePalette( hDC );
+   }
+
+   GetDIBits( hDC,
+              hBitmap,
+              0,
+              (UINT)Bitmap0.bmHeight,
+              (LPSTR)lpbi + sizeof( BITMAPINFOHEADER ) + dwPaletteSize,
+              (BITMAPINFO*)lpbi,
+              DIB_RGB_COLORS );
+
+   if ( hOldPal2 )
+   {
+      SelectPalette( hDC, (HPALETTE)hOldPal2, TRUE );
+      RealizePalette( hDC );
+      ReleaseDC( NULL, hDC );
+   }
+
+   fh = CreateFileA( filePath, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL | FILE_FLAG_SEQUENTIAL_SCAN, NULL );
+
+   if ( fh == INVALID_HANDLE_VALUE )
+   {
+      return FALSE;
+   }
+
+   bmfHdr.bfType = 0x4D42; // "BM"
+   dwDIBSize = sizeof( BITMAPFILEHEADER ) + sizeof( BITMAPINFOHEADER ) + dwPaletteSize + dwBmBitsSize;
+   bmfHdr.bfSize = dwDIBSize;
+   bmfHdr.bfReserved1 = 0;
+   bmfHdr.bfReserved2 = 0;
+   bmfHdr.bfOffBits = (DWORD)sizeof( BITMAPFILEHEADER ) + (DWORD)sizeof( BITMAPINFOHEADER ) + dwPaletteSize;
+
+   WriteFile( fh, (LPSTR)( &bmfHdr ), sizeof( BITMAPFILEHEADER ), &dwWritten, NULL );
+
+   WriteFile( fh, (LPSTR)lpbi, dwDIBSize, &dwWritten, NULL );
+   GlobalUnlock( hDib );
+   GlobalFree( hDib );
+   CloseHandle( fh );
+   return TRUE;
+}
+
+// this function can be really useful for getting a bird's eye view of the entire map,
+// it just spits out a bunch of bitmap files for every tile map in the game.
+internal void WriteAllTileMapsToBitmapFiles()
+{
+   uint8_t i;
+   Game_t* game = &( g_globals.game );
+   char filePath[256];
+
+   for ( i = 0; i < 92; i++ )
+   {
+      TileMap_LoadTileMap( &( game->tileMap ), i );
+      Screen_DrawTileMap( game );
+
+      snprintf( filePath, 256, "C:\\YourPathGoesHere\\tilemap_%u.bmp", i );
+
+      if ( !WriteScreenBufferToFile( filePath ) )
+      {
+         FatalError( "Could not write screen buffer to file." );
+      }
    }
 }

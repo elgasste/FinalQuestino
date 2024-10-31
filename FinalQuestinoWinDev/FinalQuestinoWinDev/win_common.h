@@ -14,8 +14,15 @@
 #include "win_pixel_buffer.h"
 #include "vector.h"
 
-#define STRING_SIZE_DEFAULT   1024
-#define GRAPHICS_SCALE        2.0f
+#define STRING_SIZE_DEFAULT         1024
+#define GRAPHICS_SCALE              2.0f
+
+#define VK_DEBUG_PASSABLETILES      0x31     // 1
+#define VK_DEBUG_ENCOUNTERRATES     0x32     // 2
+#define VK_DEBUG_FASTWALK           0x33     // 3
+#define VK_DEBUG_NOENCOUNTERS       0x34     // 4
+#define VK_DEBUG_NOCLIP             0x35     // 5
+#define VK_DEBUG_CLEARFLAGS         0x30     // 0
 
 typedef struct GlobalObjects_t
 {
