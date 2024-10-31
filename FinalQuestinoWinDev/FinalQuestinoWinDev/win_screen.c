@@ -659,16 +659,20 @@ internal uint32_t Screen_GetBlendedPixelColor( Game_t* game, uint8_t tile, uint1
    }
    else if ( g_debugFlags.encounterRates )
    {
-      tileTextureIndex = GET_TILE_TEXTURE_INDEX( tile );
-      tileFlags = game->tileMap.tileTextures[MIN_I( tileTextureIndex, 15 )].flags;
-      encounterRate = GET_ENCOUNTER_RATE( tileFlags );
+      overlay = 0xFF000000;
 
-      switch ( encounterRate )
+      if ( GET_TILE_ENCOUNTERABLE( tile ) )
       {
-         case 1: overlay = 0xFF00FF00; break;
-         case 2: overlay = 0xFF0000FF; break;
-         case 3: overlay = 0xFFFF0000; break;
-         default: overlay = 0xFF000000; break;
+         tileTextureIndex = GET_TILE_TEXTURE_INDEX( tile );
+         tileFlags = game->tileMap.tileTextures[MIN_I( tileTextureIndex, 15 )].flags;
+         encounterRate = GET_ENCOUNTER_RATE( tileFlags );
+
+         switch ( encounterRate )
+         {
+            case 1: overlay = 0xFF00FF00; break;
+            case 2: overlay = 0xFF0000FF; break;
+            case 3: overlay = 0xFFFF0000; break;
+         }
       }
 
       dest = Screen_LinearBlend( overlay, dest, 0.4f );
