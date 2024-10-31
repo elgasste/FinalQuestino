@@ -134,13 +134,13 @@ void Game_SteppedOnTile( Game_t* game, uint16_t tileIndex )
 
 void Game_ShowMessage( Game_t* game, const char* message )
 {
-   Screen_DrawRect( &( game->screen ), 48, 160, 224, 64, DARKGRAY );
-   Screen_DrawWrappedText( &( game->screen ), message, 56, 168, 26, 8, DARKGRAY, WHITE );
+   Screen_DrawRect( &( game->screen ), 48, 152, 224, 72, DARKGRAY );
+   Screen_DrawWrappedText( &( game->screen ), message, 56, 160, 26, 9, DARKGRAY, WHITE );
 }
 
 void Game_WipeMessage( Game_t* game )
 {
-   Screen_WipeTileMapSection( game, 48, 160, 224, 64 );
+   Screen_WipeTileMapSection( game, 48, 152, 224, 72 );
 }
 
 void Game_ShowMapQuickStats( Game_t* game )
