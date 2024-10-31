@@ -89,7 +89,7 @@ void Battle_Spell( Game_t* game )
 {
    char msg[64];
 
-   Menu_Wipe( game );
+   Menu_WipeCarat( game );
    Screen_WipeEnemy( game, 160, 40 );
    SPRINTF_P( msg, PSTR( "You scream 'ABRA KEDAVRA!!', which somehow kills him." ) );
    Battle_ShowMessage( game, msg );
@@ -100,7 +100,7 @@ void Battle_Item( Game_t* game )
 {
    char msg[64];
 
-   Menu_Wipe( game );
+   Menu_WipeCarat( game );
    Screen_WipeEnemy( game, 160, 40 );
    SPRINTF_P( msg, PSTR( "You throw spare change from your pocket, and he dies." ) );
    Battle_ShowMessage( game, msg );
@@ -111,7 +111,7 @@ void Battle_Flee( Game_t* game )
 {
    char msg[64];
 
-   Menu_Wipe( game );
+   Menu_WipeCarat( game );
    Screen_WipeEnemy( game, 160, 40 );
    SPRINTF_P( msg, PSTR( "You sneak out without him noticing. How brave!" ) );
    Battle_ShowMessage( game, msg );
@@ -148,6 +148,8 @@ void Battle_Collect( Game_t* game )
    player->experience += experience;
    player->gold += gold;
 
+   Battle_WipeMessage( game );
+
    if ( experience == 0 && gold == 0 )
    {
       Battle_Done( game );
@@ -155,7 +157,7 @@ void Battle_Collect( Game_t* game )
    else if ( experience == 0 && gold > 0 )
    {
       SPRINTF_P( msg, PSTR( "You have gained %u gold." ), gold );
-      Battle_ShowMessage( game, msg );
+      Game_ShowMessage( game, msg );
       game->state = GAMESTATE_BATTLECOLLECT;
    }
    else
@@ -163,12 +165,12 @@ void Battle_Collect( Game_t* game )
       if ( gold > 0 )
       {
          SPRINTF_P( msg, PSTR( "You have gained %u experience and %u gold." ), experience, gold );
-         Battle_ShowMessage( game, msg );
+         Game_ShowMessage( game, msg );
       }
       else
       {
          SPRINTF_P( msg, PSTR( "You have gained %u experience." ), experience );
-         Battle_ShowMessage( game, msg );
+         Game_ShowMessage( game, msg );
       }
 
       // TODO: check for a level-up
@@ -180,7 +182,7 @@ void Battle_Done( Game_t* game )
 {
    Screen_WipeTileMapSection( game, 16, 16, 76, 36 );       // quick stats
    Screen_WipeTileMapSection( game, 144, 32, 112, 112 );    // enemy
-   Battle_WipeMessage( game );
+   Game_WipeMessage( game );
    Screen_DrawActors( game );
    game->state = GAMESTATE_MAP;
 }
