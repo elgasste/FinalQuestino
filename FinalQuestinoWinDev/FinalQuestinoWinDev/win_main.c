@@ -129,7 +129,7 @@ int CALLBACK WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
          Game_Tic( &( g_globals.game ) );
       }
 
-      InvalidateRect( g_globals.hWndMain, 0, 0 );
+      InvalidateRect( g_globals.hWndMain, 0, FALSE );
       Clock_EndFrame( &( g_globals.game.clock ) );
 
       if ( g_globals.shutdown )
@@ -342,14 +342,27 @@ internal void HandleKeyboardInput( uint32_t keyCode, LPARAM flags )
    }
 }
 
+// the double-buffering part of this came from Stack Overflow
 internal void RenderScreen()
 {
-   PAINTSTRUCT pc;
+   HDC dc, dcMem;
+   HBITMAP bmMem;
+   HANDLE hOld;
+   PAINTSTRUCT ps;
    RECT r = { 10, 10, 110, 110 };
-   HDC dc = BeginPaint( g_globals.hWndMain, &pc );
+   int winWidth = (int)( SCREEN_WIDTH * GRAPHICS_SCALE );
+   int winHeight = (int)( SCREEN_HEIGHT * GRAPHICS_SCALE );
 
+   dc = BeginPaint( g_globals.hWndMain, &ps );
+
+   // create an off-screen DC for double-buffering
+   dcMem = CreateCompatibleDC( dc );
+   bmMem = CreateCompatibleBitmap( dc, winWidth, winHeight );
+   hOld = SelectObject( dcMem, bmMem );
+
+   // actually draw everything
    StretchDIBits(
-      dc,
+      dcMem,
       0, 0, (int)( SCREEN_WIDTH * GRAPHICS_SCALE ), (int)( SCREEN_HEIGHT * GRAPHICS_SCALE ), // dest
       0, 0, g_globals.screenBuffer.w, g_globals.screenBuffer.h, // src
       g_globals.screenBuffer.memory,
@@ -357,36 +370,42 @@ internal void RenderScreen()
       DIB_RGB_COLORS, SRCCOPY
    );
 
-   SetTextColor( dc, 0x00FFFFFF );
-   SetBkMode( dc, TRANSPARENT );
+   SetTextColor( dcMem, 0x00FFFFFF );
+   SetBkMode( dcMem, TRANSPARENT );
 
    if ( g_debugFlags.passableTiles )
    {
-      DrawTextA( dc, "passable tiles", -1, &r, DT_SINGLELINE | DT_NOCLIP );
+      DrawTextA( dcMem, "passable tiles", -1, &r, DT_SINGLELINE | DT_NOCLIP );
       r.top += 16;
    }
    if ( g_debugFlags.encounterRates )
    {
-      DrawTextA( dc, "encounter rates", -1, &r, DT_SINGLELINE | DT_NOCLIP );
+      DrawTextA( dcMem, "encounter rates", -1, &r, DT_SINGLELINE | DT_NOCLIP );
       r.top += 16;
    }
    if ( g_debugFlags.fastWalk )
    {
-      DrawTextA( dc, "fast walk", -1, &r, DT_SINGLELINE | DT_NOCLIP );
+      DrawTextA( dcMem, "fast walk", -1, &r, DT_SINGLELINE | DT_NOCLIP );
       r.top += 16;
    }
    if ( g_debugFlags.noEncounters )
    {
-      DrawTextA( dc, "no encounters", -1, &r, DT_SINGLELINE | DT_NOCLIP );
+      DrawTextA( dcMem, "no encounters", -1, &r, DT_SINGLELINE | DT_NOCLIP );
       r.top += 16;
    }
    if ( g_debugFlags.noClip )
    {
-      DrawTextA( dc, "no clip", -1, &r, DT_SINGLELINE | DT_NOCLIP );
+      DrawTextA( dcMem, "no clip", -1, &r, DT_SINGLELINE | DT_NOCLIP );
       r.top += 16;
    }
 
-   EndPaint( g_globals.hWndMain, &pc );
+   // transfer the off-screen DC to the screen
+   BitBlt( dc, 0, 0, winWidth, winHeight, dcMem, 0, 0, SRCCOPY );
+
+   SelectObject( dcMem, hOld );
+   DeleteObject( bmMem );
+   DeleteDC( dcMem );
+   EndPaint( g_globals.hWndMain, &ps );
 }
 
 internal void BattleStartAnimationTic()
