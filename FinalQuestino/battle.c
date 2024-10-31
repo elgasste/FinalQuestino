@@ -125,8 +125,6 @@ void Battle_Collect( Game_t* game )
    Player_t* player = &( game->player );
    char msg[64];
 
-   Menu_Wipe( game );
-
    if ( enemy->experience < ( INT16_MAX - player->experience ) )
    {
       experience = enemy->experience;
@@ -148,8 +146,6 @@ void Battle_Collect( Game_t* game )
    player->experience += experience;
    player->gold += gold;
 
-   Battle_WipeMessage( game );
-
    if ( experience == 0 && gold == 0 )
    {
       Battle_Done( game );
@@ -157,7 +153,7 @@ void Battle_Collect( Game_t* game )
    else if ( experience == 0 && gold > 0 )
    {
       SPRINTF_P( msg, PSTR( "You have gained %u gold." ), gold );
-      Game_ShowMessage( game, msg );
+      Battle_ShowMessage( game, msg );
       game->state = GAMESTATE_BATTLECOLLECT;
    }
    else
@@ -165,12 +161,12 @@ void Battle_Collect( Game_t* game )
       if ( gold > 0 )
       {
          SPRINTF_P( msg, PSTR( "You have gained %u experience and %u gold." ), experience, gold );
-         Game_ShowMessage( game, msg );
+         Battle_ShowMessage( game, msg );
       }
       else
       {
          SPRINTF_P( msg, PSTR( "You have gained %u experience." ), experience );
-         Game_ShowMessage( game, msg );
+         Battle_ShowMessage( game, msg );
       }
 
       // TODO: check for a level-up
@@ -182,7 +178,8 @@ void Battle_Done( Game_t* game )
 {
    Screen_WipeTileMapSection( game, 16, 16, 76, 36 );       // quick stats
    Screen_WipeTileMapSection( game, 144, 32, 112, 112 );    // enemy
-   Game_WipeMessage( game );
+   Menu_Wipe( game );
+   Battle_WipeMessage( game );
    Screen_DrawActors( game );
    game->state = GAMESTATE_MAP;
 }
