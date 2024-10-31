@@ -652,12 +652,12 @@ internal uint32_t Screen_GetBlendedPixelColor( Game_t* game, uint8_t tile, uint1
    Bool_t passable = GET_TILE_PASSABLE( tile );
    uint32_t dest = Convert565To32( color16 );
 
-   if ( g_globals.debugFlags & DEBUGMASK_TILEPASSABILITY )
+   if ( g_debugFlags.passableTiles )
    {
       overlay = passable ? 0xFF00FF00 : 0xFFFF0000;
       dest = Screen_LinearBlend( overlay, dest, 0.4f );
    }
-   else if ( g_globals.debugFlags & DEBUGMASK_ENCOUNTERRATE )
+   else if ( g_debugFlags.encounterRates )
    {
       tileTextureIndex = GET_TILE_TEXTURE_INDEX( tile );
       tileFlags = game->tileMap.tileTextures[MIN_I( tileTextureIndex, 15 )].flags;

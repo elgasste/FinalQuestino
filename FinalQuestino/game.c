@@ -97,6 +97,13 @@ void Game_SteppedOnTile( Game_t* game, uint16_t tileIndex )
       default: game->player.maxVelocity = PLAYERVELOCITY_NORMAL; break;
    }
 
+#if defined( VISUAL_STUDIO_DEV )
+   if ( g_debugFlags.fastWalk )
+   {
+      game->player.maxVelocity = 96;
+   }
+#endif
+
 #if defined( DEBUG_NOENCOUNTERSONB )
    if ( game->input.buttonStates[BUTTON_B].down )
    {

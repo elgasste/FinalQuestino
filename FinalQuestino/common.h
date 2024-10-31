@@ -10,12 +10,14 @@
 #include <limits.h>
 #include <string.h>
 
+// Arduino debug flags
+
 // un-comment to use Serial_PrintLn
 //#define DEBUG_SERIAL
 // un-comment to turn off encounters when the B button is pressed
-#define DEBUG_NOENCOUNTERSONB
+//#define DEBUG_NOENCOUNTERSONB
 // un-comment to turn on fast walk mode
-#define DEBUG_FASTWALK
+//#define DEBUG_FASTWALK
 
 // not really necessary, but makes things easier to distinguish
 #define internal static
@@ -159,6 +161,18 @@ typedef uint8_t Bool_t;
 #define True 1
 #define False 0
 #define TOGGLE_BOOL( b ) b = b ? False : True
+
+#if defined( VISUAL_STUDIO_DEV )
+typedef struct DebugFlags_t
+{
+   Bool_t passableTiles;
+   Bool_t encounterRates;
+   Bool_t fastWalk;
+}
+DebugFlags_t;
+
+DebugFlags_t g_debugFlags;
+#endif
 
 #if defined( DEBUG_SERIAL )
 

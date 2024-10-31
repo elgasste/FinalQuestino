@@ -17,11 +17,9 @@
 #define STRING_SIZE_DEFAULT         1024
 #define GRAPHICS_SCALE              2.0f
 
-#define VK_DEBUG_TILEPASSABILITY    0x31     // 1
-#define VK_DEBUG_ENCOUNTERRATE      0x32     // 2
-
-#define DEBUGMASK_TILEPASSABILITY   0x1
-#define DEBUGMASK_ENCOUNTERRATE     0x2
+#define VK_DEBUG_PASSABLETILES      0x31     // 1
+#define VK_DEBUG_ENCOUNTERRATES     0x32     // 2
+#define VK_DEBUG_FASTWALK           0x33     // 3
 
 typedef struct GlobalObjects_t
 {
@@ -44,8 +42,6 @@ typedef struct GlobalObjects_t
    Bool_t hasPaddedBattleAttackEnd;
 
    float animationSecondsElapsed;
-
-   uint32_t debugFlags;
 }
 GlobalObjects_t;
 
