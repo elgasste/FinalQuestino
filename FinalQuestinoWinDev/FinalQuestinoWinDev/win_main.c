@@ -94,6 +94,7 @@ int CALLBACK WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
    g_debugFlags.encounterRates = False;
    g_debugFlags.fastWalk = False;
    g_debugFlags.noEncounters = False;
+   g_debugFlags.noClip = False;
 
    InitButtonMap();
    InitBattleStartRects();
@@ -302,6 +303,9 @@ internal void HandleKeyboardInput( uint32_t keyCode, LPARAM flags )
                break;
             case VK_DEBUG_NOENCOUNTERS:
                TOGGLE_BOOL( g_debugFlags.noEncounters );
+               break;
+            case VK_DEBUG_NOCLIP:
+               TOGGLE_BOOL( g_debugFlags.noClip );
                break;
          }
       }

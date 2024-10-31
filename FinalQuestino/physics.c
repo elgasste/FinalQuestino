@@ -50,6 +50,11 @@ void Physics_Tic( Game_t* game )
       return;
    }
 
+#if defined( VISUAL_STUDIO_DEV )
+   if ( !g_debugFlags.noClip )
+   {
+#endif
+
    // clip to unpassable horizontal tiles
    if ( newPos.x != player->position.x )
    {
@@ -133,6 +138,10 @@ void Physics_Tic( Game_t* game )
          }
       }
    }
+
+#if defined( VISUAL_STUDIO_DEV )
+   }
+#endif
 
    posChanged = newPos.x != player->position.x || newPos.y != player->position.y;
 

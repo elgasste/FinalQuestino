@@ -21,6 +21,7 @@
 #define VK_DEBUG_ENCOUNTERRATES     0x32     // 2
 #define VK_DEBUG_FASTWALK           0x33     // 3
 #define VK_DEBUG_NOENCOUNTERS       0x34     // 4
+#define VK_DEBUG_NOCLIP             0x35     // 5
 
 typedef struct GlobalObjects_t
 {
