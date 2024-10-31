@@ -326,6 +326,7 @@ internal void HandleKeyboardInput( uint32_t keyCode, LPARAM flags )
 internal void RenderScreen()
 {
    PAINTSTRUCT pc;
+   RECT r = { 10, 10, 110, 110 };
    HDC dc = BeginPaint( g_globals.hWndMain, &pc );
 
    StretchDIBits(
@@ -336,6 +337,35 @@ internal void RenderScreen()
       &( g_globals.bmpInfo ),
       DIB_RGB_COLORS, SRCCOPY
    );
+
+   SetTextColor( dc, 0x00FFFFFF );
+   SetBkMode( dc, TRANSPARENT );
+
+   if ( g_debugFlags.passableTiles )
+   {
+      DrawTextA( dc, "passable tiles", -1, &r, DT_SINGLELINE | DT_NOCLIP );
+      r.top += 16;
+   }
+   if ( g_debugFlags.encounterRates )
+   {
+      DrawTextA( dc, "encounter rates", -1, &r, DT_SINGLELINE | DT_NOCLIP );
+      r.top += 16;
+   }
+   if ( g_debugFlags.fastWalk )
+   {
+      DrawTextA( dc, "fast walk", -1, &r, DT_SINGLELINE | DT_NOCLIP );
+      r.top += 16;
+   }
+   if ( g_debugFlags.noEncounters )
+   {
+      DrawTextA( dc, "no encounters", -1, &r, DT_SINGLELINE | DT_NOCLIP );
+      r.top += 16;
+   }
+   if ( g_debugFlags.noClip )
+   {
+      DrawTextA( dc, "no clip", -1, &r, DT_SINGLELINE | DT_NOCLIP );
+      r.top += 16;
+   }
 
    EndPaint( g_globals.hWndMain, &pc );
 }
