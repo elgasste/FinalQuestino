@@ -168,6 +168,7 @@ typedef struct DebugFlags_t
    Bool_t passableTiles;
    Bool_t encounterRates;
    Bool_t fastWalk;
+   Bool_t noEncounters;
 }
 DebugFlags_t;
 

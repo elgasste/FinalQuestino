@@ -102,6 +102,10 @@ void Game_SteppedOnTile( Game_t* game, uint16_t tileIndex )
    {
       game->player.maxVelocity = 96;
    }
+   if ( g_debugFlags.noEncounters )
+   {
+      return;
+   }
 #endif
 
 #if defined( DEBUG_NOENCOUNTERSONB )
@@ -167,6 +171,13 @@ void Game_WipeMapStatus( Game_t* game )
 internal void Game_RollEncounter( Game_t* game, uint8_t encounterRate )
 {
    Bool_t spawnEncounter;
+
+#if defined( VISUAL_STUDIO_DEV )
+   if ( g_debugFlags.noEncounters )
+   {
+      return;
+   }
+#endif
 
 #if defined( DEBUG_NOENCOUNTERSONB )
    if ( game->input.buttonStates[BUTTON_B].down )
