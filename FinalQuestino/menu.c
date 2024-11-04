@@ -1,25 +1,31 @@
 #include "game.h"
+#include "menu.h"
 
 internal void Menu_DrawCarat( Game_t* game );
 internal void Menu_MapMenuSelect( Game_t* game );
 internal void Menu_BattleMainSelect( Game_t* game );
 
-void Menu_Load( Menu_t* menu, uint8_t index )
+void Menu_Load( Game_t* game, uint8_t menuIndex )
 {
-   menu->index = index;
-   menu->optionIndex = 0;
-   menu->caratSeconds = 0;
-   menu->showCarat = True;
+   game->menu.index = menuIndex;
+   Menu_Reset( game );
 
-   switch( index )
+   switch( menuIndex )
    {
       case MENUINDEX_MAP:
-         menu->optionCount = 5;
+         game->menu.optionCount = 5;
          break;
       case MENUINDEX_BATTLEMAIN:
-         menu->optionCount = 4;
+         game->menu.optionCount = 4;
          break;
    }
+}
+
+void Menu_Reset( Game_t* game )
+{
+   game->menu.optionIndex = 0;
+   game->menu.caratSeconds = 0;
+   game->menu.showCarat = True;
 }
 
 void Menu_Draw( Game_t* game )

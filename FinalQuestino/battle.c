@@ -70,8 +70,9 @@ void Battle_StartHUD( Game_t* game )
    }
 
    Battle_ShowMessage( game, str );
-   Menu_Load( &( game->menu ), MENUINDEX_BATTLEMAIN );
+   Menu_Load( game, MENUINDEX_BATTLEMAIN );
    Menu_Draw( game );
+   Menu_Reset( game );
    game->state = GAMESTATE_BATTLEMENUMAIN;
 }
 
@@ -116,59 +117,6 @@ void Battle_Flee( Game_t* game )
    SPRINTF_P( msg, PSTR( STR_BATTLE_PLAYERFLEE ) );
    Battle_ShowMessage( game, msg );
    Battle_AnimateFlee( game );
-}
-
-void Battle_ExecuteFlee( Game_t* game )
-{
-   BattleStats_t* playerStats = &( game->player.stats );
-   BattleStats_t* enemyStats = &( game->battle.enemy.stats );
-   Bool_t success = False;
-   int16_t agilityDiff;
-   uint8_t fleeChance;
-   char msg[64];
-
-   if ( !Game_OnAnySpecialEnemyTile( game ) && playerStats->agility > 0 )
-   {
-      if ( enemyStats->agility == 0 )
-      {
-         success = True;
-      }
-      else if ( playerStats->agility > enemyStats->agility ||
-                ( enemyStats->agility - playerStats->agility ) <= BATTLE_FLEEAGILITYTHRESHOLD )
-      {
-         agilityDiff = (int16_t)playerStats->agility - enemyStats->agility;
-
-         if ( agilityDiff > BATTLE_FLEEAGILITYTHRESHOLD )
-         {
-            success = True;
-         }
-         else
-         {
-            fleeChance = (uint8_t)( ( agilityDiff < 0 ) ?
-                                    ( (float)( -agilityDiff ) / BATTLE_FLEEAGILITYTHRESHOLD ) * 100 :
-                                    ( (float)agilityDiff / BATTLE_FLEEAGILITYTHRESHOLD ) * 100 );
-
-            if ( Random_Percent() <= fleeChance )
-            {
-               success = True;
-            }
-         }
-      }
-   }
-
-   if ( success )
-   {
-      Screen_WipeEnemy( game, 160, 40 );
-      SPRINTF_P( msg, PSTR( STR_BATTLE_FLEESUCCESS ), game->battle.enemy.name );
-      Battle_ShowMessage( game, msg );
-      game->state = GAMESTATE_BATTLECOLLECT;
-   }
-   else
-   {
-      SPRINTF_P( msg, PSTR( STR_BATTLE_FLEEBLOCK ), game->battle.enemy.name );
-      Battle_ShowMessage( game, msg );
-      game->state = GAMESTATE_BATTLEMENUMAIN;
-   }
 }
 
 void Battle_Collect( Game_t* game )
@@ -385,6 +333,61 @@ void Battle_ExecuteAttack( Game_t* game )
    {
       SPRINTF_P( msg, PSTR( STR_BATTLE_ATTACKENEMY ), enemy->name, payload );
       Battle_ShowMessage( game, msg );
+      Menu_Reset( game );
+      game->state = GAMESTATE_BATTLEMENUMAIN;
+   }
+}
+
+void Battle_ExecuteFlee( Game_t* game )
+{
+   BattleStats_t* playerStats = &( game->player.stats );
+   BattleStats_t* enemyStats = &( game->battle.enemy.stats );
+   Bool_t success = False;
+   int16_t agilityDiff;
+   uint8_t fleeChance;
+   char msg[64];
+
+   if ( !Game_OnAnySpecialEnemyTile( game ) && playerStats->agility > 0 )
+   {
+      if ( enemyStats->agility == 0 )
+      {
+         success = True;
+      }
+      else if ( playerStats->agility > enemyStats->agility ||
+                ( enemyStats->agility - playerStats->agility ) <= BATTLE_FLEEAGILITYTHRESHOLD )
+      {
+         agilityDiff = (int16_t)playerStats->agility - enemyStats->agility;
+
+         if ( agilityDiff > BATTLE_FLEEAGILITYTHRESHOLD )
+         {
+            success = True;
+         }
+         else
+         {
+            fleeChance = (uint8_t)( ( agilityDiff < 0 ) ?
+                                    ( (float)( -agilityDiff ) / BATTLE_FLEEAGILITYTHRESHOLD ) * 100 :
+                                    ( (float)agilityDiff / BATTLE_FLEEAGILITYTHRESHOLD ) * 100 );
+
+            if ( Random_Percent() <= fleeChance )
+            {
+               success = True;
+            }
+         }
+      }
+   }
+
+   if ( success )
+   {
+      Screen_WipeEnemy( game, 160, 40 );
+      SPRINTF_P( msg, PSTR( STR_BATTLE_FLEESUCCESS ), game->battle.enemy.name );
+      Battle_ShowMessage( game, msg );
+      game->state = GAMESTATE_BATTLECOLLECT;
+   }
+   else
+   {
+      SPRINTF_P( msg, PSTR( STR_BATTLE_FLEEBLOCK ), game->battle.enemy.name );
+      Battle_ShowMessage( game, msg );
+      Menu_Reset( game );
       game->state = GAMESTATE_BATTLEMENUMAIN;
    }
 }

@@ -19,7 +19,8 @@ Menu_t;
 extern "C" {
 #endif
 
-void Menu_Load( Menu_t* menu, uint8_t index );
+void Menu_Load( Game_t* game, uint8_t menuIndex );
+void Menu_Reset( Game_t* game );
 void Menu_Draw( Game_t* game );
 void Menu_Wipe( Game_t* game );
 void Menu_WipeCarat( Game_t* game );
