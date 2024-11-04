@@ -10,6 +10,8 @@
 #include <limits.h>
 #include <string.h>
 
+#include "strings.h"
+
 // Arduino debug flags
 
 // un-comment to use Serial_PrintLn
@@ -156,6 +158,8 @@
 #define ENCOUNTERRATE_LOW                    4
 #define ENCOUNTERRATE_MEDIUM                 6
 #define ENCOUNTERRATE_HIGH                   8
+
+#define BATTLE_FLEEAGILITYTHRESHOLD          96
 
 typedef uint8_t Bool_t;
 #define True 1

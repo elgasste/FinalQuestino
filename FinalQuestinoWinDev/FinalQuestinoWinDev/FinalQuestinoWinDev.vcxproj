@@ -149,6 +149,7 @@
     <ClInclude Include="..\..\FinalQuestino\random.h" />
     <ClInclude Include="..\..\FinalQuestino\screen.h" />
     <ClInclude Include="..\..\FinalQuestino\sprite.h" />
+    <ClInclude Include="..\..\FinalQuestino\strings.h" />
     <ClInclude Include="..\..\FinalQuestino\tile_map.h" />
     <ClInclude Include="..\..\FinalQuestino\tile_texture.h" />
     <ClInclude Include="..\..\FinalQuestino\vector.h" />

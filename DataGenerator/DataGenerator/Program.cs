@@ -627,15 +627,15 @@ string BuildEnemyOutputString()
       }
 
       outputString += "   {\n";
-      outputString += string.Format( "      SPRINTF_P( enemy->name, PSTR( \"{0}\" ) );\n", enemy.name );
+      outputString += string.Format( "      SPRINTF_P( enemy->name, PSTR( {0} ) );\n", enemy.nameMacro );
       outputString += string.Format( "      enemy->indefiniteArticle = INDEFINITEARTICLE_{0};\n", enemy.indefinitearticle == "A" ? "A" : "AN" );
-      outputString += string.Format( "      enemy->stats.HitPoints = {0};\n", enemy.hp );
-      outputString += string.Format( "      enemy->stats.MaxHitPoints = {0};\n", enemy.hp );
-      outputString += string.Format( "      enemy->stats.MagicPoints = {0};\n", 255 );
-      outputString += string.Format( "      enemy->stats.MaxMagicPoints = {0};\n", enemy.mp );
-      outputString += string.Format( "      enemy->stats.AttackPower = {0};\n", enemy.atk );
-      outputString += string.Format( "      enemy->stats.DefensePower = {0};\n", enemy.def );
-      outputString += string.Format( "      enemy->stats.Agility = {0};\n", enemy.agl );
+      outputString += string.Format( "      enemy->stats.hitPoints = {0};\n", enemy.hp );
+      outputString += string.Format( "      enemy->stats.maxHitPoints = {0};\n", enemy.hp );
+      outputString += string.Format( "      enemy->stats.magicPoints = {0};\n", 255 );
+      outputString += string.Format( "      enemy->stats.maxMagicPoints = {0};\n", enemy.mp );
+      outputString += string.Format( "      enemy->stats.attackPower = {0};\n", enemy.atk );
+      outputString += string.Format( "      enemy->stats.defensePower = {0};\n", enemy.def );
+      outputString += string.Format( "      enemy->stats.agility = {0};\n", enemy.agl );
       outputString += string.Format( "      enemy->experience = {0};\n", enemy.exp );
       outputString += string.Format( "      enemy->gold = {0};\n", enemy.gold );
 

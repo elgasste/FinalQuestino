@@ -4,6 +4,7 @@
    {
       public int index = 0;
       public string name = string.Empty;
+      public string nameMacro = string.Empty;
       public string indefinitearticle = string.Empty;
       public int hp = 0;
       public int mp = 0;

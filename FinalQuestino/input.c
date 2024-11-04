@@ -111,7 +111,7 @@ void Input_Handle( Game_t* game )
          Input_HandleMenuStateInput( game );
          break;
       case GAMESTATE_MAPMESSAGE:
-         if ( Input_AnyButtonPressed( &game->input ) )
+         if ( Input_AnyButtonPressed( &( game->input ) ) )
          {
             Game_WipeMessage( game );
             Screen_DrawActors( game );
@@ -119,7 +119,7 @@ void Input_Handle( Game_t* game )
          }
          break;
       case GAMESTATE_MAPSTATUS:
-         if ( Input_AnyButtonPressed( &game->input ) )
+         if ( Input_AnyButtonPressed( &( game->input ) ) )
          {
             Game_WipeMapStatus( game );
             Screen_DrawActors( game );

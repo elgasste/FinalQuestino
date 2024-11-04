@@ -3,6 +3,7 @@
 		{
 			"index": 0,
 			"name": "slime",
+			"nameMacro": "STR_ENEMY_SLIME",
 			"indefiniteArticle": "A",
 			"hp": 3,
 			"atk": 5,
@@ -14,6 +15,7 @@
 		{
 			"index": 1,
 			"name": "red slime",
+			"nameMacro": "STR_ENEMY_REDSLIME",
 			"indefiniteArticle": "A",
 			"hp": 4,
 			"atk": 7,
@@ -25,6 +27,7 @@
 		{
 			"index": 2,
 			"name": "metal slime",
+			"nameMacro": "STR_ENEMY_METALSLIME",
 			"indefiniteArticle": "A",
 			"hp": 4,
 			"atk": 10,
@@ -36,6 +39,7 @@
 		{
 			"index": 3,
 			"name": "drakee",
+			"nameMacro": "STR_ENEMY_DRAKEE",
 			"indefiniteArticle": "A",
 			"hp": 6,
 			"atk": 9,
@@ -47,6 +51,7 @@
 		{
 			"index": 4,
 			"name": "magidrakee",
+			"nameMacro": "STR_ENEMY_MAGIDRAKEE",
 			"indefiniteArticle": "A",
 			"hp": 15,
 			"atk": 14,
@@ -58,6 +63,7 @@
 		{
 			"index": 5,
 			"name": "drakeema",
+			"nameMacro": "STR_ENEMY_DRAKEEMA",
 			"indefiniteArticle": "A",
 			"hp": 20,
 			"atk": 22,
@@ -69,6 +75,7 @@
 		{
 			"index": 6,
 			"name": "ghost",
+			"nameMacro": "STR_ENEMY_GHOST",
 			"indefiniteArticle": "A",
 			"hp": 7,
 			"atk": 11,
@@ -80,6 +87,7 @@
 		{
 			"index": 7,
 			"name": "poltergeist",
+			"nameMacro": "STR_ENEMY_POLTERGEIST",
 			"indefiniteArticle": "A",
 			"hp": 23,
 			"atk": 18,
@@ -91,6 +99,7 @@
 		{
 			"index": 8,
 			"name": "specter",
+			"nameMacro": "STR_ENEMY_SPECTER",
 			"indefiniteArticle": "A",
 			"hp": 36,
 			"atk": 40,
@@ -102,6 +111,7 @@
 		{
 			"index": 9,
 			"name": "magician",
+			"nameMacro": "STR_ENEMY_MAGICIAN",
 			"indefiniteArticle": "A",
 			"hp": 12,
 			"atk": 11,
@@ -113,6 +123,7 @@
 		{
 			"index": 10,
 			"name": "warlock",
+			"nameMacro": "STR_ENEMY_WARLOCK",
 			"indefiniteArticle": "A",
 			"hp": 30,
 			"atk": 28,
@@ -124,6 +135,7 @@
 		{
 			"index": 11,
 			"name": "wizard",
+			"nameMacro": "STR_ENEMY_WIZARD",
 			"indefiniteArticle": "A",
 			"hp": 65,
 			"atk": 80,
@@ -135,6 +147,7 @@
 		{
 			"index": 12,
 			"name": "scorpion",
+			"nameMacro": "STR_ENEMY_SCORPION",
 			"indefiniteArticle": "A",
 			"hp": 20,
 			"atk": 18,
@@ -146,6 +159,7 @@
 		{
 			"index": 13,
 			"name": "metal scorpion",
+			"nameMacro": "STR_ENEMY_METALSCORPION",
 			"indefiniteArticle": "A",
 			"hp": 22,
 			"atk": 36,
@@ -157,6 +171,7 @@
 		{
 			"index": 14,
 			"name": "rogue scorpion",
+			"nameMacro": "STR_ENEMY_ROGUESCORPION",
 			"indefiniteArticle": "A",
 			"hp": 35,
 			"atk": 60,
@@ -168,6 +183,7 @@
 		{
 			"index": 15,
 			"name": "druin",
+			"nameMacro": "STR_ENEMY_DRUIN",
 			"indefiniteArticle": "A",
 			"hp": 22,
 			"atk": 22,
@@ -179,6 +195,7 @@
 		{
 			"index": 16,
 			"name": "druinlord",
+			"nameMacro": "STR_ENEMY_DRUINLORD",
 			"indefiniteArticle": "A",
 			"hp": 35,
 			"atk": 47,
@@ -190,6 +207,7 @@
 		{
 			"index": 17,
 			"name": "droll",
+			"nameMacro": "STR_ENEMY_DROLL",
 			"indefiniteArticle": "A",
 			"hp": 25,
 			"atk": 24,
@@ -201,6 +219,7 @@
 		{
 			"index": 18,
 			"name": "drollmagi",
+			"nameMacro": "STR_ENEMY_DROLLMAGI",
 			"indefiniteArticle": "A",
 			"hp": 38,
 			"atk": 52,
@@ -212,6 +231,7 @@
 		{
 			"index": 19,
 			"name": "skeleton",
+			"nameMacro": "STR_ENEMY_SKELETON",
 			"indefiniteArticle": "A",
 			"hp": 30,
 			"atk": 28,
@@ -223,6 +243,7 @@
 		{
 			"index": 20,
 			"name": "wraith",
+			"nameMacro": "STR_ENEMY_WRAITH",
 			"indefiniteArticle": "A",
 			"hp": 36,
 			"atk": 44,
@@ -234,6 +255,7 @@
 		{
 			"index": 21,
 			"name": "wraith knight",
+			"nameMacro": "STR_ENEMY_WRAITHKNIGHT",
 			"indefiniteArticle": "A",
 			"hp": 46,
 			"atk": 68,
@@ -245,6 +267,7 @@
 		{
 			"index": 22,
 			"name": "demon knight",
+			"nameMacro": "STR_ENEMY_DEMONKNIGHT",
 			"indefiniteArticle": "A",
 			"hp": 50,
 			"atk": 79,
@@ -256,6 +279,7 @@
 		{
 			"index": 23,
 			"name": "wolf",
+			"nameMacro": "STR_ENEMY_WOLF",
 			"indefiniteArticle": "A",
 			"hp": 34,
 			"atk": 40,
@@ -267,6 +291,7 @@
 		{
 			"index": 24,
 			"name": "wolflord",
+			"nameMacro": "STR_ENEMY_WOLFLORD",
 			"indefiniteArticle": "A",
 			"hp": 38,
 			"atk": 50,
@@ -278,6 +303,7 @@
 		{
 			"index": 25,
 			"name": "werewolf",
+			"nameMacro": "STR_ENEMY_WEREWOLF",
 			"indefiniteArticle": "A",
 			"hp": 60,
 			"atk": 86,
@@ -289,6 +315,7 @@
 		{
 			"index": 26,
 			"name": "goldman",
+			"nameMacro": "STR_ENEMY_GOLDMAN",
 			"indefiniteArticle": "A",
 			"hp": 50,
 			"atk": 48,
@@ -300,6 +327,7 @@
 		{
 			"index": 27,
 			"name": "golem",
+			"nameMacro": "STR_ENEMY_GOLEM",
 			"indefiniteArticle": "A",
 			"hp": 70,
 			"atk": 120,
@@ -311,6 +339,7 @@
 		{
 			"index": 28,
 			"name": "stoneman",
+			"nameMacro": "STR_ENEMY_STONEMAN",
 			"indefiniteArticle": "A",
 			"hp": 160,
 			"atk": 100,
@@ -322,6 +351,7 @@
 		{
 			"index": 29,
 			"name": "wyvern",
+			"nameMacro": "STR_ENEMY_WYVERN",
 			"indefiniteArticle": "A",
 			"hp": 42,
 			"atk": 56,
@@ -333,6 +363,7 @@
 		{
 			"index": 30,
 			"name": "magiwyvern",
+			"nameMacro": "STR_ENEMY_MAGIWYVERN",
 			"indefiniteArticle": "A",
 			"hp": 58,
 			"atk": 78,
@@ -344,6 +375,7 @@
 		{
 			"index": 31,
 			"name": "starwyvern",
+			"nameMacro": "STR_ENEMY_STARWYVERN",
 			"indefiniteArticle": "A",
 			"hp": 65,
 			"atk": 86,
@@ -355,6 +387,7 @@
 		{
 			"index": 32,
 			"name": "knight",
+			"nameMacro": "STR_ENEMY_KNIGHT",
 			"indefiniteArticle": "A",
 			"hp": 55,
 			"atk": 76,
@@ -366,6 +399,7 @@
 		{
 			"index": 33,
 			"name": "axe knight",
+			"nameMacro": "STR_ENEMY_AXEKNIGHT",
 			"indefiniteArticle": "An",
 			"hp": 70,
 			"atk": 94,
@@ -377,6 +411,7 @@
 		{
 			"index": 34,
 			"name": "armored knight",
+			"nameMacro": "STR_ENEMY_ARMOREDKNIGHT",
 			"indefiniteArticle": "An",
 			"hp": 90,
 			"atk": 105,
@@ -388,6 +423,7 @@
 		{
 			"index": 35,
 			"name": "green dragon",
+			"nameMacro": "STR_ENEMY_GREENDRAGON",
 			"indefiniteArticle": "A",
 			"hp": 65,
 			"atk": 88,
@@ -399,6 +435,7 @@
 		{
 			"index": 36,
 			"name": "blue dragon",
+			"nameMacro": "STR_ENEMY_BLUEDRAGON",
 			"indefiniteArticle": "A",
 			"hp": 70,
 			"atk": 98,
@@ -410,6 +447,7 @@
 		{
 			"index": 37,
 			"name": "red dragon",
+			"nameMacro": "STR_ENEMY_REDDRAGON",
 			"indefiniteArticle": "A",
 			"hp": 100,
 			"atk": 120,
@@ -421,6 +459,7 @@
 		{
 			"index": 38,
 			"name": "dragonlord wizard",
+			"nameMacro": "STR_ENEMY_DRAGONLORDWIZARD",
 			"indefiniteArticle": "A",
 			"hp": 100,
 			"atk": 60,
@@ -432,6 +471,7 @@
 		{
 			"index": 39,
 			"name": "dragonlord dragon",
+			"nameMacro": "STR_ENEMY_DRAGONLORDDRAGON",
 			"indefiniteArticle": "A",
 			"hp": 200,
 			"atk": 180,

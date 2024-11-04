@@ -10,13 +10,13 @@ void Player_Init( Player_t* player )
    player->velocity.y = 0;
    player->maxVelocity = PLAYERVELOCITY_NORMAL;
 
-   player->stats.HitPoints = 12;
-   player->stats.MaxHitPoints = 12;
-   player->stats.MagicPoints = 0;
-   player->stats.MaxMagicPoints = 0;
-   player->stats.AttackPower = 2;
-   player->stats.DefensePower = 2;
-   player->stats.Agility = 2;
+   player->stats.hitPoints = 12;
+   player->stats.maxHitPoints = 12;
+   player->stats.magicPoints = 0;
+   player->stats.maxMagicPoints = 0;
+   player->stats.attackPower = 2;
+   player->stats.defensePower = 2;
+   player->stats.agility = 2;
 
    player->experience = 0;
    player->gold = 0;
