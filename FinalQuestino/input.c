@@ -126,12 +126,6 @@ void Input_Handle( Game_t* game )
             game->state = GAMESTATE_MAP;
          }
          break;
-      case GAMESTATE_BATTLEFLEEATTEMPT:
-         if ( Input_AnyButtonPressed( &( game->input ) ) )
-         {
-            Battle_ExecuteFlee( game );
-         }
-         break;
       case GAMESTATE_BATTLERESULT:
          if ( Input_AnyButtonPressed( &( game->input ) ) )
          {

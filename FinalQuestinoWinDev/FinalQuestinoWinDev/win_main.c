@@ -13,6 +13,7 @@ internal void HandleKeyboardInput( uint32_t keyCode, LPARAM flags );
 internal void RenderScreen();
 internal void BattleStartAnimationTic();
 internal void BattleAttackAnimationTic();
+internal void BattleFleeAnimationTic();
 internal BOOL WriteScreenBufferToFile( const char* filePath );
 internal void WriteAllTileMapsToBitmapFiles();
 
@@ -104,6 +105,7 @@ int CALLBACK WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
    g_globals.shutdown = False;
    g_globals.isAnimatingBattleStart = False;
    g_globals.isAnimatingBattleAttack = False;
+   g_globals.isAnimatingBattleFlee = False;
 
    while ( 1 )
    {
@@ -123,6 +125,10 @@ int CALLBACK WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
       else if ( g_globals.isAnimatingBattleAttack )
       {
          BattleAttackAnimationTic();
+      }
+      else if ( g_globals.isAnimatingBattleFlee )
+      {
+         BattleFleeAnimationTic();
       }
       else
       {
@@ -161,6 +167,12 @@ void Battle_WinAnimateAttack()
    g_globals.hasBattleAttackFlashed = False;
    g_globals.hasPaddedBattleAttackEnd = False;
    g_globals.battleAttackFlashCounter = 0;
+   g_globals.animationSecondsElapsed = 0.0f;
+}
+
+void Battle_WinAnimateFlee()
+{
+   g_globals.isAnimatingBattleFlee = True;
    g_globals.animationSecondsElapsed = 0.0f;
 }
 
@@ -478,6 +490,17 @@ internal void BattleAttackAnimationTic()
    {
       g_globals.isAnimatingBattleAttack = False;
       Battle_ExecuteAttack( &( g_globals.game ) );
+   }
+}
+
+internal void BattleFleeAnimationTic()
+{
+   g_globals.animationSecondsElapsed += FRAME_SECONDS;
+
+   if ( g_globals.animationSecondsElapsed > 1.2f )
+   {
+      g_globals.isAnimatingBattleFlee = False;
+      Battle_ExecuteFlee( &( g_globals.game ) );
    }
 }
 

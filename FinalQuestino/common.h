@@ -63,10 +63,8 @@
 #define GAMESTATE_BATTLEMENUMAIN             5
 #define GAMESTATE_BATTLEATTACKANIMATION      6
 #define GAMESTATE_BATTLEATTACKRESULT         7
-#define GAMESTATE_BATTLEFLEEATTEMPT          8
-#define GAMESTATE_BATTLEFLEERESULT           9
-#define GAMESTATE_BATTLERESULT               10
-#define GAMESTATE_BATTLECOLLECT              11
+#define GAMESTATE_BATTLERESULT               8
+#define GAMESTATE_BATTLECOLLECT              9
 
 #define BUTTON_LEFT                          0
 #define BUTTON_UP                            1

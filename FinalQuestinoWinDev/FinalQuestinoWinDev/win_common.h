@@ -44,6 +44,8 @@ typedef struct GlobalObjects_t
    Bool_t hasBattleAttackFlashed;
    Bool_t hasPaddedBattleAttackEnd;
 
+   Bool_t isAnimatingBattleFlee;
+
    float animationSecondsElapsed;
 }
 GlobalObjects_t;

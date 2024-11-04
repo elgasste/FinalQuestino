@@ -6,6 +6,7 @@ internal void Battle_AnimateStart( Game_t* game );
 internal void Battle_ShowMessage( Game_t* game, const char* message );
 internal void Battle_WipeMessage( Game_t* game );
 internal void Battle_AnimateAttack( Game_t* game );
+internal void Battle_AnimateFlee( Game_t* game );
 
 void Battle_Start( Game_t* game )
 {
@@ -114,7 +115,7 @@ void Battle_Flee( Game_t* game )
    Menu_WipeCarat( game );
    SPRINTF_P( msg, PSTR( "You attempt to flee..." ) );
    Battle_ShowMessage( game, msg );
-   game->state = GAMESTATE_BATTLEFLEEATTEMPT;
+   Battle_AnimateFlee( game );
 }
 
 void Battle_ExecuteFlee( Game_t* game )
@@ -324,6 +325,17 @@ internal void Battle_AnimateAttack( Game_t* game )
    DELAY_MS( 400 );
 
    Battle_ExecuteAttack( game );
+#endif
+}
+
+internal void Battle_AnimateFlee( Game_t* game )
+{
+#if defined( VISUAL_STUDIO_DEV )
+   UNUSED_PARAM( game );
+   Battle_WinAnimateFlee();
+#else
+   DELAY_MS( 1200 );
+   Battle_ExecuteFlee( game );
 #endif
 }
 

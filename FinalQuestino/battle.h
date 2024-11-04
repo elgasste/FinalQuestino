@@ -30,6 +30,7 @@ void Battle_ExecuteAttack( Game_t* game );
 #if defined( VISUAL_STUDIO_DEV )
 void Battle_WinAnimateStart();
 void Battle_WinAnimateAttack();
+void Battle_WinAnimateFlee();
 #endif
 
 #if defined( __cplusplus )
