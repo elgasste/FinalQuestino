@@ -10,6 +10,8 @@
 #include <limits.h>
 #include <string.h>
 
+#include "strings.h"
+
 // Arduino debug flags
 
 // un-comment to use Serial_PrintLn

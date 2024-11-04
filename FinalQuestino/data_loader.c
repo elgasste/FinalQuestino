@@ -20915,7 +20915,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    for ( i = 0; i < 78; i++ ) { for ( j = 0; j < 32; j++ ) { enemy->tileTextures[i][j] = 0; } };
    if ( index == 0 )
    {
-      SPRINTF_P( enemy->name, PSTR( "slime" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_SLIME ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 3;
       enemy->stats.maxHitPoints = 3;
@@ -21017,7 +21017,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 1 )
    {
-      SPRINTF_P( enemy->name, PSTR( "red slime" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_REDSLIME ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 4;
       enemy->stats.maxHitPoints = 4;
@@ -21114,7 +21114,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 2 )
    {
-      SPRINTF_P( enemy->name, PSTR( "metal slime" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_METALSLIME ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 4;
       enemy->stats.maxHitPoints = 4;
@@ -21211,7 +21211,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 3 )
    {
-      SPRINTF_P( enemy->name, PSTR( "drakee" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_DRAKEE ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 6;
       enemy->stats.maxHitPoints = 6;
@@ -21368,7 +21368,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 4 )
    {
-      SPRINTF_P( enemy->name, PSTR( "magidrakee" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_MAGIDRAKEE ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 15;
       enemy->stats.maxHitPoints = 15;
@@ -21520,7 +21520,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 5 )
    {
-      SPRINTF_P( enemy->name, PSTR( "drakeema" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_DRAKEEMA ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 20;
       enemy->stats.maxHitPoints = 20;
@@ -21672,7 +21672,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 6 )
    {
-      SPRINTF_P( enemy->name, PSTR( "ghost" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_GHOST ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 7;
       enemy->stats.maxHitPoints = 7;
@@ -21945,7 +21945,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 7 )
    {
-      SPRINTF_P( enemy->name, PSTR( "poltergeist" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_POLTERGEIST ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 23;
       enemy->stats.maxHitPoints = 23;
@@ -22218,7 +22218,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 8 )
    {
-      SPRINTF_P( enemy->name, PSTR( "specter" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_SPECTER ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 36;
       enemy->stats.maxHitPoints = 36;
@@ -22492,7 +22492,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 9 )
    {
-      SPRINTF_P( enemy->name, PSTR( "magician" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_MAGICIAN ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 12;
       enemy->stats.maxHitPoints = 12;
@@ -22822,7 +22822,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 10 )
    {
-      SPRINTF_P( enemy->name, PSTR( "warlock" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_WARLOCK ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 30;
       enemy->stats.maxHitPoints = 30;
@@ -23194,7 +23194,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 11 )
    {
-      SPRINTF_P( enemy->name, PSTR( "wizard" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_WIZARD ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 65;
       enemy->stats.maxHitPoints = 65;
@@ -23569,7 +23569,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 12 )
    {
-      SPRINTF_P( enemy->name, PSTR( "scorpion" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_SCORPION ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 20;
       enemy->stats.maxHitPoints = 20;
@@ -23841,7 +23841,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 13 )
    {
-      SPRINTF_P( enemy->name, PSTR( "metal scorpion" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_METALSCORPION ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 22;
       enemy->stats.maxHitPoints = 22;
@@ -24113,7 +24113,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 14 )
    {
-      SPRINTF_P( enemy->name, PSTR( "rogue scorpion" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_ROGUESCORPION ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 35;
       enemy->stats.maxHitPoints = 35;
@@ -24385,7 +24385,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 15 )
    {
-      SPRINTF_P( enemy->name, PSTR( "druin" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_DRUIN ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 22;
       enemy->stats.maxHitPoints = 22;
@@ -24714,7 +24714,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 16 )
    {
-      SPRINTF_P( enemy->name, PSTR( "druinlord" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_DRUINLORD ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 35;
       enemy->stats.maxHitPoints = 35;
@@ -25043,7 +25043,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 17 )
    {
-      SPRINTF_P( enemy->name, PSTR( "droll" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_DROLL ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 25;
       enemy->stats.maxHitPoints = 25;
@@ -25474,7 +25474,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 18 )
    {
-      SPRINTF_P( enemy->name, PSTR( "drollmagi" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_DROLLMAGI ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 38;
       enemy->stats.maxHitPoints = 38;
@@ -25904,7 +25904,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 19 )
    {
-      SPRINTF_P( enemy->name, PSTR( "skeleton" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_SKELETON ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 30;
       enemy->stats.maxHitPoints = 30;
@@ -26292,7 +26292,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 20 )
    {
-      SPRINTF_P( enemy->name, PSTR( "wraith" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_WRAITH ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 36;
       enemy->stats.maxHitPoints = 36;
@@ -26678,7 +26678,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 21 )
    {
-      SPRINTF_P( enemy->name, PSTR( "wraith knight" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_WRAITHKNIGHT ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 46;
       enemy->stats.maxHitPoints = 46;
@@ -27078,7 +27078,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 22 )
    {
-      SPRINTF_P( enemy->name, PSTR( "demon knight" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_DEMONKNIGHT ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 50;
       enemy->stats.maxHitPoints = 50;
@@ -27466,7 +27466,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 23 )
    {
-      SPRINTF_P( enemy->name, PSTR( "wolf" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_WOLF ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 34;
       enemy->stats.maxHitPoints = 34;
@@ -27933,7 +27933,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 24 )
    {
-      SPRINTF_P( enemy->name, PSTR( "wolflord" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_WOLFLORD ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 38;
       enemy->stats.maxHitPoints = 38;
@@ -28407,7 +28407,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 25 )
    {
-      SPRINTF_P( enemy->name, PSTR( "werewolf" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_WEREWOLF ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 60;
       enemy->stats.maxHitPoints = 60;
@@ -28880,7 +28880,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 26 )
    {
-      SPRINTF_P( enemy->name, PSTR( "goldman" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_GOLDMAN ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 50;
       enemy->stats.maxHitPoints = 50;
@@ -29523,7 +29523,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 27 )
    {
-      SPRINTF_P( enemy->name, PSTR( "golem" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_GOLEM ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 70;
       enemy->stats.maxHitPoints = 70;
@@ -30166,7 +30166,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 28 )
    {
-      SPRINTF_P( enemy->name, PSTR( "stoneman" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_STONEMAN ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 160;
       enemy->stats.maxHitPoints = 160;
@@ -30808,7 +30808,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 29 )
    {
-      SPRINTF_P( enemy->name, PSTR( "wyvern" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_WYVERN ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 42;
       enemy->stats.maxHitPoints = 42;
@@ -31201,7 +31201,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 30 )
    {
-      SPRINTF_P( enemy->name, PSTR( "magiwyvern" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_MAGIWYVERN ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 58;
       enemy->stats.maxHitPoints = 58;
@@ -31594,7 +31594,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 31 )
    {
-      SPRINTF_P( enemy->name, PSTR( "starwyvern" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_STARWYVERN ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 65;
       enemy->stats.maxHitPoints = 65;
@@ -31978,7 +31978,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 32 )
    {
-      SPRINTF_P( enemy->name, PSTR( "knight" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_KNIGHT ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 55;
       enemy->stats.maxHitPoints = 55;
@@ -32513,7 +32513,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 33 )
    {
-      SPRINTF_P( enemy->name, PSTR( "axe knight" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_AXEKNIGHT ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_AN;
       enemy->stats.hitPoints = 70;
       enemy->stats.maxHitPoints = 70;
@@ -33125,7 +33125,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 34 )
    {
-      SPRINTF_P( enemy->name, PSTR( "armored knight" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_ARMOREDKNIGHT ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_AN;
       enemy->stats.hitPoints = 90;
       enemy->stats.maxHitPoints = 90;
@@ -33811,7 +33811,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 35 )
    {
-      SPRINTF_P( enemy->name, PSTR( "green dragon" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_GREENDRAGON ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 65;
       enemy->stats.maxHitPoints = 65;
@@ -34354,7 +34354,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 36 )
    {
-      SPRINTF_P( enemy->name, PSTR( "blue dragon" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_BLUEDRAGON ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 70;
       enemy->stats.maxHitPoints = 70;
@@ -34896,7 +34896,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 37 )
    {
-      SPRINTF_P( enemy->name, PSTR( "red dragon" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_REDDRAGON ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 100;
       enemy->stats.maxHitPoints = 100;
@@ -35438,7 +35438,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 38 )
    {
-      SPRINTF_P( enemy->name, PSTR( "dragonlord wizard" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_DRAGONLORDWIZARD ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 100;
       enemy->stats.maxHitPoints = 100;
@@ -35879,7 +35879,7 @@ void Enemy_Load( Enemy_t* enemy, uint8_t index )
    }
    else if ( index == 39 )
    {
-      SPRINTF_P( enemy->name, PSTR( "dragonlord dragon" ) );
+      SPRINTF_P( enemy->name, PSTR( STR_ENEMY_DRAGONLORDDRAGON ) );
       enemy->indefiniteArticle = INDEFINITEARTICLE_A;
       enemy->stats.hitPoints = 200;
       enemy->stats.maxHitPoints = 200;

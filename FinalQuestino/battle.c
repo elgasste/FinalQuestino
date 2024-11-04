@@ -55,18 +55,18 @@ void Battle_StartHUD( Game_t* game )
 
    // quick stats
    Screen_DrawRect( &( game->screen ), 16, 16, 76, 36, DARKGRAY );
-   SPRINTF_P( str, PSTR( "HP:%u" ), game->player.stats.hitPoints );
+   SPRINTF_P( str, PSTR( STR_BATTLE_QUICKSTATSHP ), game->player.stats.hitPoints );
    Screen_DrawText( &( game->screen ), str, 24, 24, DARKGRAY, WHITE );
-   SPRINTF_P( str, PSTR( "MP:%u" ), game->player.stats.magicPoints );
+   SPRINTF_P( str, PSTR( STR_BATTLE_QUICKSTATSMP ), game->player.stats.magicPoints );
    Screen_DrawText( &( game->screen ), str, 24, 36, DARKGRAY, WHITE );
 
    if ( game->battle.enemy.indefiniteArticle == INDEFINITEARTICLE_A )
    {
-      SPRINTF_P( str, PSTR( "A %s approaches! Command?" ), game->battle.enemy.name );
+      SPRINTF_P( str, PSTR( STR_BATTLE_APPROACHINDEFINITEA ), game->battle.enemy.name );
    }
    else
    {
-      SPRINTF_P( str, PSTR( "An %s approaches! Command?" ), game->battle.enemy.name );
+      SPRINTF_P( str, PSTR( STR_BATTLE_APPROACHINDEFINITEAN ), game->battle.enemy.name );
    }
 
    Battle_ShowMessage( game, str );
@@ -80,7 +80,7 @@ void Battle_Attack( Game_t* game )
    char msg[64];
 
    Menu_WipeCarat( game );
-   SPRINTF_P( msg, PSTR( "You attack!" ) );
+   SPRINTF_P( msg, PSTR( STR_BATTLE_PLAYERATTACK ) );
    Battle_ShowMessage( game, msg );
    game->state = GAMESTATE_BATTLEATTACKANIMATION;
    Battle_AnimateAttack( game );
@@ -92,7 +92,7 @@ void Battle_Spell( Game_t* game )
 
    Menu_WipeCarat( game );
    Screen_WipeEnemy( game, 160, 40 );
-   SPRINTF_P( msg, PSTR( "You scream 'ABRA KEDAVRA!!', which somehow kills him." ) );
+   SPRINTF_P( msg, PSTR( STR_TEMP_SPELL ) );
    Battle_ShowMessage( game, msg );
    game->state = GAMESTATE_BATTLERESULT;
 }
@@ -103,7 +103,7 @@ void Battle_Item( Game_t* game )
 
    Menu_WipeCarat( game );
    Screen_WipeEnemy( game, 160, 40 );
-   SPRINTF_P( msg, PSTR( "You throw spare change from your pocket, and he dies." ) );
+   SPRINTF_P( msg, PSTR( STR_TEMP_ITEM ) );
    Battle_ShowMessage( game, msg );
    game->state = GAMESTATE_BATTLERESULT;
 }
@@ -113,7 +113,7 @@ void Battle_Flee( Game_t* game )
    char msg[32];
 
    Menu_WipeCarat( game );
-   SPRINTF_P( msg, PSTR( "You attempt to flee..." ) );
+   SPRINTF_P( msg, PSTR( STR_BATTLE_PLAYERFLEE ) );
    Battle_ShowMessage( game, msg );
    Battle_AnimateFlee( game );
 }
@@ -159,13 +159,13 @@ void Battle_ExecuteFlee( Game_t* game )
    if ( success )
    {
       Screen_WipeEnemy( game, 160, 40 );
-      SPRINTF_P( msg, PSTR( "You have successfully evaded the %s!" ), game->battle.enemy.name );
+      SPRINTF_P( msg, PSTR( STR_BATTLE_FLEESUCCESS ), game->battle.enemy.name );
       Battle_ShowMessage( game, msg );
       game->state = GAMESTATE_BATTLECOLLECT;
    }
    else
    {
-      SPRINTF_P( msg, PSTR( "The %s has blocked your escape! Command?" ), game->battle.enemy.name );
+      SPRINTF_P( msg, PSTR( STR_BATTLE_FLEEBLOCK ), game->battle.enemy.name );
       Battle_ShowMessage( game, msg );
       game->state = GAMESTATE_BATTLEMENUMAIN;
    }
@@ -205,7 +205,7 @@ void Battle_Collect( Game_t* game )
    }
    else if ( experience == 0 && gold > 0 )
    {
-      SPRINTF_P( msg, PSTR( "You have gained %u gold." ), gold );
+      SPRINTF_P( msg, PSTR( STR_BATTLE_GOLDHAUL ), gold );
       Battle_ShowMessage( game, msg );
       game->state = GAMESTATE_BATTLECOLLECT;
    }
@@ -213,12 +213,12 @@ void Battle_Collect( Game_t* game )
    {
       if ( gold > 0 )
       {
-         SPRINTF_P( msg, PSTR( "You have gained %u experience and %u gold." ), experience, gold );
+         SPRINTF_P( msg, PSTR( STR_BATTLE_EXPERIENCEGOLDHAUL ), experience, gold );
          Battle_ShowMessage( game, msg );
       }
       else
       {
-         SPRINTF_P( msg, PSTR( "You have gained %u experience." ), experience );
+         SPRINTF_P( msg, PSTR( STR_BATTLE_EXPERIENCEHAUL ), experience );
          Battle_ShowMessage( game, msg );
       }
 
@@ -360,7 +360,7 @@ void Battle_ExecuteAttack( Game_t* game )
    {
       Screen_WipeEnemy( game, 160, 40 );
       SPRINTF_P( msg,
-                 PSTR( "The %s's hit points have been reduced by %u. You have defeated the %s!" ),
+                 PSTR( STR_BATTLE_ATTACKENEMYDEATH ),
                  enemy->name,
                  payload,
                  enemy->name );
@@ -383,7 +383,7 @@ void Battle_ExecuteAttack( Game_t* game )
    }
    else
    {
-      SPRINTF_P( msg, PSTR( "The %s's hit points have been reduced by %u. Command?" ), enemy->name, payload );
+      SPRINTF_P( msg, PSTR( STR_BATTLE_ATTACKENEMY ), enemy->name, payload );
       Battle_ShowMessage( game, msg );
       game->state = GAMESTATE_BATTLEMENUMAIN;
    }
