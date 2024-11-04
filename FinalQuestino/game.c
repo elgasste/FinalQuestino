@@ -3,7 +3,6 @@
 #include "battle.h"
 
 internal void Game_RollEncounter( Game_t* game, uint8_t encounterRate );
-internal Bool_t Game_OnAnySpecialEnemyTile( Game_t* game );
 internal Bool_t Game_CollectTreasure( Game_t* game, uint32_t treasureFlag );
 
 void Game_Init( Game_t* game )
@@ -148,9 +147,9 @@ void Game_ShowMapQuickStats( Game_t* game )
    char str[10];
 
    Screen_DrawRect( &( game->screen ), 16, 16, 76, 60, DARKGRAY );
-   SPRINTF_P( str, PSTR( "HP:%u" ), game->player.stats.HitPoints );
+   SPRINTF_P( str, PSTR( "HP:%u" ), game->player.stats.hitPoints );
    Screen_DrawText( &( game->screen ), str, 24, 24, DARKGRAY, WHITE );
-   SPRINTF_P( str, PSTR( "MP:%u" ), game->player.stats.MagicPoints );
+   SPRINTF_P( str, PSTR( "MP:%u" ), game->player.stats.magicPoints );
    Screen_DrawText( &( game->screen ), str, 24, 36, DARKGRAY, WHITE );
    SPRINTF_P( str, PSTR( " G:%u" ), game->player.gold );
    Screen_DrawText( &( game->screen ), str, 24, 48, DARKGRAY, WHITE );
@@ -221,7 +220,7 @@ Bool_t Game_OnSpecialEnemyTile( Game_t* game, uint8_t specialEnemyId )
    return False;
 }
 
-internal Bool_t Game_OnAnySpecialEnemyTile( Game_t* game )
+Bool_t Game_OnAnySpecialEnemyTile( Game_t* game )
 {
    return Game_OnSpecialEnemyTile( game, SPECIALENEMYID_GREENDRAGON ) ||
           Game_OnSpecialEnemyTile( game, SPECIALENEMYID_GOLEM ) ||
@@ -251,15 +250,15 @@ void Game_Status( Game_t* game )
 
    SPRINTF_P( str, PSTR( "Lvl: %u" ), Player_GetLevel( player ) );
    Screen_DrawText( &( game->screen ), str, 24, 24, DARKGRAY, WHITE );
-   SPRINTF_P( str, PSTR( " HP: %u/%u" ), player->stats.HitPoints, player->stats.MaxHitPoints );
+   SPRINTF_P( str, PSTR( " HP: %u/%u" ), player->stats.hitPoints, player->stats.maxHitPoints );
    Screen_DrawText( &( game->screen ), str, 24, 36, DARKGRAY, WHITE );
-   SPRINTF_P( str, PSTR( " MP: %u/%u" ), player->stats.MagicPoints, player->stats.MaxMagicPoints );
+   SPRINTF_P( str, PSTR( " MP: %u/%u" ), player->stats.magicPoints, player->stats.maxMagicPoints );
    Screen_DrawText( &( game->screen ), str, 24, 48, DARKGRAY, WHITE );
-   SPRINTF_P( str, PSTR( "Atk: %u" ), player->stats.AttackPower );
+   SPRINTF_P( str, PSTR( "Atk: %u" ), player->stats.attackPower );
    Screen_DrawText( &( game->screen ), str, 24, 60, DARKGRAY, WHITE );
-   SPRINTF_P( str, PSTR( "Def: %u" ), player->stats.DefensePower );
+   SPRINTF_P( str, PSTR( "Def: %u" ), player->stats.defensePower );
    Screen_DrawText( &( game->screen ), str, 24, 72, DARKGRAY, WHITE );
-   SPRINTF_P( str, PSTR( "Agl: %u" ), player->stats.Agility );
+   SPRINTF_P( str, PSTR( "Agl: %u" ), player->stats.agility );
    Screen_DrawText( &( game->screen ), str, 24, 84, DARKGRAY, WHITE );
    SPRINTF_P( str, PSTR( "Exp: %u" ), player->experience );
    Screen_DrawText( &( game->screen ), str, 24, 96, DARKGRAY, WHITE );

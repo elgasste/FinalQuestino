@@ -63,8 +63,10 @@
 #define GAMESTATE_BATTLEMENUMAIN             5
 #define GAMESTATE_BATTLEATTACKANIMATION      6
 #define GAMESTATE_BATTLEATTACKRESULT         7
-#define GAMESTATE_BATTLERESULT               8
-#define GAMESTATE_BATTLECOLLECT              9
+#define GAMESTATE_BATTLEFLEEATTEMPT          8
+#define GAMESTATE_BATTLEFLEERESULT           9
+#define GAMESTATE_BATTLERESULT               10
+#define GAMESTATE_BATTLECOLLECT              11
 
 #define BUTTON_LEFT                          0
 #define BUTTON_UP                            1
@@ -156,6 +158,8 @@
 #define ENCOUNTERRATE_LOW                    4
 #define ENCOUNTERRATE_MEDIUM                 6
 #define ENCOUNTERRATE_HIGH                   8
+
+#define BATTLE_FLEEAGILITYTHRESHOLD          96
 
 typedef uint8_t Bool_t;
 #define True 1

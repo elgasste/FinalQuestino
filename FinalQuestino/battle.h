@@ -22,6 +22,7 @@ void Battle_Attack( Game_t* game );
 void Battle_Spell( Game_t* game );
 void Battle_Item( Game_t* game );
 void Battle_Flee( Game_t* game );
+void Battle_ExecuteFlee( Game_t* game );
 void Battle_Collect( Game_t* game );
 void Battle_Done( Game_t* game );
 void Battle_ExecuteAttack( Game_t* game );

@@ -54,9 +54,9 @@ void Battle_StartHUD( Game_t* game )
 
    // quick stats
    Screen_DrawRect( &( game->screen ), 16, 16, 76, 36, DARKGRAY );
-   SPRINTF_P( str, PSTR( "HP:%u" ), game->player.stats.HitPoints );
+   SPRINTF_P( str, PSTR( "HP:%u" ), game->player.stats.hitPoints );
    Screen_DrawText( &( game->screen ), str, 24, 24, DARKGRAY, WHITE );
-   SPRINTF_P( str, PSTR( "MP:%u" ), game->player.stats.MagicPoints );
+   SPRINTF_P( str, PSTR( "MP:%u" ), game->player.stats.magicPoints );
    Screen_DrawText( &( game->screen ), str, 24, 36, DARKGRAY, WHITE );
 
    if ( game->battle.enemy.indefiniteArticle == INDEFINITEARTICLE_A )
@@ -109,13 +109,65 @@ void Battle_Item( Game_t* game )
 
 void Battle_Flee( Game_t* game )
 {
-   char msg[64];
+   char msg[32];
 
    Menu_WipeCarat( game );
-   Screen_WipeEnemy( game, 160, 40 );
-   SPRINTF_P( msg, PSTR( "You sneak out without him noticing. How brave!" ) );
+   SPRINTF_P( msg, PSTR( "You attempt to flee..." ) );
    Battle_ShowMessage( game, msg );
-   game->state = GAMESTATE_BATTLERESULT;
+   game->state = GAMESTATE_BATTLEFLEEATTEMPT;
+}
+
+void Battle_ExecuteFlee( Game_t* game )
+{
+   BattleStats_t* playerStats = &( game->player.stats );
+   BattleStats_t* enemyStats = &( game->battle.enemy.stats );
+   Bool_t success = False;
+   int16_t agilityDiff;
+   uint8_t fleeChance;
+   char msg[64];
+
+   if ( !Game_OnAnySpecialEnemyTile( game ) && playerStats->agility > 0 )
+   {
+      if ( enemyStats->agility == 0 )
+      {
+         success = True;
+      }
+      else if ( playerStats->agility > enemyStats->agility ||
+                ( enemyStats->agility - playerStats->agility ) <= BATTLE_FLEEAGILITYTHRESHOLD )
+      {
+         agilityDiff = (int16_t)playerStats->agility - enemyStats->agility;
+
+         if ( agilityDiff > BATTLE_FLEEAGILITYTHRESHOLD )
+         {
+            success = True;
+         }
+         else
+         {
+            fleeChance = (uint8_t)( ( agilityDiff < 0 ) ?
+                                    ( (float)( -agilityDiff ) / BATTLE_FLEEAGILITYTHRESHOLD ) * 100 :
+                                    ( (float)agilityDiff / BATTLE_FLEEAGILITYTHRESHOLD ) * 100 );
+
+            if ( Random_Percent() <= fleeChance )
+            {
+               success = True;
+            }
+         }
+      }
+   }
+
+   if ( success )
+   {
+      Screen_WipeEnemy( game, 160, 40 );
+      SPRINTF_P( msg, PSTR( "You have successfully evaded the %s!" ), game->battle.enemy.name );
+      Battle_ShowMessage( game, msg );
+      game->state = GAMESTATE_BATTLECOLLECT;
+   }
+   else
+   {
+      SPRINTF_P( msg, PSTR( "The %s has blocked your escape! Command?" ), game->battle.enemy.name );
+      Battle_ShowMessage( game, msg );
+      game->state = GAMESTATE_BATTLEMENUMAIN;
+   }
 }
 
 void Battle_Collect( Game_t* game )
@@ -283,15 +335,16 @@ void Battle_ExecuteAttack( Game_t* game )
    char msg[128];
 
    // TODO: try slightly randomizing the payload, and also take the enemy's stats into account
-   payload = player->stats.AttackPower;
-   if ( payload > enemy->stats.HitPoints )
+   payload = player->stats.attackPower;
+
+   if ( payload > enemy->stats.hitPoints )
    {
-      payload = enemy->stats.HitPoints;
+      payload = enemy->stats.hitPoints;
    }
 
-   enemy->stats.HitPoints -= payload;
+   enemy->stats.hitPoints -= payload;
 
-   if ( enemy->stats.HitPoints == 0 )
+   if ( enemy->stats.hitPoints == 0 )
    {
       Screen_WipeEnemy( game, 160, 40 );
       SPRINTF_P( msg,

@@ -48,6 +48,7 @@ void Game_ShowMapQuickStats( Game_t* game );
 void Game_WipeMapQuickStats( Game_t* game );
 void Game_WipeMapStatus( Game_t* game );
 Bool_t Game_OnSpecialEnemyTile( Game_t* game, uint8_t specialEnemyId );
+Bool_t Game_OnAnySpecialEnemyTile( Game_t* game );
 void Game_Talk( Game_t* game );
 void Game_Status( Game_t* game );
 void Game_Search( Game_t* game );
