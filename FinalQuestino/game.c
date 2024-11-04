@@ -279,18 +279,10 @@ void Game_Search( Game_t* game )
    {
       if ( Game_CollectTreasure( game, treasureFlag ) )
       {
-         SPRINTF_P( msg, PSTR( STR_TEMP_COLLECTTREASURE ) );
-         Game_ShowMessage( game, msg );
-
          y = ( uint8_t )( game->tileMap.tileIndexCache / MAP_TILES_X );
          x = ( uint8_t )( game->tileMap.tileIndexCache - ( y * MAP_TILES_X ) );
          Screen_WipeTileMapSection( game, (float)x * MAP_TILE_SIZE, (float)y * MAP_TILE_SIZE, MAP_TILE_SIZE, MAP_TILE_SIZE );
          Screen_DrawPlayer( game );
-      }
-      else
-      {
-         SPRINTF_P( msg, PSTR( STR_MAP_ITEMCAPACITY ) );
-         Game_ShowMessage( game, msg );
       }
    }
    else
@@ -304,9 +296,41 @@ void Game_Search( Game_t* game )
 
 internal Bool_t Game_CollectTreasure( Game_t* game, uint32_t treasureFlag )
 {
-   // TODO: check if we can carry any more of whatever this is
-   game->treasureFlags ^= treasureFlag;
-   return True;
+   Bool_t collected = False;
+   char msg[128];
+
+   // TODO: there's a chance we could save some memory here if we need to,
+   // by wrapping the item names in PSTR.
+   switch ( treasureFlag )
+   {
+      case 0x1:
+         collected = Player_CollectItem( &( game->player ), ITEM_KEY );
+         if ( collected ) { SPRINTF_P( msg, PSTR( STR_TREASURE_ITEMCOLLECTED ), STR_ITEM_AKEY ); }
+         else { SPRINTF_P( msg, PSTR( STR_TREASURE_ITEMDENIED ), STR_ITEM_AKEY ); }
+         break;
+      case 0x2:
+         collected = ( Player_CollectGold( &( game->player ), 120 ) > 0 ) ? True : False;
+         if ( collected ) { SPRINTF_P( msg, PSTR( STR_TREASURE_GOLDCOLLECTED ), 120 ); }
+         else { SPRINTF_P( msg, PSTR( STR_TREASURE_GOLDDENIED ), 120 ); }
+         break;
+      case 0x4:
+         collected = Player_CollectItem( &( game->player ), ITEM_HERB );
+         if ( collected ) { SPRINTF_P( msg, PSTR( STR_TREASURE_ITEMCOLLECTED ), STR_ITEM_ANHERB ); }
+         else { SPRINTF_P( msg, PSTR( STR_TREASURE_ITEMDENIED ), STR_ITEM_ANHERB ); }
+         break;
+      default:
+         SPRINTF_P( msg, PSTR( STR_ITEM_ERR ) );
+         break;
+   }
+   
+   Game_ShowMessage( game, msg );
+
+   if ( collected )
+   {
+      game->treasureFlags ^= treasureFlag;
+   }
+
+   return collected;
 }
 
 void Game_MapSpell( Game_t* game )

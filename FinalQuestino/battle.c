@@ -122,30 +122,10 @@ void Battle_Flee( Game_t* game )
 void Battle_Collect( Game_t* game )
 {
    uint16_t experience, gold;
-   Enemy_t* enemy = &( game->battle.enemy );
-   Player_t* player = &( game->player );
    char msg[64];
 
-   if ( enemy->experience < ( INT16_MAX - player->experience ) )
-   {
-      experience = enemy->experience;
-   }
-   else
-   {
-      experience = INT16_MAX - player->experience;
-   }
-
-   if ( enemy->gold < ( INT16_MAX - player->gold ) )
-   {
-      gold = enemy->gold;
-   }
-   else
-   {
-      gold = INT16_MAX - player->gold;
-   }
-
-   player->experience += experience;
-   player->gold += gold;
+   experience = Player_CollectExperience( &( game->player ), game->battle.enemy.experience );
+   gold = Player_CollectGold( &( game->player ), game->battle.enemy.gold );
 
    if ( experience == 0 && gold == 0 )
    {

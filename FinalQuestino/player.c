@@ -20,6 +20,7 @@ void Player_Init( Player_t* player )
 
    player->experience = 0;
    player->gold = 0;
+   player->items = 0;
 }
 
 uint8_t Player_GetLevel( Player_t* player )
@@ -54,4 +55,80 @@ uint8_t Player_GetLevel( Player_t* player )
    else if ( player->experience < 62000 ) { return 28; }
    else if ( player->experience < 65535 ) { return 29; }
    else { return 30; }
+}
+
+uint16_t Player_CollectGold( Player_t* player, uint16_t gold )
+{
+   if ( gold < ( UINT16_MAX - player->gold ) )
+   {
+      player->gold += gold;
+      return gold;
+   }
+   else
+   {
+      player->gold = UINT16_MAX;
+      return UINT16_MAX - player->gold;
+   }
+}
+
+uint16_t Player_CollectExperience( Player_t* player, uint16_t experience )
+{
+   if ( experience < ( UINT16_MAX - player->experience ) )
+   {
+      player->experience += experience;
+      return experience;
+   }
+   else
+   {
+      player->experience = UINT16_MAX;
+      return UINT16_MAX - player->experience;
+   }
+}
+
+Bool_t Player_CollectItem( Player_t* player, uint8_t item )
+{
+   Bool_t collected = False;
+   int8_t count;
+
+   switch ( item )
+   {
+      case ITEM_KEY:
+         count = GET_ITEM_KEYCOUNT( player->items );
+         if ( count < ITEM_MAXKEYS )
+         {
+            count++;
+            SET_ITEM_KEYCOUNT( player->items, count );
+            collected = True;
+         }
+         break;
+      case ITEM_HERB:
+         count = GET_ITEM_HERBCOUNT( player->items );
+         if ( count < ITEM_MAXHERBS )
+         {
+            count++;
+            SET_ITEM_HERBCOUNT( player->items, count );
+            collected = True;
+         }
+         break;
+      case ITEM_WING:
+         count = GET_ITEM_WINGCOUNT( player->items );
+         if ( count < ITEM_MAXWINGS )
+         {
+            count++;
+            SET_ITEM_WINGCOUNT( player->items, count );
+            collected = True;
+         }
+         break;
+      case ITEM_FAIRYWATER:
+         count = GET_ITEM_FAIRYWATERCOUNT( player->items );
+         if ( count < ITEM_MAXFAIRYWATERS )
+         {
+            count++;
+            SET_ITEM_FAIRYWATERCOUNT( player->items, count );
+            collected = True;
+         }
+         break;
+   }
+
+   return collected;
 }
