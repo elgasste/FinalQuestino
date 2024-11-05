@@ -297,26 +297,24 @@ void Game_Search( Game_t* game )
 internal Bool_t Game_CollectTreasure( Game_t* game, uint32_t treasureFlag )
 {
    Bool_t collected = False;
+   char itemStr[32];
    char msg[128];
 
-   // TODO: there's a chance we could save some memory here if we need to,
-   // by wrapping the item names in PSTR.
    switch ( treasureFlag )
    {
       case 0x1:
          collected = Player_CollectItem( &( game->player ), ITEM_KEY );
-         if ( collected ) { SPRINTF_P( msg, PSTR( STR_TREASURE_ITEMCOLLECTED ), STR_ITEM_AKEY ); }
-         else { SPRINTF_P( msg, PSTR( STR_TREASURE_ITEMDENIED ), STR_ITEM_AKEY ); }
+         SPRINTF_P( itemStr, PSTR( STR_ITEM_AKEY ) );
+         SPRINTF_P( msg, collected ? PSTR( STR_TREASURE_ITEMCOLLECTED ) : PSTR( STR_TREASURE_ITEMDENIED ), itemStr );
          break;
       case 0x2:
          collected = ( Player_CollectGold( &( game->player ), 120 ) > 0 ) ? True : False;
-         if ( collected ) { SPRINTF_P( msg, PSTR( STR_TREASURE_GOLDCOLLECTED ), 120 ); }
-         else { SPRINTF_P( msg, PSTR( STR_TREASURE_GOLDDENIED ), 120 ); }
+         SPRINTF_P( msg, collected ? PSTR( STR_TREASURE_GOLDCOLLECTED ) : PSTR( STR_TREASURE_GOLDDENIED ), 120);
          break;
       case 0x4:
          collected = Player_CollectItem( &( game->player ), ITEM_HERB );
-         if ( collected ) { SPRINTF_P( msg, PSTR( STR_TREASURE_ITEMCOLLECTED ), STR_ITEM_ANHERB ); }
-         else { SPRINTF_P( msg, PSTR( STR_TREASURE_ITEMDENIED ), STR_ITEM_ANHERB ); }
+         SPRINTF_P( itemStr, PSTR( STR_ITEM_ANHERB ) );
+         SPRINTF_P( msg, collected ? PSTR( STR_TREASURE_ITEMCOLLECTED ) : PSTR( STR_TREASURE_ITEMDENIED ), itemStr );
          break;
       default:
          SPRINTF_P( msg, PSTR( STR_ITEM_ERR ) );
