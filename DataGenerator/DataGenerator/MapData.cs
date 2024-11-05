@@ -455,9 +455,12 @@ namespace DataGenerator
          new( 0, new() ),     // 70
 
          // tantegel
-         new( 1, new() { 0 | ( 1 << 13 ) | ( 2 << 9 ) | 146 } ), // 71
+         new( 4, new() { 0 | ( 1 << 13 ) | ( 2 << 9 ) | 146,
+                         0 | ( 1 << 13 ) | ( 0 << 9 ) | 242,
+                         0 | ( 1 << 13 ) | ( 0 << 9 ) | 261,
+                         0 | ( 1 << 13 ) | ( 0 << 9 ) | 282 } ), // 71
          new( 0, new() ),     // 72
-         new( 0, new() ),     // 73
+         new( 1, new() { 0 | ( 1 << 13 ) | ( 0 << 9 ) | 1 } ), // 73
          new( 0, new() ),     // 74
          new( 0, new() ),     // 75
          new( 1, new() { 0 | ( 1 << 13 ) | ( 3 << 9 ) | 68 } ), // 76
@@ -491,8 +494,10 @@ namespace DataGenerator
 
       public static List<Tuple<int, List<Tuple<int, int>>>> MapTreasures = new()
       {
-         new( 77, new() { new( 71, 0 ), new( 129, 1 ), new( 130, 2) } ), // tantegel throne room
-         new( 87, new() { new( 109, 3 ) } )                              // erdrick's cave
+         new( 77, new() { new( 71, 0 ), new( 129, 1 ), new( 130, 2 ) } ),  // tantegel throne room
+         new( 71, new() { new( 242, 3 ), new( 261, 4 ), new( 282, 5 ) } ), // tantegel ground floor (upper-left)
+         new( 73, new() { new( 1, 6 ) } ),                                 // tantegel ground floor (lower-left)
+         new( 87, new() { new( 109, 7 ) } )                                // erdrick's cave
       };
 
       public static List<List<int>> MapTiles = new()

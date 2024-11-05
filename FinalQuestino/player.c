@@ -128,6 +128,10 @@ Bool_t Player_CollectItem( Player_t* player, uint8_t item )
             collected = True;
          }
          break;
+      case ITEM_TABLET:
+         SET_ITEM_HASTABLET( player->items, True );
+         collected = True;
+         break;
    }
 
    return collected;

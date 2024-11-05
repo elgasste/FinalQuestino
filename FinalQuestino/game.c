@@ -296,29 +296,42 @@ void Game_Search( Game_t* game )
 
 internal Bool_t Game_CollectTreasure( Game_t* game, uint32_t treasureFlag )
 {
+   uint16_t gold = 0;
    Bool_t collected = False;
    char itemStr[32];
    char msg[128];
 
    switch ( treasureFlag )
    {
-      case 0x1:
+      case 0x1:  // tantegel throne room, upper-right chest
          collected = Player_CollectItem( &( game->player ), ITEM_KEY );
          SPRINTF_P( itemStr, PSTR( STR_ITEM_AKEY ) );
          SPRINTF_P( msg, collected ? PSTR( STR_TREASURE_ITEMCOLLECTED ) : PSTR( STR_TREASURE_ITEMDENIED ), itemStr );
          break;
-      case 0x2:
-         collected = ( Player_CollectGold( &( game->player ), 120 ) > 0 ) ? True : False;
-         SPRINTF_P( msg, collected ? PSTR( STR_TREASURE_GOLDCOLLECTED ) : PSTR( STR_TREASURE_GOLDDENIED ), 120);
-         break;
-      case 0x4:
+      case 0x2: gold = 120; break;  // tantegel throne room, lower-left chest
+      case 0x4:  // tantegel throne room, lower-right chest
          collected = Player_CollectItem( &( game->player ), ITEM_HERB );
          SPRINTF_P( itemStr, PSTR( STR_ITEM_ANHERB ) );
+         SPRINTF_P( msg, collected ? PSTR( STR_TREASURE_ITEMCOLLECTED ) : PSTR( STR_TREASURE_ITEMDENIED ), itemStr );
+         break;
+      case 0x8: gold = 10; break;  // tantegel ground floor, upper-left area, upper-left chest
+      case 0x10: gold = 15; break;  // tantegel ground floor, upper-left area, lower-left chest
+      case 0x20: gold = 12; break;  // tantegel ground floor, upper-left area, lower-right chest
+      case 0x40: gold = 30; break;  // tantegel ground floor, lower-left area
+      case 0x80:  // erdrick's cave
+         collected = Player_CollectItem( &( game->player ), ITEM_TABLET );
+         SPRINTF_P( itemStr, PSTR( STR_ITEM_ERDRICKSTABLET ) );
          SPRINTF_P( msg, collected ? PSTR( STR_TREASURE_ITEMCOLLECTED ) : PSTR( STR_TREASURE_ITEMDENIED ), itemStr );
          break;
       default:
          SPRINTF_P( msg, PSTR( STR_ITEM_ERR ) );
          break;
+   }
+
+   if ( gold > 0 )
+   {
+      collected = ( Player_CollectGold( &( game->player ), gold ) > 0 ) ? True : False;
+      SPRINTF_P( msg, collected ? PSTR( STR_TREASURE_GOLDCOLLECTED ) : PSTR( STR_TREASURE_GOLDDENIED ), gold );
    }
    
    Game_ShowMessage( game, msg );

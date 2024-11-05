@@ -17842,8 +17842,11 @@ void TileMap_LoadTileMap( TileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
-      map->spriteCount = 1;
+      map->spriteCount = 4;
       map->spriteData[0] = 0x2492;
+      map->spriteData[1] = 0x20F2;
+      map->spriteData[2] = 0x2105;
+      map->spriteData[3] = 0x211A;
    }
    else if ( index == 72 )
    {
@@ -18184,7 +18187,8 @@ void TileMap_LoadTileMap( TileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
-      map->spriteCount = 0;
+      map->spriteCount = 1;
+      map->spriteData[0] = 0x2001;
    }
    else if ( index == 74 )
    {
@@ -20900,8 +20904,16 @@ uint32_t TileMap_GetTreasureFlag( uint8_t tileMapIndex, uint16_t tileIndex )
          if ( tileIndex == 129 ) return 0x0002;
          if ( tileIndex == 130 ) return 0x0004;
          break;
+      case 71:
+         if ( tileIndex == 242 ) return 0x0008;
+         if ( tileIndex == 261 ) return 0x0010;
+         if ( tileIndex == 282 ) return 0x0020;
+         break;
+      case 73:
+         if ( tileIndex == 1 ) return 0x0040;
+         break;
       case 87:
-         if ( tileIndex == 109 ) return 0x0008;
+         if ( tileIndex == 109 ) return 0x0080;
          break;
    }
 
