@@ -96,6 +96,7 @@
 #define STR_ITEM_AWING                                      "a chimaera wing"
 #define STR_ITEM_FAIRYWATER                                 "fairy water"
 #define STR_ITEM_ERDRICKSTABLET                             "Erdrick's Tablet"
+#define STR_ITEM_THESTONEOFSUNLIGHT                         "the Stone of Sunlight"
 
 #define STR_ITEM_ERR                                        "The chest is a lie!"
 

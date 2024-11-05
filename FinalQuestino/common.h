@@ -166,6 +166,7 @@
 #define ITEM_WING                            2
 #define ITEM_FAIRYWATER                      3
 #define ITEM_TABLET                          4
+#define ITEM_STONEOFSUNLIGHT                 5
 
 #define ITEM_MAXKEYS                         6
 #define ITEM_MAXHERBS                        7
@@ -177,12 +178,14 @@
 #define GET_ITEM_WINGCOUNT( x )              ( ( ( x ) >> 6 ) & 0x7 )
 #define GET_ITEM_FAIRYWATERCOUNT( x )        ( ( ( x ) >> 9 ) & 0x7 )
 #define GET_ITEM_HASTABLET( x )              ( ( x ) >> 10 & 0x1 )
+#define GET_ITEM_HASSTONEOFSUNLIGHT( x )     ( ( x ) >> 11 & 0x1 )
 
 #define SET_ITEM_KEYCOUNT( x, c )            x |= ( ( c ) & 0x7 )
 #define SET_ITEM_HERBCOUNT( x, c )           x |= ( ( (uint32_t)( c ) & 0x7 ) << 3 )
 #define SET_ITEM_WINGCOUNT( x, c )           x |= ( ( (uint32_t)( c ) & 0x7 ) << 6 )
 #define SET_ITEM_FAIRYWATERCOUNT( x, c )     x |= ( ( (uint32_t)( c ) & 0x7 ) << 9 )
 #define SET_ITEM_HASTABLET( x, b )           x |= ( ( uint32_t )( b ) << 10 )
+#define SET_ITEM_HASSTONEOFSUNLIGHT( x, b )  x |= ( ( uint32_t )( b ) << 11 )
 
 typedef uint8_t Bool_t;
 #define True 1

@@ -470,7 +470,8 @@ namespace DataGenerator
                          0 | ( 1 << 13 ) | ( 0 << 9 ) | 129,
                          0 | ( 1 << 13 ) | ( 0 << 9 ) | 130,
                          0 | ( 1 << 13 ) | ( 3 << 9 ) | 233 } ), // 77 (throne room)
-         new( 1, new() { 0 | ( 1 << 13 ) | ( 2 << 9 ) | 145 } ), // 78
+         new( 2, new() { 0 | ( 1 << 13 ) | ( 2 << 9 ) | 145,
+                         0 | ( 1 << 13 ) | ( 0 << 9 ) | 150 } ), // 78
 
          // brecconary
          new( 0, new() ),     // 79
@@ -497,7 +498,8 @@ namespace DataGenerator
          new( 77, new() { new( 71, 0 ), new( 129, 1 ), new( 130, 2 ) } ),  // tantegel throne room
          new( 71, new() { new( 242, 3 ), new( 261, 4 ), new( 282, 5 ) } ), // tantegel ground floor (upper-left)
          new( 73, new() { new( 1, 6 ) } ),                                 // tantegel ground floor (lower-left)
-         new( 87, new() { new( 109, 7 ) } )                                // erdrick's cave
+         new( 78, new() { new( 150, 7 ) } ),                               // tantegel basement
+         new( 87, new() { new( 109, 8 ) } )                                // erdrick's cave
       };
 
       public static List<List<int>> MapTiles = new()

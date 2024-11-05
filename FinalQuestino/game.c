@@ -318,7 +318,12 @@ internal Bool_t Game_CollectTreasure( Game_t* game, uint32_t treasureFlag )
       case 0x10: gold = 15; break;  // tantegel ground floor, upper-left area, lower-left chest
       case 0x20: gold = 12; break;  // tantegel ground floor, upper-left area, lower-right chest
       case 0x40: gold = 30; break;  // tantegel ground floor, lower-left area
-      case 0x80:  // erdrick's cave
+      case 0x80:  // tantegel basement
+         collected = Player_CollectItem( &( game->player ), ITEM_STONEOFSUNLIGHT );
+         SPRINTF_P( itemStr, PSTR( STR_ITEM_THESTONEOFSUNLIGHT ) );
+         SPRINTF_P( msg, collected ? PSTR( STR_TREASURE_ITEMCOLLECTED ) : PSTR( STR_TREASURE_ITEMDENIED ), itemStr );
+         break;
+      case 0x100:  // erdrick's cave
          collected = Player_CollectItem( &( game->player ), ITEM_TABLET );
          SPRINTF_P( itemStr, PSTR( STR_ITEM_ERDRICKSTABLET ) );
          SPRINTF_P( msg, collected ? PSTR( STR_TREASURE_ITEMCOLLECTED ) : PSTR( STR_TREASURE_ITEMDENIED ), itemStr );
