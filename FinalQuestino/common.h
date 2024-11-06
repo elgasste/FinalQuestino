@@ -67,6 +67,8 @@
 #define GAMESTATE_BATTLEATTACKRESULT         7
 #define GAMESTATE_BATTLERESULT               8
 #define GAMESTATE_BATTLECOLLECT              9
+#define GAMESTATE_MAPNOITEMSMESSAGE          10
+#define GAMESTATE_MAPMENUITEMS               11
 
 #define BUTTON_LEFT                          0
 #define BUTTON_UP                            1
@@ -78,6 +80,7 @@
 
 #define MENUINDEX_MAP                        0
 #define MENUINDEX_BATTLEMAIN                 1
+#define MENUINDEX_MAPITEMS                   2
 
 #define INDEFINITEARTICLE_A                  0
 #define INDEFINITEARTICLE_AN                 1

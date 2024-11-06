@@ -148,16 +148,15 @@ void Physics_Tic( Game_t* game )
    if ( posChanged || player->sprite.currentFrame != game->physics.spriteFrameCache )
    {
       Screen_WipePlayer( game );
+      player->position.x = newPos.x;
+      player->position.y = newPos.y;
+      Screen_DrawPlayer( game );
       game->physics.spriteFrameCache = player->sprite.currentFrame;
-   }
 
-   player->position.x = newPos.x;
-   player->position.y = newPos.y;
-   Screen_DrawPlayer( game );
-
-   if ( posChanged )
-   {
-      Physics_UpdateTileIndexCache( game );
+      if ( posChanged )
+      {
+         Physics_UpdateTileIndexCache( game );
+      }
    }
 
    player->velocity.x = 0;

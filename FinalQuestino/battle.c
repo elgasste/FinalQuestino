@@ -157,11 +157,10 @@ void Battle_Collect( Game_t* game )
 
 void Battle_Done( Game_t* game )
 {
-   Screen_WipeTileMapSection( game, 16, 16, 76, 36 );       // quick stats
-   Screen_WipeTileMapSection( game, 144, 32, 112, 112 );    // enemy
+   Screen_WipeTileMapSection( game, 16, 16, 76, 36, False );       // quick stats
+   Screen_WipeTileMapSection( game, 144, 32, 112, 112, False );    // enemy
    Menu_Wipe( game );
    Battle_WipeMessage( game );
-   Screen_DrawActors( game );
    game->state = GAMESTATE_MAP;
 }
 
@@ -234,7 +233,7 @@ internal void Battle_ShowMessage( Game_t* game, const char* message )
 
 internal void Battle_WipeMessage( Game_t* game )
 {
-   Screen_WipeTileMapSection( game, 96, 152, 208, 72 );
+   Screen_WipeTileMapSection( game, 96, 152, 208, 72, False );
 }
 
 internal void Battle_AnimateAttack( Game_t* game )

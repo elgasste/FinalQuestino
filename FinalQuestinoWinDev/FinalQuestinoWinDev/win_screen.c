@@ -1,7 +1,7 @@
 #include "screen.h"
 #include "win_common.h"
 
-internal uint16_t Screen_GetTilePixelColor( Game_t* game, uint16_t x, uint16_t y );
+internal uint16_t Screen_GetTilePixelColor( Game_t* game, uint16_t x, uint16_t y, Bool_t includePlayer );
 internal int8_t Screen_GetCharIndexFromChar( const char c );
 internal uint32_t Screen_GetBlendedPixelColor( Game_t* game, uint8_t tile, uint16_t color16 );
 internal uint32_t Screen_LinearBlend( uint32_t source, uint32_t dest, float alpha );
@@ -283,7 +283,7 @@ void Screen_DrawMapSprites( Game_t* game )
          color16 = screen->mapPalette[paletteIndex];
          if ( color16 == TRANSPARENT_COLOR )
          {
-            color16 = Screen_GetTilePixelColor( game, x + ( pixel % SPRITE_SIZE ), y + ( pixel / SPRITE_SIZE ) );
+            color16 = Screen_GetTilePixelColor( game, x + ( pixel % SPRITE_SIZE ), y + ( pixel / SPRITE_SIZE ), True );
          }
          color32 = Screen_GetBlendedPixelColor( game, game->tileMap.tiles[MIN_I( tileIndex, 299 )], color16 );
 
@@ -295,7 +295,7 @@ void Screen_DrawMapSprites( Game_t* game )
          color16 = screen->mapPalette[paletteIndex];
          if ( color16 == TRANSPARENT_COLOR )
          {
-            color16 = Screen_GetTilePixelColor( game, x + ( pixel % SPRITE_SIZE ), y + ( pixel / SPRITE_SIZE ) );
+            color16 = Screen_GetTilePixelColor( game, x + ( pixel % SPRITE_SIZE ), y + ( pixel / SPRITE_SIZE ), True );
          }
          color32 = Screen_GetBlendedPixelColor( game, game->tileMap.tiles[MIN_I( tileIndex, 299 )], color16 );
 
@@ -367,7 +367,7 @@ void Screen_DrawPlayer( Game_t* game )
          {
             tx = ux + ( pixel % SPRITE_SIZE );
             ty = uy + ( pixel / SPRITE_SIZE );
-            color16 = Screen_GetTilePixelColor( game, tx, ty );
+            color16 = Screen_GetTilePixelColor( game, tx, ty, False );
             uint16_t tileIndex = ( ( ty / MAP_TILE_SIZE ) * MAP_TILES_X ) + ( tx / MAP_TILE_SIZE );
             color32 = Screen_GetBlendedPixelColor( game, game->tileMap.tiles[tileIndex], color16 );
          }
@@ -390,7 +390,7 @@ void Screen_DrawPlayer( Game_t* game )
          {
             tx = ux + ( pixel % SPRITE_SIZE );
             ty = uy + ( pixel / SPRITE_SIZE );
-            color16 = Screen_GetTilePixelColor( game, tx, ty );
+            color16 = Screen_GetTilePixelColor( game, tx, ty, False );
             uint16_t tileIndex = ( ( ty / MAP_TILE_SIZE ) * MAP_TILES_X ) + ( tx / MAP_TILE_SIZE );
             color32 = Screen_GetBlendedPixelColor( game, game->tileMap.tiles[tileIndex], color16 );
          }
@@ -419,18 +419,13 @@ void Screen_DrawPlayer( Game_t* game )
    }
 }
 
-void Screen_DrawActors( Game_t* game )
-{
-   Screen_DrawMapSprites( game );
-   Screen_DrawPlayer( game );
-}
-
 void Screen_WipePlayer( Game_t* game )
 {
    Screen_WipeTileMapSection( game,
                               game->player.position.x + PLAYER_SPRITEOFFSET_X,
                               game->player.position.y + PLAYER_SPRITEOFFSET_Y,
-                              SPRITE_SIZE, SPRITE_SIZE );
+                              SPRITE_SIZE, SPRITE_SIZE,
+                              True );
 }
 
 void Screen_DrawEnemy( Game_t* game, uint16_t x, uint16_t y )
@@ -499,7 +494,7 @@ void Screen_WipeEnemy( Game_t* game, uint16_t x, uint16_t y )
    }
 }
 
-void Screen_WipeTileMapSection( Game_t* game, float x, float y, uint16_t w, uint16_t h )
+void Screen_WipeTileMapSection( Game_t* game, float x, float y, uint16_t w, uint16_t h, Bool_t wipePlayer )
 {
    uint16_t color16, ux, uy, row, col;
    uint32_t color32;
@@ -539,7 +534,7 @@ void Screen_WipeTileMapSection( Game_t* game, float x, float y, uint16_t w, uint
    {
       for ( col = ux; col < ux + w; col++ )
       {
-         color16 = Screen_GetTilePixelColor( game, col, row );
+         color16 = Screen_GetTilePixelColor( game, col, row, wipePlayer ? False : True ); 
          uint16_t tileIndex = ( ( row / MAP_TILE_SIZE ) * MAP_TILES_X ) + ( col / MAP_TILE_SIZE );
          color32 = Screen_GetBlendedPixelColor( game, game->tileMap.tiles[MIN_I( tileIndex, 299 )], color16 );
          *bufferPos = color32;
@@ -550,10 +545,10 @@ void Screen_WipeTileMapSection( Game_t* game, float x, float y, uint16_t w, uint
    }
 }
 
-internal uint16_t Screen_GetTilePixelColor( Game_t* game, uint16_t x, uint16_t y )
+internal uint16_t Screen_GetTilePixelColor( Game_t* game, uint16_t x, uint16_t y, Bool_t includePlayer )
 {
-   uint8_t i, tileTextureIndex, spriteIndex;
-   uint16_t color;
+   uint8_t i, tileTextureIndex, spriteIndex, pixelPair, paletteIndex;
+   uint16_t color, px, py, startByte, tx, ty;
    uint16_t tileIndex = ( ( y / MAP_TILE_SIZE ) * MAP_TILES_X ) + ( x / MAP_TILE_SIZE );
    TileMap_t* map = &( game->tileMap );
    uint8_t tile = map->tiles[tileIndex];
@@ -568,10 +563,31 @@ internal uint16_t Screen_GetTilePixelColor( Game_t* game, uint16_t x, uint16_t y
    tileTexture = &( map->tileTextures[MIN_I( tileTextureIndex, 15 )].pixels );
 #pragma warning( default: 4047 )
 
+   if ( includePlayer )
+   {
+      px = (uint16_t)( game->player.position.x + PLAYER_SPRITEOFFSET_X );
+      py = (uint16_t)( game->player.position.y + PLAYER_SPRITEOFFSET_Y );
+
+      if ( x >= px && x < px + SPRITE_SIZE && y >= py && y < py + SPRITE_SIZE )
+      {
+         startByte = ( (uint8_t)( game->player.sprite.direction ) * SPRITE_FRAMES * SPRITE_TEXTURE_SIZE_BYTES ) + ( game->player.sprite.currentFrame * SPRITE_TEXTURE_SIZE_BYTES );
+         tx = ( x - px ) % SPRITE_SIZE;
+         ty = y - py;
+         pixelPair = game->player.sprite.frameTextures[startByte + ( ty * ( SPRITE_SIZE / 2 ) ) + ( tx / 2 )];
+         paletteIndex = ( tx % 2 ) == 0 ? pixelPair >> 4 : pixelPair & 0x0F;
+         color = screen->mapPalette[paletteIndex];
+
+         if ( color != TRANSPARENT_COLOR )
+         {
+            return color;
+         }
+      }
+   }
+
    // check if this pixel is on a treasure that has already been collected
    if ( !( treasureFlag && !( game->treasureFlags & treasureFlag ) ) )
    {
-      // if there's a sprite on this tile, check that first
+      // check if there's a sprite on this tile
       for ( i = 0; i < map->spriteCount; i++ )
       {
          if ( ( GET_SPRITE_TILE_INDEX( map->spriteData[i] ) ) == tileIndex )

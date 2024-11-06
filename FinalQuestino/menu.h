@@ -23,6 +23,7 @@ void Menu_Load( Game_t* game, uint8_t menuIndex );
 void Menu_Reset( Game_t* game );
 void Menu_Draw( Game_t* game );
 void Menu_Wipe( Game_t* game );
+void Menu_DrawCarat( Game_t* game );
 void Menu_WipeCarat( Game_t* game );
 void Menu_Tic( Game_t* game );
 void Menu_ScrollDown( Game_t* game );

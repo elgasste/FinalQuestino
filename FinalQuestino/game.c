@@ -46,6 +46,7 @@ void Game_Tic( Game_t* game )
          break;
       case GAMESTATE_MAPMENU:
       case GAMESTATE_BATTLEMENUMAIN:
+      case GAMESTATE_MAPMENUITEMS:
          Menu_Tic( game );
          break;
    }
@@ -55,7 +56,8 @@ void Game_RefreshMap( Game_t* game )
 {
    TileMap_LoadTileMap( &( game->tileMap ), game->tileMapIndex );
    Screen_DrawTileMap( game );
-   Screen_DrawActors( game );
+   Screen_DrawMapSprites( game );
+   Screen_DrawPlayer( game );
    Physics_UpdateTileIndexCache( game );
 }
 
@@ -139,7 +141,18 @@ void Game_ShowMessage( Game_t* game, const char* message )
 
 void Game_WipeMessage( Game_t* game )
 {
-   Screen_WipeTileMapSection( game, 48, 152, 224, 72 );
+   Screen_WipeTileMapSection( game, 48, 144, 224, 80, False );
+}
+
+void Game_ShowMapMenuMessage( Game_t* game, const char* message )
+{
+   Screen_DrawRect( &( game->screen ), 112, 144, 192, 80, DARKGRAY );
+   Screen_DrawWrappedText( &( game->screen ), message, 120, 152, 22, 10, DARKGRAY, WHITE );
+}
+
+void Game_WipeMapMenuMessage( Game_t* game )
+{
+   Screen_WipeTileMapSection( game, 112, 144, 192, 80, False );
 }
 
 void Game_ShowMapQuickStats( Game_t* game )
@@ -159,12 +172,12 @@ void Game_ShowMapQuickStats( Game_t* game )
 
 void Game_WipeMapQuickStats( Game_t* game )
 {
-   Screen_WipeTileMapSection( game, 16, 16, 76, 60 );
+   Screen_WipeTileMapSection( game, 16, 16, 76, 60, False );
 }
 
 void Game_WipeMapStatus( Game_t* game )
 {
-   Screen_WipeTileMapSection( game, 16, 16, 112, 96 );
+   Screen_WipeTileMapSection( game, 16, 16, 112, 96, False );
 }
 
 internal void Game_RollEncounter( Game_t* game, uint8_t encounterRate )
@@ -281,8 +294,7 @@ void Game_Search( Game_t* game )
       {
          y = ( uint8_t )( game->tileMap.tileIndexCache / MAP_TILES_X );
          x = ( uint8_t )( game->tileMap.tileIndexCache - ( y * MAP_TILES_X ) );
-         Screen_WipeTileMapSection( game, (float)x * MAP_TILE_SIZE, (float)y * MAP_TILE_SIZE, MAP_TILE_SIZE, MAP_TILE_SIZE );
-         Screen_DrawPlayer( game );
+         Screen_WipeTileMapSection( game, (float)x * MAP_TILE_SIZE, (float)y * MAP_TILE_SIZE, MAP_TILE_SIZE, MAP_TILE_SIZE, False );
       }
    }
    else
@@ -364,9 +376,19 @@ void Game_MapItem( Game_t* game )
 {
    char msg[64];
 
-   Game_WipeMapQuickStats( game );
-   Menu_Wipe( game );
-   SPRINTF_P( msg, PSTR( STR_MAP_NOITEMS ) );
-   Game_ShowMessage( game, msg );
-   game->state = GAMESTATE_MAPMESSAGE;
+   if ( Player_GetMapItemCount( &( game->player ) ) )
+   {
+      Menu_DrawCarat( game );
+      Menu_Load( game, MENUINDEX_MAPITEMS );
+      Menu_Draw( game );
+      Menu_Reset( game );
+      game->state = GAMESTATE_MAPMENUITEMS;  
+   }
+   else
+   {
+      SPRINTF_P( msg, PSTR( STR_MAP_NOITEMS ) );
+      Menu_DrawCarat( game );
+      Game_ShowMapMenuMessage( game, msg );
+      game->state = GAMESTATE_MAPNOITEMSMESSAGE;
+   }
 }

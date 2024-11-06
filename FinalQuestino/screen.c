@@ -3,7 +3,7 @@
 internal void Screen_Reset( Screen_t* screen );
 internal void Screen_SetAddrWindow( Screen_t* screen, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2 );
 internal int8_t Screen_GetCharIndexFromChar( const char ch );
-internal uint16_t Screen_GetTilePixelColor( Game_t* game, uint16_t x, uint16_t y );
+internal uint16_t Screen_GetTilePixelColor( Game_t* game, uint16_t x, uint16_t y, Bool_t includePlayer );
 
 void Screen_Init( Screen_t* screen )
 {
@@ -364,10 +364,11 @@ void Screen_DrawWrappedText( Screen_t* screen, const char* text, uint16_t x, uin
    }
 }
 
-internal uint16_t Screen_GetTilePixelColor( Game_t* game, uint16_t x, uint16_t y )
+// TODO: see if there's any way to optimize this, it seems to be slowing down drawing pretty significantly
+internal uint16_t Screen_GetTilePixelColor( Game_t* game, uint16_t x, uint16_t y, Bool_t includePlayer )
 {
-   uint8_t i, tileTextureIndex, spriteIndex;
-   uint16_t color;
+   uint8_t i, tileTextureIndex, spriteIndex, pixelPair, paletteIndex;
+   uint16_t color, px, py, startByte, tx, ty;
    uint16_t tileIndex = ( ( y / MAP_TILE_SIZE ) * MAP_TILES_X ) + ( x / MAP_TILE_SIZE );
    TileMap_t* map = &( game->tileMap );
    uint8_t tile = map->tiles[tileIndex];
@@ -380,10 +381,31 @@ internal uint16_t Screen_GetTilePixelColor( Game_t* game, uint16_t x, uint16_t y
    tileTextureIndex = GET_TILE_TEXTURE_INDEX( tile );
    tileTexture = &( map->tileTextures[MIN_I( tileTextureIndex, 15 )].pixels );
 
+   if ( includePlayer )
+   {
+      px = (uint16_t)( game->player.position.x + PLAYER_SPRITEOFFSET_X );
+      py = (uint16_t)( game->player.position.y + PLAYER_SPRITEOFFSET_Y );
+
+      if ( x >= px && x < px + SPRITE_SIZE && y >= py && y < py + SPRITE_SIZE )
+      {
+         startByte = ( (uint8_t)( game->player.sprite.direction ) * SPRITE_FRAMES * SPRITE_TEXTURE_SIZE_BYTES ) + ( game->player.sprite.currentFrame * SPRITE_TEXTURE_SIZE_BYTES );
+         tx = ( x - px ) % SPRITE_SIZE;
+         ty = y - py;
+         pixelPair = game->player.sprite.frameTextures[startByte + ( ty * ( SPRITE_SIZE / 2 ) ) + ( tx / 2 )];
+         paletteIndex = ( tx % 2 ) == 0 ? pixelPair >> 4 : pixelPair & 0x0F;
+         color = screen->mapPalette[paletteIndex];
+
+         if ( color != TRANSPARENT_COLOR )
+         {
+            return color;
+         }
+      }
+   }
+
    // check if this pixel is on a treasure that has already been collected
    if ( !( treasureFlag && !( game->treasureFlags & treasureFlag ) ) )
    {
-      // if there's a sprite on this tile, check that first
+      // check if there's a sprite on this tile
       for ( i = 0; i < map->spriteCount; i++ )
       {
          if ( ( GET_SPRITE_TILE_INDEX( map->spriteData[i] ) ) == tileIndex )
@@ -464,7 +486,7 @@ void Screen_DrawMapSprites( Game_t* game )
 
          if ( color == TRANSPARENT_COLOR )
          {
-            color = Screen_GetTilePixelColor( game, x + ( pixel % SPRITE_SIZE ), y + ( pixel / SPRITE_SIZE ) );
+            color = Screen_GetTilePixelColor( game, x + ( pixel % SPRITE_SIZE ), y + ( pixel / SPRITE_SIZE ), True );
          }
 
          write16( color >> 8, color );
@@ -474,7 +496,7 @@ void Screen_DrawMapSprites( Game_t* game )
 
          if ( color == TRANSPARENT_COLOR )
          {
-            color = Screen_GetTilePixelColor( game, x + ( pixel % SPRITE_SIZE ), y + ( pixel / SPRITE_SIZE ) );
+            color = Screen_GetTilePixelColor( game, x + ( pixel % SPRITE_SIZE ), y + ( pixel / SPRITE_SIZE ), True );
          }
 
          write16( color >> 8, color );
@@ -542,7 +564,7 @@ void Screen_DrawPlayer( Game_t* game )
 
          if ( color == TRANSPARENT_COLOR )
          {
-            color = Screen_GetTilePixelColor( game, ux + ( pixel % SPRITE_SIZE ), uy + ( pixel / SPRITE_SIZE ) );
+            color = Screen_GetTilePixelColor( game, ux + ( pixel % SPRITE_SIZE ), uy + ( pixel / SPRITE_SIZE ), False );
          }
 
          write16( color >> 8, color );
@@ -558,7 +580,7 @@ void Screen_DrawPlayer( Game_t* game )
 
          if ( color == TRANSPARENT_COLOR )
          {
-            color = Screen_GetTilePixelColor( game, ux + ( pixel % SPRITE_SIZE ), uy + ( pixel / SPRITE_SIZE ) );
+            color = Screen_GetTilePixelColor( game, ux + ( pixel % SPRITE_SIZE ), uy + ( pixel / SPRITE_SIZE ), False );
          }
 
          write16( color >> 8, color );
@@ -593,7 +615,8 @@ void Screen_WipePlayer( Game_t* game )
    Screen_WipeTileMapSection( game,
                               game->player.position.x + PLAYER_SPRITEOFFSET_X,
                               game->player.position.y + PLAYER_SPRITEOFFSET_Y,
-                              SPRITE_SIZE, SPRITE_SIZE );
+                              SPRITE_SIZE, SPRITE_SIZE,
+                              True );
 }
 
 void Screen_DrawEnemy( Game_t* game, uint16_t x, uint16_t y )
@@ -671,7 +694,7 @@ void Screen_WipeEnemy( Game_t* game, uint16_t x, uint16_t y )
    CS_IDLE;
 }
 
-void Screen_WipeTileMapSection( Game_t* game, float x, float y, uint16_t w, uint16_t h )
+void Screen_WipeTileMapSection( Game_t* game, float x, float y, uint16_t w, uint16_t h, Bool_t wipePlayer )
 {
    uint16_t color, ux, uy, row, col;
    Screen_t* screen = &( game->screen );
@@ -714,7 +737,7 @@ void Screen_WipeTileMapSection( Game_t* game, float x, float y, uint16_t w, uint
    {
       for ( col = ux; col < ux + w; col++ )
       {
-         color = Screen_GetTilePixelColor( game, col, row );
+         color = Screen_GetTilePixelColor( game, col, row, wipePlayer ? False : True );
          write16( color >> 8, color );
       }
    }

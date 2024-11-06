@@ -12,6 +12,10 @@
 #define STR_MENU_ITEM                                       "ITEM"
 #define STR_MENU_ATTACK                                     "ATTACK"
 #define STR_MENU_FLEE                                       "FLEE"
+#define STR_MENU_KEY                                        "Key (%u)"
+#define STR_MENU_HERB                                       "Herb (%u)"
+#define STR_MENU_WING                                       "Chimaera wing (%u)"
+#define STR_MENU_FAIRYWATER                                 "Fairy water (%u)"
 
 #define STR_MAP_QUICKSTATSHP                                "HP:%u"
 #define STR_MAP_QUICKSTATSMP                                "MP:%u"
@@ -25,7 +29,7 @@
 #define STR_MAP_STATUSAGILITY                               "Agl: %u"
 #define STR_MAP_STATUSEXP                                   "Exp: %u"
 #define STR_MAP_FOUNDNOTHING                                "You didn't find anything."
-#define STR_MAP_NOITEMS                                     "You don't have any items."
+#define STR_MAP_NOITEMS                                     "You don't have any items that can be used here."
 
 #define STR_BATTLE_QUICKSTATSHP                             "HP:%u"
 #define STR_BATTLE_QUICKSTATSMP                             "MP:%u"
@@ -98,6 +102,7 @@
 #define STR_ITEM_ERDRICKSTABLET                             "Erdrick's Tablet"
 #define STR_ITEM_THESTONEOFSUNLIGHT                         "the Stone of Sunlight"
 
+// we should never see this, but just in case
 #define STR_ITEM_ERR                                        "The chest is a lie!"
 
 #endif // STRINGS_H
