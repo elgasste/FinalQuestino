@@ -4095,6 +4095,22 @@ void Screen_LoadTextBitFields( Screen_t* screen )
    screen->textBitFields[72][5] = 0x60;
    screen->textBitFields[72][6] = 0x40;
    screen->textBitFields[72][7] = 0x00;
+   screen->textBitFields[73][0] = 0x06;
+   screen->textBitFields[73][1] = 0x0C;
+   screen->textBitFields[73][2] = 0x18;
+   screen->textBitFields[73][3] = 0x18;
+   screen->textBitFields[73][4] = 0x18;
+   screen->textBitFields[73][5] = 0x0C;
+   screen->textBitFields[73][6] = 0x06;
+   screen->textBitFields[73][7] = 0x00;
+   screen->textBitFields[74][0] = 0x60;
+   screen->textBitFields[74][1] = 0x30;
+   screen->textBitFields[74][2] = 0x18;
+   screen->textBitFields[74][3] = 0x18;
+   screen->textBitFields[74][4] = 0x18;
+   screen->textBitFields[74][5] = 0x30;
+   screen->textBitFields[74][6] = 0x60;
+   screen->textBitFields[74][7] = 0x00;
 }
 
 void Player_LoadSprite( Player_t* player )
@@ -17842,8 +17858,11 @@ void TileMap_LoadTileMap( TileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
-      map->spriteCount = 1;
+      map->spriteCount = 4;
       map->spriteData[0] = 0x2492;
+      map->spriteData[1] = 0x20F2;
+      map->spriteData[2] = 0x2105;
+      map->spriteData[3] = 0x211A;
    }
    else if ( index == 72 )
    {
@@ -18184,7 +18203,8 @@ void TileMap_LoadTileMap( TileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
-      map->spriteCount = 0;
+      map->spriteCount = 1;
+      map->spriteData[0] = 0x2001;
    }
    else if ( index == 74 )
    {
@@ -18753,8 +18773,9 @@ void TileMap_LoadTileMap( TileMap_t* map, uint8_t index )
       map->enemySpecialRegion.y = 15;
       map->enemySpecialRegion.w = 0;
       map->enemySpecialRegion.h = 0;
-      map->spriteCount = 1;
+      map->spriteCount = 2;
       map->spriteData[0] = 0x2491;
+      map->spriteData[1] = 0x2096;
    }
    else if ( index == 79 )
    {
@@ -20900,8 +20921,19 @@ uint32_t TileMap_GetTreasureFlag( uint8_t tileMapIndex, uint16_t tileIndex )
          if ( tileIndex == 129 ) return 0x0002;
          if ( tileIndex == 130 ) return 0x0004;
          break;
+      case 71:
+         if ( tileIndex == 242 ) return 0x0008;
+         if ( tileIndex == 261 ) return 0x0010;
+         if ( tileIndex == 282 ) return 0x0020;
+         break;
+      case 73:
+         if ( tileIndex == 1 ) return 0x0040;
+         break;
+      case 78:
+         if ( tileIndex == 150 ) return 0x0080;
+         break;
       case 87:
-         if ( tileIndex == 109 ) return 0x0008;
+         if ( tileIndex == 109 ) return 0x0100;
          break;
    }
 

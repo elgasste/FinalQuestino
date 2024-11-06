@@ -12,6 +12,10 @@
 #define STR_MENU_ITEM                                       "ITEM"
 #define STR_MENU_ATTACK                                     "ATTACK"
 #define STR_MENU_FLEE                                       "FLEE"
+#define STR_MENU_KEY                                        "Key (%u)"
+#define STR_MENU_HERB                                       "Herb (%u)"
+#define STR_MENU_WING                                       "Chimaera wing (%u)"
+#define STR_MENU_FAIRYWATER                                 "Fairy water (%u)"
 
 #define STR_MAP_QUICKSTATSHP                                "HP:%u"
 #define STR_MAP_QUICKSTATSMP                                "MP:%u"
@@ -25,8 +29,7 @@
 #define STR_MAP_STATUSAGILITY                               "Agl: %u"
 #define STR_MAP_STATUSEXP                                   "Exp: %u"
 #define STR_MAP_FOUNDNOTHING                                "You didn't find anything."
-#define STR_MAP_NOITEMS                                     "You don't have any items."
-#define STR_MAP_ITEMCAPACITY                                "You can't carry any more of these."
+#define STR_MAP_NOITEMS                                     "You don't have any items that can be used here."
 
 #define STR_BATTLE_QUICKSTATSHP                             "HP:%u"
 #define STR_BATTLE_QUICKSTATSMP                             "MP:%u"
@@ -42,7 +45,6 @@
 #define STR_BATTLE_EXPERIENCEHAUL                           "You have gained %u experience."
 #define STR_BATTLE_EXPERIENCEGOLDHAUL                       "You have gained %u experience and %u gold."
 
-#define STR_TEMP_COLLECTTREASURE                            "Time to quit your day job!"
 #define STR_TEMP_TALK                                       "Nobody's there."
 #define STR_TEMP_SPELL                                      "You scream 'ABRA KEDAVRA!!', which somehow kills him."
 #define STR_TEMP_ITEM                                       "You throw spare change from your pocket, and he dies."
@@ -87,5 +89,20 @@
 #define STR_ENEMY_REDDRAGON                                 "red dragon"
 #define STR_ENEMY_DRAGONLORDWIZARD                          "Dragonlord Wizard"
 #define STR_ENEMY_DRAGONLORDDRAGON                          "Dragonlord Dragon"
+
+#define STR_TREASURE_GOLDCOLLECTED                          "The chest contains %u gold!"
+#define STR_TREASURE_GOLDDENIED                             "The chest contains %u gold, but you can't carry any more gold."
+#define STR_TREASURE_ITEMCOLLECTED                          "The chest contains %s!"
+#define STR_TREASURE_ITEMDENIED                             "The chest contains %s, but you can't carry any more of these."
+
+#define STR_ITEM_AKEY                                       "a key"
+#define STR_ITEM_ANHERB                                     "an herb"
+#define STR_ITEM_AWING                                      "a chimaera wing"
+#define STR_ITEM_FAIRYWATER                                 "fairy water"
+#define STR_ITEM_ERDRICKSTABLET                             "Erdrick's Tablet"
+#define STR_ITEM_THESTONEOFSUNLIGHT                         "the Stone of Sunlight"
+
+// we should never see this, but just in case
+#define STR_ITEM_ERR                                        "The chest is a lie!"
 
 #endif // STRINGS_H

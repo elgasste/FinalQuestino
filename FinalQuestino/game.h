@@ -44,6 +44,8 @@ void Game_RefreshMap( Game_t* game );
 void Game_SteppedOnTile( Game_t* game, uint16_t tileIndex );
 void Game_ShowMessage( Game_t* game, const char* message );
 void Game_WipeMessage( Game_t* game );
+void Game_ShowMapMenuMessage( Game_t* game, const char* message );
+void Game_WipeMapMenuMessage( Game_t* game );
 void Game_ShowMapQuickStats( Game_t* game );
 void Game_WipeMapQuickStats( Game_t* game );
 void Game_WipeMapStatus( Game_t* game );

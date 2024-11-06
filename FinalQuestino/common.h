@@ -67,6 +67,8 @@
 #define GAMESTATE_BATTLEATTACKRESULT         7
 #define GAMESTATE_BATTLERESULT               8
 #define GAMESTATE_BATTLECOLLECT              9
+#define GAMESTATE_MAPNOITEMSMESSAGE          10
+#define GAMESTATE_MAPMENUITEMS               11
 
 #define BUTTON_LEFT                          0
 #define BUTTON_UP                            1
@@ -78,6 +80,7 @@
 
 #define MENUINDEX_MAP                        0
 #define MENUINDEX_BATTLEMAIN                 1
+#define MENUINDEX_MAPITEMS                   2
 
 #define INDEFINITEARTICLE_A                  0
 #define INDEFINITEARTICLE_AN                 1
@@ -105,7 +108,7 @@
 #define GET_SPRITE_PASSABLE( x )             ( ( ( x ) & 0x2000 ) >> 13 )
 #define GET_SPRITE_INDEX( x )                ( ( ( x ) & 0x1E00 ) >> 9 )
 
-#define TEXT_TILE_COUNT                      73
+#define TEXT_TILE_COUNT                      75
 
 #define SPRITE_SIZE                          16
 #define SPRITE_PACKED_SIZE                   8
@@ -160,6 +163,32 @@
 #define ENCOUNTERRATE_HIGH                   8
 
 #define BATTLE_FLEEAGILITYTHRESHOLD          96
+
+#define ITEM_KEY                             0
+#define ITEM_HERB                            1
+#define ITEM_WING                            2
+#define ITEM_FAIRYWATER                      3
+#define ITEM_TABLET                          4
+#define ITEM_STONEOFSUNLIGHT                 5
+
+#define ITEM_MAXKEYS                         6
+#define ITEM_MAXHERBS                        7
+#define ITEM_MAXWINGS                        4
+#define ITEM_MAXFAIRYWATERS                  4
+
+#define GET_ITEM_KEYCOUNT( x )               ( ( x ) & 0x7 )
+#define GET_ITEM_HERBCOUNT( x )              ( ( ( x ) >> 3 ) & 0x7 )
+#define GET_ITEM_WINGCOUNT( x )              ( ( ( x ) >> 6 ) & 0x7 )
+#define GET_ITEM_FAIRYWATERCOUNT( x )        ( ( ( x ) >> 9 ) & 0x7 )
+#define GET_ITEM_HASTABLET( x )              ( ( x ) >> 10 & 0x1 )
+#define GET_ITEM_HASSTONEOFSUNLIGHT( x )     ( ( x ) >> 11 & 0x1 )
+
+#define SET_ITEM_KEYCOUNT( x, c )            x |= ( ( c ) & 0x7 )
+#define SET_ITEM_HERBCOUNT( x, c )           x |= ( ( (uint32_t)( c ) & 0x7 ) << 3 )
+#define SET_ITEM_WINGCOUNT( x, c )           x |= ( ( (uint32_t)( c ) & 0x7 ) << 6 )
+#define SET_ITEM_FAIRYWATERCOUNT( x, c )     x |= ( ( (uint32_t)( c ) & 0x7 ) << 9 )
+#define SET_ITEM_HASTABLET( x, b )           x |= ( ( uint32_t )( b ) << 10 )
+#define SET_ITEM_HASSTONEOFSUNLIGHT( x, b )  x |= ( ( uint32_t )( b ) << 11 )
 
 typedef uint8_t Bool_t;
 #define True 1

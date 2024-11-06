@@ -107,6 +107,7 @@ void Input_Handle( Game_t* game )
          Input_HandleMapStateInput( game );
          break;
       case GAMESTATE_MAPMENU:
+      case GAMESTATE_MAPMENUITEMS:
       case GAMESTATE_BATTLEMENUMAIN:
          Input_HandleMenuStateInput( game );
          break;
@@ -114,7 +115,6 @@ void Input_Handle( Game_t* game )
          if ( Input_AnyButtonPressed( &( game->input ) ) )
          {
             Game_WipeMessage( game );
-            Screen_DrawActors( game );
             game->state = GAMESTATE_MAP;
          }
          break;
@@ -122,7 +122,6 @@ void Input_Handle( Game_t* game )
          if ( Input_AnyButtonPressed( &( game->input ) ) )
          {
             Game_WipeMapStatus( game );
-            Screen_DrawActors( game );
             game->state = GAMESTATE_MAP;
          }
          break;
@@ -136,6 +135,13 @@ void Input_Handle( Game_t* game )
          if ( Input_AnyButtonPressed( &( game->input ) ) )
          {
             Battle_Done( game );
+         }
+         break;
+      case GAMESTATE_MAPNOITEMSMESSAGE:
+         if ( Input_AnyButtonPressed( &( game->input ) ) )
+         {
+            Game_WipeMapMenuMessage( game );
+            game->state = GAMESTATE_MAPMENU;
          }
          break;
    }
@@ -240,12 +246,19 @@ internal void Input_HandleMenuStateInput( Game_t* game )
    }
    else if ( game->input.buttonStates[BUTTON_B].pressed )
    {
-      if ( game->state == GAMESTATE_MAPMENU )
+      switch ( game->state )
       {
-         Game_WipeMapQuickStats( game );
-         Menu_Wipe( game );
-         Screen_DrawActors( game );
-         game->state = GAMESTATE_MAP;
+         case GAMESTATE_MAPMENU:
+            Game_WipeMapQuickStats( game );
+            Menu_Wipe( game );
+            game->state = GAMESTATE_MAP;
+            break;
+         case GAMESTATE_MAPMENUITEMS:
+            Menu_Wipe( game );
+            Menu_Load( game, MENUINDEX_MAP );
+            game->menu.optionIndex = 4;
+            game->state = GAMESTATE_MAPMENU;
+            break;
       }
    }
    else

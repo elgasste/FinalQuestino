@@ -122,30 +122,10 @@ void Battle_Flee( Game_t* game )
 void Battle_Collect( Game_t* game )
 {
    uint16_t experience, gold;
-   Enemy_t* enemy = &( game->battle.enemy );
-   Player_t* player = &( game->player );
    char msg[64];
 
-   if ( enemy->experience < ( INT16_MAX - player->experience ) )
-   {
-      experience = enemy->experience;
-   }
-   else
-   {
-      experience = INT16_MAX - player->experience;
-   }
-
-   if ( enemy->gold < ( INT16_MAX - player->gold ) )
-   {
-      gold = enemy->gold;
-   }
-   else
-   {
-      gold = INT16_MAX - player->gold;
-   }
-
-   player->experience += experience;
-   player->gold += gold;
+   experience = Player_CollectExperience( &( game->player ), game->battle.enemy.experience );
+   gold = Player_CollectGold( &( game->player ), game->battle.enemy.gold );
 
    if ( experience == 0 && gold == 0 )
    {
@@ -177,11 +157,10 @@ void Battle_Collect( Game_t* game )
 
 void Battle_Done( Game_t* game )
 {
-   Screen_WipeTileMapSection( game, 16, 16, 76, 36 );       // quick stats
-   Screen_WipeTileMapSection( game, 144, 32, 112, 112 );    // enemy
+   Screen_WipeTileMapSection( game, 16, 16, 76, 36, False );       // quick stats
+   Screen_WipeTileMapSection( game, 144, 32, 112, 112, False );    // enemy
    Menu_Wipe( game );
    Battle_WipeMessage( game );
-   Screen_DrawActors( game );
    game->state = GAMESTATE_MAP;
 }
 
@@ -254,7 +233,7 @@ internal void Battle_ShowMessage( Game_t* game, const char* message )
 
 internal void Battle_WipeMessage( Game_t* game )
 {
-   Screen_WipeTileMapSection( game, 96, 152, 208, 72 );
+   Screen_WipeTileMapSection( game, 96, 152, 208, 72, False );
 }
 
 internal void Battle_AnimateAttack( Game_t* game )
