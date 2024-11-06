@@ -655,6 +655,8 @@ internal int8_t Screen_GetCharIndexFromChar( const char c )
          case 62: return 70;     // greater-than
          case 58: return 71;     // colon
          case 47: return 72;     // forward slash
+         case 40: return 73;     // left parenthesis
+         case 41: return 74;     // right parenthesis
 
          default: return -1;
       }

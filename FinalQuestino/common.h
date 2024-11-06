@@ -108,7 +108,7 @@
 #define GET_SPRITE_PASSABLE( x )             ( ( ( x ) & 0x2000 ) >> 13 )
 #define GET_SPRITE_INDEX( x )                ( ( ( x ) & 0x1E00 ) >> 9 )
 
-#define TEXT_TILE_COUNT                      73
+#define TEXT_TILE_COUNT                      75
 
 #define SPRITE_SIZE                          16
 #define SPRITE_PACKED_SIZE                   8

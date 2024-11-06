@@ -245,6 +245,8 @@ internal int8_t Screen_GetCharIndexFromChar( const char ch )
          case 62: return 70;     // greater-than
          case 58: return 71;     // colon
          case 47: return 72;     // forward slash
+         case 40: return 73;     // left parenthesis
+         case 41: return 74;     // right parenthesis
 
          default: return -1;
       }
@@ -602,12 +604,6 @@ void Screen_DrawPlayer( Game_t* game )
    }
 
    CS_IDLE;
-}
-
-void Screen_DrawActors( Game_t* game )
-{
-   Screen_DrawMapSprites( game );
-   Screen_DrawPlayer( game );
 }
 
 void Screen_WipePlayer( Game_t* game )
