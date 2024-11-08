@@ -42,7 +42,7 @@ void Screen_Init( Screen_t* screen )
 
    for ( i = 0; i < 16; i++ )
    {
-      screen->mapPalette[i] = 0;
+      screen->palette[i] = 0;
    }
 
    Screen_LoadTextBitFields( screen );
@@ -198,11 +198,11 @@ void Screen_DrawTileMap( Game_t* game )
                pixelPair = map->tileTextures[MIN_I( tileTextureIndex, 15 )].pixels[pixelCol + ( pixelRow * MAP_PACKED_TILE_SIZE )];
 
                paletteIndex = pixelPair >> 4;
-               color = screen->mapPalette[paletteIndex];
+               color = screen->palette[paletteIndex];
                write16( color >> 8, color );
 
                paletteIndex = pixelPair & 0x0F;
-               color = screen->mapPalette[paletteIndex];
+               color = screen->palette[paletteIndex];
                write16( color >> 8, color );
             }
          }
@@ -370,7 +370,8 @@ void Screen_DrawWrappedText( Screen_t* screen, const char* text, uint16_t x, uin
 internal uint16_t Screen_GetTilePixelColor( Game_t* game, uint16_t x, uint16_t y, Bool_t includePlayer )
 {
    uint8_t i, tileTextureIndex, spriteIndex, pixelPair, paletteIndex;
-   uint16_t color, px, py, startByte, tx, ty;
+   int16_t sx, sy, tx, ty;
+   uint16_t color, startByte;
    uint16_t tileIndex = ( ( y / MAP_TILE_SIZE ) * MAP_TILES_X ) + ( x / MAP_TILE_SIZE );
    TileMap_t* map = &( game->tileMap );
    uint8_t tile = map->tiles[tileIndex];
@@ -385,17 +386,22 @@ internal uint16_t Screen_GetTilePixelColor( Game_t* game, uint16_t x, uint16_t y
 
    if ( includePlayer )
    {
-      px = (uint16_t)( game->player.position.x + PLAYER_SPRITEOFFSET_X );
-      py = (uint16_t)( game->player.position.y + PLAYER_SPRITEOFFSET_Y );
+      sx = (int16_t)( game->player.position.x + PLAYER_SPRITEOFFSET_X );
+      sy = (int16_t)( game->player.position.y + PLAYER_SPRITEOFFSET_Y );
 
-      if ( x >= px && x < px + SPRITE_SIZE && y >= py && y < py + SPRITE_SIZE )
+      // TODO: if these values are negative, the player is drawn one pixel off, and
+      // I have no idea why. somehow this "fixes" it, but we should figure that out later.
+      if ( sy < 0 ) sy--;
+      if ( sx < 0 ) sx--;
+
+      if ( (int16_t)x >= sx && (int16_t)x < sx + SPRITE_SIZE && (int16_t)y >= sy && (int16_t)y < sy + SPRITE_SIZE )
       {
          startByte = ( (uint8_t)( game->player.sprite.direction ) * SPRITE_FRAMES * SPRITE_TEXTURE_SIZE_BYTES ) + ( game->player.sprite.currentFrame * SPRITE_TEXTURE_SIZE_BYTES );
-         tx = ( x - px ) % SPRITE_SIZE;
-         ty = y - py;
+         tx = ( (int16_t)x - sx ) % SPRITE_SIZE;
+         ty = (int16_t)y - sy;
          pixelPair = game->player.sprite.frameTextures[startByte + ( ty * ( SPRITE_SIZE / 2 ) ) + ( tx / 2 )];
          paletteIndex = ( tx % 2 ) == 0 ? pixelPair >> 4 : pixelPair & 0x0F;
-         color = screen->mapPalette[paletteIndex];
+         color = screen->palette[paletteIndex];
 
          if ( color != TRANSPARENT_COLOR )
          {
@@ -421,8 +427,8 @@ internal uint16_t Screen_GetTilePixelColor( Game_t* game, uint16_t x, uint16_t y
             }
 
             color = pixelOffsetX % 2 == 0
-               ? screen->mapPalette[map->spriteTexture[( pixelOffsetX / 2 ) + ( pixelOffsetY * SPRITE_PACKED_SIZE )] >> 4]
-               : screen->mapPalette[map->spriteTexture[( pixelOffsetX / 2 ) + ( pixelOffsetY * SPRITE_PACKED_SIZE )] & 0xF];
+               ? screen->palette[map->spriteTexture[( pixelOffsetX / 2 ) + ( pixelOffsetY * SPRITE_PACKED_SIZE )] >> 4]
+               : screen->palette[map->spriteTexture[( pixelOffsetX / 2 ) + ( pixelOffsetY * SPRITE_PACKED_SIZE )] & 0xF];
             
             if ( color != TRANSPARENT_COLOR )
             {
@@ -434,11 +440,11 @@ internal uint16_t Screen_GetTilePixelColor( Game_t* game, uint16_t x, uint16_t y
 
    if ( pixelOffsetX % 2 == 0 )
    {
-      return screen->mapPalette[tileTexture[( pixelOffsetX / 2 ) + ( pixelOffsetY * MAP_PACKED_TILE_SIZE )] >> 4];
+      return screen->palette[tileTexture[( pixelOffsetX / 2 ) + ( pixelOffsetY * MAP_PACKED_TILE_SIZE )] >> 4];
    }
    else
    {
-      return screen->mapPalette[tileTexture[( pixelOffsetX / 2 ) + ( pixelOffsetY * MAP_PACKED_TILE_SIZE )] & 0xF];
+      return screen->palette[tileTexture[( pixelOffsetX / 2 ) + ( pixelOffsetY * MAP_PACKED_TILE_SIZE )] & 0xF];
    }
 }
 
@@ -484,7 +490,7 @@ void Screen_DrawMapSprites( Game_t* game )
       {
          pixelPair = map->spriteTexture[j];
          paletteIndex = pixelPair >> 4;
-         color = screen->mapPalette[paletteIndex];
+         color = screen->palette[paletteIndex];
 
          if ( color == TRANSPARENT_COLOR )
          {
@@ -494,7 +500,7 @@ void Screen_DrawMapSprites( Game_t* game )
          write16( color >> 8, color );
          pixel++;
          paletteIndex = pixelPair & 0x0F;
-         color = screen->mapPalette[paletteIndex];
+         color = screen->palette[paletteIndex];
 
          if ( color == TRANSPARENT_COLOR )
          {
@@ -562,7 +568,7 @@ void Screen_DrawPlayer( Game_t* game )
       if ( curX >= skipLeft && curX < ( MAP_TILE_SIZE - skipRight ) && curY >= skipTop && curY < ( MAP_TILE_SIZE - skipBottom ) )
       {
          paletteIndex = pixelPair >> 4;
-         color = screen->mapPalette[paletteIndex];
+         color = screen->palette[paletteIndex];
 
          if ( color == TRANSPARENT_COLOR )
          {
@@ -578,7 +584,7 @@ void Screen_DrawPlayer( Game_t* game )
       if ( curX >= skipLeft && curX < ( MAP_TILE_SIZE - skipRight ) && curY >= skipTop && curY < ( MAP_TILE_SIZE - skipBottom ) )
       {
          paletteIndex = pixelPair & 0x0F;
-         color = screen->mapPalette[paletteIndex];
+         color = screen->palette[paletteIndex];
 
          if ( color == TRANSPARENT_COLOR )
          {

@@ -112,7 +112,7 @@ typedef struct Screen_t
    uint8_t wrPinUnset;
    uint8_t rdPinUnset;
 
-   uint16_t mapPalette[16];
+   uint16_t palette[16];
    uint8_t textBitFields[TEXT_TILE_COUNT][8];
 
    uint8_t mapSpriteIndexCache;
