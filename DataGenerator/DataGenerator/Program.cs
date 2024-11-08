@@ -5,7 +5,7 @@ using System.Windows.Media.Imaging;
 using DataGenerator;
 using Newtonsoft.Json;
 
-var _mapPalette = new List<ushort>();
+var _palette = new List<ushort>();
 var _textTextureMap = new List<byte>();
 var _tileTextureMapBytes = new List<byte>();
 var _mapSpritesBytes = new List<byte>();
@@ -114,7 +114,7 @@ void LoadMapTileset( BitmapSource bitmap )
    {
       throw new Exception( "Trying to add too many map tile textures." );
    }
-   else if ( _mapPalette is null )
+   else if ( _palette is null )
    {
       throw new Exception( "Somehow the map palette is null, no idea how it happened." );
    }
@@ -124,7 +124,7 @@ void LoadMapTileset( BitmapSource bitmap )
       for ( int col = 0; col < bitmap.PixelWidth; col++ )
       {
          var pixelColor = GetPixelColor16( bitmap, col, row );
-         _tileTextureMapBytes.Add( (byte)PaletteIndexFromColor( pixelColor, _mapPalette ) );
+         _tileTextureMapBytes.Add( (byte)PaletteIndexFromColor( pixelColor, _palette ) );
       }
    }
 }
@@ -139,7 +139,7 @@ void LoadMapSprites( BitmapSource bitmap )
    {
       throw new Exception( "Trying to add too many map sprites." );
    }
-   else if ( _mapPalette is null )
+   else if ( _palette is null )
    {
       throw new Exception( "Somehow the map palette is null, no idea how it happened." );
    }
@@ -149,7 +149,7 @@ void LoadMapSprites( BitmapSource bitmap )
       for ( int col = 0; col < bitmap.PixelWidth; col++ )
       {
          var pixelColor = GetPixelColor16( bitmap, col, row );
-         _mapSpritesBytes.Add( (byte)PaletteIndexFromColor( pixelColor, _mapPalette ) );
+         _mapSpritesBytes.Add( (byte)PaletteIndexFromColor( pixelColor, _palette ) );
       }
    }
 }
@@ -160,7 +160,7 @@ void LoadPlayerSpriteTextureMap( BitmapSource bitmap )
    {
       throw new Exception( "Somehow the player sprite texture map is null, no idea how it happened." );
    }
-   else if ( _mapPalette is null )
+   else if ( _palette is null )
    {
       throw new Exception( "Somehow the map palette is null, no idea how it happened." );
    }
@@ -170,7 +170,7 @@ void LoadPlayerSpriteTextureMap( BitmapSource bitmap )
       for ( int col = 0; col < bitmap.PixelWidth; col++ )
       {
          var pixelColor = GetPixelColor16( bitmap, col, row );
-         _playerSpriteTextureMapBytes.Add( (byte)PaletteIndexFromColor( pixelColor, _mapPalette ) );
+         _playerSpriteTextureMapBytes.Add( (byte)PaletteIndexFromColor( pixelColor, _palette ) );
       }
    }
 }
@@ -250,7 +250,7 @@ void LoadEnemies()
 
 string BuildMapPaletteOutputString()
 {
-   if ( _mapPalette is null )
+   if ( _palette is null )
    {
       throw new Exception( "Somehow the map palette is null, I have no idea what could have happened." );
    }
@@ -262,13 +262,13 @@ string BuildMapPaletteOutputString()
 
    for ( int i = 0; i < 16; i++ )
    {
-      if ( i < _mapPalette.Count )
+      if ( i < _palette.Count )
       {
-         outputString += string.Format( "      screen->mapPalette[{0}] = 0x{1};\n", i, _mapPalette[i].ToString( "X4" ) );
+         outputString += string.Format( "      screen->palette[{0}] = 0x{1};\n", i, _palette[i].ToString( "X4" ) );
       }
       else
       {
-         outputString += string.Format( "      screen->mapPalette[{0}] = 0x0000;\n", i );
+         outputString += string.Format( "      screen->palette[{0}] = 0x0000;\n", i );
       }
    }
 
@@ -280,7 +280,7 @@ string BuildMapPaletteOutputString()
 
 string BuildMapTileTexturesOutputString()
 {
-   if ( _mapPalette is null )
+   if ( _palette is null )
    {
       throw new Exception( "Somehow the map palette is null, I have no idea what could have happened." );
    }
@@ -378,7 +378,7 @@ string BuildMapTileTexturesOutputString()
 
 string BuildMapSpriteTexturesOutputString()
 {
-   if ( _mapPalette is null )
+   if ( _palette is null )
    {
       throw new Exception( "Somehow the map palette is null, I have no idea what could have happened." );
    }
