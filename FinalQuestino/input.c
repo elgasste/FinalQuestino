@@ -256,7 +256,7 @@ internal void Input_HandleMenuStateInput( Game_t* game )
          case GAMESTATE_MAPMENUITEMS:
             Menu_Wipe( game );
             Menu_Load( game, MENUINDEX_MAP );
-            game->menu.optionIndex = 4;
+            game->menu.selectedOption = 4;
             game->state = GAMESTATE_MAPMENU;
             break;
       }

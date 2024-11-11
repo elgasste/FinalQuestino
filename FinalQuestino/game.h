@@ -56,6 +56,7 @@ void Game_Status( Game_t* game );
 void Game_Search( Game_t* game );
 void Game_MapSpell( Game_t* game );
 void Game_MapItem( Game_t* game );
+void Game_UseMapItem( Game_t* game, uint8_t itemId );
 
 #if defined( __cplusplus )
 }

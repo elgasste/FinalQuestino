@@ -8,10 +8,12 @@ typedef struct Game_t Game_t;
 typedef struct Menu_t
 {
    uint8_t index;
-   uint8_t optionIndex;
    uint8_t optionCount;
+   uint8_t selectedOption;
    float caratSeconds;
    Bool_t showCarat;
+
+   uint8_t mapItemFlags;
 }
 Menu_t;
 

@@ -392,3 +392,10 @@ void Game_MapItem( Game_t* game )
       game->state = GAMESTATE_MAPNOITEMSMESSAGE;
    }
 }
+
+void Game_UseMapItem( Game_t* game, uint8_t itemId )
+{
+   // TODO: actually use the item
+   UNUSED_PARAM( game );
+   UNUSED_PARAM( itemId );
+}
