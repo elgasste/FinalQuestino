@@ -599,6 +599,30 @@ string BuildMapTreasuresOutputString()
 
    outputString += "   }\n\n";
    outputString += "   return 0;\n";
+   outputString += "}\n\n";
+   return outputString;
+}
+
+string BuildMapDoorsOutputString()
+{
+   string outputString = "uint32_t TileMap_GetDoorFlag( uint8_t tileMapIndex, uint16_t tileIndex )\n";
+   outputString += "{\n";
+   outputString += "   switch ( tileMapIndex )\n";
+   outputString += "   {\n";
+
+   foreach ( var doorData in MapData.MapDoors )
+   {
+      outputString += string.Format( "      case {0}:\n", doorData.Item1 );
+      foreach ( var tileIndex in doorData.Item2 )
+      {
+         outputString += string.Format( "         if ( tileIndex == {0} ) return 0x{1};\n", tileIndex.Item1, ( 1 << tileIndex.Item2 ).ToString( "X4" ) );
+      }
+
+      outputString += "         break;\n";
+   }
+
+   outputString += "   }\n\n";
+   outputString += "   return 0;\n";
    outputString += "}\n";
    return outputString;
 }
@@ -738,6 +762,7 @@ try
    Console.Write( "Generating map data loader..." );
    outputString += BuildMapTilesOutputString();
    outputString += BuildMapTreasuresOutputString();
+   outputString += BuildMapDoorsOutputString();
    Console.Write( "Done!\n" );
 
    Console.Write( "Generating enemy data loader..." );

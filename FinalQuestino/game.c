@@ -11,6 +11,7 @@ void Game_Init( Game_t* game )
    game->tileMapIndex = 77; // Tantegel throne room
    game->specialEnemyFlags = 0xFF;
    game->treasureFlags = 0xFFFF;
+   game->doorFlags = 0xFFFF;
 
    Screen_Init( &( game->screen ) );
    Screen_LoadMapPalette( &( game->screen ), game->paletteIndex );

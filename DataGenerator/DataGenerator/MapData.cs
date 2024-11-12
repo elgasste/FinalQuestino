@@ -505,6 +505,11 @@ namespace DataGenerator
          new( 87, new() { new( 109, 8 ) } )                                // erdrick's cave
       };
 
+      public static List<Tuple<int, List<Tuple<int, int>>>> MapDoors = new()
+      {
+         new( 77, new() { new( 189, 0 ) } )  // tantegel throne room
+      };
+
       public static List<List<int>> MapTiles = new()
       {
          // LEGEND:

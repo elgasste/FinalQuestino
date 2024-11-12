@@ -51,6 +51,7 @@ void TileMap_Init( TileMap_t* tileMap );
 void TileMap_LoadTileMap( TileMap_t* map, uint8_t index );
 void TileMap_LoadSprite( TileMap_t* map, uint8_t index );
 uint32_t TileMap_GetTreasureFlag( uint8_t tileMapIndex, uint16_t tileIndex );
+uint32_t TileMap_GetDoorFlag( uint8_t tileMapIndex, uint16_t tileIndex );
 
 #if defined( __cplusplus )
 }

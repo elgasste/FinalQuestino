@@ -20943,6 +20943,18 @@ uint32_t TileMap_GetTreasureFlag( uint8_t tileMapIndex, uint16_t tileIndex )
    return 0;
 }
 
+uint32_t TileMap_GetDoorFlag( uint8_t tileMapIndex, uint16_t tileIndex )
+{
+   switch ( tileMapIndex )
+   {
+      case 77:
+         if ( tileIndex == 189 ) return 0x0001;
+         break;
+   }
+
+   return 0;
+}
+
 void Enemy_Load( Enemy_t* enemy, uint8_t index )
 {
    uint8_t i, j;

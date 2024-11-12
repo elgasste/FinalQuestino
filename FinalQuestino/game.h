@@ -31,6 +31,7 @@ typedef struct Game_t
 
    uint8_t specialEnemyFlags;
    uint32_t treasureFlags;
+   uint32_t doorFlags;
 }
 Game_t;
 
