@@ -261,7 +261,7 @@ void Screen_DrawMapSprites( Game_t* game )
       if ( treasureFlag )
       {
          // this is a treasure chest that has already been collected
-         if ( treasureFlag && !( game->treasureFlags & treasureFlag ) )
+         if ( !( game->treasureFlags & treasureFlag ) )
          {
             continue;
          }
@@ -269,7 +269,7 @@ void Screen_DrawMapSprites( Game_t* game )
       else if ( doorFlag )
       {
          // this is a door that has already been opened
-         if ( doorFlag && !( game->doorFlags & doorFlag ) )
+         if ( !( game->doorFlags & doorFlag ) )
          {
             continue;
          }
@@ -550,6 +550,14 @@ void Screen_WipeTileMapSection( Game_t* game, float x, float y, uint16_t w, uint
 
       bufferPos += ( SCREEN_WIDTH - w );
    }
+}
+
+void Screen_WipeTileIndex( Game_t* game, uint16_t tileIndex, Bool_t wipePlayer )
+{
+   uint8_t y = ( uint8_t )( tileIndex / MAP_TILES_X );
+   uint8_t x = ( uint8_t )( tileIndex - ( y * MAP_TILES_X ) );
+
+   Screen_WipeTileMapSection( game, (float)x * MAP_TILE_SIZE, (float)y * MAP_TILE_SIZE, MAP_TILE_SIZE, MAP_TILE_SIZE, wipePlayer );
 }
 
 internal uint16_t Screen_GetTilePixelColor( Game_t* game, uint16_t x, uint16_t y, Bool_t includePlayer )

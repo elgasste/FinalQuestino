@@ -250,11 +250,11 @@ internal void Input_HandleMenuStateInput( Game_t* game )
       {
          case GAMESTATE_MAPMENU:
             Game_WipeMapQuickStats( game );
-            Menu_Wipe( game );
+            Menu_Wipe( game, MENUINDEX_MAP );
             game->state = GAMESTATE_MAP;
             break;
          case GAMESTATE_MAPMENUITEMS:
-            Menu_Wipe( game );
+            Menu_Wipe( game, MENUINDEX_MAPITEMS );
             Menu_Load( game, MENUINDEX_MAP );
             game->menu.selectedOption = 4;
             game->state = GAMESTATE_MAPMENU;

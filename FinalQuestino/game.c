@@ -4,6 +4,7 @@
 
 internal void Game_RollEncounter( Game_t* game, uint8_t encounterRate );
 internal Bool_t Game_CollectTreasure( Game_t* game, uint32_t treasureFlag );
+internal void Game_OpenDoor( Game_t* game );
 
 void Game_Init( Game_t* game )
 {
@@ -246,7 +247,7 @@ void Game_Talk( Game_t* game )
    char msg[64];
 
    Game_WipeMapQuickStats( game );
-   Menu_Wipe( game );
+   Menu_Wipe( game, MENUINDEX_MAP );
    SPRINTF_P( msg, PSTR( STR_TEMP_TALK ) );
    Game_ShowMessage( game, msg );
    game->state = GAMESTATE_MAPMESSAGE;
@@ -258,7 +259,7 @@ void Game_Status( Game_t* game )
    char str[14];
 
    Game_WipeMapQuickStats( game );
-   Menu_Wipe( game );
+   Menu_Wipe( game, MENUINDEX_MAP );
    
    Screen_DrawRect( &( game->screen ), 16, 16, 112, 96, DARKGRAY );
 
@@ -282,20 +283,17 @@ void Game_Status( Game_t* game )
 
 void Game_Search( Game_t* game )
 {
-   uint8_t x, y;
    uint32_t treasureFlag = TileMap_GetTreasureFlag( game->tileMapIndex, game->tileMap.tileIndexCache );
    char msg[64];
 
    Game_WipeMapQuickStats( game );
-   Menu_Wipe( game );
+   Menu_Wipe( game, MENUINDEX_MAP );
 
    if ( treasureFlag && ( game->treasureFlags & treasureFlag ) )
    {
       if ( Game_CollectTreasure( game, treasureFlag ) )
       {
-         y = ( uint8_t )( game->tileMap.tileIndexCache / MAP_TILES_X );
-         x = ( uint8_t )( game->tileMap.tileIndexCache - ( y * MAP_TILES_X ) );
-         Screen_WipeTileMapSection( game, (float)x * MAP_TILE_SIZE, (float)y * MAP_TILE_SIZE, MAP_TILE_SIZE, MAP_TILE_SIZE, False );
+         Screen_WipeTileIndex( game, game->tileMap.tileIndexCache, False );
       }
    }
    else
@@ -367,7 +365,7 @@ void Game_MapSpell( Game_t* game )
    char msg[64];
 
    Game_WipeMapQuickStats( game );
-   Menu_Wipe( game );
+   Menu_Wipe( game, MENUINDEX_MAP );
    SPRINTF_P( msg, PSTR( STR_NOSPELLS ) );
    Game_ShowMessage( game, msg );
    game->state = GAMESTATE_MAPMESSAGE;
@@ -396,7 +394,44 @@ void Game_MapItem( Game_t* game )
 
 void Game_UseMapItem( Game_t* game, uint8_t itemId )
 {
-   // TODO: actually use the item
-   UNUSED_PARAM( game );
-   UNUSED_PARAM( itemId );
+   if ( itemId == ITEM_KEY )
+   {
+      Game_OpenDoor( game );
+   }
+}
+
+internal void Game_OpenDoor( Game_t* game )
+{
+   uint32_t doorFlag;
+   int16_t facingTileIndex = TileMap_GetPlayerFacingTileIndex( game->physics.tileIndexCache, game->player.sprite.direction );
+   char msg[32];
+
+   Game_WipeMapQuickStats( game );
+   Menu_Wipe( game, MENUINDEX_MAPITEMS );
+   Menu_Wipe( game, MENUINDEX_MAP );
+
+   if ( facingTileIndex >= 0 && TileMap_TileHasSprite( &( game->tileMap ), 1, (uint16_t)facingTileIndex ) )
+   {
+      doorFlag = TileMap_GetDoorFlag( game->tileMapIndex, (uint16_t)facingTileIndex );
+
+      if ( game->doorFlags & doorFlag )
+      {
+         game->doorFlags ^= doorFlag;
+         SET_ITEM_KEYCOUNT( game->player.items, GET_ITEM_KEYCOUNT( game->player.items ) - 1 );
+         Screen_WipeTileIndex( game, facingTileIndex, False );
+         game->state = GAMESTATE_MAP;
+         return;
+      }
+      else
+      {
+         SPRINTF_P( msg, PSTR( STR_MAP_NODOOR ) );
+      }
+   }
+   else
+   {
+      SPRINTF_P( msg, PSTR( STR_MAP_NODOOR ) );
+   }
+
+   Game_ShowMessage( game, msg );
+   game->state = GAMESTATE_MAPMESSAGE;
 }

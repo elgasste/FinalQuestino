@@ -507,7 +507,8 @@ namespace DataGenerator
 
       public static List<Tuple<int, List<Tuple<int, int>>>> MapDoors = new()
       {
-         new( 77, new() { new( 189, 0 ) } )  // tantegel throne room
+         new( 77, new() { new( 189, 0 ) } ),                 // tantegel throne room
+         new( 71, new() { new( 137, 1 ), new( 263, 2 ) } ),  // tantegel ground floor (upper-left)
       };
 
       public static List<List<int>> MapTiles = new()

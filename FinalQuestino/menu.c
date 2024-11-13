@@ -47,9 +47,9 @@ void Menu_Draw( Game_t* game )
    Menu_DrawCarat( game );
 }
 
-void Menu_Wipe( Game_t* game )
+void Menu_Wipe( Game_t* game, uint8_t menuIndex )
 {
-   switch( game->menu.index )
+   switch( menuIndex )
    {
       case MENUINDEX_MAP: Screen_WipeTileMapSection( game, 16, 88, 76, 88, False ); break;
       case MENUINDEX_BATTLEMAIN: Screen_WipeTileMapSection( game, 16, 152, 76, 72, False ); break;

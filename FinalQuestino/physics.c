@@ -1,6 +1,6 @@
 #include "game.h"
 
-internal Bool_t Physics_TileHasImpassableSprite( TileMap_t* map, uint16_t tileIndex );
+internal Bool_t Physics_TileHasImpassableSprite( Game_t* game, uint16_t tileIndex );
 
 void Physics_Init( Physics_t* physics )
 {
@@ -71,7 +71,7 @@ void Physics_Tic( Game_t* game )
             tileIndex = col + ( row * MAP_TILES_X );
             tile = game->tileMap.tiles[tileIndex];
 
-            if ( !GET_TILE_PASSABLE( tile ) || Physics_TileHasImpassableSprite( &( game->tileMap ), tileIndex ) )
+            if ( !GET_TILE_PASSABLE( tile ) || Physics_TileHasImpassableSprite( game, tileIndex ) )
             {
                newPos.x = (float)( ( ( col + 1 ) * MAP_TILE_SIZE ) );
                break;
@@ -88,7 +88,7 @@ void Physics_Tic( Game_t* game )
             tileIndex = col + ( row * MAP_TILES_X );
             tile = game->tileMap.tiles[tileIndex];
 
-            if ( !GET_TILE_PASSABLE( tile ) || Physics_TileHasImpassableSprite( &( game->tileMap ), tileIndex ) )
+            if ( !GET_TILE_PASSABLE( tile ) || Physics_TileHasImpassableSprite( game, tileIndex ) )
             {
                newPos.x = ( col * MAP_TILE_SIZE ) - PLAYER_HITBOX_SIZE - COLLISION_PADDING;
                break;
@@ -113,7 +113,7 @@ void Physics_Tic( Game_t* game )
             tileIndex = col + ( row * MAP_TILES_X );
             tile = game->tileMap.tiles[tileIndex];
 
-            if ( !GET_TILE_PASSABLE( tile ) || Physics_TileHasImpassableSprite( &( game->tileMap ), tileIndex ) )
+            if ( !GET_TILE_PASSABLE( tile ) || Physics_TileHasImpassableSprite( game, tileIndex ) )
             {
                newPos.y = (float)( ( ( row + 1 ) * MAP_TILE_SIZE ) );
                break;
@@ -130,7 +130,7 @@ void Physics_Tic( Game_t* game )
             tileIndex = col + ( row * MAP_TILES_X );
             tile = game->tileMap.tiles[tileIndex];
 
-            if ( !GET_TILE_PASSABLE( tile ) || Physics_TileHasImpassableSprite( &( game->tileMap ), tileIndex ) )
+            if ( !GET_TILE_PASSABLE( tile ) || Physics_TileHasImpassableSprite( game, tileIndex ) )
             {
                newPos.y = ( row * MAP_TILE_SIZE ) - PLAYER_HITBOX_SIZE - COLLISION_PADDING;
                break;
@@ -176,15 +176,24 @@ void Physics_UpdateTileIndexCache( Game_t* game )
    }
 }
 
-internal Bool_t Physics_TileHasImpassableSprite( TileMap_t* map, uint16_t tileIndex )
+internal Bool_t Physics_TileHasImpassableSprite( Game_t* game, uint16_t tileIndex )
 {
    uint8_t i;
+   uint32_t doorFlag;
 
-   for ( i = 0; i < map->spriteCount; i++ )
+   for ( i = 0; i < game->tileMap.spriteCount; i++ )
    {
-      if ( (uint16_t)( GET_SPRITE_TILE_INDEX( map->spriteData[i] ) ) == tileIndex )
+      if ( (uint16_t)( GET_SPRITE_TILE_INDEX( game->tileMap.spriteData[i] ) ) == tileIndex )
       {
-         return GET_SPRITE_PASSABLE( map->spriteData[i] ) ? False : True;
+         if ( GET_SPRITE_INDEX( game->tileMap.spriteData[i] ) == SPRITE_INDEX_DOOR )
+         {
+            doorFlag = TileMap_GetDoorFlag( game->tileMapIndex, tileIndex );
+            return ( game->doorFlags & doorFlag ) ? True : False;
+         }
+         else
+         {
+            return GET_SPRITE_PASSABLE( game->tileMap.spriteData[i] ) ? False : True;
+         }
       }
    }
 

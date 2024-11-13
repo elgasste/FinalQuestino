@@ -756,3 +756,11 @@ void Screen_WipeTileMapSection( Game_t* game, float x, float y, uint16_t w, uint
 
    CS_IDLE;
 }
+
+void Screen_WipeTileIndex( Game_t* game, uint16_t tileIndex, Bool_t wipePlayer )
+{
+   uint8_t y = ( uint8_t )( tileIndex / MAP_TILES_X );
+   uint8_t x = ( uint8_t )( tileIndex - ( y * MAP_TILES_X ) );
+
+   Screen_WipeTileMapSection( game, (float)x * MAP_TILE_SIZE, (float)y * MAP_TILE_SIZE, MAP_TILE_SIZE, MAP_TILE_SIZE, wipePlayer );
+}

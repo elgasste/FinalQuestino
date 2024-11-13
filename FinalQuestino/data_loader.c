@@ -20950,6 +20950,10 @@ uint32_t TileMap_GetDoorFlag( uint8_t tileMapIndex, uint16_t tileIndex )
       case 77:
          if ( tileIndex == 189 ) return 0x0001;
          break;
+      case 71:
+         if ( tileIndex == 137 ) return 0x0002;
+         if ( tileIndex == 263 ) return 0x0004;
+         break;
    }
 
    return 0;
