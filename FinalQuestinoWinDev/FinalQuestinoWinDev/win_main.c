@@ -338,6 +338,15 @@ internal void HandleKeyboardInput( uint32_t keyCode, LPARAM flags )
                   }
                }
                break;
+            case VK_DEBUG_GETGOLD:
+               Player_CollectGold( &( g_globals.game.player ), 500 );
+               if ( g_globals.game.state == GAMESTATE_MAPMENU ||
+                    g_globals.game.state == GAMESTATE_MAPMENUITEMS ||
+                    g_globals.game.state == GAMESTATE_MAPNOITEMSMESSAGE )
+               {
+                  Game_ShowMapQuickStats( &( g_globals.game ) );
+               }
+               break;
             case VK_DEBUG_CLEARFLAGS:
                if ( g_globals.game.state == GAMESTATE_MAP )
                {
