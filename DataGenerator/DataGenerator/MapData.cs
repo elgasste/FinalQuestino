@@ -455,21 +455,24 @@ namespace DataGenerator
          new( 0, new() ),     // 70
 
          // tantegel
-         new( 4, new() { 0 | ( 1 << 13 ) | ( 2 << 9 ) | 146,
+         new( 6, new() { 0 | ( 0 << 13 ) | ( 1 << 9 ) | 137,
+                         0 | ( 1 << 13 ) | ( 2 << 9 ) | 146,
                          0 | ( 1 << 13 ) | ( 0 << 9 ) | 242,
                          0 | ( 1 << 13 ) | ( 0 << 9 ) | 261,
+                         0 | ( 0 << 13 ) | ( 1 << 9 ) | 263,
                          0 | ( 1 << 13 ) | ( 0 << 9 ) | 282 } ), // 71
          new( 0, new() ),     // 72
          new( 1, new() { 0 | ( 1 << 13 ) | ( 0 << 9 ) | 1 } ), // 73
          new( 0, new() ),     // 74
          new( 0, new() ),     // 75
          new( 1, new() { 0 | ( 1 << 13 ) | ( 3 << 9 ) | 68 } ), // 76
-         new( 6, new() { 0 | ( 1 << 13 ) | ( 0 << 9 ) | 71,
+         new( 7, new() { 0 | ( 1 << 13 ) | ( 0 << 9 ) | 71,
                          0 | ( 0 << 13 ) | ( 8 << 9 ) | 108,
                          0 | ( 0 << 13 ) | ( 7 << 9 ) | 111,
                          0 | ( 1 << 13 ) | ( 0 << 9 ) | 129,
                          0 | ( 1 << 13 ) | ( 0 << 9 ) | 130,
-                         0 | ( 1 << 13 ) | ( 3 << 9 ) | 233 } ), // 77 (throne room)
+                         0 | ( 1 << 13 ) | ( 3 << 9 ) | 233,
+                         0 | ( 0 << 13 ) | ( 1 << 9 ) | 189 } ), // 77 (throne room)
          new( 2, new() { 0 | ( 1 << 13 ) | ( 2 << 9 ) | 145,
                          0 | ( 1 << 13 ) | ( 0 << 9 ) | 150 } ), // 78
 
@@ -500,6 +503,12 @@ namespace DataGenerator
          new( 73, new() { new( 1, 6 ) } ),                                 // tantegel ground floor (lower-left)
          new( 78, new() { new( 150, 7 ) } ),                               // tantegel basement
          new( 87, new() { new( 109, 8 ) } )                                // erdrick's cave
+      };
+
+      public static List<Tuple<int, List<Tuple<int, int>>>> MapDoors = new()
+      {
+         new( 77, new() { new( 189, 0 ) } ),                 // tantegel throne room
+         new( 71, new() { new( 137, 1 ), new( 263, 2 ) } ),  // tantegel ground floor (upper-left)
       };
 
       public static List<List<int>> MapTiles = new()

@@ -138,6 +138,7 @@ void Screen_WipePlayer( Game_t* game );
 void Screen_DrawEnemy( Game_t* game, uint16_t x, uint16_t y );
 void Screen_WipeEnemy( Game_t* game, uint16_t x, uint16_t y );
 void Screen_WipeTileMapSection( Game_t* game, float x, float y, uint16_t w, uint16_t h, Bool_t wipePlayer );
+void Screen_WipeTileIndex( Game_t* game, uint16_t tileIndex, Bool_t wipePlayer );
 
 // data_loader.c
 void Screen_LoadMapPalette( Screen_t* screen, uint8_t index );

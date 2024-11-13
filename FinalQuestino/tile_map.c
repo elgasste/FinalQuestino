@@ -52,3 +52,33 @@ void TileMap_Init( TileMap_t* tileMap )
    tileMap->enemySpecialRegion.w = 0;
    tileMap->enemySpecialRegion.h = 0;
 }
+
+int16_t TileMap_GetPlayerFacingTileIndex( uint16_t playerTileIndex, uint8_t direction )
+{
+   uint16_t tileX = playerTileIndex % MAP_TILES_X;
+   uint16_t tileY = playerTileIndex / MAP_TILES_X;
+
+   switch ( direction )
+   {
+      case DIRECTION_LEFT: return ( tileX == 0 ) ? -1 : playerTileIndex - 1; break;
+      case DIRECTION_RIGHT: return ( tileX >= ( MAP_TILES_X - 1 ) ) ? -1 : playerTileIndex + 1; break;
+      case DIRECTION_UP: return ( tileY == 0 ) ? -1 : playerTileIndex - MAP_TILES_X; break;
+      case DIRECTION_DOWN: return ( tileY >= ( MAP_TILES_Y - 1 ) ) ? -1 : playerTileIndex + MAP_TILES_X; break;
+      default: return -1;
+   }
+}
+
+Bool_t TileMap_TileHasSprite( TileMap_t* map, uint8_t spriteId, uint16_t tileIndex )
+{
+   uint8_t i;
+
+   for ( i = 0; i < map->spriteCount; i++ )
+   {
+      if ( GET_SPRITE_TILE_INDEX( map->spriteData[i] ) == tileIndex )
+      {
+         return GET_SPRITE_INDEX( map->spriteData[i] ) == spriteId;
+      }
+   }
+
+   return False;
+}

@@ -159,7 +159,7 @@ void Battle_Done( Game_t* game )
 {
    Screen_WipeTileMapSection( game, 16, 16, 76, 36, False );       // quick stats
    Screen_WipeTileMapSection( game, 144, 32, 112, 112, False );    // enemy
-   Menu_Wipe( game );
+   Menu_Wipe( game, MENUINDEX_BATTLEMAIN );
    Battle_WipeMessage( game );
    game->state = GAMESTATE_MAP;
 }

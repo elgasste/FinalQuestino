@@ -30,6 +30,7 @@
 #define STR_MAP_STATUSEXP                                   "Exp: %u"
 #define STR_MAP_FOUNDNOTHING                                "You didn't find anything."
 #define STR_MAP_NOITEMS                                     "You don't have any items that can be used here."
+#define STR_MAP_NODOOR                                      "There is no door here."
 
 #define STR_BATTLE_QUICKSTATSHP                             "HP:%u"
 #define STR_BATTLE_QUICKSTATSMP                             "MP:%u"

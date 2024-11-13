@@ -164,6 +164,8 @@
 
 #define BATTLE_FLEEAGILITYTHRESHOLD          96
 
+#define SPRITE_INDEX_DOOR                    1
+
 #define ITEM_KEY                             0
 #define ITEM_HERB                            1
 #define ITEM_WING                            2
@@ -183,12 +185,15 @@
 #define GET_ITEM_HASTABLET( x )              ( ( x ) >> 12 & 0x1 )
 #define GET_ITEM_HASSTONEOFSUNLIGHT( x )     ( ( x ) >> 13 & 0x1 )
 
-#define SET_ITEM_KEYCOUNT( x, c )            x |= ( ( c ) & 0x7 )
-#define SET_ITEM_HERBCOUNT( x, c )           x |= ( ( (uint32_t)( c ) & 0x7 ) << 3 )
-#define SET_ITEM_WINGCOUNT( x, c )           x |= ( ( (uint32_t)( c ) & 0x7 ) << 6 )
-#define SET_ITEM_FAIRYWATERCOUNT( x, c )     x |= ( ( (uint32_t)( c ) & 0x7 ) << 9 )
+// TODO: keep an eye on these and make sure they actually go away when you use them
+#define SET_ITEM_KEYCOUNT( x, c )            ( x ) = ( ( ( x ) & 0xFFFFFFF8 ) | ( ( c ) & 0x7 ) )
+#define SET_ITEM_HERBCOUNT( x, c )           ( x ) = ( ( ( x ) & 0xFFFFFFC7 ) | ( (uint32_t)( c ) & 0x7 ) << 3 )
+#define SET_ITEM_WINGCOUNT( x, c )           ( x ) = ( ( ( x ) & 0xFFFFFE3F ) | ( (uint32_t)( c ) & 0x7 ) << 6 )
+#define SET_ITEM_FAIRYWATERCOUNT( x, c )     ( x ) = ( ( ( x ) & 0xFFFFF1FF ) | ( (uint32_t)( c ) & 0x7 ) << 9 )
+
 #define SET_ITEM_HASTABLET( x, b )           x |= ( ( uint32_t )( b ) << 12 )
 #define SET_ITEM_HASSTONEOFSUNLIGHT( x, b )  x |= ( ( uint32_t )( b ) << 13 )
+
 
 typedef uint8_t Bool_t;
 #define True 1

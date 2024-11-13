@@ -8,10 +8,12 @@ typedef struct Game_t Game_t;
 typedef struct Menu_t
 {
    uint8_t index;
-   uint8_t optionIndex;
    uint8_t optionCount;
+   uint8_t selectedOption;
    float caratSeconds;
    Bool_t showCarat;
+
+   uint8_t mapItemFlags;
 }
 Menu_t;
 
@@ -22,7 +24,7 @@ extern "C" {
 void Menu_Load( Game_t* game, uint8_t menuIndex );
 void Menu_Reset( Game_t* game );
 void Menu_Draw( Game_t* game );
-void Menu_Wipe( Game_t* game );
+void Menu_Wipe( Game_t* game, uint8_t menuIndex );
 void Menu_DrawCarat( Game_t* game );
 void Menu_WipeCarat( Game_t* game );
 void Menu_Tic( Game_t* game );

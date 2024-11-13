@@ -31,6 +31,7 @@ typedef struct Game_t
 
    uint8_t specialEnemyFlags;
    uint32_t treasureFlags;
+   uint32_t doorFlags;
 }
 Game_t;
 
@@ -56,6 +57,7 @@ void Game_Status( Game_t* game );
 void Game_Search( Game_t* game );
 void Game_MapSpell( Game_t* game );
 void Game_MapItem( Game_t* game );
+void Game_UseMapItem( Game_t* game, uint8_t itemId );
 
 #if defined( __cplusplus )
 }
