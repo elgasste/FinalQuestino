@@ -327,6 +327,17 @@ internal void HandleKeyboardInput( uint32_t keyCode, LPARAM flags )
             case VK_DEBUG_NOCLIP:
                TOGGLE_BOOL( g_debugFlags.noClip );
                break;
+            case VK_DEBUG_GETKEY:
+               if ( GET_ITEM_KEYCOUNT( g_globals.game.player.items ) < ITEM_MAXKEYS )
+               {
+                  SET_ITEM_KEYCOUNT( g_globals.game.player.items, GET_ITEM_KEYCOUNT( g_globals.game.player.items ) + 1 );
+                  if ( g_globals.game.state == GAMESTATE_MAPMENUITEMS )
+                  {
+                     Menu_Load( &( g_globals.game ), MENUINDEX_MAPITEMS );
+                     Menu_Draw( &( g_globals.game ) );
+                  }
+               }
+               break;
             case VK_DEBUG_CLEARFLAGS:
                if ( g_globals.game.state == GAMESTATE_MAP )
                {
