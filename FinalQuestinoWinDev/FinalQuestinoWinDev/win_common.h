@@ -15,7 +15,7 @@
 #include "vector.h"
 
 #define STRING_SIZE_DEFAULT         1024
-#define GRAPHICS_SCALE              2.0f
+#define GRAPHICS_SCALE              3.0f
 
 #define VK_DEBUG_PASSABLETILES      0x31     // 1
 #define VK_DEBUG_ENCOUNTERRATES     0x32     // 2
