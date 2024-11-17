@@ -658,7 +658,7 @@ void Screen_WipeTileMapSection( Game_t* game, float x, float y, uint16_t w, uint
             redrawX = -xOffset;
             redrawW = SPRITE_SIZE - redrawX;
          }
-         else if ( xOffset % SPRITE_SIZE != 0 )
+         else if ( ( xOffset + SPRITE_SIZE ) > ( x + w ) )
          {
             redrawW = SPRITE_SIZE - ( xOffset % SPRITE_SIZE );
          }
@@ -668,7 +668,7 @@ void Screen_WipeTileMapSection( Game_t* game, float x, float y, uint16_t w, uint
             redrawY = -yOffset;
             redrawH = SPRITE_SIZE - redrawY;
          }
-         else if ( yOffset % SPRITE_SIZE != 0 )
+         else if ( ( yOffset + SPRITE_SIZE ) > ( y + h ) )
          {
             redrawH = SPRITE_SIZE - ( yOffset % SPRITE_SIZE );
          }
@@ -689,13 +689,15 @@ void Screen_WipeTileIndex( Game_t* game, uint16_t tileIndex, Bool_t wipePlayer )
 internal void Screen_DrawPlayerSpriteSection( Game_t* game, uint8_t sx, uint8_t sy, uint8_t w, uint8_t h )
 {
    uint8_t pixelPair, paletteIndex, skipLeft, skipTop, skipRight, skipBottom, curX, curY;
-   uint16_t i, startByte, color;
-   uint16_t color16, b, pixel, ux, uy, tx, ty;
-   uint32_t color32;
+   uint16_t b, startByte, color, pixel, ux, uy, tx, ty;
    Screen_t* screen = &( game->screen );
    float px = game->player.position.x + PLAYER_SPRITEOFFSET_X;
    float py = game->player.position.y + PLAYER_SPRITEOFFSET_Y;
-   uint32_t* bufferPos;
+
+   if ( px >= ( MAP_TILE_SIZE * MAP_TILES_X ) || py >= ( MAP_TILE_SIZE * MAP_TILES_Y ) || px + SPRITE_SIZE < 0 || py + SPRITE_SIZE < 0 )
+   {
+      return;
+   }
 
    if ( px >= ( MAP_TILE_SIZE * MAP_TILES_X ) || py >= ( MAP_TILE_SIZE * MAP_TILES_Y ) || px + SPRITE_SIZE < 0 || py + SPRITE_SIZE < 0 )
    {
@@ -709,16 +711,16 @@ internal void Screen_DrawPlayerSpriteSection( Game_t* game, uint8_t sx, uint8_t 
       if ( skipLeft > sx )
       {
          sx = skipLeft;
-         w -= ( skipLeft - sx );
+         w -= skipLeft;
       }
       skipRight = SPRITE_SIZE - ( sx + w );
    }
    else
    {
-      ux = (uint16_t)px;
+      ux = (uint16_t)px + sx;
       skipLeft = sx;
       skipRight = ( ux + SPRITE_SIZE ) >= ( MAP_TILE_SIZE * MAP_TILES_X ) ? (uint8_t)( MAP_TILE_SIZE - ( ( MAP_TILE_SIZE * MAP_TILES_X ) - ux ) ) : 0;
-      w = MIN_I( sx + w, skipRight );
+      w -= skipRight;
    }
 
    if ( py < 0 )
@@ -728,16 +730,16 @@ internal void Screen_DrawPlayerSpriteSection( Game_t* game, uint8_t sx, uint8_t 
       if ( skipTop > sy )
       {
          sy = skipTop;
-         h -= ( skipTop - sy );
+         h -= skipTop;
       }
       skipBottom = SPRITE_SIZE - ( sy + h );
    }
    else
    {
-      uy = (uint16_t)py;
-      skipTop = 0;
+      uy = (uint16_t)py + sy;
+      skipTop = sy;
       skipBottom = ( uy + SPRITE_SIZE ) >= ( MAP_TILE_SIZE * MAP_TILES_Y ) ? (uint8_t)( MAP_TILE_SIZE - ( ( MAP_TILE_SIZE * MAP_TILES_Y ) - uy ) ) : 0;
-      h = MIN_I( sy + h, skipBottom );
+      h -= skipBottom;
    }
 
    startByte = ( (uint8_t)( game->player.sprite.direction ) * SPRITE_FRAMES * SPRITE_TEXTURE_SIZE_BYTES )
@@ -746,56 +748,57 @@ internal void Screen_DrawPlayerSpriteSection( Game_t* game, uint8_t sx, uint8_t 
       + ( skipTop * 8 );
 
    CS_ACTIVE;
-   Screen_SetAddrWindow( screen, ux, uy, ux + SPRITE_SIZE - skipLeft - skipRight - 1, uy + SPRITE_SIZE - skipTop - skipBottom - 1 );
+   Screen_SetAddrWindow( screen, ux, uy, ux + w - 1, uy + h - 1 );
    CD_COMMAND;
    write8( 0x2C );
    CD_DATA;
 
-   for ( i = startByte, pixel = 0, curX = 0, curY = 0; i < startByte + SPRITE_TEXTURE_SIZE_BYTES; i++ )
+   for ( b = startByte, pixel = 0; b < ( startByte + SPRITE_TEXTURE_SIZE_BYTES ) && sy < ( SPRITE_SIZE - skipBottom ); b++ )
    {
-      pixelPair = game->player.sprite.frameTextures[i];
+      pixelPair = game->player.sprite.frameTextures[b];
+      paletteIndex = pixelPair >> 4;
+      color = screen->palette[paletteIndex];
 
-      if ( curX >= skipLeft && curX < ( MAP_TILE_SIZE - skipRight ) && curY >= skipTop && curY < ( MAP_TILE_SIZE - skipBottom ) )
+      if ( color == TRANSPARENT_COLOR )
       {
-         paletteIndex = pixelPair >> 4;
-         color = screen->palette[paletteIndex];
-
-         if ( color == TRANSPARENT_COLOR )
-         {
-            color = Screen_GetTilePixelColor( game, ux + ( pixel % SPRITE_SIZE ), uy + ( pixel / SPRITE_SIZE ) );
-         }
-
-         write16( color >> 8, color );
+         tx = ux + ( pixel % SPRITE_SIZE );
+         ty = uy + ( pixel / SPRITE_SIZE );
+         color = Screen_GetTilePixelColor( game, tx, ty );
       }
-      
+
+      write16( color >> 8, color );
+      sx++;
       pixel++;
-      curX++;
 
-      if ( curX >= skipLeft && curX < ( MAP_TILE_SIZE - skipRight ) && curY >= skipTop && curY < ( MAP_TILE_SIZE - skipBottom ) )
+      if ( sx >= SPRITE_SIZE - skipRight )
       {
-         paletteIndex = pixelPair & 0x0F;
-         color = screen->palette[paletteIndex];
-
-         if ( color == TRANSPARENT_COLOR )
-         {
-            color = Screen_GetTilePixelColor( game, ux + ( pixel % SPRITE_SIZE ), uy + ( pixel / SPRITE_SIZE ) );
-         }
-
-         write16( color >> 8, color );
+         sx = skipLeft;
+         sy++;
+         pixel += skipRight + skipLeft;
+         b += ( skipRight / 2 ) + ( skipLeft / 2 );
+         continue;
       }
-      
-      pixel++;
-      curX++;
 
-      if ( curX >= SPRITE_SIZE )
+      paletteIndex = pixelPair & 0x0F;
+      color = screen->palette[paletteIndex];
+
+      if ( color == TRANSPARENT_COLOR )
       {
-         curX = 0;
-         curY++;
+         tx = ux + ( pixel % SPRITE_SIZE );
+         ty = uy + ( pixel / SPRITE_SIZE );
+         color = Screen_GetTilePixelColor( game, tx, ty );
+      }
 
-         if ( curY >= SPRITE_SIZE )
-         {
-            curY = 0;
-         }
+      write16( color >> 8, color );
+      sx++;
+      pixel++;
+
+      if ( sx >= SPRITE_SIZE - skipRight )
+      {
+         sx = skipLeft;
+         sy++;
+         pixel += skipRight + skipLeft;
+         b += ( skipRight / 2 ) + ( skipLeft / 2 );
       }
    }
 
