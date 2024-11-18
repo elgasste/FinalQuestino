@@ -143,6 +143,8 @@ uint8_t Player_GetMapItemCount( Player_t* player )
    if ( GET_ITEM_HERBCOUNT( player->items ) ) count++;
    if ( GET_ITEM_WINGCOUNT( player->items ) ) count++;
    if ( GET_ITEM_FAIRYWATERCOUNT( player->items ) ) count++;
+   if ( GET_ITEM_HASTABLET( player->items ) ) count++;
+   if ( GET_ITEM_HASSTONEOFSUNLIGHT( player->items ) ) count++;
 
    return count;
 }

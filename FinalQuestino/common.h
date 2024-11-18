@@ -67,7 +67,7 @@
 #define GAMESTATE_BATTLEATTACKRESULT         7
 #define GAMESTATE_BATTLERESULT               8
 #define GAMESTATE_BATTLECOLLECT              9
-#define GAMESTATE_MAPNOITEMSMESSAGE          10
+#define GAMESTATE_MAPITEMMESSAGE             10
 #define GAMESTATE_MAPMENUITEMS               11
 
 #define BUTTON_LEFT                          0
@@ -184,6 +184,13 @@
 #define GET_ITEM_FAIRYWATERCOUNT( x )        ( ( ( x ) >> 9 ) & 0x7 )
 #define GET_ITEM_HASTABLET( x )              ( ( x ) >> 12 & 0x1 )
 #define GET_ITEM_HASSTONEOFSUNLIGHT( x )     ( ( x ) >> 13 & 0x1 )
+
+#define GET_ITEM_COUNT( x )                  ( 0 + ( GET_ITEM_KEYCOUNT( x ) ? 1 : 0 ) + \
+                                                   ( GET_ITEM_HERBCOUNT( x ) ? 1 : 0 ) + \
+                                                   ( GET_ITEM_WINGCOUNT( x ) ? 1 : 0 ) + \
+                                                   ( GET_ITEM_FAIRYWATERCOUNT( x ) ? 1 : 0 ) + \
+                                                   ( GET_ITEM_HASTABLET( x ) ? 1 : 0 ) + \
+                                                   ( GET_ITEM_HASSTONEOFSUNLIGHT( x ) ? 1 : 0 ) )
 
 // TODO: keep an eye on these and make sure they actually go away when you use them
 #define SET_ITEM_KEYCOUNT( x, c )            ( x ) = ( ( ( x ) & 0xFFFFFFF8 ) | ( ( c ) & 0x7 ) )

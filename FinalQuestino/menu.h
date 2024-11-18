@@ -10,10 +10,9 @@ typedef struct Menu_t
    uint8_t index;
    uint8_t optionCount;
    uint8_t selectedOption;
+   uint64_t itemFlags;
    float caratSeconds;
    Bool_t showCarat;
-
-   uint8_t mapItemFlags;
 }
 Menu_t;
 

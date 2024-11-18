@@ -148,13 +148,13 @@ void Game_WipeMessage( Game_t* game )
 
 void Game_ShowMapMenuMessage( Game_t* game, const char* message )
 {
-   Screen_DrawRect( &( game->screen ), 112, 144, 192, 80, DARKGRAY );
+   Screen_DrawRect( &( game->screen ), 112, 144, 192, 48, DARKGRAY );
    Screen_DrawWrappedText( &( game->screen ), message, 120, 152, 22, 10, DARKGRAY, WHITE );
 }
 
 void Game_WipeMapMenuMessage( Game_t* game )
 {
-   Screen_WipeTileMapSection( game, 112, 144, 192, 80, False );
+   Screen_WipeTileMapSection( game, 112, 144, 192, 48, False );
 }
 
 void Game_ShowMapQuickStats( Game_t* game )
@@ -385,18 +385,28 @@ void Game_MapItem( Game_t* game )
    }
    else
    {
-      SPRINTF_P( msg, PSTR( STR_MAP_NOITEMS ) );
+      SPRINTF_P( msg, PSTR( STR_MAP_NOMAPITEMS ) );
       Menu_DrawCarat( game );
       Game_ShowMapMenuMessage( game, msg );
-      game->state = GAMESTATE_MAPNOITEMSMESSAGE;
+      game->state = GAMESTATE_MAPITEMMESSAGE;
    }
 }
 
 void Game_UseMapItem( Game_t* game, uint8_t itemId )
 {
-   if ( itemId == ITEM_KEY )
+   char msg[64];
+
+   switch ( itemId )
    {
-      Game_OpenDoor( game );
+      case ITEM_KEY:
+         Game_OpenDoor( game );
+         break;
+      case ITEM_TABLET:
+      case ITEM_STONEOFSUNLIGHT:
+         SPRINTF_P( msg, PSTR( STR_MAP_MAPITEMCANNOTBEUSED ) );
+         Game_ShowMapMenuMessage( game, msg );
+         game->state = GAMESTATE_MAPITEMMESSAGE;
+         break;
    }
 }
 
@@ -406,10 +416,6 @@ internal void Game_OpenDoor( Game_t* game )
    int16_t facingTileIndex = TileMap_GetPlayerFacingTileIndex( game->physics.tileIndexCache, game->player.sprite.direction );
    char msg[32];
 
-   Game_WipeMapQuickStats( game );
-   Menu_Wipe( game, MENUINDEX_MAPITEMS );
-   Menu_Wipe( game, MENUINDEX_MAP );
-
    if ( facingTileIndex >= 0 && TileMap_TileHasSprite( &( game->tileMap ), 1, (uint16_t)facingTileIndex ) )
    {
       doorFlag = TileMap_GetDoorFlag( game->tileMapIndex, (uint16_t)facingTileIndex );
@@ -418,6 +424,9 @@ internal void Game_OpenDoor( Game_t* game )
       {
          game->doorFlags ^= doorFlag;
          SET_ITEM_KEYCOUNT( game->player.items, GET_ITEM_KEYCOUNT( game->player.items ) - 1 );
+         Game_WipeMapQuickStats( game );
+         Menu_Wipe( game, MENUINDEX_MAP );
+         Menu_Wipe( game, MENUINDEX_MAPITEMS );
          Screen_WipeTileIndex( game, facingTileIndex, False );
          game->state = GAMESTATE_MAP;
          return;
@@ -432,6 +441,6 @@ internal void Game_OpenDoor( Game_t* game )
       SPRINTF_P( msg, PSTR( STR_MAP_NODOOR ) );
    }
 
-   Game_ShowMessage( game, msg );
-   game->state = GAMESTATE_MAPMESSAGE;
+   Game_ShowMapMenuMessage( game, msg );
+   game->state = GAMESTATE_MAPITEMMESSAGE;
 }

@@ -16,6 +16,8 @@
 #define STR_MENU_HERB                                       "Herb (%u)"
 #define STR_MENU_WING                                       "Chimaera wing (%u)"
 #define STR_MENU_FAIRYWATER                                 "Fairy water (%u)"
+#define STR_MENU_TABLET                                     "Erdrick's Tablet"
+#define STR_MENU_STONEOFSUNLIGHT                            "Stone of Sunlight"
 
 #define STR_MAP_QUICKSTATSHP                                "HP:%u"
 #define STR_MAP_QUICKSTATSMP                                "MP:%u"
@@ -29,7 +31,8 @@
 #define STR_MAP_STATUSAGILITY                               "Agl: %u"
 #define STR_MAP_STATUSEXP                                   "Exp: %u"
 #define STR_MAP_FOUNDNOTHING                                "You didn't find anything."
-#define STR_MAP_NOITEMS                                     "You don't have any items that can be used here."
+#define STR_MAP_NOMAPITEMS                                  "You don't have any items that can be used here."
+#define STR_MAP_MAPITEMCANNOTBEUSED                         "This item cannot be used here."
 #define STR_MAP_NODOOR                                      "There is no door here."
 
 #define STR_BATTLE_QUICKSTATSHP                             "HP:%u"
