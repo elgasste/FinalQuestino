@@ -422,11 +422,11 @@ internal void Game_OpenDoor( Game_t* game )
 
       if ( game->doorFlags & doorFlag )
       {
-         game->doorFlags ^= doorFlag;
-         SET_ITEM_KEYCOUNT( game->player.items, GET_ITEM_KEYCOUNT( game->player.items ) - 1 );
          Game_WipeMapQuickStats( game );
          Menu_Wipe( game, MENUINDEX_MAP );
          Menu_Wipe( game, MENUINDEX_MAPITEMS );
+         game->doorFlags ^= doorFlag;
+         SET_ITEM_KEYCOUNT( game->player.items, GET_ITEM_KEYCOUNT( game->player.items ) - 1 );
          Screen_WipeTileIndex( game, facingTileIndex, False );
          game->state = GAMESTATE_MAP;
          return;

@@ -141,7 +141,7 @@ void Input_Handle( Game_t* game )
          if ( Input_AnyButtonPressed( &( game->input ) ) )
          {
             Game_WipeMapMenuMessage( game );
-            game->state = GAMESTATE_MAPMENUITEMS;
+            game->state = game->menu.index == MENUINDEX_MAPITEMS ? GAMESTATE_MAPMENUITEMS : GAMESTATE_MAPMENU;
          }
          break;
    }

@@ -160,6 +160,8 @@ internal void Menu_SetItemFlags( Game_t* game )
    uint32_t items = game->player.items;
    uint8_t shift = 0;
 
+   game->menu.itemFlags = 0;
+
    if ( game->menu.index == MENUINDEX_MAPITEMS )
    {
       if ( GET_ITEM_KEYCOUNT( items ) ) { game->menu.itemFlags |= (uint64_t)ITEM_KEY << shift; shift += 4; }
