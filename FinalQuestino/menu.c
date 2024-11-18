@@ -168,14 +168,10 @@ internal void Menu_SetItemFlags( Game_t* game )
       if ( GET_ITEM_HERBCOUNT( items ) ) { game->menu.itemFlags |= (uint64_t)ITEM_HERB << shift; shift += 4; }
       if ( GET_ITEM_WINGCOUNT( items ) ) { game->menu.itemFlags |= (uint64_t)ITEM_WING << shift; shift += 4; }
       if ( GET_ITEM_FAIRYWATERCOUNT( items ) ) { game->menu.itemFlags |= (uint64_t)ITEM_FAIRYWATER << shift; shift += 4; }
-      if ( GET_ITEM_HASSTONEOFSUNLIGHT( items ) ) { game->menu.itemFlags |= (uint64_t)ITEM_STONEOFSUNLIGHT << shift; shift += 4; }
-      if ( GET_ITEM_HASSTAFFOFRAIN( items ) ) { game->menu.itemFlags |= (uint64_t)ITEM_STAFFOFRAIN << shift; shift += 4; }
       if ( GET_ITEM_HASRAINBOWDROP( items ) ) { game->menu.itemFlags |= (uint64_t)ITEM_RAINBOWDROP << shift; shift += 4; }
       if ( GET_ITEM_HASSILVERHARP( items ) ) { game->menu.itemFlags |= (uint64_t)ITEM_SILVERHARP << shift; shift += 4; }
       if ( GET_ITEM_HASFAIRYFLUTE( items ) ) { game->menu.itemFlags |= (uint64_t)ITEM_FAIRYFLUTE << shift; shift += 4; }
-      if ( GET_ITEM_HASGWAELYNSLOVE( items ) ) { game->menu.itemFlags |= (uint64_t)ITEM_GWAELYNSLOVE << shift; shift += 4; }
-      if ( GET_ITEM_HASTOKEN( items ) ) { game->menu.itemFlags |= (uint64_t)ITEM_TOKEN << shift; shift += 4; }
-      if ( GET_ITEM_HASSPHEREOFLIGHT( items ) ) { game->menu.itemFlags |= (uint64_t)ITEM_SPHEREOFLIGHT << shift; shift += 4; }
+      if ( GET_ITEM_HASGWAELYNSLOVE( items ) ) { game->menu.itemFlags |= (uint64_t)ITEM_GWAELYNSLOVE << shift; }
    }
 }
 
@@ -272,18 +268,6 @@ internal void Menu_DrawMapItemsMenu( Game_t* game )
       Screen_DrawText( &( game->screen ), str, 136, textY, DARKGRAY, WHITE );
       textY += 8;
    }
-   if ( GET_ITEM_HASSTONEOFSUNLIGHT( items ) )
-   {
-      SPRINTF_P( str, PSTR( STR_MENU_STONEOFSUNLIGHT ) );
-      Screen_DrawText( &( game->screen ), str, 136, textY, DARKGRAY, WHITE );
-      textY += 8;
-   }
-   if ( GET_ITEM_HASSTAFFOFRAIN( items ) )
-   {
-      SPRINTF_P( str, PSTR( STR_MENU_STAFFOFRAIN ) );
-      Screen_DrawText( &( game->screen ), str, 136, textY, DARKGRAY, WHITE );
-      textY += 8;
-   }
    if ( GET_ITEM_HASRAINBOWDROP( items ) )
    {
       SPRINTF_P( str, PSTR( STR_MENU_RAINBOWDROP ) );
@@ -305,18 +289,6 @@ internal void Menu_DrawMapItemsMenu( Game_t* game )
    if ( GET_ITEM_HASGWAELYNSLOVE( items ) )
    {
       SPRINTF_P( str, PSTR( STR_MENU_GWAELYNSLOVE ) );
-      Screen_DrawText( &( game->screen ), str, 136, textY, DARKGRAY, WHITE );
-      textY += 8;
-   }
-   if ( GET_ITEM_HASTOKEN( items ) )
-   {
-      SPRINTF_P( str, PSTR( STR_MENU_TOKEN ) );
-      Screen_DrawText( &( game->screen ), str, 136, textY, DARKGRAY, WHITE );
-      textY += 8;
-   }
-   if ( GET_ITEM_HASSPHEREOFLIGHT( items ) )
-   {
-      SPRINTF_P( str, PSTR( STR_MENU_SPHEREOFLIGHT ) );
       Screen_DrawText( &( game->screen ), str, 136, textY, DARKGRAY, WHITE );
       textY += 8;
    }

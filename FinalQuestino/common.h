@@ -204,14 +204,10 @@
                                              ( GET_ITEM_HERBCOUNT( x ) ? 1 : 0 ) + \
                                              ( GET_ITEM_WINGCOUNT( x ) ? 1 : 0 ) + \
                                              ( GET_ITEM_FAIRYWATERCOUNT( x ) ? 1 : 0 ) + \
-                                             ( GET_ITEM_HASSTONEOFSUNLIGHT( x ) ? 1 : 0 ) + \
-                                             ( GET_ITEM_HASSTAFFOFRAIN( x ) ? 1 : 0 ) + \
                                              ( GET_ITEM_HASRAINBOWDROP( x ) ? 1 : 0 ) + \
                                              ( GET_ITEM_HASSILVERHARP( x ) ? 1 : 0 ) + \
                                              ( GET_ITEM_HASFAIRYFLUTE( x ) ? 1 : 0 ) + \
-                                             ( GET_ITEM_HASGWAELYNSLOVE( x ) ? 1 : 0 ) + \
-                                             ( GET_ITEM_HASTOKEN( x ) ? 1 : 0 ) + \
-                                             ( GET_ITEM_HASSPHEREOFLIGHT( x ) ? 1 : 0 ) )
+                                             ( GET_ITEM_HASGWAELYNSLOVE( x ) ? 1 : 0 ) )
 
 // TODO: keep an eye on these and make sure they actually go away when you use them
 #define SET_ITEM_KEYCOUNT( x, c )            ( x ) = ( ( ( x ) & 0xFFFFFFF8 ) | ( ( c ) & 0x7 ) )
