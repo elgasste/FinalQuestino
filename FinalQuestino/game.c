@@ -148,13 +148,13 @@ void Game_WipeMessage( Game_t* game )
 
 void Game_ShowMapMenuMessage( Game_t* game, const char* message )
 {
-   Screen_DrawRect( &( game->screen ), 112, 144, 192, 48, DARKGRAY );
-   Screen_DrawWrappedText( &( game->screen ), message, 120, 152, 22, 10, DARKGRAY, WHITE );
+   Screen_DrawRect( &( game->screen ), 112, 128, 192, 48, DARKGRAY );
+   Screen_DrawWrappedText( &( game->screen ), message, 120, 136, 22, 10, DARKGRAY, WHITE );
 }
 
 void Game_WipeMapMenuMessage( Game_t* game )
 {
-   Screen_WipeTileMapSection( game, 112, 144, 192, 48, False );
+   Screen_WipeTileMapSection( game, 112, 128, 192, 48, False );
 }
 
 void Game_ShowMapQuickStats( Game_t* game )
@@ -401,8 +401,7 @@ void Game_UseMapItem( Game_t* game, uint8_t itemId )
       case ITEM_KEY:
          Game_OpenDoor( game );
          break;
-      case ITEM_TABLET:
-      case ITEM_STONEOFSUNLIGHT:
+      default:
          SPRINTF_P( msg, PSTR( STR_MAP_MAPITEMCANNOTBEUSED ) );
          Game_ShowMapMenuMessage( game, msg );
          game->state = GAMESTATE_MAPITEMMESSAGE;

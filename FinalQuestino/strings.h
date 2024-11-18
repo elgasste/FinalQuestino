@@ -18,6 +18,13 @@
 #define STR_MENU_FAIRYWATER                                 "Fairy water (%u)"
 #define STR_MENU_TABLET                                     "Erdrick's Tablet"
 #define STR_MENU_STONEOFSUNLIGHT                            "Stone of Sunlight"
+#define STR_MENU_STAFFOFRAIN                                "Staff of Rain"
+#define STR_MENU_RAINBOWDROP                                "Rainbow Drop"
+#define STR_MENU_SILVERHARP                                 "Silver Harp"
+#define STR_MENU_FAIRYFLUTE                                 "Fairy Flute"
+#define STR_MENU_GWAELYNSLOVE                               "Gwaelyn's Love"
+#define STR_MENU_TOKEN                                      "Erdrick's Token"
+#define STR_MENU_SPHEREOFLIGHT                              "Sphere of Light"
 
 #define STR_MAP_QUICKSTATSHP                                "HP:%u"
 #define STR_MAP_QUICKSTATSMP                                "MP:%u"
@@ -105,6 +112,13 @@
 #define STR_ITEM_FAIRYWATER                                 "fairy water"
 #define STR_ITEM_ERDRICKSTABLET                             "Erdrick's Tablet"
 #define STR_ITEM_THESTONEOFSUNLIGHT                         "the Stone of Sunlight"
+#define STR_ITEM_THESTAFFOFRAIN                             "the Staff of Rain"
+#define STR_ITEM_ARAINBOWDROP                               "a Rainbow Drop"
+#define STR_ITEM_THESILVERHARP                              "the Silver Harp"
+#define STR_ITEM_THEFAIRYFLUTE                              "the Fairy Flute"
+#define STR_ITEM_GWAELYNSLOVE                               "Gwaelyn's Love"
+#define STR_ITEM_TOKEN                                      "Erdrick's Token"
+#define STR_ITEM_THESPHEREOFLIGHT                           "the Sphere of Light"
 
 // we should never see this, but just in case
 #define STR_ITEM_ERR                                        "The chest is a lie!"
