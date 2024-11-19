@@ -148,13 +148,13 @@ void Game_WipeMessage( Game_t* game )
 
 void Game_ShowMapMenuMessage( Game_t* game, const char* message )
 {
-   Screen_DrawRect( &( game->screen ), 112, 128, 192, 48, DARKGRAY );
-   Screen_DrawWrappedText( &( game->screen ), message, 120, 136, 22, 10, DARKGRAY, WHITE );
+   Screen_DrawRect( &( game->screen ), 112, 136, 160, 48, DARKGRAY );
+   Screen_DrawWrappedText( &( game->screen ), message, 120, 144, 18, 10, DARKGRAY, WHITE );
 }
 
 void Game_WipeMapMenuMessage( Game_t* game )
 {
-   Screen_WipeTileMapSection( game, 112, 128, 192, 48, False );
+   Screen_WipeTileMapSection( game, 112, 136, 160, 48, False );
 }
 
 void Game_ShowMapQuickStats( Game_t* game )
@@ -335,6 +335,8 @@ internal Bool_t Game_CollectTreasure( Game_t* game, uint32_t treasureFlag )
          SPRINTF_P( msg, collected ? PSTR( STR_TREASURE_ITEMCOLLECTED ) : PSTR( STR_TREASURE_ITEMDENIED ), itemStr );
          break;
       case 0x100:  // erdrick's cave
+         // TODO: this is the only item we don't show in any menus, instead we need to
+         // display a series of dialogs with the tablet's message
          collected = Player_CollectItem( &( game->player ), ITEM_TABLET );
          SPRINTF_P( itemStr, PSTR( STR_ITEM_ERDRICKSTABLET ) );
          SPRINTF_P( msg, collected ? PSTR( STR_TREASURE_ITEMCOLLECTED ) : PSTR( STR_TREASURE_ITEMDENIED ), itemStr );
@@ -375,7 +377,7 @@ void Game_MapItem( Game_t* game )
 {
    char msg[64];
 
-   if ( Player_GetMapItemCount( &( game->player ) ) )
+   if ( GET_MAPUSEABLEITEM_COUNT( game->player.items ) || GET_MAPNONUSEABLEITEM_COUNT( game->player.items ) )
    {
       Menu_DrawCarat( game );
       Menu_Load( game, MENUINDEX_MAPITEMS );

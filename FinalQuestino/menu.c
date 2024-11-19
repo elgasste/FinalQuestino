@@ -8,6 +8,7 @@ internal void Menu_ItemSelect( Game_t* game );
 internal void Menu_DrawMapMenu( Game_t* game );
 internal void Menu_DrawBattleMainMenu( Game_t* game );
 internal void Menu_DrawMapItemsMenu( Game_t* game );
+internal uint16_t Menu_GetMapItemsMenuHeight( Game_t* game );
 
 void Menu_Load( Game_t* game, uint8_t menuIndex )
 {
@@ -23,7 +24,7 @@ void Menu_Load( Game_t* game, uint8_t menuIndex )
          game->menu.optionCount = 4;
          break;
       case MENUINDEX_MAPITEMS:
-         game->menu.optionCount = Player_GetMapItemCount( &( game->player ) );
+         game->menu.optionCount = GET_MAPUSEABLEITEM_COUNT( game->player.items );
          Menu_SetItemFlags( game );
          break;
    }
@@ -52,9 +53,9 @@ void Menu_Wipe( Game_t* game, uint8_t menuIndex )
 {
    switch( menuIndex )
    {
-      case MENUINDEX_MAP: Screen_WipeTileMapSection( game, 16, 88, 76, 88, False ); break;
+      case MENUINDEX_MAP: Screen_WipeTileMapSection( game, 16, 96, 76, 88, False ); break;
       case MENUINDEX_BATTLEMAIN: Screen_WipeTileMapSection( game, 16, 152, 76, 72, False ); break;
-      case MENUINDEX_MAPITEMS: Screen_WipeTileMapSection( game, 112, 16, 164, ( 8 * GET_MAPITEM_COUNT( game->player.items ) ) + 16, False ); break;
+      case MENUINDEX_MAPITEMS: Screen_WipeTileMapSection( game, 112, 16, 160, Menu_GetMapItemsMenuHeight( game ), False); break;
    }
 }
 
@@ -90,9 +91,11 @@ void Menu_DrawCarat( Game_t* game )
 
    switch( game->menu.index )
    {
-      case MENUINDEX_MAP: x = 20; y = 96; break;
+      case MENUINDEX_MAP: x = 20; y = 104; break;
       case MENUINDEX_BATTLEMAIN: x = 20; y = 160; break;
-      case MENUINDEX_MAPITEMS: x = 120; y = 24; lineHeight = 8; break;
+      case MENUINDEX_MAPITEMS:
+         if ( !GET_MAPUSEABLEITEM_COUNT( game->player.items ) ) return;
+         x = 116; y = 24; lineHeight = 8; break;
    }
 
    Screen_DrawText( &( game->screen ), STR_MENU_CARAT, x, y + ( lineHeight * game->menu.selectedOption ), DARKGRAY, WHITE );
@@ -104,9 +107,11 @@ void Menu_WipeCarat( Game_t* game )
 
    switch( game->menu.index )
    {
-      case MENUINDEX_MAP: x = 20; y = 96; break;
+      case MENUINDEX_MAP: x = 20; y = 104; break;
       case MENUINDEX_BATTLEMAIN: x = 20; y = 160; break;
-      case MENUINDEX_MAPITEMS: x = 120; y = 24; lineHeight = 8; break;
+      case MENUINDEX_MAPITEMS:
+         if ( !GET_MAPUSEABLEITEM_COUNT( game->player.items ) ) return;
+         x = 116; y = 24; lineHeight = 8; break;
    }
 
    Screen_DrawText( &( game->screen ), STR_MENU_BLANKCARAT, x, y + ( lineHeight * game->menu.selectedOption ), DARKGRAY, WHITE );
@@ -151,7 +156,12 @@ void Menu_Select( Game_t* game )
    {
       case MENUINDEX_MAP: Menu_MapMenuSelect( game ); break;
       case MENUINDEX_BATTLEMAIN: Menu_BattleMainSelect( game ); break;
-      case MENUINDEX_MAPITEMS: Menu_ItemSelect( game ); break;
+      case MENUINDEX_MAPITEMS:
+         if ( GET_MAPUSEABLEITEM_COUNT( game->player.items ) )
+         {
+            Menu_ItemSelect( game );
+         }
+         break;
    }
 }
 
@@ -208,17 +218,17 @@ internal void Menu_DrawMapMenu( Game_t* game )
 {
    char str[8];
 
-   Screen_DrawRect( &( game->screen ), 16, 88, 76, 88, DARKGRAY );
+   Screen_DrawRect( &( game->screen ), 16, 96, 76, 88, DARKGRAY );
    SPRINTF_P( str, PSTR( STR_MENU_TALK ) );
-   Screen_DrawText( &( game->screen ), str, 32, 96, DARKGRAY, WHITE );
+   Screen_DrawText( &( game->screen ), str, 32, 104, DARKGRAY, WHITE );
    SPRINTF_P( str, PSTR( STR_MENU_STATUS ) );
-   Screen_DrawText( &( game->screen ), str, 32, 112, DARKGRAY, WHITE );
+   Screen_DrawText( &( game->screen ), str, 32, 120, DARKGRAY, WHITE );
    SPRINTF_P( str, PSTR( STR_MENU_SEARCH ) );
-   Screen_DrawText( &( game->screen ), str, 32, 128, DARKGRAY, WHITE );
+   Screen_DrawText( &( game->screen ), str, 32, 136, DARKGRAY, WHITE );
    SPRINTF_P( str, PSTR( STR_MENU_SPELL ) );
-   Screen_DrawText( &( game->screen ), str, 32, 144, DARKGRAY, WHITE );
+   Screen_DrawText( &( game->screen ), str, 32, 152, DARKGRAY, WHITE );
    SPRINTF_P( str, PSTR( STR_MENU_ITEM ) );
-   Screen_DrawText( &( game->screen ), str, 32, 160, DARKGRAY, WHITE );
+   Screen_DrawText( &( game->screen ), str, 32, 168, DARKGRAY, WHITE );
 }
 
 internal void Menu_DrawBattleMainMenu( Game_t* game )
@@ -242,54 +252,108 @@ internal void Menu_DrawMapItemsMenu( Game_t* game )
    uint16_t textY = 24;
    uint32_t items = game->player.items;
 
-   Screen_DrawRect( &( game->screen ), 112, 16, 164, ( 8 * GET_MAPITEM_COUNT( items ) ) + 16, DARKGRAY );
+   Screen_DrawRect( &( game->screen ), 112, 16, 160, Menu_GetMapItemsMenuHeight( game ), DARKGRAY );
 
-   if ( GET_ITEM_KEYCOUNT( items ) )
+   if ( GET_MAPUSEABLEITEM_COUNT( items ) )
    {
-      SPRINTF_P( str, PSTR( STR_MENU_KEY ), GET_ITEM_KEYCOUNT( items ) );
-      Screen_DrawText( &( game->screen ), str, 136, textY, DARKGRAY, WHITE );
+      if ( GET_ITEM_KEYCOUNT( items ) )
+      {
+         SPRINTF_P( str, PSTR( STR_MENU_KEY ), GET_ITEM_KEYCOUNT( items ) );
+         Screen_DrawText( &( game->screen ), str, 128, textY, DARKGRAY, WHITE );
+         textY += 8;
+      }
+      if ( GET_ITEM_HERBCOUNT( items ) )
+      {
+         SPRINTF_P( str, PSTR( STR_MENU_HERB ), GET_ITEM_HERBCOUNT( items ) );
+         Screen_DrawText( &( game->screen ), str, 128, textY, DARKGRAY, WHITE );
+         textY += 8;
+      }
+      if ( GET_ITEM_WINGCOUNT( items ) )
+      {
+         SPRINTF_P( str, PSTR( STR_MENU_WING ), GET_ITEM_WINGCOUNT( items ) );
+         Screen_DrawText( &( game->screen ), str, 128, textY, DARKGRAY, WHITE );
+         textY += 8;
+      }
+      if ( GET_ITEM_FAIRYWATERCOUNT( items ) )
+      {
+         SPRINTF_P( str, PSTR( STR_MENU_FAIRYWATER ), GET_ITEM_FAIRYWATERCOUNT( items ) );
+         Screen_DrawText( &( game->screen ), str, 128, textY, DARKGRAY, WHITE );
+         textY += 8;
+      }
+      if ( GET_ITEM_HASRAINBOWDROP( items ) )
+      {
+         SPRINTF_P( str, PSTR( STR_MENU_RAINBOWDROP ) );
+         Screen_DrawText( &( game->screen ), str, 128, textY, DARKGRAY, WHITE );
+         textY += 8;
+      }
+      if ( GET_ITEM_HASSILVERHARP( items ) )
+      {
+         SPRINTF_P( str, PSTR( STR_MENU_SILVERHARP ) );
+         Screen_DrawText( &( game->screen ), str, 128, textY, DARKGRAY, WHITE );
+         textY += 8;
+      }
+      if ( GET_ITEM_HASFAIRYFLUTE( items ) )
+      {
+         SPRINTF_P( str, PSTR( STR_MENU_FAIRYFLUTE ) );
+         Screen_DrawText( &( game->screen ), str, 128, textY, DARKGRAY, WHITE );
+         textY += 8;
+      }
+      if ( GET_ITEM_HASGWAELYNSLOVE( items ) )
+      {
+         SPRINTF_P( str, PSTR( STR_MENU_GWAELYNSLOVE ) );
+         Screen_DrawText( &( game->screen ), str, 128, textY, DARKGRAY, WHITE );
+         textY += 8;
+      }
+
       textY += 8;
    }
-   if ( GET_ITEM_HERBCOUNT( items ) )
+
+   if ( GET_MAPNONUSEABLEITEM_COUNT( items ) )
    {
-      SPRINTF_P( str, PSTR( STR_MENU_HERB ), GET_ITEM_HERBCOUNT( items ) );
-      Screen_DrawText( &( game->screen ), str, 136, textY, DARKGRAY, WHITE );
-      textY += 8;
+      if ( GET_ITEM_HASSTONEOFSUNLIGHT( items ) )
+      {
+         SPRINTF_P( str, PSTR( STR_MENU_STONEOFSUNLIGHT ) );
+         Screen_DrawText( &( game->screen ), str, 128, textY, DARKGRAY, WHITE );
+         textY += 8;
+      }
+      if ( GET_ITEM_HASSTAFFOFRAIN( items ) )
+      {
+         SPRINTF_P( str, PSTR( STR_MENU_STAFFOFRAIN ) );
+         Screen_DrawText( &( game->screen ), str, 128, textY, DARKGRAY, WHITE );
+         textY += 8;
+      }
+      if ( GET_ITEM_HASTOKEN( items ) )
+      {
+         SPRINTF_P( str, PSTR( STR_MENU_TOKEN ) );
+         Screen_DrawText( &( game->screen ), str, 128, textY, DARKGRAY, WHITE );
+         textY += 8;
+      }
+      if ( GET_ITEM_HASSPHEREOFLIGHT( items ) )
+      {
+         SPRINTF_P( str, PSTR( STR_MENU_SPHEREOFLIGHT ) );
+         Screen_DrawText( &( game->screen ), str, 128, textY, DARKGRAY, WHITE );
+         textY += 8;
+      }
    }
-   if ( GET_ITEM_WINGCOUNT( items ) )
+}
+
+internal uint16_t Menu_GetMapItemsMenuHeight( Game_t* game )
+{
+   uint16_t h;
+   uint8_t useableItems = GET_MAPUSEABLEITEM_COUNT( game->player.items );
+   uint8_t nonUseableItems = GET_MAPNONUSEABLEITEM_COUNT( game->player.items );
+
+   h = ( 8 * useableItems ) + 16;
+
+   if ( nonUseableItems )
    {
-      SPRINTF_P( str, PSTR( STR_MENU_WING ), GET_ITEM_WINGCOUNT( items ) );
-      Screen_DrawText( &( game->screen ), str, 136, textY, DARKGRAY, WHITE );
-      textY += 8;
+      h += ( 8 * nonUseableItems );
+
+      if ( useableItems )
+      {
+         h += 8;
+      }
    }
-   if ( GET_ITEM_FAIRYWATERCOUNT( items ) )
-   {
-      SPRINTF_P( str, PSTR( STR_MENU_FAIRYWATER ), GET_ITEM_FAIRYWATERCOUNT( items ) );
-      Screen_DrawText( &( game->screen ), str, 136, textY, DARKGRAY, WHITE );
-      textY += 8;
-   }
-   if ( GET_ITEM_HASRAINBOWDROP( items ) )
-   {
-      SPRINTF_P( str, PSTR( STR_MENU_RAINBOWDROP ) );
-      Screen_DrawText( &( game->screen ), str, 136, textY, DARKGRAY, WHITE );
-      textY += 8;
-   }
-   if ( GET_ITEM_HASSILVERHARP( items ) )
-   {
-      SPRINTF_P( str, PSTR( STR_MENU_SILVERHARP ) );
-      Screen_DrawText( &( game->screen ), str, 136, textY, DARKGRAY, WHITE );
-      textY += 8;
-   }
-   if ( GET_ITEM_HASFAIRYFLUTE( items ) )
-   {
-      SPRINTF_P( str, PSTR( STR_MENU_FAIRYFLUTE ) );
-      Screen_DrawText( &( game->screen ), str, 136, textY, DARKGRAY, WHITE );
-      textY += 8;
-   }
-   if ( GET_ITEM_HASGWAELYNSLOVE( items ) )
-   {
-      SPRINTF_P( str, PSTR( STR_MENU_GWAELYNSLOVE ) );
-      Screen_DrawText( &( game->screen ), str, 136, textY, DARKGRAY, WHITE );
-      textY += 8;
-   }
+
+   return h;
 }

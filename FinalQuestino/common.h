@@ -199,7 +199,7 @@
 #define GET_ITEM_HASTOKEN( x )               ( ( x ) >> 19 & 0x1 )
 #define GET_ITEM_HASSPHEREOFLIGHT( x )       ( ( x ) >> 20 & 0x1 )
 
-#define GET_MAPITEM_COUNT( x )               ( 0 + \
+#define GET_MAPUSEABLEITEM_COUNT( x )        ( 0 + \
                                              ( GET_ITEM_KEYCOUNT( x ) ? 1 : 0 ) + \
                                              ( GET_ITEM_HERBCOUNT( x ) ? 1 : 0 ) + \
                                              ( GET_ITEM_WINGCOUNT( x ) ? 1 : 0 ) + \
@@ -209,12 +209,16 @@
                                              ( GET_ITEM_HASFAIRYFLUTE( x ) ? 1 : 0 ) + \
                                              ( GET_ITEM_HASGWAELYNSLOVE( x ) ? 1 : 0 ) )
 
-// TODO: keep an eye on these and make sure they actually go away when you use them
+#define GET_MAPNONUSEABLEITEM_COUNT( x )     ( 0 + \
+                                             ( GET_ITEM_HASSTONEOFSUNLIGHT( x ) ? 1 : 0 ) + \
+                                             ( GET_ITEM_HASSTAFFOFRAIN( x ) ? 1 : 0 ) + \
+                                             ( GET_ITEM_HASTOKEN( x ) ? 1 : 0 ) + \
+                                             ( GET_ITEM_HASSPHEREOFLIGHT( x ) ? 1 : 0 ) )
+
 #define SET_ITEM_KEYCOUNT( x, c )            ( x ) = ( ( ( x ) & 0xFFFFFFF8 ) | ( ( c ) & 0x7 ) )
 #define SET_ITEM_HERBCOUNT( x, c )           ( x ) = ( ( ( x ) & 0xFFFFFFC7 ) | ( (uint32_t)( c ) & 0x7 ) << 3 )
 #define SET_ITEM_WINGCOUNT( x, c )           ( x ) = ( ( ( x ) & 0xFFFFFE3F ) | ( (uint32_t)( c ) & 0x7 ) << 6 )
 #define SET_ITEM_FAIRYWATERCOUNT( x, c )     ( x ) = ( ( ( x ) & 0xFFFFF1FF ) | ( (uint32_t)( c ) & 0x7 ) << 9 )
-
 #define SET_ITEM_HASTABLET( x, b )           x |= ( ( uint32_t )( b ) << 12 )
 #define SET_ITEM_HASSTONEOFSUNLIGHT( x, b )  x |= ( ( uint32_t )( b ) << 13 )
 #define SET_ITEM_HASSTAFFOFRAIN( x, b )      x |= ( ( uint32_t )( b ) << 14 )
