@@ -137,11 +137,11 @@ void Input_Handle( Game_t* game )
             Battle_Done( game );
          }
          break;
-      case GAMESTATE_MAPNOITEMSMESSAGE:
+      case GAMESTATE_MAPITEMMESSAGE:
          if ( Input_AnyButtonPressed( &( game->input ) ) )
          {
             Game_WipeMapMenuMessage( game );
-            game->state = GAMESTATE_MAPMENU;
+            game->state = game->menu.index == MENUINDEX_MAPITEMS ? GAMESTATE_MAPMENUITEMS : GAMESTATE_MAPMENU;
          }
          break;
    }

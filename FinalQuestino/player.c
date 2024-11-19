@@ -134,15 +134,3 @@ Bool_t Player_CollectItem( Player_t* player, uint8_t item )
 
    return collected;
 }
-
-uint8_t Player_GetMapItemCount( Player_t* player )
-{
-   uint8_t count = 0;
-
-   if ( GET_ITEM_KEYCOUNT( player->items ) ) count++;
-   if ( GET_ITEM_HERBCOUNT( player->items ) ) count++;
-   if ( GET_ITEM_WINGCOUNT( player->items ) ) count++;
-   if ( GET_ITEM_FAIRYWATERCOUNT( player->items ) ) count++;
-
-   return count;
-}

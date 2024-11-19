@@ -67,7 +67,7 @@
 #define GAMESTATE_BATTLEATTACKRESULT         7
 #define GAMESTATE_BATTLERESULT               8
 #define GAMESTATE_BATTLECOLLECT              9
-#define GAMESTATE_MAPNOITEMSMESSAGE          10
+#define GAMESTATE_MAPITEMMESSAGE             10
 #define GAMESTATE_MAPMENUITEMS               11
 
 #define BUTTON_LEFT                          0
@@ -172,6 +172,13 @@
 #define ITEM_FAIRYWATER                      3
 #define ITEM_TABLET                          4
 #define ITEM_STONEOFSUNLIGHT                 5
+#define ITEM_STAFFOFRAIN                     6
+#define ITEM_RAINBOWDROP                     7
+#define ITEM_SILVERHARP                      8
+#define ITEM_FAIRYFLUTE                      9
+#define ITEM_GWAELYNSLOVE                    10
+#define ITEM_TOKEN                           11
+#define ITEM_SPHEREOFLIGHT                   12
 
 #define ITEM_MAXKEYS                         6
 #define ITEM_MAXHERBS                        7
@@ -184,15 +191,43 @@
 #define GET_ITEM_FAIRYWATERCOUNT( x )        ( ( ( x ) >> 9 ) & 0x7 )
 #define GET_ITEM_HASTABLET( x )              ( ( x ) >> 12 & 0x1 )
 #define GET_ITEM_HASSTONEOFSUNLIGHT( x )     ( ( x ) >> 13 & 0x1 )
+#define GET_ITEM_HASSTAFFOFRAIN( x )         ( ( x ) >> 14 & 0x1 )
+#define GET_ITEM_HASRAINBOWDROP( x )         ( ( x ) >> 15 & 0x1 )
+#define GET_ITEM_HASSILVERHARP( x )          ( ( x ) >> 16 & 0x1 )
+#define GET_ITEM_HASFAIRYFLUTE( x )          ( ( x ) >> 17 & 0x1 )
+#define GET_ITEM_HASGWAELYNSLOVE( x )        ( ( x ) >> 18 & 0x1 )
+#define GET_ITEM_HASTOKEN( x )               ( ( x ) >> 19 & 0x1 )
+#define GET_ITEM_HASSPHEREOFLIGHT( x )       ( ( x ) >> 20 & 0x1 )
 
-// TODO: keep an eye on these and make sure they actually go away when you use them
+#define GET_MAPUSEABLEITEM_COUNT( x )        ( 0 + \
+                                             ( GET_ITEM_KEYCOUNT( x ) ? 1 : 0 ) + \
+                                             ( GET_ITEM_HERBCOUNT( x ) ? 1 : 0 ) + \
+                                             ( GET_ITEM_WINGCOUNT( x ) ? 1 : 0 ) + \
+                                             ( GET_ITEM_FAIRYWATERCOUNT( x ) ? 1 : 0 ) + \
+                                             ( GET_ITEM_HASRAINBOWDROP( x ) ? 1 : 0 ) + \
+                                             ( GET_ITEM_HASSILVERHARP( x ) ? 1 : 0 ) + \
+                                             ( GET_ITEM_HASFAIRYFLUTE( x ) ? 1 : 0 ) + \
+                                             ( GET_ITEM_HASGWAELYNSLOVE( x ) ? 1 : 0 ) )
+
+#define GET_MAPNONUSEABLEITEM_COUNT( x )     ( 0 + \
+                                             ( GET_ITEM_HASSTONEOFSUNLIGHT( x ) ? 1 : 0 ) + \
+                                             ( GET_ITEM_HASSTAFFOFRAIN( x ) ? 1 : 0 ) + \
+                                             ( GET_ITEM_HASTOKEN( x ) ? 1 : 0 ) + \
+                                             ( GET_ITEM_HASSPHEREOFLIGHT( x ) ? 1 : 0 ) )
+
 #define SET_ITEM_KEYCOUNT( x, c )            ( x ) = ( ( ( x ) & 0xFFFFFFF8 ) | ( ( c ) & 0x7 ) )
 #define SET_ITEM_HERBCOUNT( x, c )           ( x ) = ( ( ( x ) & 0xFFFFFFC7 ) | ( (uint32_t)( c ) & 0x7 ) << 3 )
 #define SET_ITEM_WINGCOUNT( x, c )           ( x ) = ( ( ( x ) & 0xFFFFFE3F ) | ( (uint32_t)( c ) & 0x7 ) << 6 )
 #define SET_ITEM_FAIRYWATERCOUNT( x, c )     ( x ) = ( ( ( x ) & 0xFFFFF1FF ) | ( (uint32_t)( c ) & 0x7 ) << 9 )
-
 #define SET_ITEM_HASTABLET( x, b )           x |= ( ( uint32_t )( b ) << 12 )
 #define SET_ITEM_HASSTONEOFSUNLIGHT( x, b )  x |= ( ( uint32_t )( b ) << 13 )
+#define SET_ITEM_HASSTAFFOFRAIN( x, b )      x |= ( ( uint32_t )( b ) << 14 )
+#define SET_ITEM_HASRAINBOWDROP( x, b )      x |= ( ( uint32_t )( b ) << 15 )
+#define SET_ITEM_HASSILVERHARP( x, b )       x |= ( ( uint32_t )( b ) << 16 )
+#define SET_ITEM_HASFAIRYFLUTE( x, b )       x |= ( ( uint32_t )( b ) << 17 )
+#define SET_ITEM_HASGWAELYNSLOVE( x, b )     x |= ( ( uint32_t )( b ) << 18 )
+#define SET_ITEM_HASTOKEN( x, b )            x |= ( ( uint32_t )( b ) << 19 )
+#define SET_ITEM_HASSPHEREOFLIGHT( x, b )    x |= ( ( uint32_t )( b ) << 20 )
 
 
 typedef uint8_t Bool_t;

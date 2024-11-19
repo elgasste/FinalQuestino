@@ -342,7 +342,7 @@ internal void HandleKeyboardInput( uint32_t keyCode, LPARAM flags )
                Player_CollectGold( &( g_globals.game.player ), 500 );
                if ( g_globals.game.state == GAMESTATE_MAPMENU ||
                     g_globals.game.state == GAMESTATE_MAPMENUITEMS ||
-                    g_globals.game.state == GAMESTATE_MAPNOITEMSMESSAGE )
+                    g_globals.game.state == GAMESTATE_MAPITEMMESSAGE )
                {
                   Game_ShowMapQuickStats( &( g_globals.game ) );
                }
