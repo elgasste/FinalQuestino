@@ -15,6 +15,7 @@ typedef struct TileMap_t
    // high 3 bits are flags, low 5 bits are tile texture index
    // flag 001: is passable
    // flag 010: is encounterable
+   // MUFFINS: what if this was a special encounter flag?
    // flag 100: reserved
    uint8_t tiles[MAP_TILE_COUNT];
    uint16_t tileIndexCache;

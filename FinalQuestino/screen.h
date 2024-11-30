@@ -22,95 +22,51 @@
 
 #if !defined( VISUAL_STUDIO_DEV )
 
-// registers
-#define HX8347G_COLADDREND_HI   0x04
-#define HX8347G_COLADDREND_LO   0x05
-#define HX8347G_ROWADDREND_HI   0x08
-#define HX8347G_ROWADDREND_LO   0x09
-#define ILI9341_SOFTRESET       0x01
-#define ILI9341_MADCTL_BGR      0x08
-#define ILI9341_SLEEPOUT        0x11
-#define ILI9341_DISPLAYOFF      0x28
-#define ILI9341_DISPLAYON       0x29
-#define ILI9341_COLADDRSET      0x2A
-#define ILI9341_PAGEADDRSET     0x2B
-#define ILI9341_MEMCONTROL      0x36
-#define ILI9341_PIXELFORMAT     0x3A
-#define ILI9341_MADCTL_MV       0x20
-#define ILI9341_MADCTL_MX       0x40
-#define ILI9341_MADCTL_MY       0x80
-#define ILI9341_FRAMECONTROL    0xB1
-#define ILI9341_ENTRYMODE       0xB7
-#define ILI9341_POWERCONTROL1   0xC0
-#define ILI9341_POWERCONTROL2   0xC1
-#define ILI9341_VCOMCONTROL1    0xC5
-#define ILI9341_VCOMCONTROL2    0xC7
+#define HX8357_CASET   0x2A
+#define HX8357_PASET   0x2B
+#define HX8357_RAMWR   0x2C
+#define HX8357_RAMRD   0x2E
+#define HX8357_MADCTL  0x36
 
-// control pins
-#define LCD_CS A3     // chip select
-#define LCD_CD A2     // command/data
-#define LCD_WR A1     // write
-#define LCD_RD A0     // read
-#define LCD_RESET A4  // Can alternately just connect to Arduino's reset pin
+#define MADCTL_BGR 0x08
+#define MADCTL_MV  0x20
+#define MADCTL_MX  0x40
 
-// Arduino Mega w/Breakout board
-#define write8( d ) {\                        
-	PORTH &= ~( 0x78 );\
- 	PORTH |= ( ( d & 0xC0 ) >> 3 ) | ( ( d & 0x3 ) << 5 );\
- 	PORTE &= ~( 0x38 );\
- 	PORTE |= ( ( d & 0xC ) << 2 ) | ( ( d & 0x20 ) >> 2 );\
- 	PORTG &= ~( 0x20 );\
- 	PORTG |= ( d & 0x10 ) << 1; \
-  WR_STROBE; }
-#define write16( d1, d2 ) write8( d1 ) write8( d2 )
-#define setWriteDir() { DDRH |= 0x78; DDRE |= 0x38; DDRG |= 0x20; }
+#define SETUP_CS_H PORTG |= _BV( 1 )
+#define SETUP_CS_L PORTG &= ~_BV( 1 )
 
-// When using the TFT breakout board, control pins are configurable.
-#define RD_ACTIVE  *( screen->rdPort ) &=  screen->rdPinUnset
-#define RD_IDLE    *( screen->rdPort ) |=  screen->rdPinSet
-#define WR_ACTIVE  *( screen->wrPort ) &=  screen->wrPinUnset
-#define WR_IDLE    *( screen->wrPort ) |=  screen->wrPinSet
-#define CD_COMMAND *( screen->cdPort ) &=  screen->cdPinUnset
-#define CD_DATA    *( screen->cdPort ) |=  screen->cdPinSet
-#define CS_ACTIVE  *( screen->csPort ) &=  screen->csPinUnset
-#define CS_IDLE    *( screen->csPort ) |=  screen->csPinSet
+#define CS_H PORTG |= _BV( 1 )
+#define CS_L PORTG &= ~_BV( 1 )
 
-// Data write strobe, ~2 instructions and always inline
-#define WR_STROBE { WR_ACTIVE; WR_IDLE; }
+#define RS_H PORTD |= _BV( 7 )
+#define RS_L PORTD &= ~_BV( 7 )
 
-// Set value of TFT register: 8-bit address, 8-bit value
-#define writeRegister8( a, d ) { CD_COMMAND; write8( a ); CD_DATA; write8( d ); }
+#define WR_H PORTG |= _BV( 2 );
+#define WR_L PORTG &= ~_BV( 2 );
+#define WR_STB PORTG &= ~_BV( 2 ); PORTG |= _BV( 2 );
 
-// When using this, provide local variables uint8_t "hi" and "lo"
-#define writeRegister16( a, d ) { \
-  hi = ( a ) >> 8; lo = ( a ); CD_COMMAND; write8( hi ); write8( lo ); \
-  hi = ( d ) >> 8; lo = ( d ); CD_DATA   ; write8( hi ); write8( lo ); }
+#define WRITE_COLOR_16( c ) PORTC = c; PORTA = c >> 8; WR_STB;
 
 #endif // VISUAL_STUDIO_DEV
 
 #define NEGATIVE_CLAMP_THETA 0.9999f
 
-#define SCREEN_WIDTH  320
-#define SCREEN_HEIGHT 240
+#define LCD_WIDTH       480
+#define LCD_HEIGHT      320
+#define SCREEN_WIDTH    320
+#define SCREEN_HEIGHT   240
+#define SCREEN_OFFSET_X 80
+#define SCREEN_OFFSET_Y 40
 
 typedef struct Game_t Game_t;
 
 typedef struct Screen_t
 {
-   volatile uint8_t* csPort;
-   volatile uint8_t* cdPort;
-   volatile uint8_t* wrPort;
-   volatile uint8_t* rdPort;
-
-   uint8_t csPinSet;
-   uint8_t cdPinSet;
-   uint8_t wrPinSet;
-   uint8_t rdPinSet;
-
-   uint8_t csPinUnset;
-   uint8_t cdPinUnset;
-   uint8_t wrPinUnset;
-   uint8_t rdPinUnset;
+   int8_t cs;
+   int8_t rs;
+   int8_t rst;
+   int8_t wr;
+   int8_t fcs;
 
    uint16_t palette[16];
    uint8_t textBitFields[TEXT_TILE_COUNT][8];
@@ -124,14 +80,11 @@ extern "C" {
 #endif
 
 void Screen_Init( Screen_t* screen );
-void Screen_Begin( Screen_t* screen );
-void Screen_DrawRect( Screen_t* screen, uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color );
+void Screen_Clear();
+void Screen_FillRect( uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color );
 void Screen_DrawTileMap( Game_t* game );
-void Screen_DrawText( Screen_t* screen, const char* text, uint16_t x, uint16_t y,
-                      uint16_t backgroundColor, uint16_t foregroundColor );
-void Screen_DrawWrappedText( Screen_t* screen, const char* text, uint16_t x, uint16_t y,
-                             uint8_t lineChars, uint8_t lineHeight,
-                             uint16_t backgroundColor, uint16_t foregroundColor );
+void Screen_DrawTextLine( Screen_t* screen, const char* text, uint16_t x, uint16_t y, uint16_t backgroundColor, uint16_t foregroundColor );
+void Screen_DrawWrappedText( Screen_t* screen, const char* text, uint16_t x, uint16_t y, uint8_t lineChars, uint8_t lineHeight, uint16_t backgroundColor, uint16_t foregroundColor );
 void Screen_DrawMapSprites( Game_t* game );
 void Screen_DrawPlayer( Game_t* game );
 void Screen_WipePlayer( Game_t* game );

@@ -16,7 +16,6 @@ void Game_Init( Game_t* game )
 
    Screen_Init( &( game->screen ) );
    Screen_LoadMapPalette( &( game->screen ), game->paletteIndex );
-   Screen_Begin( &( game->screen ) );
 
    Clock_Init( &( game->clock ) );
    Input_Init( &( game->input ) );
@@ -137,7 +136,7 @@ void Game_SteppedOnTile( Game_t* game, uint16_t tileIndex )
 
 void Game_ShowMessage( Game_t* game, const char* message )
 {
-   Screen_DrawRect( &( game->screen ), 48, 152, 224, 72, DARKGRAY );
+   Screen_FillRect( 48, 152, 224, 72, DARKGRAY );
    Screen_DrawWrappedText( &( game->screen ), message, 56, 160, 26, 9, DARKGRAY, WHITE );
 }
 
@@ -148,7 +147,7 @@ void Game_WipeMessage( Game_t* game )
 
 void Game_ShowMapMenuMessage( Game_t* game, const char* message )
 {
-   Screen_DrawRect( &( game->screen ), 112, 136, 160, 48, DARKGRAY );
+   Screen_FillRect( 112, 136, 160, 48, DARKGRAY );
    Screen_DrawWrappedText( &( game->screen ), message, 120, 144, 18, 10, DARKGRAY, WHITE );
 }
 
@@ -161,15 +160,15 @@ void Game_ShowMapQuickStats( Game_t* game )
 {
    char str[10];
 
-   Screen_DrawRect( &( game->screen ), 16, 16, 76, 60, DARKGRAY );
+   Screen_FillRect( 16, 16, 76, 60, DARKGRAY );
    SPRINTF_P( str, PSTR( STR_MAP_QUICKSTATSHP ), game->player.stats.hitPoints );
-   Screen_DrawText( &( game->screen ), str, 24, 24, DARKGRAY, WHITE );
+   Screen_DrawTextLine( &( game->screen ), str, 24, 24, DARKGRAY, WHITE );
    SPRINTF_P( str, PSTR( STR_MAP_QUICKSTATSMP ), game->player.stats.magicPoints );
-   Screen_DrawText( &( game->screen ), str, 24, 36, DARKGRAY, WHITE );
+   Screen_DrawTextLine( &( game->screen ), str, 24, 36, DARKGRAY, WHITE );
    SPRINTF_P( str, PSTR( STR_MAP_QUICKSTATSGOLD ), game->player.gold );
-   Screen_DrawText( &( game->screen ), str, 24, 48, DARKGRAY, WHITE );
+   Screen_DrawTextLine( &( game->screen ), str, 24, 48, DARKGRAY, WHITE );
    SPRINTF_P( str, PSTR( STR_MAP_QUICKSTATSEXP ), game->player.experience );
-   Screen_DrawText( &( game->screen ), str, 24, 60, DARKGRAY, WHITE );
+   Screen_DrawTextLine( &( game->screen ), str, 24, 60, DARKGRAY, WHITE );
 }
 
 void Game_WipeMapQuickStats( Game_t* game )
@@ -261,22 +260,22 @@ void Game_Status( Game_t* game )
    Game_WipeMapQuickStats( game );
    Menu_Wipe( game, MENUINDEX_MAP );
    
-   Screen_DrawRect( &( game->screen ), 16, 16, 112, 96, DARKGRAY );
+   Screen_FillRect( 16, 16, 112, 96, DARKGRAY );
 
    SPRINTF_P( str, PSTR( STR_MAP_STATUSLEVEL ), Player_GetLevel( player ) );
-   Screen_DrawText( &( game->screen ), str, 24, 24, DARKGRAY, WHITE );
+   Screen_DrawTextLine( &( game->screen ), str, 24, 24, DARKGRAY, WHITE );
    SPRINTF_P( str, PSTR( STR_MAP_STATUSHP ), player->stats.hitPoints, player->stats.maxHitPoints );
-   Screen_DrawText( &( game->screen ), str, 24, 36, DARKGRAY, WHITE );
+   Screen_DrawTextLine( &( game->screen ), str, 24, 36, DARKGRAY, WHITE );
    SPRINTF_P( str, PSTR( STR_MAP_STATUSMP ), player->stats.magicPoints, player->stats.maxMagicPoints );
-   Screen_DrawText( &( game->screen ), str, 24, 48, DARKGRAY, WHITE );
+   Screen_DrawTextLine( &( game->screen ), str, 24, 48, DARKGRAY, WHITE );
    SPRINTF_P( str, PSTR( STR_MAP_STATUSATTACK ), player->stats.attackPower );
-   Screen_DrawText( &( game->screen ), str, 24, 60, DARKGRAY, WHITE );
+   Screen_DrawTextLine( &( game->screen ), str, 24, 60, DARKGRAY, WHITE );
    SPRINTF_P( str, PSTR( STR_MAP_STATUSDEFENSE ), player->stats.defensePower );
-   Screen_DrawText( &( game->screen ), str, 24, 72, DARKGRAY, WHITE );
+   Screen_DrawTextLine( &( game->screen ), str, 24, 72, DARKGRAY, WHITE );
    SPRINTF_P( str, PSTR( STR_MAP_STATUSAGILITY ), player->stats.agility );
-   Screen_DrawText( &( game->screen ), str, 24, 84, DARKGRAY, WHITE );
+   Screen_DrawTextLine( &( game->screen ), str, 24, 84, DARKGRAY, WHITE );
    SPRINTF_P( str, PSTR( STR_MAP_STATUSEXP ), player->experience );
-   Screen_DrawText( &( game->screen ), str, 24, 96, DARKGRAY, WHITE );
+   Screen_DrawTextLine( &( game->screen ), str, 24, 96, DARKGRAY, WHITE );
 
    game->state = GAMESTATE_MAPSTATUS;
 }
